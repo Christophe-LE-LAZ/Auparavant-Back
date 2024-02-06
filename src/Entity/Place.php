@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EntityRepository;
+use App\Repository\PlaceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EntityRepository::class)]
-class Entity
+#[ORM\Entity(repositoryClass: PlaceRepository::class)]
+class Place
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,7 +25,7 @@ class Entity
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'entities')]
+    #[ORM\ManyToOne(inversedBy: 'places')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Location $location = null;
 
