@@ -35,16 +35,18 @@ class MemoryType extends AbstractType
                 ]
             )
             ->add(
+                'main_picture',
+                UrlType::class,
+                [
+                    'label' => 'Photo principale :'
+                ]
+            )
+            ->add(
                 'picture_date',
                 DateType::class,
                 [
+                    'label' => 'Date de la photo :',
                     'placeholder' => ['année' => 'Année', 'mois' => 'Mois', 'jour' => 'Jour'],
-                ]
-            )
-            ->add('main_picture',
-            UrlType::class,
-                [
-                    'label' => 'Photo principale :'
                 ]
             )
             // ->add('publishedAt')
@@ -55,14 +57,7 @@ class MemoryType extends AbstractType
             ->add('location', EntityType::class, [
                 'class' => Location::class,
                 'choice_label' => 'id',
-            ])
-            ->add(
-                'submit',
-                SubmitType::class,
-                [
-                    'label' => 'Valider'
-                ]
-            );
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

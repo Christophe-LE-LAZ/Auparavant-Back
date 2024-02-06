@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<title>Memory</title>
+<title>Souvenir</title>
 
 {% block body %}
-    <h1>Memory</h1>
+    <h1>Souvenir</h1>
 
     <table class="table">
         <tbody>
@@ -12,22 +12,22 @@
                 <td>{{ memory.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Titre</th>
                 <td>{{ memory.title }}</td>
             </tr>
             <tr>
-                <th>Content</th>
+                <th>Contenu</th>
                 <td>{{ memory.content }}</td>
             </tr>
             <tr>
-                <th>Picture_date</th>
-                <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Main_picture</th>
+                <th>Photographie principale</th>
                 <td>{{ memory.mainPicture }}</td>
             </tr>
             <tr>
+                <th>Date de la photographie</th>
+                <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            {# <tr>
                 <th>PublishedAt</th>
                 <td>{{ memory.publishedAt ? memory.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
@@ -38,13 +38,13 @@
             <tr>
                 <th>UpdatedAt</th>
                 <td>{{ memory.updatedAt ? memory.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
+            </tr> #}
         </tbody>
     </table>
 
-    <a href="{{ path('app_memory_index') }}">back to list</a>
+    <a href="{{ path('app_memory_index') }}">retour à la liste</a>
 
-    <a href="{{ path('app_memory_edit', {'id': memory.id}) }}">edit</a>
+    <a href="{{ path('app_memory_edit', {'id': memory.id}) }}">modifier</a>
 
     {{ include('memory/_delete_form.html.twig') }}
 {% endblock %}

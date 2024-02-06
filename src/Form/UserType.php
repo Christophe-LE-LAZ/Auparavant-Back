@@ -49,6 +49,7 @@ class UserType extends AbstractType
                 'role',
                 ChoiceType::class,
                 [
+                    'label' => 'rôle',
                     'choices'  => [
                         'ADMIN' => 'ROLE_ADMIN',
                         'MANAGER' => 'ROLE_MANAGER',
@@ -56,13 +57,6 @@ class UserType extends AbstractType
                     ],
                     'multiple' => true,
                     'expanded' => true
-                ]
-            )
-            ->add(
-                'submit',
-                SubmitType::class,
-                [
-                    'label' => 'Valider'
                 ]
             );
     }

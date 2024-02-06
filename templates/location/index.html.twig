@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 
-<title>Location index</title>
+<title>Index des lieux</title>
 
 {% block body %}
-    <h1>Location index</h1>
+    <h1>Index des lieux</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Area</th>
-                <th>Department</th>
-                <th>District</th>
-                <th>Street</th>
-                <th>City</th>
-                <th>Zipcode</th>
+                <th>Région</th>
+                <th>Département</th>
+                <th>Quartier</th>
+                <th>Rue</th>
+                <th>Ville</th>
+                <th>Code postal</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
+                {# <th>CreatedAt</th>
+                <th>UpdatedAt</th> #}
                 <th>actions</th>
             </tr>
         </thead>
@@ -34,20 +34,20 @@
                 <td>{{ location.zipcode }}</td>
                 <td>{{ location.latitude }}</td>
                 <td>{{ location.longitude }}</td>
-                <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ location.updatedAt ? location.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                {# <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ location.updatedAt ? location.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_location_show', {'id': location.id}) }}">show</a>
-                    <a href="{{ path('app_location_edit', {'id': location.id}) }}">edit</a>
+                    <a href="{{ path('app_location_show', {'id': location.id}) }}">voir</a>
+                    <a href="{{ path('app_location_edit', {'id': location.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="12">no records found</td>
+                <td colspan="12">Aucun élément n'a été trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_location_new') }}">Create new</a>
+    <a href="{{ path('app_location_new') }}">Créer un nouveau lieu</a>
 {% endblock %}

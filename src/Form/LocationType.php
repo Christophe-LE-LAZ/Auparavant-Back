@@ -58,14 +58,7 @@ class LocationType extends AbstractType
                 ]
             )
             ->add('latitude')
-            ->add('longitude')
-            ->add(
-                'submit',
-                SubmitType::class,
-                [
-                    'label' => 'Valider'
-                ]
-            );
+            ->add('longitude');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -31,13 +31,6 @@ class PictureType extends AbstractType
                     Memory::class,
                     'choice_label' => 'title',
                 ]
-            )
-            ->add(
-                'submit',
-                SubmitType::class,
-                [
-                    'label' => 'Valider'
-                ]
             );
     }
 
