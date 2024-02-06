@@ -49,13 +49,14 @@ class Location
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Memory::class, orphanRemoval: true)]
     private Collection $memories;
 
-    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Entity::class, orphanRemoval: true)]
-    private Collection $entities;
+    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Place::class, orphanRemoval: true)]
+    private Collection $places;
+
 
     public function __construct()
     {
         $this->memories = new ArrayCollection();
-        $this->entities = new ArrayCollection();
+        $this->places = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,32 +215,33 @@ class Location
     }
 
     /**
-     * @return Collection<int, Entity>
+     * @return Collection<int, Place>
      */
-    public function getEntities(): Collection
+    public function getPlaces(): Collection
     {
-        return $this->entities;
+        return $this->places;
     }
 
-    public function addEntity(Entity $entity): static
+    public function addPlace(Place $place): static
     {
-        if (!$this->entities->contains($entity)) {
-            $this->entities->add($entity);
-            $entity->setLocation($this);
+        if (!$this->places->contains($place)) {
+            $this->places->add($place);
+            $place->setLocation($this);
         }
 
         return $this;
     }
 
-    public function removeEntity(Entity $entity): static
+    public function removePlace(Place $place): static
     {
-        if ($this->entities->removeElement($entity)) {
+        if ($this->places->removeElement($place)) {
             // set the owning side to null (unless already changed)
-            if ($entity->getLocation() === $this) {
-                $entity->setLocation(null);
+            if ($place->getLocation() === $this) {
+                $place->setLocation(null);
             }
         }
 
         return $this;
     }
+
 }
