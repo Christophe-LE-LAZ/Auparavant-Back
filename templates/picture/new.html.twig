@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>Nouvelle photo</title>
+
+{% block body %}
+    <h1>Ajouter une nouvelle photo</h1>
+
+    {{ include('picture/_form.html.twig') }}
+
+    <a href="{{ path('app_picture_index') }}">retour à la liste</a>
+{% endblock %}
