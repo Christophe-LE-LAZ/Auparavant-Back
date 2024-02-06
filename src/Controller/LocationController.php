@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/location')]
 class LocationController extends AbstractController
 {
+    /**
+     * Display all locations
+     *
+     * @param LocationRepository $locationRepository
+     * @return Response
+     */
     #[Route('/', name: 'app_location_index', methods: ['GET'])]
     public function index(LocationRepository $locationRepository): Response
     {
@@ -22,6 +28,13 @@ class LocationController extends AbstractController
         ]);
     }
 
+    /**
+     * Create a location using a form
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/new', name: 'app_location_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,6 +55,12 @@ class LocationController extends AbstractController
         ]);
     }
 
+    /**
+     * Display a single location by its id
+     * 
+     * @param Location $location
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_location_show', methods: ['GET'])]
     public function show(Location $location): Response
     {
@@ -50,6 +69,13 @@ class LocationController extends AbstractController
         ]);
     }
 
+    /**
+     * Update a location by its id using a form
+     * @param Request $request
+     * @param Location $location
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'app_location_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Location $location, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +94,13 @@ class LocationController extends AbstractController
         ]);
     }
 
+    /**
+     * Delete a location by its id
+     * @param Request $request
+     * @param Location $location
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_location_delete', methods: ['POST'])]
     public function delete(Request $request, Location $location, EntityManagerInterface $entityManager): Response
     {

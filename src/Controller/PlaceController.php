@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/place')]
 class PlaceController extends AbstractController
 {
+    /**
+     * Display all places
+     *
+     * @param PlaceRepository $placeRepository
+     * @return Response
+     */
     #[Route('/', name: 'app_place_index', methods: ['GET'])]
     public function index(PlaceRepository $placeRepository): Response
     {
@@ -22,6 +28,13 @@ class PlaceController extends AbstractController
         ]);
     }
 
+    /**
+     * Create a place using a form
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/new', name: 'app_place_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,6 +55,12 @@ class PlaceController extends AbstractController
         ]);
     }
 
+    /**
+     * Display a single place by its id
+     * 
+     * @param Place $place
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_place_show', methods: ['GET'])]
     public function show(Place $place): Response
     {
@@ -50,6 +69,13 @@ class PlaceController extends AbstractController
         ]);
     }
 
+    /**
+     * Update a place by its id using a form
+     * @param Request $request
+     * @param Place $place
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'app_place_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Place $place, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +94,13 @@ class PlaceController extends AbstractController
         ]);
     }
 
+    /**
+     * Delete a place by its id
+     * @param Request $request
+     * @param Place $place
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_place_delete', methods: ['POST'])]
     public function delete(Request $request, Place $place, EntityManagerInterface $entityManager): Response
     {

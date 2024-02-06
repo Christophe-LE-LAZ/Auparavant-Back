@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/picture')]
 class PictureController extends AbstractController
 {
+    /**
+     * Display all pictures
+     *
+     * @param PictureRepository $pictureRepository
+     * @return Response
+     */
     #[Route('/', name: 'app_picture_index', methods: ['GET'])]
     public function index(PictureRepository $pictureRepository): Response
     {
@@ -22,6 +28,13 @@ class PictureController extends AbstractController
         ]);
     }
 
+    /**
+     * Create a picture using a form
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/new', name: 'app_picture_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,6 +55,12 @@ class PictureController extends AbstractController
         ]);
     }
 
+    /**
+     * Display a single picture by its id
+     * 
+     * @param Picture $picture
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_picture_show', methods: ['GET'])]
     public function show(Picture $picture): Response
     {
@@ -50,6 +69,13 @@ class PictureController extends AbstractController
         ]);
     }
 
+    /**
+     * Update a picture by its id using a form
+     * @param Request $request
+     * @param Picture $picture
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'app_picture_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Picture $picture, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +94,13 @@ class PictureController extends AbstractController
         ]);
     }
 
+    /**
+     * Delete a picture by its id
+     * @param Request $request
+     * @param Picture $picture
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_picture_delete', methods: ['POST'])]
     public function delete(Request $request, Picture $picture, EntityManagerInterface $entityManager): Response
     {

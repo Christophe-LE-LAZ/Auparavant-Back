@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/memory')]
 class MemoryController extends AbstractController
 {
+    /**
+     * Display all memories
+     *
+     * @param MemoryRepository $memoryRepository
+     * @return Response
+     */
     #[Route('/', name: 'app_memory_index', methods: ['GET'])]
     public function index(MemoryRepository $memoryRepository): Response
     {
@@ -22,6 +28,13 @@ class MemoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Create a memory using a form
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/new', name: 'app_memory_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,6 +55,12 @@ class MemoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Display a single memory by its id
+     * 
+     * @param Memory $memory
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_memory_show', methods: ['GET'])]
     public function show(Memory $memory): Response
     {
@@ -50,6 +69,13 @@ class MemoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Update a memory by its id using a form
+     * @param Request $request
+     * @param Memory $memory
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'app_memory_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Memory $memory, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +94,13 @@ class MemoryController extends AbstractController
         ]);
     }
 
+    /**
+     * Delete a memory by its id
+     * @param Request $request
+     * @param Memory $memory
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_memory_delete', methods: ['POST'])]
     public function delete(Request $request, Memory $memory, EntityManagerInterface $entityManager): Response
     {
