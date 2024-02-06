@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PictureType extends AbstractType
 {
@@ -20,13 +19,14 @@ class PictureType extends AbstractType
                 'picture',
                 UrlType::class,
                 [
-                    'label' => 'Photo :'
+                    'label' => 'Photo : '
                 ]
             )
             ->add(
                 'memory',
                 EntityType::class,
                 [
+                    'label' => 'Souvenir : ',
                     'class' =>
                     Memory::class,
                     'choice_label' => 'title',

@@ -12,7 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class MemoryType extends AbstractType
@@ -24,39 +23,47 @@ class MemoryType extends AbstractType
                 'title',
                 TextType::class,
                 [
-                    'label' => 'Titre :'
+                    'label' => 'Titre : '
                 ]
             )
             ->add(
                 'content',
                 TextareaType::class,
                 [
-                    'label' => 'Contenu :'
+                    'label' => 'Contenu : '
                 ]
             )
             ->add(
                 'main_picture',
                 UrlType::class,
                 [
-                    'label' => 'Photo principale :'
+                    'label' => 'Photo principale : '
                 ]
             )
             ->add(
                 'picture_date',
                 DateType::class,
                 [
-                    'label' => 'Date de la photo :',
+                    'label' => 'Date de la photo : ',
                     'placeholder' => ['année' => 'Année', 'mois' => 'Mois', 'jour' => 'Jour'],
                 ]
             )
             // ->add('publishedAt')
-            ->add('user', EntityType::class, [
+            ->add('user', EntityType::class, 
+            [
+                'label' => 'Utilisateur : ',
                 'class' => User::class,
-                'choice_label' => 'id',
+                'choice_label' => function (User $user) {
+                    return $user->getFirstname() . ' ' . $user->getLastname();
+                },
             ])
-            ->add('location', EntityType::class, [
+            ->add('location', EntityType::class, 
+            [
+                'label' => 'Adresse : ',
                 'class' => Location::class,
-                'choice_label' => 'id',
+                'choice_label' => function (Location $location) {
+                    return $location->getStreet() . ' ' . $location->getZipcode() . ' ' . $location->getCity();
+                },
             ]);
     }
 

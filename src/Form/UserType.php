@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
@@ -21,39 +20,39 @@ class UserType extends AbstractType
                 'firstname',
                 TextType::class,
                 [
-                    'label' => 'Prénom :'
+                    'label' => 'Prénom : '
                 ]
             )
             ->add(
                 'lastname',
                 TextType::class,
                 [
-                    'label' => 'Nom de famille :'
+                    'label' => 'Nom de famille : '
                 ]
             )
             ->add(
                 'email',
                 EmailType::class,
                 [
-                    'label' => 'Adresse électronique :'
+                    'label' => 'Adresse électronique : '
                 ]
             )
             ->add(
                 'password',
                 PasswordType::class,
                 [
-                    'label' => 'Mot de passe'
+                    'label' => 'Mot de passe : '
                 ]
             )
             ->add(
                 'role',
                 ChoiceType::class,
                 [
-                    'label' => 'rôle',
+                    'label' => 'Rôle : ',
                     'choices'  => [
-                        'ADMIN' => 'ROLE_ADMIN',
-                        'MANAGER' => 'ROLE_MANAGER',
-                        'USER' => 'ROLE_USER',
+                        'Administrateur' => 'ROLE_ADMIN',
+                        'Responsable' => 'ROLE_MANAGER',
+                        'Utilisateur' => 'ROLE_USER',
                     ],
                     'multiple' => true,
                     'expanded' => true

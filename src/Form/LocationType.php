@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class LocationType extends AbstractType
@@ -19,46 +18,58 @@ class LocationType extends AbstractType
                 'area',
                 TextType::class,
                 [
-                    'label' => 'Région :'
+                    'label' => 'Région : '
                 ]
             )
             ->add(
                 'department',
                 TextType::class,
                 [
-                    'label' => 'Département :'
+                    'label' => 'Département : '
                 ]
             )
             ->add(
                 'district',
                 TextType::class,
                 [
-                    'label' => 'Quartier:'
+                    'label' => 'Quartier: '
                 ]
             )
             ->add(
                 'street',
                 TextType::class,
                 [
-                    'label' => 'Rue :'
+                    'label' => 'Rue : '
                 ]
             )
             ->add(
                 'city',
                 TextType::class,
                 [
-                    'label' => 'Ville :'
+                    'label' => 'Ville : '
                 ]
             )
             ->add(
                 'zipcode',
                 IntegerType::class,
                 [
-                    'label' => 'Code postal :'
+                    'label' => 'Code postal : '
                 ]
             )
-            ->add('latitude')
-            ->add('longitude');
+            ->add(
+                'latitude',
+                IntegerType::class,
+                [
+                    'label' => 'Lalitude : '
+                ]
+            )
+            ->add(
+                'longitude',
+                IntegerType::class,
+                [
+                    'label' => 'Longitude : '
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
