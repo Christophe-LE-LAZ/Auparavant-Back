@@ -60,7 +60,7 @@ class LocationType extends AbstractType
                 'latitude',
                 IntegerType::class,
                 [
-                    'label' => 'Lalitude : '
+                    'label' => 'Latitude : '
                 ]
             )
             ->add(
