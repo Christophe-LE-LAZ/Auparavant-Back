@@ -37,16 +37,17 @@ class Memory
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'memories')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
+   
     #[ORM\ManyToOne(inversedBy: 'memories')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Location $location = null;
 
     #[ORM\OneToMany(mappedBy: 'memory', targetEntity: Picture::class, orphanRemoval: true)]
     private Collection $picture;
+
+    #[ORM\ManyToOne(inversedBy: 'memories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -142,17 +143,6 @@ class Memory
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     public function getLocation(): ?Location
     {
@@ -192,6 +182,18 @@ class Memory
                 $picture->setMemory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
