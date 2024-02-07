@@ -21,12 +21,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['get_user'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 30)]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['get_user'])]
     private ?string $email = null;
 
     /**
