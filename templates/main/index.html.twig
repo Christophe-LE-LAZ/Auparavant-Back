@@ -1,0 +1,44 @@
+
+
+{% block body %}
+<div class="my-5 py-5 text-center">
+        {# <img src="favicon.png" height="100" alt="Logo O'flix" class="mb-3"> #}
+        <h1 class="display-6 fw-bold">Bienvenue sur le backoffice de Y'avait quoi avant.</h1>
+        <div class="col-lg-6 mx-auto">
+            <h2>Navigation</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom de l'entité</th>
+                <th>Liste</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Localité</td>
+                <td><a href="{{ path("app_location_index") }}">Liste</a></td>
+            </tr>
+            <tr>
+                <td>Lieu</td>
+                <td><a href="{{ path("app_place_index") }}">Liste</a></td>
+            </tr>
+            <tr>
+                <td>Souvenir</td>
+                <td><a href="{{ path("app_memory_index") }}">Liste</a></td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><a href="{{ path("app_picture_index") }}">Liste</a></td>
+            </tr>
+            {# {% if is_granted('ROLE_ADMIN') %} #}
+            <tr>
+                <td>Utilisateurs</td>
+                <td><a href="{{ path("app_user_index") }}">Liste</a></td>
+            </tr>
+            {# {% endif %} #}
+        </tbody>
+    </table>
+        </div>
+    </div>
+{% endblock %}

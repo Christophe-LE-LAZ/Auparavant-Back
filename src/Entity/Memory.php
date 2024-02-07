@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\MemoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MemoryRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: MemoryRepository::class)]
 class Memory
@@ -51,6 +52,7 @@ class Memory
 
     public function __construct()
     {
+        $this->createdAt = new DateTimeImmutable();
         $this->picture = new ArrayCollection();
     }
 

@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\PictureRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PictureRepository;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
 class Picture
@@ -25,6 +26,11 @@ class Picture
     #[ORM\ManyToOne(inversedBy: 'picture')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Memory $memory = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

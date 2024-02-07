@@ -30,11 +30,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+
     #[ORM\Column(length: 30)]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 30)]
     private ?string $firstname = null;
+
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -47,6 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->createdAt = new DateTimeImmutable();
         $this->memories = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
     }
@@ -133,14 +136,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     public function getFirstname(): ?string
+
     {
         return $this->firstname;
     }
 
+
     public function setFirstname(string $firstname): static
     {
         $this->firstname = $firstname;
+
 
         return $this;
     }

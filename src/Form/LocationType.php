@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class LocationType extends AbstractType
@@ -58,14 +59,14 @@ class LocationType extends AbstractType
             )
             ->add(
                 'latitude',
-                IntegerType::class,
+                NumberType::class,
                 [
                     'label' => 'Latitude : '
                 ]
             )
             ->add(
                 'longitude',
-                IntegerType::class,
+                NumberType::class,
                 [
                     'label' => 'Longitude : '
                 ]
