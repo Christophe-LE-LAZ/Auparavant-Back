@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -16,15 +17,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_user'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['get_user'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['get_user'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['get_user'])]
     private ?string $email = null;
 
     /**
@@ -34,6 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column]
+    #[Groups(['get_user'])]
     private array $roles = [];
 
     #[ORM\Column]

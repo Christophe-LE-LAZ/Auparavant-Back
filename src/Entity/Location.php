@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location
@@ -15,30 +16,39 @@ class Location
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_location'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_location'])]
     private ?string $area = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['get_location'])]
     private ?string $department = null;
 
     #[ORM\Column(length: 20, nullable: true)]
+    #[Groups(['get_location'])]
     private ?string $district = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_location'])]
     private ?string $street = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['get_location'])]
     private ?string $city = null;
 
     #[ORM\Column]
+    #[Groups(['get_location'])]
     private ?int $zipcode = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8)]
+    #[Groups(['get_location'])]
     private ?string $latitude = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 11, scale: 8)]
+    #[Groups(['get_location'])]
     private ?string $longitude = null;
 
     #[ORM\Column]
@@ -48,9 +58,11 @@ class Location
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Memory::class, orphanRemoval: true)]
+    #[Groups(['get_location'])]
     private Collection $memories;
 
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Place::class, orphanRemoval: true)]
+    #[Groups(['get_location'])]
     private Collection $places;
 
 

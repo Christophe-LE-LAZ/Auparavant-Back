@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MemoryRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: MemoryRepository::class)]
 class Memory
@@ -15,18 +16,23 @@ class Memory
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_memory'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['get_memory'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['get_memory'])]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['get_memory'])]
     private ?\DateTimeInterface $picture_date = null;
 
     #[ORM\Column(length: 2000)]
+    #[Groups(['get_memory'])]
     private ?string $main_picture = null;
 
     #[ORM\Column(nullable: true)]
@@ -41,13 +47,16 @@ class Memory
    
     #[ORM\ManyToOne(inversedBy: 'memories')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_memory'])]
     private ?Location $location = null;
 
     #[ORM\OneToMany(mappedBy: 'memory', targetEntity: Picture::class, orphanRemoval: true)]
+    #[Groups(['get_memory'])]
     private Collection $picture;
 
     #[ORM\ManyToOne(inversedBy: 'memories')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_memory'])]
     private ?User $user = null;
 
     public function __construct()

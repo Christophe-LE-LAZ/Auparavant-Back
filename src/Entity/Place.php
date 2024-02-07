@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlaceRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PlaceRepository::class)]
 class Place
@@ -12,12 +13,15 @@ class Place
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_place'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30, nullable: true)]
+    #[Groups(['get_place'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['get_place'])]
     private ?string $type = null;
 
     #[ORM\Column]
@@ -28,6 +32,7 @@ class Place
 
     #[ORM\ManyToOne(inversedBy: 'places')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_place'])]
     private ?Location $location = null;
 
     public function __construct()
