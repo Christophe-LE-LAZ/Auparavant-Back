@@ -56,7 +56,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->createdAt = new DateTimeImmutable();
         $this->memories = new ArrayCollection();
-        $this->createdAt = new DateTimeImmutable();
+        // guarantee every user at least has ROLE_USER
+        $this->roles = ['ROLE_USER'];
     }
 
     public function getId(): ?int
@@ -92,9 +93,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
+        
+        
         return array_unique($roles);
     }
 
