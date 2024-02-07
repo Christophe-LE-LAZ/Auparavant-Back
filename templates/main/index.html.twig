@@ -20,6 +20,10 @@
                 <td><a href="{{ path("app_location_index") }}">Liste</a></td>
             </tr>
             <tr>
+                <td>Lieu</td>
+                <td><a href="{{ path("app_place_index") }}">Liste</a></td>
+            </tr>
+            <tr>
                 <td>Souvenir</td>
                 <td><a href="{{ path("app_memory_index") }}">Liste</a></td>
             </tr>
@@ -27,16 +31,12 @@
                 <td>Photo</td>
                 <td><a href="{{ path("app_picture_index") }}">Liste</a></td>
             </tr>
-            <tr>
-                <td>Lieu</td>
-                <td><a href="{{ path("app_place_index") }}">Liste</a></td>
-            </tr>
-            {# {% if is_granted('ROLE_ADMIN') %}
+            {# {% if is_granted('ROLE_ADMIN') %} #}
             <tr>
                 <td>Utilisateurs</td>
                 <td><a href="{{ path("app_user_index") }}">Liste</a></td>
             </tr>
-            {% endif %} #}
+            {# {% endif %} #}
         </tbody>
     </table>
         </div>

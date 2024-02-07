@@ -13,8 +13,8 @@
                 <th>Département</th>
                 <th>Quartier</th>
                 <th>Rue</th>
-                <th>Ville</th>
                 <th>Code postal</th>
+                <th>Ville</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
                 {# <th>CreatedAt</th>
@@ -30,15 +30,15 @@
                 <td>{{ location.department }}</td>
                 <td>{{ location.district }}</td>
                 <td>{{ location.street }}</td>
-                <td>{{ location.city }}</td>
                 <td>{{ location.zipcode }}</td>
+                <td>{{ location.city }}</td>
                 <td>{{ location.latitude }}</td>
                 <td>{{ location.longitude }}</td>
                 {# <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ location.updatedAt ? location.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
                     <a href="{{ path('app_location_show', {'id': location.id}) }}">voir</a>
-                    <a href="{{ path('app_location_edit', {'id': location.id}) }}">modifier</a>
+                    <a href="{{ path('app_location_edit', {'id': location.id}) }}">modifier</a>                    
                 </td>
             </tr>
         {% else %}
@@ -51,3 +51,4 @@
 
     <a href="{{ path('app_location_new') }}">Créer une nouvelle localité</a>
 {% endblock %}
+<a href="{{ path('app_main') }}">accueil</a>

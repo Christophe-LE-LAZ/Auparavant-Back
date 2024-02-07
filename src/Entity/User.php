@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -28,7 +29,7 @@ class User
     private ?string $password = null;
 
     #[ORM\Column(length: 20)]
-    private ?string $role = null;
+    private array $role = [];
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -41,6 +42,7 @@ class User
 
     public function __construct()
     {
+        $this->createdAt = new DateTimeImmutable();
         $this->memories = new ArrayCollection();
     }
 
@@ -97,15 +99,14 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRole(): array
     {
         return $this->role;
     }
 
-    public function setRole(string $role): static
+    public function setRole(array $role): self
     {
         $this->role = $role;
-
         return $this;
     }
 

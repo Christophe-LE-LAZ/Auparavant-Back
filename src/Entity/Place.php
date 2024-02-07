@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\PlaceRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PlaceRepository;
 
 #[ORM\Entity(repositoryClass: PlaceRepository::class)]
 class Place
@@ -28,6 +29,11 @@ class Place
     #[ORM\ManyToOne(inversedBy: 'places')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Location $location = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
