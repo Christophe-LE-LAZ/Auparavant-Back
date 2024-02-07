@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<title>Utilisateur</title>
+<title>utilisateur</title>
 
 {% block body %}
-    <h1>Utilisateur</h1>
+    <h1>utilisateur</h1>
 
     <table class="table">
         <tbody>
@@ -12,24 +12,24 @@
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Firstname</th>
+                <th>Prénom</th>
                 <td>{{ user.firstname }}</td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th>Nom</th>
                 <td>{{ user.lastname }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>Adresse électronique</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>Mot de passe</th>
                 <td>{{ user.password }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <th>Rôle</th>
+                <td>{{ user.role }}</td>
             </tr>
             {# <tr>
                 <th>CreatedAt</th>

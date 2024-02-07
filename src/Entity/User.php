@@ -18,11 +18,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 30)]
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 30)]
+    private ?string $lastname = null;
+
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
-
-    #[ORM\Column]
-    private array $roles = [];
 
     /**
      * @var string The hashed password
@@ -30,13 +33,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-
-    #[ORM\Column(length: 30)]
-    private ?string $lastname = null;
-
-    #[ORM\Column(length: 30)]
-    private ?string $firstname = null;
-
+    #[ORM\Column]
+    private array $roles = [];
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
