@@ -63,8 +63,11 @@ class PlaceController extends AbstractController
     }
 
     #[Route('/api/delete/place/{id<\d+>}', methods: ['DELETE'])]
-    public function delete()
+    public function delete(Place $place, EntityManagerInterface $entityManager): Response
     {
+        $entityManager->remove($place);
+        $entityManager->flush();
 
+        return new Response('Endroit supprime', 200);
     }
 }

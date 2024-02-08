@@ -3,13 +3,14 @@
 namespace App\Controller\Api;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
 use DateTimeImmutable;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
@@ -67,8 +68,11 @@ class UserController extends AbstractController
     }
 
     #[Route('/api/delete/user/{id<\d+>}', methods: ['DELETE'])]
-    public function delete()
+    public function delete(User $user, EntityManagerInterface $entityManager): Response
     {
+        $entityManager->remove($user);
+        $entityManager->flush();
 
+        return new Response('Utilisateur supprime', 200);
     }
 }

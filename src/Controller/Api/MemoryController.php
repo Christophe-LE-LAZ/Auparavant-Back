@@ -64,8 +64,11 @@ class MemoryController extends AbstractController
     }
 
     #[Route('/api/delete/memory/{id<\d+>}', methods: ['DELETE'])]
-    public function delete()
+    public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
     {
+        $entityManager->remove($memory);
+        $entityManager->flush();
 
+        return new Response('Souvenir supprime', 200);
     }
 }

@@ -65,8 +65,11 @@ class LocationController extends AbstractController
     }
 
     #[Route('/api/delete/location/{id<\d+>}', methods: ['DELETE'])]
-    public function delete()
+    public function delete(Location $location, EntityManagerInterface $entityManager): Response
     {
-        
+        $entityManager->remove($location);
+        $entityManager->flush();
+
+        return new Response('Localite supprime', 200);
     }
 }
