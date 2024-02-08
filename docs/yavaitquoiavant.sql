@@ -119,6 +119,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `roles`, `created_at`, `updated_at`) VALUES
-(1,	'Aurélien',	'ROUCHETTE-MARET',	'aurelien.rouchette@orange.fr',	'aurélien',	'[\"ROLE_ADMIN\"]',	'2024-02-07 13:44:52',	NULL);
+(1,	'Aurélien',	'ROUCHETTE-MARET',	'aurelien.rouchette@orange.fr',	'aurélien',	'[\"ROLE_ADMIN\"]',	'2024-02-07 13:44:52',	NULL),
+(3,	'Christophe',	'LE LAZ',	'christophe.le-laz@oclock.school',	'christophe',	'[\"ROLE_ADMIN\"]',	'2024-02-08 14:19:24',	NULL);
 
--- 2024-02-08 09:50:48
+-- 2024-02-08 14:20:11
