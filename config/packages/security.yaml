@@ -17,7 +17,7 @@ security:
             pattern: ^/api/login # Indique que ce firewall s'applique aux URL qui commence par /api/login
             stateless: true # Signifie que le firewall est sans état, cad qu'il n'utilise pas de session PHP pour stocker les informations de l'utilisateur, c'est courant dans les api ou on doit etre authentifiée a chaque requête (a chaque requête on renseigne le token)
             json_login: # définit la maniere dont l'auth doit etre gérée (pour ce chemin), ici authentification basée sur JSON (normal on utilsie les JWT)
-                check_path: api_login_check # La route de notre application, ou la requête d'authentification sera envoyée, c'est la ou on va devoire faire la requete pour recuperer notre token (a l'aide de notre username et password envoyée en méthode POST et au format JSON)
+                check_path: api_login # La route de notre application, ou la requête d'authentification sera envoyée, c'est la ou on va devoire faire la requete pour recuperer notre token (a l'aide de notre username et password envoyée en méthode POST et au format JSON)
                 success_handler: lexik_jwt_authentication.handler.authentication_success # Si l'authentifiaction se passe bien, on retourne le message de succès par défaut du composant lexik_jwt_authentication
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure # Si l'authentifiaction ne se passe pas bien, on retourne le message d'erreur par défaut du composant lexik_jwt_authentication 
         # api_secure: # Regle de firewall pour TOUTES les routes de l'api secure, c'est ici que je définis que TOUTES les routes de l'api nécéssitent un token
