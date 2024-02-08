@@ -21,10 +21,13 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
-        api:
-            pattern:   ^/api
-            stateless: true
-            jwt: ~
+        api_secure: # Regle de firewall pour TOUTES les routes de l'api secure, c'est ici que je définis que TOUTES les routes de l'api nécéssitent un token
+            pattern:   ^/api/secure # ici on dit que ce firewall s'applique pour TOUTES les routes qui commence par le endpoint '/api/secure'
+            stateless: true # Le Firewall est sans état (no sessions ici)
+            jwt: ~ # on indique que ce firewall utilise les tokens JWT pour l'auth, toutes les requetes effectués vers l'API doivent inclure un JWT valide pour etre autorisé.
+        api_public: # Regle de firewall pour TOUTES les routes de l'api publique, c'est ici que je définis que TOUTES les routes de l'api
+            pattern:   ^/api # ici on dit que ce firewall s'applique pour TOUTES les routes qui commence par le endpoint '/api'
+            stateless: true # Le Firewall est sans état (no sessions ici)
 
         main:
             lazy: true

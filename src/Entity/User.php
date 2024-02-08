@@ -7,17 +7,17 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_user'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
@@ -25,6 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $firstname = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['get_user'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -37,13 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-
-    #[ORM\Column(length: 30)]
-    private ?string $lastname = null;
-
-    #[ORM\Column(length: 30)]
-    private ?string $firstname = null;
-
+    #[ORM\Column]
+    #[Groups(['get_user'])]
+    private array $roles = [];
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -58,8 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->createdAt = new DateTimeImmutable();
         $this->memories = new ArrayCollection();
-        // guarantee every user at least has ROLE_USER
-        $this->roles = ['ROLE_USER'];
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -89,23 +85,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-    //  /**
-    //  * Méthode getUsername qui permet de retourner le champ qui est utilisé pour l'authentification.
-    //  *
-    //  * @return string
-    //  */
-    // public function getUsername(): string 
-    // {
-    //     return $this->getUserIdentifier();
-    // }
     /**
      * @see UserInterface
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        
-        
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
         return array_unique($roles);
     }
 
