@@ -33,7 +33,6 @@ class MemoryAndPlaceController extends AbstractController
         // $jsonContent = '{"user": {"id": 1},"location": {"id": 1},"place": {"name": "l'elysée","type": "batiment"},"memory":{"title": "l'elysée en 1990","content": "que de souvenirs avec ce lieu","picture_date": "1990-02-08T14:00:00Z","main_picture": "URL"}}';
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
-        dump($data);
         
         // $data = [
         //     "user" => ["id" => 1],
