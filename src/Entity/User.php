@@ -19,7 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_user'])]
+    // #[Groups(['get_user'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
@@ -29,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Votre prénom doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Votre prénom ne peut pas dépasser {{ limit }} caractères.',
     )]
-    #[Groups(['get_user'])]
+    // #[Groups(['get_user'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 30)]
@@ -39,14 +39,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Votre nom doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Votre nom ne peut pas dépasser {{ limit }} caractères.',
     )]
-    #[Groups(['get_user'])]
+    // #[Groups(['get_user'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Email(
         message: 'L\'adresse électronique {{ value }} n\'est pas valide.',
     )]
-    #[Groups(['get_user'])]
+    // #[Groups(['get_user'])]
     private ?string $email = null;
 
     /**
@@ -56,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column]
-    #[Groups(['get_user'])]
+    // #[Groups(['get_user'])]
     private array $roles = [];
 
     #[ORM\Column]
