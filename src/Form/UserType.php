@@ -27,7 +27,7 @@ class UserType extends AbstractType
                 'lastname',
                 TextType::class,
                 [
-                    'label' => 'Nom de famille : '
+                    'label' => 'Nom : '
                 ]
             )
             ->add(
