@@ -13,6 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PictureController extends AbstractController
 {
+    /**
+     * Display all pictures
+     * @param PictureRepository $ppictureRepository
+     * @return Response
+     */
     #[Route('/api/pictures', methods: ['GET'])]
     public function index(PictureRepository $pictureRepository)
     {
@@ -21,6 +26,11 @@ class PictureController extends AbstractController
         return $this->json($pictures, 200, [], ['groups' => ['get_picture']]);
     }
 
+    /**
+     * Display a single picture by its id
+     * @param Picture $picture
+     * @return Response
+     */
     #[Route('/api/picture/{id<\d+>}', methods: ['GET'])]
     public function read(Picture $picture = null )
     {
@@ -34,6 +44,13 @@ class PictureController extends AbstractController
     );
     }
 
+    /**
+     * Create a new picture
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/api/create/picture', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
@@ -45,6 +62,14 @@ class PictureController extends AbstractController
         return $this->json($picture, 201, []);
     }
 
+    /**
+     * Update a picture by its id
+     * @param Picture $picture
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/api/update/picture/{id<\d+>}', methods: ['PUT'])]
     public function update(Picture $picture = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
@@ -60,6 +85,9 @@ class PictureController extends AbstractController
         return $this->json($picture, 200, []);
     }
 
+    /**
+     * Delete a picture by its id
+     */
     #[Route('/api/delete/picture/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Picture $picture, EntityManagerInterface $entityManager): Response
     {

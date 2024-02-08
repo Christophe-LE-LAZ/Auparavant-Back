@@ -14,6 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PlaceController extends AbstractController
 {
+    /**
+     * Display all places
+     * @param PlaceRepository $placeRepository
+     * @return Response
+     */
     #[Route('/api/places', methods: ['GET'])]
     public function index(PlaceRepository $placeRepository)
     {
@@ -22,6 +27,11 @@ class PlaceController extends AbstractController
         return $this->json($places, 200, [], ['groups' => ['get_place']]);
     }
 
+    /**
+     * Display a single place by its id
+     * @param Place $place
+     * @return Response
+     */
     #[Route('/api/place/{id<\d+>}', methods: ['GET'])]
     public function read(Place $place = null )
     {
@@ -35,6 +45,13 @@ class PlaceController extends AbstractController
     );
     }
 
+    /** 
+     * Create a new place
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/api/create/place', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
@@ -46,6 +63,14 @@ class PlaceController extends AbstractController
         return $this->json($place, 201, []);
     }
 
+    /**
+     * Update a place by its id
+     * @param Place $place
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/api/update/place/{id<\d+>}', methods: ['PUT'])]
     public function update(Place $place = null,  Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
@@ -62,6 +87,9 @@ class PlaceController extends AbstractController
         return $this->json($place, 200, [], ['groups' => ['get_place']]);
     }
 
+    /**
+     * Delete a place by its id
+     */
     #[Route('/api/delete/place/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Place $place, EntityManagerInterface $entityManager): Response
     {

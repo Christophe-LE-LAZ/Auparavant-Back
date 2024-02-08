@@ -14,6 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
+    /**
+     * Display all users
+     * @param UserRepository $userRepository
+     * @return Response
+     */
     #[Route('/api/users', methods: ['GET'])]
     public function index(UserRepository $userRepository)
     {
@@ -23,6 +28,11 @@ class UserController extends AbstractController
         return $this->json($users, 200, [], ['groups' => ['get_user']]);
     }
 
+    /** 
+     * Display a single user by its id
+     * @param User $user
+     * @return Response
+     */
     #[Route('/api/user/{id<\d+>}', methods: ['GET'])]
     public function read(User $user = null )
     {
@@ -37,10 +47,17 @@ class UserController extends AbstractController
     );
     }
 
+    /**
+     * Create a new user
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/api/create/user', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
-        // Pour la creation d'un utilisateur, on recupere des donnees en JSON, on envoie la requete en BDD et on sauvegarde. Si c'est OK, on indique un code 201
+        // Pour la creation d'un utilisateur, on récupère des données en JSON, on envoie la requête en BDD et on sauvegarde. Si c'est OK, on indique un code 201
         $user = $serializer->deserialize($request->getContent(), User::class, 'json');
 
         $entityManager->persist($user);
@@ -49,16 +66,24 @@ class UserController extends AbstractController
         return $this->json($user, 201, []);
     }
 
+    /**
+     * Update a user by its id
+     * @param User $user
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/api/update/user/{id<\d+>}', methods: ['PUT'])]
     public function update(User $user = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
-        // Pour la modification, on recupere l'id et on verifie si il y a un utilisateur. Si non, on affiche une erreur 404.
+        // Pour la modification, on récupère l'id et on vérifie si il y a un utilisateur. Sinon, on affiche une erreur 404.
         if(!$user) {
             return $this->json(
                 "Erreur : L'utilisateur n'existe pas", 404
             );
         }
-        // Si l'utilisateur existe, on recupere et modifie les donnees en JSON, on envoie la requete et on sauvegarde en BDD avec un code 201.
+        // Si l'utilisateur existe, on récupère et modifie les données en JSON, on envoie la requête et on sauvegarde en BDD avec un code 201.
         $serializer->deserialize($request->getContent(), User::class, 'json', ['object_to_populate'=>$user]);
         $user->setUpdatedAt(new DateTimeImmutable());
 
@@ -67,6 +92,9 @@ class UserController extends AbstractController
         return $this->json($user, 200, []);
     }
 
+    /**
+     * Delete a user by its id
+     */
     #[Route('/api/delete/user/{id<\d+>}', methods: ['DELETE'])]
     public function delete(User $user, EntityManagerInterface $entityManager): Response
     {

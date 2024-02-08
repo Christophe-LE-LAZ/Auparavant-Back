@@ -14,6 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LocationController extends AbstractController
 {
+    /**
+     * Display all locations
+     * @param LocationRepository $locationRepository
+     * @return Response
+     */
     #[Route('/api/locations', methods: ['GET'])]
     public function index(LocationRepository $locationRepository)
     {
@@ -24,12 +29,17 @@ class LocationController extends AbstractController
 
     }
 
+    /**
+     * Display a single location by its id
+     * @param Location $location
+     * @return Response
+     */
     #[Route('/api/location/{id<\d+>}', methods: ['GET'])]
     public function read(Location $location = null )
     {
         if (!$location) {
             return $this->json(
-                "Error : Localite inexistante", 404
+                "Error : Localité inexistante", 404
             );
         }
 
@@ -37,6 +47,13 @@ class LocationController extends AbstractController
     );
     }
 
+    /**
+     * Create a new location
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/api/create/location', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
@@ -48,12 +65,20 @@ class LocationController extends AbstractController
         return $this->json($location, 201, []);
     }
 
+    /**
+     * Update a location by its id
+     * @param Location $location
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/api/update/location/{id<\d+>}', methods: ['PUT'])]
     public function update(Location $location = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$location) {
             return $this->json(
-                "Erreur : La localite n'existe pas", 404
+                "Erreur : La localité n'existe pas", 404
             );
         }
         $serializer->deserialize($request->getContent(), Location::class, 'json', ['object_to_populate'=>$location]);
@@ -64,6 +89,9 @@ class LocationController extends AbstractController
         return $this->json($location, 200, []);
     }
 
+    /**
+     * Delete a location by its id
+     */
     #[Route('/api/delete/location/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Location $location, EntityManagerInterface $entityManager): Response
     {

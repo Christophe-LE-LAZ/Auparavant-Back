@@ -15,6 +15,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MemoryController extends AbstractController
 {
+    /**
+     * Display all memories
+     * @param MemoryRepository $memoryRepository
+     * @return Response
+     */
     #[Route('/api/memories', methods: ['GET'])]
     public function index(MemoryRepository $memoryRepository)
     {
@@ -23,6 +28,11 @@ class MemoryController extends AbstractController
         return $this->json($memories, 200, [], ['groups' => ['get_memory']]);
     }
 
+    /**
+     * Display a single memory by its id
+     * @param Memory $memory
+     * @return Response
+     */
     #[Route('/api/memory/{id<\d+>}', methods: ['GET'])]
     public function read(Memory $memory = null )
     {
@@ -36,6 +46,13 @@ class MemoryController extends AbstractController
     );
     }
 
+    /**
+     * Create a new memory
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/api/create/memory', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
@@ -47,6 +64,13 @@ class MemoryController extends AbstractController
         return $this->json($memory, 201, []);
     }
 
+    /**
+     * Update a memory by its id
+     * @param Memory $memory
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @return Response
+     */
     #[Route('/api/update/memory/{id<\d+}', methods: ['PUT'])]
     public function update(Memory $memory = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
@@ -63,6 +87,9 @@ class MemoryController extends AbstractController
         return $this->json($memory, 200, []);
     }
 
+    /**
+     * Delete a memory by its id
+     */
     #[Route('/api/delete/memory/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
     {
