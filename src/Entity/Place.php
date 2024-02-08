@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlaceRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PlaceRepository::class)]
 class Place
@@ -15,9 +16,21 @@ class Place
     private ?int $id = null;
 
     #[ORM\Column(length: 30, nullable: true)]
+    #[Assert\Length(
+        min: 2,
+        max: 30,
+        minMessage: 'Le nom de l\'endroit doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le nom de l\'endroit ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\Length(
+        min: 2,
+        max: 30,
+        minMessage: 'Le type d\'endroit doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le type d\'endroit ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $type = null;
 
     #[ORM\Column]

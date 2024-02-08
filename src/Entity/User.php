@@ -7,8 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -19,12 +21,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\Length(
+        min: 2,
+        max: 30,
+        minMessage: 'Votre prénom doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Votre prénom ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\Length(
+        min: 2,
+        max: 30,
+        minMessage: 'Votre nom doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Votre nom ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: 'L\'adresse électronique {{ value }} n\'est pas valide.',
+    )]
     private ?string $email = null;
 
     /**

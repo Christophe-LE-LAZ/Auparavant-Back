@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Photo</th>
+                <th>Souvenir correspondant</th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
@@ -20,6 +21,7 @@
             <tr>
                 <td>{{ picture.id }}</td>
                 <td>{{ picture.picture }}</td>
+                <td>{{ picture.memory.title }}</td>
                 {# <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>

@@ -19,6 +19,10 @@
                 <th>Type</th>
                 <td>{{ place.type }}</td>
             </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ place.location.street }} {{ place.location.zipcode }} {{ place.location.city }}</td>
+            </tr>
             {# <tr>
                 <th>CreatedAt</th>
                 <td>{{ place.createdAt ? place.createdAt|date('Y-m-d H:i:s') : '' }}</td>

@@ -15,6 +15,10 @@
                 <th>Photo</th>
                 <td>{{ picture.picture }}</td>
             </tr>
+            <tr>
+                <th>Souvenir correspondant</th>
+                <td>{{ picture.memory.title }}</td>
+            </tr>
             {# <tr>
                 <th>CreatedAt</th>
                 <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
