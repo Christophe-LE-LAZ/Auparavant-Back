@@ -6,4 +6,5 @@ controllers:
 
 api_login_check:
     path: /api/login_check
-    controller: App\Controller\Api\LoginController::apiLogin
+
+    
