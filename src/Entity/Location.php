@@ -58,11 +58,9 @@ class Location
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Memory::class, orphanRemoval: true)]
-    #[Groups(['get_location'])]
     private Collection $memories;
 
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Place::class, orphanRemoval: true)]
-    #[Groups(['get_location'])]
     private Collection $places;
 
 

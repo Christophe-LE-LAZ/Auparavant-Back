@@ -32,7 +32,6 @@ class Place
 
     #[ORM\ManyToOne(inversedBy: 'places')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['get_place'])]
     private ?Location $location = null;
 
     public function __construct()

@@ -60,7 +60,7 @@ class PictureController extends AbstractController
         return $this->json($picture, 200, []);
     }
 
-    #[Route('/api/delete/picture', methods: ['DELETE'])]
+    #[Route('/api/delete/picture/{id<\d+>}', methods: ['DELETE'])]
     public function delete()
     {
 

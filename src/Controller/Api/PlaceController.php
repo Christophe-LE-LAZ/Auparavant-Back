@@ -2,8 +2,8 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\User;
 use App\Entity\Place;
+use DateTimeImmutable;
 use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,21 +47,22 @@ class PlaceController extends AbstractController
     }
 
     #[Route('/api/update/place/{id<\d+>}', methods: ['PUT'])]
-    public function update(Place $place = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
+    public function update(Place $place = null,  Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$place) {
             return $this->json(
                 "Erreur : L'endroit n'existe pas", 404
             );
         }
-        $serializer->deserialize($request->getContent(), User::class, 'json', ['object_to_populate'=>$place]);
+        $serializer->deserialize($request->getContent(), Place::class, 'json', ['object_to_populate'=>$place]);
+        $place->setUpdatedAt(new DateTimeImmutable());
 
         $entityManager->flush();
 
-        return $this->json($place, 200, []);
+        return $this->json($place, 200, [], ['groups' => ['get_place']]);
     }
 
-    #[Route('/api/delete/place', methods: ['DELETE'])]
+    #[Route('/api/delete/place/{id<\d+>}', methods: ['DELETE'])]
     public function delete()
     {
 

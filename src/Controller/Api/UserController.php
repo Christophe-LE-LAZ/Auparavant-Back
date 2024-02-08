@@ -66,7 +66,7 @@ class UserController extends AbstractController
         return $this->json($user, 200, []);
     }
 
-    #[Route('/api/delete/user', methods: ['DELETE'])]
+    #[Route('/api/delete/user/{id<\d+>}', methods: ['DELETE'])]
     public function delete()
     {
 

@@ -64,7 +64,7 @@ class LocationController extends AbstractController
         return $this->json($location, 200, []);
     }
 
-    #[Route('/api/delete/location', methods: ['DELETE'])]
+    #[Route('/api/delete/location/{id<\d+>}', methods: ['DELETE'])]
     public function delete()
     {
         

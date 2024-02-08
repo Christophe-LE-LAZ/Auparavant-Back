@@ -63,7 +63,7 @@ class MemoryController extends AbstractController
         return $this->json($memory, 200, []);
     }
 
-    #[Route('/api/delete/memory', methods: ['DELETE'])]
+    #[Route('/api/delete/memory/{id<\d+>}', methods: ['DELETE'])]
     public function delete()
     {
 
