@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Type</th>
+                <th>Adresse</th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
@@ -22,6 +23,7 @@
                 <td>{{ place.id }}</td>
                 <td>{{ place.name }}</td>
                 <td>{{ place.type }}</td>
+                <td>{{ place.location.street }} {{ place.location.zipcode }} {{ place.location.city }}</td>
                 {# <td>{{ place.createdAt ? place.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ place.updatedAt ? place.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>

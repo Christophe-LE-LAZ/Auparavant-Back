@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location
@@ -18,21 +19,57 @@ class Location
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'La région doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'La région ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $area = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\Length(
+        min: 2,
+        max: 30,
+        minMessage: 'Le département doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le département ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $department = null;
 
     #[ORM\Column(length: 20, nullable: true)]
+    #[Assert\Length(
+        min: 2,
+        max: 20,
+        minMessage: 'Le quartier doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le quartier ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $district = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(
+        min: 5,
+        max: 50,
+        minMessage: 'Le numéro et le nom de la rue doivent comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le numéro et le nom de la rue ne peuvent pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $street = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(
+        min: 1,
+        max: 50,
+        minMessage: 'La ville doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'La ville ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $city = null;
 
     #[ORM\Column]
+    #[Assert\Length(
+        min: 5,
+        max: 10,
+        minMessage: 'Le code postal doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le code postal ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?int $zipcode = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8)]

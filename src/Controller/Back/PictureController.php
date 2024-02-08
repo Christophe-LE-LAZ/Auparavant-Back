@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Back;
 
 use App\Entity\Picture;
 use App\Form\PictureType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/picture')]
+#[Route('/back/picture')]
 class PictureController extends AbstractController
 {
     /**
@@ -23,7 +23,7 @@ class PictureController extends AbstractController
     #[Route('/', name: 'app_picture_index', methods: ['GET'])]
     public function index(PictureRepository $pictureRepository): Response
     {
-        return $this->render('picture/index.html.twig', [
+        return $this->render('back/picture/index.html.twig', [
             'pictures' => $pictureRepository->findAll(),
         ]);
     }
@@ -49,7 +49,7 @@ class PictureController extends AbstractController
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('picture/new.html.twig', [
+        return $this->render('back/picture/new.html.twig', [
             'picture' => $picture,
             'form' => $form,
         ]);
@@ -64,7 +64,7 @@ class PictureController extends AbstractController
     #[Route('/{id}', name: 'app_picture_show', methods: ['GET'])]
     public function show(Picture $picture): Response
     {
-        return $this->render('picture/show.html.twig', [
+        return $this->render('back/picture/show.html.twig', [
             'picture' => $picture,
         ]);
     }
@@ -88,7 +88,7 @@ class PictureController extends AbstractController
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('picture/edit.html.twig', [
+        return $this->render('back/picture/edit.html.twig', [
             'picture' => $picture,
             'form' => $form,
         ]);

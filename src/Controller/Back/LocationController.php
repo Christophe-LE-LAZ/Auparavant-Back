@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Back;
 
 use App\Entity\Location;
 use App\Form\LocationType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/location')]
+#[Route('/back/location')]
 class LocationController extends AbstractController
 {
     /**
@@ -23,7 +23,7 @@ class LocationController extends AbstractController
     #[Route('/', name: 'app_location_index', methods: ['GET'])]
     public function index(LocationRepository $locationRepository): Response
     {
-        return $this->render('location/index.html.twig', [
+        return $this->render('back/location/index.html.twig', [
             'locations' => $locationRepository->findAll(),
         ]);
     }
@@ -49,7 +49,7 @@ class LocationController extends AbstractController
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('location/new.html.twig', [
+        return $this->render('back/location/new.html.twig', [
             'location' => $location,
             'form' => $form,
         ]);
@@ -64,7 +64,7 @@ class LocationController extends AbstractController
     #[Route('/{id}', name: 'app_location_show', methods: ['GET'])]
     public function show(Location $location): Response
     {
-        return $this->render('location/show.html.twig', [
+        return $this->render('back/location/show.html.twig', [
             'location' => $location,
         ]);
     }
@@ -88,7 +88,7 @@ class LocationController extends AbstractController
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('location/edit.html.twig', [
+        return $this->render('back/location/edit.html.twig', [
             'location' => $location,
             'form' => $form,
         ]);

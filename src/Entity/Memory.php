@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MemoryRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MemoryRepository::class)]
 class Memory
@@ -18,15 +19,30 @@ class Memory
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\Length(
+        min: 2,
+        max: 30,
+        minMessage: 'Le titre doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le titre ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(
+        min: 10,
+        max: 64000,
+        minMessage: 'Le contenu doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le contenu ne peut pas dépasser {{ limit }} caractères.',
+    )]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $picture_date = null;
 
     #[ORM\Column(length: 2000)]
+    #[Assert\Url(
+        message: 'L\'url {{ value }} n\'est pas valide',
+    )]
     private ?string $main_picture = null;
 
     #[ORM\Column(nullable: true)]

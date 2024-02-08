@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Modifier l'endroit</h1>
 
-    {{ include('place/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('back/place/_form.html.twig', {'button_label': 'Modifier'}) }}
 
     <a href="{{ path('app_place_index') }}">retour à la liste</a>
 
-    {{ include('place/_delete_form.html.twig') }}
+    {{ include('back/place/_delete_form.html.twig') }}
 {% endblock %}
