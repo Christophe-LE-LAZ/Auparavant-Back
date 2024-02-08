@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Back;
 
 use App\Entity\Place;
 use App\Form\PlaceType;
@@ -23,7 +23,7 @@ class PlaceController extends AbstractController
     #[Route('/', name: 'app_place_index', methods: ['GET'])]
     public function index(PlaceRepository $placeRepository): Response
     {
-        return $this->render('place/index.html.twig', [
+        return $this->render('back/place/index.html.twig', [
             'places' => $placeRepository->findAll(),
         ]);
     }
@@ -49,7 +49,7 @@ class PlaceController extends AbstractController
             return $this->redirectToRoute('app_place_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('place/new.html.twig', [
+        return $this->render('back/place/new.html.twig', [
             'place' => $place,
             'form' => $form,
         ]);
@@ -64,7 +64,7 @@ class PlaceController extends AbstractController
     #[Route('/{id}', name: 'app_place_show', methods: ['GET'])]
     public function show(Place $place): Response
     {
-        return $this->render('place/show.html.twig', [
+        return $this->render('back/place/show.html.twig', [
             'place' => $place,
         ]);
     }
@@ -88,7 +88,7 @@ class PlaceController extends AbstractController
             return $this->redirectToRoute('app_place_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('place/edit.html.twig', [
+        return $this->render('back/place/edit.html.twig', [
             'place' => $place,
             'form' => $form,
         ]);

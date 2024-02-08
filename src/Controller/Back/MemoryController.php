@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Back;
 
 use App\Entity\Memory;
 use App\Form\MemoryType;
@@ -23,7 +23,7 @@ class MemoryController extends AbstractController
     #[Route('/', name: 'app_memory_index', methods: ['GET'])]
     public function index(MemoryRepository $memoryRepository): Response
     {
-        return $this->render('memory/index.html.twig', [
+        return $this->render('back/memory/index.html.twig', [
             'memories' => $memoryRepository->findAll(),
         ]);
     }
@@ -49,7 +49,7 @@ class MemoryController extends AbstractController
             return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('memory/new.html.twig', [
+        return $this->render('back/memory/new.html.twig', [
             'memory' => $memory,
             'form' => $form,
         ]);
@@ -64,7 +64,7 @@ class MemoryController extends AbstractController
     #[Route('/{id}', name: 'app_memory_show', methods: ['GET'])]
     public function show(Memory $memory): Response
     {
-        return $this->render('memory/show.html.twig', [
+        return $this->render('back/memory/show.html.twig', [
             'memory' => $memory,
         ]);
     }
@@ -88,7 +88,7 @@ class MemoryController extends AbstractController
             return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('memory/edit.html.twig', [
+        return $this->render('back/memory/edit.html.twig', [
             'memory' => $memory,
             'form' => $form,
         ]);
