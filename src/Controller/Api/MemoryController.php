@@ -8,10 +8,10 @@ use App\Entity\Memory;
 use DateTimeImmutable;
 use App\Entity\Picture;
 use App\Entity\Location;
-use Doctrine\ORM\EntityManager;
 use App\Repository\UserRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\MemoryRepository;
+use App\Repository\PictureRepository;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +42,7 @@ class MemoryController extends AbstractController
     {
         $memories = $memoryRepository->findAll();
 
-        return $this->json($memories, 200, [], ['groups' => ['get_memory']]);
+        return $this->json($memories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_user']]);
     }
 
     /**
@@ -59,7 +59,7 @@ class MemoryController extends AbstractController
             );
         }
 
-        return $this->json($memory, 200, [], ['groups' => ['get_memory']]
+        return $this->json($memory, 200, [], ['groups' => ['get_memory', 'get_location', 'get_user']]
     );
     }
 
@@ -81,6 +81,7 @@ class MemoryController extends AbstractController
         return $this->json($memory, 201, []);
     }
 
+   
     /**
      * First method for creating a memory
      * Create a new memory as well as the name and type of place from a location selected on the map
@@ -154,6 +155,7 @@ class MemoryController extends AbstractController
      * 
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     * @param UserRepository $userRepository
      * @return Response
      * 
      */
@@ -202,7 +204,7 @@ class MemoryController extends AbstractController
                    
 
 
-        // additional image management //
+        // additional picture management //
          if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
             foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {
                 $additionalPicture = (new Picture())
@@ -220,6 +222,7 @@ class MemoryController extends AbstractController
      * @param Memory $memory
      * @param Request $request
      * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
     #[Route('/api/update/memory/{id<\d+>}', methods: ['PUT'])]
@@ -238,7 +241,79 @@ class MemoryController extends AbstractController
         return $this->json($memory, 200, [], ['groups' => ['get_memory']]);
     }
 
-    //! HERE
+    /**
+     * TODO : Update a memory by its id
+     * 
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param PlaceRepository $placeRepository
+     * @param MemoryRepository $memoryRepository
+     * @param PictureRepository $pictureRepository
+     * @return Response
+     * 
+     */
+    #[Route('/api/update/memory-and-place/{id<\d+>}', methods: ['PUT'])]
+    public function updateMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, PlaceRepository $placeRepository, MemoryRepository $memoryRepository, PictureRepository $pictureRepository)
+    {
+        $jsonContent = $request->getContent();
+        // $jsonContent ={"place":{"update_place":true,"id":1,"name":"nouveau_nom","type":"nouveau_type"},"memory":{"id":1,"title":"nouveau_titre","content":"nouveau_contenu","picture_date":"1890-02-08T14:00:00Z","main_picture":"nouvelle_URL","additional_pictures":[{"id":1,"URL_image":"nouvelle_URL_image_12"},{"id":2,"URL_image":"nouvelle_URL_image_24"},{"URL_image":"nouvelle_URL_image_38"}]}}
+
+   
+        $jsonContent = trim($jsonContent);
+        $data = json_decode($jsonContent, true);
+           
+        $placeData = $data['place'];
+        if ($placeData['update_place'] == true) {
+        $currentPlace = $placeRepository->find($data['place']['id'])
+            ->setName($placeData['name'])
+            ->setType($placeData['type'])
+            ->setUpdatedAt(new DateTimeImmutable());
+        $entityManager->persist($currentPlace);
+        $entityManager->flush();
+        }
+        
+    
+        $memoryData = $data['memory'];
+    
+        $currentMemory = $memoryRepository->find($data['memory']['id'])
+            ->setTitle($memoryData['title'])
+            ->setContent($memoryData['content'])
+            ->setPictureDate(new DateTime($memoryData['picture_date']))
+            ->setMainPicture($memoryData['main_picture'])
+            ->setUpdatedAt(new DateTimeImmutable());
+            // ->setPlace($place);
+
+        $entityManager->persist($currentMemory);
+                   
+
+        // additional picture management //
+        foreach ($memoryData['additional_pictures'] as $additionalPictureData) {
+            $additionalPictureId = isset($additionalPictureData['id']) ? $additionalPictureData['id'] : null;
+        
+            if ($additionalPictureId) {
+                // Update an existing picture
+                $additionalPicture = $pictureRepository->find($additionalPictureId);
+                if ($additionalPicture) {
+                    $additionalPicture
+                        ->setPicture($additionalPictureData['URL_image'])
+                        ->setMemory($currentMemory)
+                        ->setUpdatedAt(new DateTimeImmutable());
+        
+                    $entityManager->persist($additionalPicture);
+                }
+            } else {
+                // Create a new picture
+                $newAdditionalPicture = new Picture();
+                $newAdditionalPicture
+                    ->setPicture($additionalPictureData['URL_image'])
+                    ->setMemory($currentMemory);
+        
+                $entityManager->persist($newAdditionalPicture);
+            }
+        }
+               $entityManager->flush();
+        return $this->json(['message' => 'Souvenir mis à jour'], Response::HTTP_OK);
+    }
 
     /**
      * Delete a memory by its id
