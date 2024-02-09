@@ -55,7 +55,7 @@ class MemoryController extends AbstractController
     {
         if (!$memory) {
             return $this->json(
-                "Error : Souvenir inexistant", 404
+                "Erreur : Souvenir inexistant", 404
             );
         }
 
