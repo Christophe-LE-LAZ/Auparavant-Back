@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<title>Endroit</title>
+
+{% block body %}
+    <h1>Endroit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ place.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ place.name }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ place.type }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ place.location.street }} {{ place.location.zipcode }} {{ place.location.city }}</td>
+            </tr>
+            {# <tr>
+                <th>CreatedAt</th>
+                <td>{{ place.createdAt ? place.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ place.updatedAt ? place.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr> #}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_place_index') }}">retour à la liste</a>
+
+    <a href="{{ path('app_place_edit', {'id': place.id}) }}">modifier</a>
+
+    {{ include('back/place/_delete_form.html.twig') }}
+{% endblock %}

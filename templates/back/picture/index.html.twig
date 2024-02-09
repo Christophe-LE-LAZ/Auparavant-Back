@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<title>Index des photos</title>
+
+{% block body %}
+    <h1>Index des photos</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Photo</th>
+                <th>Souvenir correspondant</th>
+                {# <th>CreatedAt</th>
+                <th>UpdatedAt</th> #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for picture in pictures %}
+            <tr>
+                <td>{{ picture.id }}</td>
+                <td>{{ picture.picture }}</td>
+                <td>{{ picture.memory.title }}</td>
+                {# <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
+                <td>
+                    <a href="{{ path('app_picture_show', {'id': picture.id}) }}">voir</a>
+                    <a href="{{ path('app_picture_edit', {'id': picture.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun élément n'a été trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_picture_new') }}">Ajouter une nouvelle photo</a>
+{% endblock %}
+<a href="{{ path('app_main') }}">accueil</a>
