@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlaceRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -47,9 +49,13 @@ class Place
     #[ORM\JoinColumn(nullable: false)]
     private ?Location $location = null;
 
+    #[ORM\OneToMany(mappedBy: 'place', targetEntity: Memory::class, orphanRemoval: true)]
+    private Collection $memories;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
+        $this->memories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +119,36 @@ class Place
     public function setLocation(?Location $location): static
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Memory>
+     */
+    public function getMemories(): Collection
+    {
+        return $this->memories;
+    }
+
+    public function addMemory(Memory $memory): static
+    {
+        if (!$this->memories->contains($memory)) {
+            $this->memories->add($memory);
+            $memory->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMemory(Memory $memory): static
+    {
+        if ($this->memories->removeElement($memory)) {
+            // set the owning side to null (unless already changed)
+            if ($memory->getPlace() === $this) {
+                $memory->setPlace(null);
+            }
+        }
 
         return $this;
     }

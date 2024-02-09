@@ -64,6 +64,14 @@ class MemoryType extends AbstractType
                 'choice_label' => function (Location $location) {
                     return $location->getStreet() . ' ' . $location->getZipcode() . ' ' . $location->getCity();
                 },
+            ])
+            ->add('place', EntityType::class, 
+            [
+                'label' => 'Adresse : ',
+                'class' => Place::class,
+                'choice_label' => function (Place $place) {
+                    return $place->getName() . ' ' . $place->getType();
+                },
             ]);
     }
 

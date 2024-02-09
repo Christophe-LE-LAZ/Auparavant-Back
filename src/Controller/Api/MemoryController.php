@@ -42,7 +42,7 @@ class MemoryController extends AbstractController
     {
         $memories = $memoryRepository->findAll();
 
-        return $this->json($memories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_user']]);
+        return $this->json($memories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user']]);
     }
 
     /**
@@ -59,7 +59,7 @@ class MemoryController extends AbstractController
             );
         }
 
-        return $this->json($memory, 200, [], ['groups' => ['get_memory', 'get_location', 'get_user']]
+        return $this->json($memory, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user']]
     );
     }
 
