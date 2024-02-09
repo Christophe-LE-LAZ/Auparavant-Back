@@ -30,7 +30,26 @@ class MemoryAndPlaceController extends AbstractController
     public function create(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, LocationRepository $locationRepository)
     {
         $jsonContent = $request->getContent();
-        // $jsonContent = '{"user": {"id": 1},"location": {"id": 1},"place": {"name": "l'elysée","type": "batiment"},"memory":{"title": "l'elysée en 1990","content": "que de souvenirs avec ce lieu","picture_date": "1990-02-08T14:00:00Z","main_picture": "URL"}}';
+        // $jsonContent = '{"user": {"id": 1},"location": {"id": 1},"place": {"name": "l'elysée","type": "batiment"},"memory":{"title": "l'elysée en 1990","content": "que de souvenirs avec ce lieu","picture_date": "1990-02-08T14:00:00Z","main_picture": "URL"}}'; 
+        //{
+        //   "user": {
+        //     "id": 1
+        //   },
+        //   "location": {
+        //     "id": 1
+        //   },
+        //   "place": {
+        //     "name": "l'elysée",
+        //     "type": "batiment"
+        //   },
+        //   "memory": {
+        //     "title": "l'elysée en 1990",
+        //     "content": "que de souvenirs avec ce lieu",
+        //     "picture_date": "1990-02-08T14:00:00Z",
+        //     "main_picture": "URL",
+        // 		"additional_pictures": ["URL_image_1", "URL_image_2"]
+        //   }
+        // }
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
         
@@ -50,7 +69,7 @@ class MemoryAndPlaceController extends AbstractController
         // ];
         $user = $userRepository->find($data['user']['id']);
         $location = $locationRepository->find($data['location']['id']);
-        $memory = $data['memory'];
+        $memoryData = $data['memory'];
         // dd($memory);
         $newMemory = new Memory();
         $newMemory->setTitle($memory['title']);
@@ -59,18 +78,31 @@ class MemoryAndPlaceController extends AbstractController
         $newMemory->setMainPicture($memory['main_picture']);
         $newMemory->setUser($user);
         $newMemory->setLocation($location);
+
+        $entityManager->persist($newMemory);
                    
-        $place = $data['place'];
+        $placeData = $data['place'];
         $newPlace = new Place();
         $newPlace->setName($place['name']);
         $newPlace->setType($place['type']);
 
+        // additional image management //
+        // if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
+        //     foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {
+        //         $additionalPicture = new Picture();
+        //         $additionalPicture->setPicture($additionalPictureUrl);
+        //         $additionalPicture->setMemory($newMemory);
+        //         $entityManager->persist($additionalPicture);
+        //     }
+        // }
+
+
         if($newPlace){
             $newPlace->setLocation($location);
-         }
+            $entityManager->persist($newPlace);
+        }
 
-        $entityManager->persist($newMemory);
-        $entityManager->persist($newPlace);
+
         $entityManager->flush();
         return $this->json(['message' => 'Souvenir créé'], Response::HTTP_CREATED);
     }
