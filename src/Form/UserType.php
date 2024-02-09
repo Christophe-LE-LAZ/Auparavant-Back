@@ -51,7 +51,7 @@ class UserType extends AbstractType
                     'label' => 'Rôle : ',
                     'choices'  => [
                         'Administrateur' => 'ROLE_ADMIN',
-                        'Responsable' => 'ROLE_MANAGER',
+                        'Modérateur' => 'ROLE_MODERATOR',
                         'Utilisateur' => 'ROLE_USER',
                     ],
                     'multiple' => true,
