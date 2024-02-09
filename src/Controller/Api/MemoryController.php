@@ -2,10 +2,17 @@
 
 namespace App\Controller\Api;
 
+use DateTime;
+use App\Entity\Place;
 use App\Entity\Memory;
-use Doctrine\ORM\EntityManager;
-use App\Repository\MemoryRepository;
 use DateTimeImmutable;
+use App\Entity\Picture;
+use App\Entity\Location;
+use Doctrine\ORM\EntityManager;
+use App\Repository\UserRepository;
+use App\Repository\PlaceRepository;
+use App\Repository\MemoryRepository;
+use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +20,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * This controller groups together all the methods that manage memories.
+ * One method displays all memories.
+ * One displays only one.
+ * Two methods create a memory:
+ * -> One creates a memory from an existing locality and creates the name and type of the place if the existing ones are not suitable for this memory.
+ * -> Another creates a memory and a new locality as well as the name and type of the corresponding place.
+ * One updates a memory with its id by adding, modifying or deleting additional photos.
+ * One last deletes a memory by its id and the data assigned to it.
+ */
 class MemoryController extends AbstractController
 {
     /**
@@ -65,13 +82,147 @@ class MemoryController extends AbstractController
     }
 
     /**
+     * First method for creating a memory
+     * Create a new memory as well as the name and type of place from a location selected on the map
+     * ! Or
+     * Create a new memory by selecting the name and type of a pre-existing place from a location selected on the map.
+     * 
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param LocationRepository $locationRepository
+     * @param UserRepository $userRepository
+     * @param PlaceRepository $placeRepository
+     * @return Response
+     * 
+     */
+    #[Route('/api/create/memory-and-place', methods: ['POST'])]
+    public function createMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, LocationRepository $locationRepository, PlaceRepository $placeRepository)
+    {
+        $jsonContent = $request->getContent();
+        // $jsonContent = {"user":{"id":1},"location":{"id":1},"place":{"create_new_place":true,"name":"l'elysée","type":"batiment"},"memory":{"title":"l'elysée en 1990","content":"que de souvenirs avec ce lieu","picture_date":"1990-02-08T14:00:00Z","main_picture":"URL","additional_pictures":["URL_image_1","URL_image_2"]}}
+   
+        $jsonContent = trim($jsonContent);
+        $data = json_decode($jsonContent, true);
+     
+        $user = $userRepository->find($data['user']['id']);
+        $location = $locationRepository->find($data['location']['id']);
+        
+        $placeData = $data['place'];
+        if ($placeData['create_new_place'] == true) {
+        $newPlace = (new Place())
+            ->setName($placeData['name'])
+            ->setType($placeData['type'])
+            ->setLocation($location);
+        $entityManager->persist($newPlace);
+        $entityManager->flush();
+        // $place = $placeRepository->find($newPlace); 
+        }
+        // else {
+        //     $place = $placeRepository->find($data['place']['id']);
+        // }
+    
+        $memoryData = $data['memory'];
+        // dd($memory);
+        $newMemory = (new Memory())
+            ->setTitle($memoryData['title'])
+            ->setContent($memoryData['content'])
+            ->setPictureDate(new DateTime($memoryData['picture_date']))
+            ->setMainPicture($memoryData['main_picture'])
+            ->setUser($user)
+            ->setLocation($location);
+            // ->setPlace($place);
+
+        $entityManager->persist($newMemory);
+                   
+
+        // additional image management //
+         if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
+             foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {
+                 $additionalPicture = (new Picture())
+                    ->setPicture($additionalPictureUrl)
+                    ->setMemory($newMemory);
+                 $entityManager->persist($additionalPicture);
+             }
+        }
+               $entityManager->flush();
+        return $this->json(['message' => 'Souvenir créé'], Response::HTTP_CREATED);
+    }
+
+    /**
+     * Second method for creating a memory
+     * TODO: Create a new memory including name, type and location
+     * 
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     * 
+     */
+    #[Route('/api/create/memory-and-location-and-place', methods: ['POST'])]
+    public function createMemoryAndLocationAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
+    {
+        $jsonContent = $request->getContent();
+        // $jsonContent = {"user":{"id":1},"location":{"area": "xxx", "department": "xxx", "district": "xxx", "street": "xxx rue xxx", "city": "xxx", "zipcode": "00000", "latitude" : "00.000", "longitude": "0.0000"},"place":{"name":"l'elysée","type":"batiment"},"memory":{"title":"l'elysée en 1990","content":"que de souvenirs avec ce lieu","picture_date":"1990-02-08T14:00:00Z","main_picture":"URL","additional_pictures":["URL_image_1","URL_image_2"]}}
+
+        $jsonContent = trim($jsonContent);
+        $data = json_decode($jsonContent, true);
+        
+        $user = $userRepository->find($data['user']['id']);
+        $locationData = $data['location'];
+        $newLocation = (new Location ())
+            ->setArea($locationData['area'])
+            ->setDepartment($locationData['department'])
+            ->setDistrict($locationData['district'])
+            ->setStreet($locationData['street'])
+            ->setCity($locationData['city'])
+            ->setZipcode($locationData['zipcode'])
+            ->setLatitude($locationData['latitude'])
+            ->setLongitude($locationData['longitude']);
+        $entityManager->persist($newLocation);
+
+        $placeData = $data['place'];
+        $newPlace = (new Place())
+            ->setName($placeData['name'])
+            ->setType($placeData['type'])
+            ->setLocation($newLocation);
+        $entityManager->persist($newPlace);
+
+        $memoryData = $data['memory'];
+        // dd($memory);
+        $newMemory = (new Memory())
+            ->setTitle($memoryData['title'])
+            ->setContent($memoryData['content'])
+            ->setPictureDate(new DateTime($memoryData['picture_date']))
+            ->setMainPicture($memoryData['main_picture'])
+            ->setUser($user)
+            // ->setPlace($newPlace)
+            ->setLocation($newLocation);
+
+
+        $entityManager->persist($newMemory);
+                   
+
+
+        // additional image management //
+         if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
+            foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {
+                $additionalPicture = (new Picture())
+                    ->setPicture($additionalPictureUrl)
+                    ->setMemory($newMemory);
+                $entityManager->persist($additionalPicture);
+            }
+        }
+         $entityManager->flush();
+        return $this->json(['message' => 'Souvenir créé'], Response::HTTP_CREATED);
+    }
+
+    /**
      * Update a memory by its id
      * @param Memory $memory
      * @param Request $request
      * @param SerializerInterface $serializer
      * @return Response
      */
-    #[Route('/api/update/memory/{id<\d+}', methods: ['PUT'])]
+    #[Route('/api/update/memory/{id<\d+>}', methods: ['PUT'])]
     public function update(Memory $memory = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$memory) {
@@ -84,8 +235,10 @@ class MemoryController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->json($memory, 200, []);
+        return $this->json($memory, 200, [], ['groups' => ['get_memory']]);
     }
+
+    //! HERE
 
     /**
      * Delete a memory by its id
@@ -96,6 +249,6 @@ class MemoryController extends AbstractController
         $entityManager->remove($memory);
         $entityManager->flush();
 
-        return new Response('Souvenir supprime', 200);
+        return new Response('Souvenir supprimé', 200);
     }
 }
