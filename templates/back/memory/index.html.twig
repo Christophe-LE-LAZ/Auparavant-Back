@@ -13,6 +13,9 @@
                 <th>Contenu</th>
                 <th>Photographie principale</th>
                 <th>Date de la photographie</th>
+                <th>Nom et type de lieu</th>
+                <th>Adresse</th>
+                <th>Utilisateur</th>
                 {# <th>PublishedAt</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
@@ -27,6 +30,9 @@
                 <td>{{ memory.content }}</td>
                 <td>{{ memory.mainPicture }}</td>
                 <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ memory.place.name }} {{ memory.place.type }}</td>
+                <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
+                <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
                 {# <td>{{ memory.publishedAt ? memory.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ memory.createdAt ? memory.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ memory.updatedAt ? memory.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}

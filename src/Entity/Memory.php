@@ -74,6 +74,11 @@ class Memory
     #[Groups(['get_memory'])]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'memories')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_memory'])]
+    private ?Place $place = null;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -220,6 +225,18 @@ class Memory
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPlace(): ?Place
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?Place $place): static
+    {
+        $this->place = $place;
 
         return $this;
     }
