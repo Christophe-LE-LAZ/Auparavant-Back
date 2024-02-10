@@ -27,3 +27,5 @@
 | `/api/create/user` | POST         | -      |{"firstname": "xxx", "lastname": "xxx", "email": "xxx.xxx@xxx", "password": "xxxxxxxx", "roles": "xxxxxxxxxx"}| Create a user             | `id` - ID of the user to create |
 | `/api/update/user/{id<\d+>}` | PUT      | -            |{"firstname": "xxx", "lastname": "xxx", "email": "xxx.xxx@xxx", "password": "xxxxxxxx", "roles": "xxxxxxxxxx"}| Update a user             | `id` - ID of the user to update |
 | `/api/delete/user/{id<\d+>}` | DELETE      | -            |{"firstname": "xxx", "lastname": "xxx", "email": "xxx.xxx@xxx", "password": "xxxxxxxx", "roles": "xxxxxxxxxx"}| Delete a user             | `id` - ID of the user to delete |
+| `/api/register` | POST      | -            |{"firstname": "John","lastname": "Doe","email": "john.doe@example.com","password": "securepassword"}| Sign up          | -
+| `/api/login_check` | POST      | -            |{"username": "john.doe@example.com","password": "securepassword"}| Sign in           | -
