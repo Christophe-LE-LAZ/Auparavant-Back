@@ -70,7 +70,7 @@ class MemoryController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/api/create/memory', methods: ['POST'])]
+    #[Route('/api/secure/create/memory', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $memory = $serializer->deserialize($request->getContent(), Memory::class, 'json');
@@ -96,7 +96,7 @@ class MemoryController extends AbstractController
      * @return Response
      * 
      */
-    #[Route('/api/create/memory-and-place', methods: ['POST'])]
+    #[Route('/api/secure/create/memory-and-place', methods: ['POST'])]
     public function createMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, LocationRepository $locationRepository, PlaceRepository $placeRepository)
     {
         $jsonContent = $request->getContent();
@@ -159,7 +159,7 @@ class MemoryController extends AbstractController
      * @return Response
      * 
      */
-    #[Route('/api/create/memory-and-location-and-place', methods: ['POST'])]
+    #[Route('/api/secure/create/memory-and-location-and-place', methods: ['POST'])]
     public function createMemoryAndLocationAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
     {
         $jsonContent = $request->getContent();
@@ -225,7 +225,7 @@ class MemoryController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/api/update/memory/{id<\d+>}', methods: ['PUT'])]
+    #[Route('/api/secure/update/memory/{id<\d+>}', methods: ['PUT'])]
     public function update(Memory $memory = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$memory) {
@@ -318,7 +318,7 @@ class MemoryController extends AbstractController
     /**
      * Delete a memory by its id
      */
-    #[Route('/api/delete/memory/{id<\d+>}', methods: ['DELETE'])]
+    #[Route('/api/secure/delete/memory/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($memory);

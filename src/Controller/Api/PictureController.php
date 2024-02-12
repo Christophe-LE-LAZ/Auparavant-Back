@@ -51,7 +51,7 @@ class PictureController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/api/create/picture', methods: ['POST'])]
+    #[Route('/api/secure/create/picture', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $picture = $serializer->deserialize($request->getContent(), Picture::class, 'json');
@@ -70,7 +70,7 @@ class PictureController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/api/update/picture/{id<\d+>}', methods: ['PUT'])]
+    #[Route('/api/secure/update/picture/{id<\d+>}', methods: ['PUT'])]
     public function update(Picture $picture = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$picture) {
@@ -88,7 +88,7 @@ class PictureController extends AbstractController
     /**
      * Delete a picture by its id
      */
-    #[Route('/api/delete/picture/{id<\d+>}', methods: ['DELETE'])]
+    #[Route('/api/secure/delete/picture/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Picture $picture, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($picture);

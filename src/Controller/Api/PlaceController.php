@@ -52,7 +52,7 @@ class PlaceController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/api/create/place', methods: ['POST'])]
+    #[Route('/api/secure/create/place', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $place = $serializer->deserialize($request->getContent(), Place::class, 'json');
@@ -71,7 +71,7 @@ class PlaceController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/api/update/place/{id<\d+>}', methods: ['PUT'])]
+    #[Route('/api/secure/update/place/{id<\d+>}', methods: ['PUT'])]
     public function update(Place $place = null,  Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$place) {
@@ -90,7 +90,7 @@ class PlaceController extends AbstractController
     /**
      * Delete a place by its id
      */
-    #[Route('/api/delete/place/{id<\d+>}', methods: ['DELETE'])]
+    #[Route('/api/secure/delete/place/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Place $place, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($place);
