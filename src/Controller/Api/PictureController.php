@@ -70,11 +70,12 @@ class PictureController extends AbstractController
      * @param Request $request
      * @param SerializerInterface $serializer
      * @param EntityManagerInterface $entityManager
+     * @param MemoryRepository $memoryRepository
      * @return Response
      */
 
     #[Route('/api/secure/update/picture/{id<\d+>}', methods: ['PUT'])]
-    public function update(Picture $picture = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
+    public function update(Picture $picture = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
 
     {
     
