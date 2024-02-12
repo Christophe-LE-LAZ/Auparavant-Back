@@ -196,7 +196,7 @@ class MemoryController extends AbstractController
             ->setPictureDate(new DateTime($memoryData['picture_date']))
             ->setMainPicture($memoryData['main_picture'])
             ->setUser($user)
-            // ->setPlace($newPlace)
+            ->setPlace($newPlace)
             ->setLocation($newLocation);
 
 
