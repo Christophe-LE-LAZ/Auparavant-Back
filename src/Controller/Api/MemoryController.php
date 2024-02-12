@@ -116,11 +116,11 @@ class MemoryController extends AbstractController
             ->setLocation($location);
         $entityManager->persist($newPlace);
         $entityManager->flush();
-        // $place = $placeRepository->find($newPlace); 
+        $place = $placeRepository->find($newPlace); 
         }
-        // else {
-        //     $place = $placeRepository->find($data['place']['id']);
-        // }
+        else {
+            $place = $placeRepository->find($data['place']['id']);
+        }
     
         $memoryData = $data['memory'];
         // dd($memory);
@@ -130,8 +130,8 @@ class MemoryController extends AbstractController
             ->setPictureDate(new DateTime($memoryData['picture_date']))
             ->setMainPicture($memoryData['main_picture'])
             ->setUser($user)
-            ->setLocation($location);
-            // ->setPlace($place);
+            ->setLocation($location)
+            ->setPlace($place);
 
         $entityManager->persist($newMemory);
                    

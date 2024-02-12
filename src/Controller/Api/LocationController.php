@@ -62,7 +62,7 @@ class LocationController extends AbstractController
         $entityManager->persist($location);
         $entityManager->flush();
 
-        return $this->json($location, 201, []);
+        return $this->json($location, 201, [], ['groups' => ['get_location']]);
     }
 
     /**
@@ -86,7 +86,7 @@ class LocationController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->json($location, 200, []);
+        return $this->json($location, 200, [], ['groups' => ['get_location']]);
     }
 
     /**
