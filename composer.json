@@ -23,6 +23,7 @@
         "symfony/monolog-bundle": "^3.0",
         "symfony/runtime": "7.0.*",
         "symfony/security-bundle": "7.0.*",
+        "symfony/serializer": "7.0.*",
         "symfony/validator": "7.0.*",
         "symfony/yaml": "7.0.*",
         "twig/twig": "^3.0"

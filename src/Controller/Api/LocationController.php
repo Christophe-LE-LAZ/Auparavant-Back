@@ -39,7 +39,7 @@ class LocationController extends AbstractController
     {
         if (!$location) {
             return $this->json(
-                "Error : Localité inexistante", 404
+                "Erreur : Localité inexistante", 404
             );
         }
 
@@ -98,6 +98,6 @@ class LocationController extends AbstractController
         $entityManager->remove($location);
         $entityManager->flush();
 
-        return new Response('Localite supprime', 200);
+        return new Response('Localite supprimée', 200);
     }
 }

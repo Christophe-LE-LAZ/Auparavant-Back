@@ -39,7 +39,7 @@ class UserController extends AbstractController
         // Si l'utilisateur n'existe pas, on renvoie un message et une erreur 404
         if (!$user) {
             return $this->json(
-                "Error : Utilisateur inexistant", 404
+                "Erreur : Utilisateur inexistant", 404
             );
         }
         // Si il trouve un utilisateur avec l'id indique, il renvoie un code 200 et toutes les infos qu'il faut
@@ -101,6 +101,6 @@ class UserController extends AbstractController
         $entityManager->remove($user);
         $entityManager->flush();
 
-        return new Response('Utilisateur supprime', 200);
+        return new Response('Utilisateur supprimé', 200);
     }
 }

@@ -36,7 +36,7 @@ class PictureController extends AbstractController
     {
         if (!$picture) {
             return $this->json(
-                "Error : Photo inexistante", 404
+                "Erreur : Photo inexistante", 404
             );
         }
 
@@ -94,6 +94,6 @@ class PictureController extends AbstractController
         $entityManager->remove($picture);
         $entityManager->flush();
 
-        return new Response('Photo supprime', 200);
+        return new Response('Photo supprimée', 200);
     }
 }

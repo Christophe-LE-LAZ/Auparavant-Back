@@ -28,7 +28,7 @@ class RegistrationController extends AbstractController
         $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $data['email']]);
 
         if ($existingUser) {
-            return $this->json(['error' => 'l\'email est déjà utilisée par un autre utilisateur'], Response::HTTP_BAD_REQUEST);
+            return $this->json(['error' => 'L\'email est déjà utilisé par un autre utilisateur'], Response::HTTP_BAD_REQUEST);
         }
 
         $user = new User();
