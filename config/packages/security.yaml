@@ -20,7 +20,6 @@ security:
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-
         api_secure: # Regle de firewall pour TOUTES les routes de l'api secure, c'est ici que je définis que TOUTES les routes de l'api nécéssitent un token
             pattern:   ^/api/secure # ici on dit que ce firewall s'applique pour TOUTES les routes qui commence par le endpoint '/api/secure'
             stateless: true # Le Firewall est sans état (no sessions ici)
@@ -52,8 +51,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/api, roles: PUBLIC_ACCESS }
         - { path: ^/api/secure, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api, roles: PUBLIC_ACCESS }
      
         # - { path: ^/back, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_MODERATOR }

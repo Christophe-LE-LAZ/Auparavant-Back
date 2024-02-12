@@ -91,9 +91,14 @@ class PictureController extends AbstractController
     #[Route('/api/secure/delete/picture/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Picture $picture, EntityManagerInterface $entityManager): Response
     {
+        if(!$picture) {
+            return $this->json(
+                "Erreur : Le souvenir n'existe pas", 404
+            );
+        }
         $entityManager->remove($picture);
         $entityManager->flush();
 
-        return new Response('Photo supprimée', 200);
+        return $this->json(['message' => 'Souvenir supprimé'], Response::HTTP_OK);
     }
 }
