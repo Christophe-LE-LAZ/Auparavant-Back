@@ -67,7 +67,8 @@ INSERT INTO `memory` (`id`, `location_id`, `user_id`, `place_id`, `title`, `cont
 (4,	2,	1,	2,	'La Tour Eiffel de nos jours',	'La tour Eiffel [tuʁɛfɛl] est une tour de fer puddlé de 330 m de hauteur située à Paris, à l’extrémité nord-ouest du parc du Champ-de-Mars en bordure de la Seine dans le 7ᵉ arrondissement. Son adresse officielle est 5, avenue Anatole-France.',	'2009-06-01 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg/260px-Tour_Eiffel_Wikimedia_Commons.jpg',	NULL,	'2024-02-07 14:51:04',	NULL),
 (5,	3,	1,	3,	'Notre-Dame',	'La cathédrale Notre-Dame de Paris, communément appelée Notre-Dame, est l\'un des monuments les plus emblématiques de Paris et de la France. Elle est située sur l\'île de la Cité et est un lieu de culte catholique, siège de l\'archidiocèse de Paris, dédié à la Vierge Marie.',	'2009-01-01 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Notre-Dame_de_Paris_2009-04-28.jpg/1024px-Notre-Dame_de_Paris_2009-04-28.jpg',	NULL,	'2024-02-08 09:48:14',	NULL),
 (6,	3,	1,	3,	'Incendie de Notre-Dame',	'L’incendie de Notre-Dame de Paris est un incendie majeur survenu à la cathédrale Notre-Dame de Paris, les 15 et 16 avril 2019, pendant près de 15 heures.',	'2019-04-15 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Incendie_Notre_Dame_de_Paris.jpg/280px-Incendie_Notre_Dame_de_Paris.jpg',	NULL,	'2024-02-08 09:50:03',	NULL),
-(7,	5,	1,	5,	'Propriété de M. Clause',	'Propriété de M. Clause, édifiée en 1912',	'1912-01-01 00:00:00',	'https://p.cartorum.fr/recto/maxi/000/144/678-bretigny-sur-orge-bretigny-sur-orge-propriete-clause.jpg',	NULL,	'2024-02-12 10:18:15',	NULL);
+(7,	5,	1,	5,	'Propriété de M. Clause',	'Propriété de M. Clause, édifiée en 1912',	'1912-01-01 00:00:00',	'https://p.cartorum.fr/recto/maxi/000/144/678-bretigny-sur-orge-bretigny-sur-orge-propriete-clause.jpg',	NULL,	'2024-02-12 10:18:15',	NULL),
+(8,	5,	1,	6,	'Quartier Clause',	'Projet d\'aménagement urbain en 2023',	'2024-01-01 00:00:00',	'https://www.bretigny91.fr/wp-content/uploads/2019/08/CLAUSE-BOIS-BADEAU_VUE-AERIENNE-PLACE-LORCA_02-_Thibault-dArgent-2018.jpg',	NULL,	'2024-02-12 10:24:58',	NULL);
 
 DROP TABLE IF EXISTS `picture`;
 CREATE TABLE `picture` (
@@ -106,7 +107,8 @@ INSERT INTO `place` (`id`, `location_id`, `name`, `type`, `created_at`, `updated
 (1,	1,	'Le Panthéon',	'Mausolée',	'2024-02-07 13:49:15',	NULL),
 (2,	2,	'Tour Eiffel',	'Tour autoportante',	'2024-02-07 14:48:49',	NULL),
 (3,	3,	'Notre-Dame de Paris',	'Cathédrale',	'2024-02-08 09:46:04',	NULL),
-(5,	5,	'Propriété Clause',	'Propriété',	'2024-02-12 10:18:15',	NULL);
+(5,	5,	'Propriété Clause',	'Propriété',	'2024-02-12 10:18:15',	NULL),
+(6,	5,	'Résidence Clause',	'Résidence d\'immeubles',	'2024-02-12 10:24:58',	NULL);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -125,4 +127,4 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `roles`, `created_at`, `updated_at`) VALUES
 (1,	'Aurélien',	'ROUCHETTE-MARET',	'aurelien.rouchette@orange.fr',	'$2y$13$ln3URzIz9aaKC0UCue9fxeqg/ltuKvFRBncs4sxa7rZBiPDpRX1da',	'[]',	'2024-02-12 10:07:05',	NULL);
 
--- 2024-02-12 10:19:23
+-- 2024-02-12 10:29:53
