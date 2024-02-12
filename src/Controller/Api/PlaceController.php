@@ -93,6 +93,11 @@ class PlaceController extends AbstractController
     #[Route('/api/secure/delete/place/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Place $place, EntityManagerInterface $entityManager): Response
     {
+        if(!$place) {
+            return $this->json(
+                "Erreur : L'endroit n'existe pas", 404
+            );
+        }
         $entityManager->remove($place);
         $entityManager->flush();
 

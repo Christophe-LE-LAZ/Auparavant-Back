@@ -95,9 +95,14 @@ class LocationController extends AbstractController
     #[Route('/api/secure/delete/location/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Location $location, EntityManagerInterface $entityManager): Response
     {
+        if(!$location) {
+            return $this->json(
+                "Erreur : La localité n'existe pas", 404
+            );
+        }
         $entityManager->remove($location);
         $entityManager->flush();
 
-        return new Response('Localite supprimée', 200);
+        return $this->json(['message' => 'Localité supprimée'], Response::HTTP_OK);
     }
 }

@@ -104,12 +104,12 @@ class PictureController extends AbstractController
     {
         if(!$picture) {
             return $this->json(
-                "Erreur : Le souvenir n'existe pas", 404
+                "Erreur : La photo n'existe pas", 404
             );
         }
         $entityManager->remove($picture);
         $entityManager->flush();
 
-        return $this->json(['message' => 'Souvenir supprimé'], Response::HTTP_OK);
+        return $this->json(['message' => 'Photo supprimée'], Response::HTTP_OK);
     }
 }
