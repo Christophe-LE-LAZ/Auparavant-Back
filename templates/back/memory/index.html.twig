@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-
-<title>Index des souvenirs</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Index des souvenirs</h1>
@@ -50,5 +48,6 @@
     </table>
 
     <a href="{{ path('app_memory_new') }}">Créer un nouveau souvenir</a>
-{% endblock %}
+
 <a href="{{ path('app_main') }}">accueil</a>
+{% endblock %}

@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-
-<title>Index des localités</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Index des localités</h1>
@@ -50,5 +48,6 @@
     </table>
 
     <a href="{{ path('app_location_new') }}">Créer une nouvelle localité</a>
-{% endblock %}
+
 <a href="{{ path('app_main') }}">accueil</a>
+{% endblock %}
