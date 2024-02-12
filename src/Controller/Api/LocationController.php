@@ -54,7 +54,7 @@ class LocationController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/api/create/location', methods: ['POST'])]
+    #[Route('/api/secure/create/location', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $location = $serializer->deserialize($request->getContent(), Location::class, 'json');
@@ -73,7 +73,7 @@ class LocationController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/api/update/location/{id<\d+>}', methods: ['PUT'])]
+    #[Route('/api/secure/update/location/{id<\d+>}', methods: ['PUT'])]
     public function update(Location $location = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$location) {
@@ -92,7 +92,7 @@ class LocationController extends AbstractController
     /**
      * Delete a location by its id
      */
-    #[Route('/api/delete/location/{id<\d+>}', methods: ['DELETE'])]
+    #[Route('/api/secure/delete/location/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Location $location, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($location);

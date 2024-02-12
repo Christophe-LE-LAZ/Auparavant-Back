@@ -54,7 +54,7 @@ class UserController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/api/create/user', methods: ['POST'])]
+    #[Route('/api/secure/create/user', methods: ['POST'])]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         // Pour la creation d'un utilisateur, on récupère des données en JSON, on envoie la requête en BDD et on sauvegarde. Si c'est OK, on indique un code 201
@@ -74,7 +74,7 @@ class UserController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/api/update/user/{id<\d+>}', methods: ['PUT'])]
+    #[Route('/api/secure/update/user/{id<\d+>}', methods: ['PUT'])]
     public function update(User $user = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         // Pour la modification, on récupère l'id et on vérifie si il y a un utilisateur. Sinon, on affiche une erreur 404.
@@ -95,7 +95,7 @@ class UserController extends AbstractController
     /**
      * Delete a user by its id
      */
-    #[Route('/api/delete/user/{id<\d+>}', methods: ['DELETE'])]
+    #[Route('/api/secure/delete/user/{id<\d+>}', methods: ['DELETE'])]
     public function delete(User $user, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($user);
