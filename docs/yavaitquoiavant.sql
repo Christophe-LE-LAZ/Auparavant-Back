@@ -37,7 +37,8 @@ CREATE TABLE `location` (
 INSERT INTO `location` (`id`, `area`, `department`, `district`, `street`, `city`, `zipcode`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
 (1,	'Île-de-France',	'Paris',	'Quartier latin',	'28 place du Panthéon',	'Paris',	75005,	48.84619800,	2.34610500,	'2024-02-07 13:48:00',	NULL),
 (2,	'Île-de-France',	'Paris',	'Gros-Caillou',	'5 avenue Anatole-France',	'Paris',	75007,	48.85829600,	2.29447900,	'2024-02-07 14:48:05',	NULL),
-(3,	'Île-de-France',	'Paris',	'Notre-Dame',	'6 Parvis Notre-Dame - Place Jean-Paul II',	'Paris',	75004,	48.51110000,	2.20590000,	'2024-02-08 09:45:03',	NULL);
+(3,	'Île-de-France',	'Paris',	'Notre-Dame',	'6 Parvis Notre-Dame - Place Jean-Paul II',	'Paris',	75004,	48.51110000,	2.20590000,	'2024-02-08 09:45:03',	NULL),
+(5,	'Île-de-France',	'Essonne',	'Clause',	'Impasse du Blutin',	'Brétigny',	91220,	48.60870000,	2.30685000,	'2024-02-12 10:18:15',	NULL);
 
 DROP TABLE IF EXISTS `memory`;
 CREATE TABLE `memory` (
@@ -65,7 +66,8 @@ INSERT INTO `memory` (`id`, `location_id`, `user_id`, `place_id`, `title`, `cont
 (3,	2,	1,	2,	'La naissance de la tour Eiffel',	'C’est à l’occasion de l’Exposition Universelle de 1889, date qui marquait le centenaire de la Révolution française qu\'il a été décidé de construire une tour de 300m.\r\n\r\nLes premiers coups de pelle sont donnés le 26 janvier 1887.\r\nLe 31 mars 1889, la Tour achevée en un temps record -2 ans, 2 mois et 5 jours- s’impose comme une véritable prouesse technique.',	'1887-01-26 00:00:00',	'https://www.toureiffel.paris/sites/default/files/styles/mobile_x1_560/public/2017-10/070601-014_1.JPEG?itok=3lGoqCZK',	NULL,	'2024-02-07 14:50:11',	NULL),
 (4,	2,	1,	2,	'La Tour Eiffel de nos jours',	'La tour Eiffel [tuʁɛfɛl] est une tour de fer puddlé de 330 m de hauteur située à Paris, à l’extrémité nord-ouest du parc du Champ-de-Mars en bordure de la Seine dans le 7ᵉ arrondissement. Son adresse officielle est 5, avenue Anatole-France.',	'2009-06-01 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg/260px-Tour_Eiffel_Wikimedia_Commons.jpg',	NULL,	'2024-02-07 14:51:04',	NULL),
 (5,	3,	1,	3,	'Notre-Dame',	'La cathédrale Notre-Dame de Paris, communément appelée Notre-Dame, est l\'un des monuments les plus emblématiques de Paris et de la France. Elle est située sur l\'île de la Cité et est un lieu de culte catholique, siège de l\'archidiocèse de Paris, dédié à la Vierge Marie.',	'2009-01-01 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Notre-Dame_de_Paris_2009-04-28.jpg/1024px-Notre-Dame_de_Paris_2009-04-28.jpg',	NULL,	'2024-02-08 09:48:14',	NULL),
-(6,	3,	1,	3,	'Incendie de Notre-Dame',	'L’incendie de Notre-Dame de Paris est un incendie majeur survenu à la cathédrale Notre-Dame de Paris, les 15 et 16 avril 2019, pendant près de 15 heures.',	'2019-04-15 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Incendie_Notre_Dame_de_Paris.jpg/280px-Incendie_Notre_Dame_de_Paris.jpg',	NULL,	'2024-02-08 09:50:03',	NULL);
+(6,	3,	1,	3,	'Incendie de Notre-Dame',	'L’incendie de Notre-Dame de Paris est un incendie majeur survenu à la cathédrale Notre-Dame de Paris, les 15 et 16 avril 2019, pendant près de 15 heures.',	'2019-04-15 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Incendie_Notre_Dame_de_Paris.jpg/280px-Incendie_Notre_Dame_de_Paris.jpg',	NULL,	'2024-02-08 09:50:03',	NULL),
+(7,	5,	1,	5,	'Propriété de M. Clause',	'Propriété de M. Clause, édifiée en 1912',	'1912-01-01 00:00:00',	'https://p.cartorum.fr/recto/maxi/000/144/678-bretigny-sur-orge-bretigny-sur-orge-propriete-clause.jpg',	NULL,	'2024-02-12 10:18:15',	NULL);
 
 DROP TABLE IF EXISTS `picture`;
 CREATE TABLE `picture` (
@@ -103,7 +105,8 @@ CREATE TABLE `place` (
 INSERT INTO `place` (`id`, `location_id`, `name`, `type`, `created_at`, `updated_at`) VALUES
 (1,	1,	'Le Panthéon',	'Mausolée',	'2024-02-07 13:49:15',	NULL),
 (2,	2,	'Tour Eiffel',	'Tour autoportante',	'2024-02-07 14:48:49',	NULL),
-(3,	3,	'Notre-Dame de Paris',	'Cathédrale',	'2024-02-08 09:46:04',	NULL);
+(3,	3,	'Notre-Dame de Paris',	'Cathédrale',	'2024-02-08 09:46:04',	NULL),
+(5,	5,	'Propriété Clause',	'Propriété',	'2024-02-12 10:18:15',	NULL);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -120,7 +123,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `roles`, `created_at`, `updated_at`) VALUES
-(1,	'Aurélien',	'ROUCHETTE-MARET',	'aurelien.rouchette@orange.fr',	'aurélien',	'[\"ROLE_ADMIN\"]',	'2024-02-07 13:44:52',	NULL),
-(3,	'Christophe',	'LE LAZ',	'christophe.le-laz@oclock.school',	'christophe',	'[\"ROLE_ADMIN\"]',	'2024-02-08 14:19:24',	NULL);
+(1,	'Aurélien',	'ROUCHETTE-MARET',	'aurelien.rouchette@orange.fr',	'$2y$13$ln3URzIz9aaKC0UCue9fxeqg/ltuKvFRBncs4sxa7rZBiPDpRX1da',	'[]',	'2024-02-12 10:07:05',	NULL);
 
--- 2024-02-09 14:57:50
+-- 2024-02-12 10:19:23
