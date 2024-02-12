@@ -2,7 +2,6 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Memory;
 use App\Entity\Picture;
 use App\Repository\MemoryRepository;
 use App\Repository\PictureRepository;
@@ -75,8 +74,7 @@ class PictureController extends AbstractController
      */
 
     #[Route('/api/secure/update/picture/{id<\d+>}', methods: ['PUT'])]
-    public function update(Picture $picture = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
-
+    public function update(Picture $picture, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
     {
     
         if (!$picture) {
@@ -104,9 +102,14 @@ class PictureController extends AbstractController
     #[Route('/api/secure/delete/picture/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Picture $picture, EntityManagerInterface $entityManager): Response
     {
+        if(!$picture) {
+            return $this->json(
+                "Erreur : Le souvenir n'existe pas", 404
+            );
+        }
         $entityManager->remove($picture);
         $entityManager->flush();
 
-        return new Response('Photo supprimée', 200);
+        return $this->json(['message' => 'Souvenir supprimé'], Response::HTTP_OK);
     }
 }

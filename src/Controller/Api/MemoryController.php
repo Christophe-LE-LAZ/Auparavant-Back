@@ -250,7 +250,7 @@ class MemoryController extends AbstractController
      * @return Response
      * 
      */
-    #[Route('/api/update/memory-and-place/{id<\d+>}', methods: ['PUT'])]
+    #[Route('/api/secure/update/memory-and-place/{id<\d+>}', methods: ['PUT'])]
     public function updateMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, PlaceRepository $placeRepository, MemoryRepository $memoryRepository, PictureRepository $pictureRepository)
     {
         $jsonContent = $request->getContent();
@@ -319,9 +319,14 @@ class MemoryController extends AbstractController
     #[Route('/api/secure/delete/memory/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
     {
+        if(!$memory) {
+            return $this->json(
+                "Erreur : Le souvenir n'existe pas", 404
+            );
+        }
         $entityManager->remove($memory);
         $entityManager->flush();
 
-        return new Response('Souvenir supprimé', 200);
+        return $this->json(['message' => 'Souvenir supprimé'], Response::HTTP_OK);
     }
 }

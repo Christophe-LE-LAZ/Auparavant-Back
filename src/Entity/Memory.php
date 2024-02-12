@@ -67,7 +67,6 @@ class Memory
     private ?Location $location = null;
 
     #[ORM\OneToMany(mappedBy: 'memory', targetEntity: Picture::class, orphanRemoval: true)]
-    #[MaxDepth(1)] 
     private Collection $picture;
 
     #[ORM\ManyToOne(inversedBy: 'memories')]
