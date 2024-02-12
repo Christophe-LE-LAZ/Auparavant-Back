@@ -1,11 +1,10 @@
-
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
 <div class="my-5 py-5 text-center">
         {# <img src="favicon.png" height="100" alt="Logo O'flix" class="mb-3"> #}
         <h1 class="display-6 fw-bold">Bienvenue sur le backoffice de Y'avait quoi avant.</h1>
         <div class="col-lg-6 mx-auto">
-            <h2>Navigation</h2>
 
     <table class="table">
         <thead>
@@ -16,19 +15,19 @@
         </thead>
         <tbody>
             <tr>
-                <td>Localité</td>
+                <td>Localités</td>
                 <td><a href="{{ path("app_location_index") }}">Liste</a></td>
             </tr>
             <tr>
-                <td>Lieu</td>
+                <td>Lieux</td>
                 <td><a href="{{ path("app_place_index") }}">Liste</a></td>
             </tr>
             <tr>
-                <td>Souvenir</td>
+                <td>Souvenirs</td>
                 <td><a href="{{ path("app_memory_index") }}">Liste</a></td>
             </tr>
             <tr>
-                <td>Photo</td>
+                <td>Photographies</td>
                 <td><a href="{{ path("app_picture_index") }}">Liste</a></td>
             </tr>
             {# {% if is_granted('ROLE_ADMIN') %} #}

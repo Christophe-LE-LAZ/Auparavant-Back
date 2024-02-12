@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-
-<title>Modifier une photo</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Modifier une photo</h1>
 
-    {{ include('back/picture/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('back/picture/_form.html.twig', {'button_label': 'Valider'}) }}
 
     <a href="{{ path('app_picture_index') }}">retour à la liste</a>
 

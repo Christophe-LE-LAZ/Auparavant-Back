@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-
-<title>Index des photos</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Index des photos</h1>
@@ -38,5 +36,6 @@
     </table>
 
     <a href="{{ path('app_picture_new') }}">Ajouter une nouvelle photo</a>
-{% endblock %}
+
 <a href="{{ path('app_main') }}">accueil</a>
+{% endblock %}

@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-
-<title>Modifier un utilisateur</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Modifier un utilisateur</h1>
 
-    {{ include('back/user/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('back/user/_form.html.twig', {'button_label': 'Valider'}) }}
 
     <a href="{{ path('app_user_index') }}">retour à la liste</a>
 

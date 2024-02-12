@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-
-<title>Modifier un souvenir</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Modifier un souvenir</h1>
 
-    {{ include('back/memory/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('back/memory/_form.html.twig', {'button_label': 'Valider'}) }}
 
     <a href="{{ path('app_memory_index') }}">retour à la liste</a>
 

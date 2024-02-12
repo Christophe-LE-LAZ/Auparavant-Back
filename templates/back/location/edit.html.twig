@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-
-<title>Modifier une localité</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Modifier une localité</h1>
 
-    {{ include('back/location/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('back/location/_form.html.twig', {'button_label': 'Valider'}) }}
 
     <a href="{{ path('app_location_index') }}">retour à la liste</a>
 
