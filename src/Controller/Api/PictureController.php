@@ -2,7 +2,9 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Memory;
 use App\Entity\Picture;
+use App\Repository\MemoryRepository;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +25,7 @@ class PictureController extends AbstractController
     {
         $pictures = $pictureRepository->findAll();
 
-        return $this->json($pictures, 200, [], ['groups' => ['get_picture']]);
+        return $this->json($pictures, 200, [], ['groups' => ['get_picture', 'get_memory_id']]);
     }
 
     /**
@@ -40,7 +42,7 @@ class PictureController extends AbstractController
             );
         }
 
-        return $this->json($picture, 200, [], ['groups' => ['get_picture']]
+        return $this->json($picture, 200, [], ['groups' => ['get_picture', 'get_memory_id']]
     );
     }
 
@@ -71,19 +73,27 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/api/update/picture/{id<\d+>}', methods: ['PUT'])]
-    public function update(Picture $picture = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
+    public function updatePicture(Picture $picture, MemoryRepository $memoryRepository, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
-        if(!$picture) {
-            return $this->json(
-                "Erreur : La photo n'existe pas", 404
-            );
+    
+        if (!$picture) {
+            return $this->json("Erreur : La photo n'existe pas", 404);
         }
-        $serializer->deserialize($request->getContent(), Picture::class, 'json', ['object_to_populate'=>$picture]);
+        $jsonData = $request->getContent();
+        $data = $serializer->decode($jsonData, 'json');
+    
+        $memoryId = $data['memory']['id'];
+        $memory = $memoryRepository->find($memoryId);
+        if (!$memory) {
+            return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
+        }
+        $picture->setMemory($memory);
+        $picture->setPicture($data['picture']);
 
-        $entityManager->flush();
+    $entityManager->flush();
+    return $this->json(['message' => 'Les photos ont été mises à jour'], Response::HTTP_OK);
+}
 
-        return $this->json($picture, 200, []);
-    }
 
     /**
      * Delete a picture by its id
