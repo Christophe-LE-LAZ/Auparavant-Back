@@ -100,7 +100,7 @@ class MemoryController extends AbstractController
     public function createMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, LocationRepository $locationRepository, PlaceRepository $placeRepository)
     {
         $jsonContent = $request->getContent();
-        // $jsonContent = {"user":{"id":1},"location":{"id":1},"place":{"create_new_place":true,"name":"l'elysée","type":"batiment"},"memory":{"title":"l'elysée en 1990","content":"que de souvenirs avec ce lieu","picture_date":"1990-02-08T14:00:00Z","main_picture":"URL","additional_pictures":["URL_image_1","URL_image_2"]}}
+        // $jsonContent = {"user":{"id":1},"location":{"id":1},"place":{"create_new_place":true, "id": 1, "name":"l'elysée","type":"batiment"},"memory":{"title":"l'elysée en 1990","content":"que de souvenirs avec ce lieu","picture_date":"1990-02-08T14:00:00Z","main_picture":"URL","additional_pictures":["URL_image_1","URL_image_2"]}}
    
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
@@ -116,11 +116,11 @@ class MemoryController extends AbstractController
             ->setLocation($location);
         $entityManager->persist($newPlace);
         $entityManager->flush();
-        // $place = $placeRepository->find($newPlace); 
+        $place = $placeRepository->find($newPlace); 
         }
-        // else {
-        //     $place = $placeRepository->find($data['place']['id']);
-        // }
+        else {
+            $place = $placeRepository->find($data['place']['id']);
+        }
     
         $memoryData = $data['memory'];
         // dd($memory);
@@ -130,8 +130,8 @@ class MemoryController extends AbstractController
             ->setPictureDate(new DateTime($memoryData['picture_date']))
             ->setMainPicture($memoryData['main_picture'])
             ->setUser($user)
-            ->setLocation($location);
-            // ->setPlace($place);
+            ->setLocation($location)
+            ->setPlace($place);
 
         $entityManager->persist($newMemory);
                    
@@ -196,14 +196,12 @@ class MemoryController extends AbstractController
             ->setPictureDate(new DateTime($memoryData['picture_date']))
             ->setMainPicture($memoryData['main_picture'])
             ->setUser($user)
-            // ->setPlace($newPlace)
+            ->setPlace($newPlace)
             ->setLocation($newLocation);
 
 
         $entityManager->persist($newMemory);
                    
-
-
         // additional picture management //
          if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
             foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {

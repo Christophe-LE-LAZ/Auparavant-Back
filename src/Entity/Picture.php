@@ -30,7 +30,7 @@ class Picture
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'picture')]
+    #[ORM\ManyToOne(inversedBy: 'picture', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['get_picture'])]
     private ?Memory $memory = null;

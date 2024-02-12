@@ -39,7 +39,7 @@ class LocationController extends AbstractController
     {
         if (!$location) {
             return $this->json(
-                "Error : Localité inexistante", 404
+                "Erreur : Localité inexistante", 404
             );
         }
 
@@ -62,7 +62,7 @@ class LocationController extends AbstractController
         $entityManager->persist($location);
         $entityManager->flush();
 
-        return $this->json($location, 201, []);
+        return $this->json($location, 201, [], ['groups' => ['get_location']]);
     }
 
     /**
@@ -86,7 +86,7 @@ class LocationController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->json($location, 200, []);
+        return $this->json($location, 200, [], ['groups' => ['get_location']]);
     }
 
     /**
@@ -98,6 +98,6 @@ class LocationController extends AbstractController
         $entityManager->remove($location);
         $entityManager->flush();
 
-        return new Response('Localite supprime', 200);
+        return new Response('Localite supprimée', 200);
     }
 }

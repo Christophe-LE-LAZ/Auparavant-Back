@@ -37,7 +37,7 @@ class PlaceController extends AbstractController
     {
         if (!$place) {
             return $this->json(
-                "Error : Endroit inexistant", 404
+                "Erreur : Endroit inexistant", 404
             );
         }
 
@@ -96,6 +96,6 @@ class PlaceController extends AbstractController
         $entityManager->remove($place);
         $entityManager->flush();
 
-        return new Response('Endroit supprime', 200);
+        return new Response('Endroit supprimé', 200);
     }
 }
