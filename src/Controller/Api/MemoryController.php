@@ -228,6 +228,53 @@ class MemoryController extends AbstractController
      * 
      */
     #[Route('/api/secure/create/memory-and-place', methods: ['POST'])]
+    #[OA\RequestBody(  
+        description: 'Exemple of data to be supplied to create the memory and place',    
+        content: new OA\JsonContent(
+            oneOf: [
+                new OA\Schema(
+                    properties: [
+                        new OA\Property(property: 'location', type: 'object', properties: [
+                            new OA\Property(property: 'id', type: 'integer', example: 1),
+                        ]),
+                        new OA\Property(property: 'place', type: 'object', properties: [
+                            new OA\Property(property: 'create_new_place', type: 'boolean', example: true),
+                            new OA\Property(property: 'name', type: 'string', example: "l'elysée"),
+                            new OA\Property(property: 'type', type: 'string', example: 'bâtiment'),
+                        ]),
+                        new OA\Property(property: 'memory', type: 'object', properties: [
+                            new OA\Property(property: 'title', type: 'string', example: "l'elysée en 1990"),
+                            new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
+                            new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
+                            new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
+                            new OA\Property(property: 'additional_pictures', type: 'array', items: new OA\Items(type: 'string'), example: ['URL_image_1', 'URL_image_2']),
+                        ]),
+                    ]
+                ),
+                new OA\Schema(
+                    properties: [
+                        new OA\Property(property: 'location', type: 'object', properties: [
+                            new OA\Property(property: 'id', type: 'integer', example: 1),
+                        ]),
+                        new OA\Property(property: 'place', type: 'object', properties: [
+                            new OA\Property(property: 'create_new_place', type: 'boolean', example: false),
+                            new OA\Property(property: 'id', type: 'integer', example: 1),
+                        ]),
+                        new OA\Property(property: 'memory', type: 'object', properties: [
+                            new OA\Property(property: 'title', type: 'string', example: "l'elysée en 1990"),
+                            new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
+                            new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
+                            new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
+                            new OA\Property(property: 'additional_pictures', type: 'array', items: new OA\Items(type: 'string'), example: ['URL_image_1', 'URL_image_2']),
+                        ]),
+                    ]
+                ),
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 201,
+        description: '')]
     #[OA\Tag(name: 'memory')]
     public function createMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, LocationRepository $locationRepository, PlaceRepository $placeRepository)
     {
@@ -280,11 +327,13 @@ class MemoryController extends AbstractController
              }
         }
                $entityManager->flush();
+     
         return $this->json(['message' => 'Souvenir créé'], Response::HTTP_CREATED);
     }
 
     /**
      * Second method for creating a memory
+     * 
      * TODO: Create a new memory including name, type and location
      * 
      * @param Request $request
@@ -294,6 +343,37 @@ class MemoryController extends AbstractController
      * 
      */
     #[Route('/api/secure/create/memory-and-location-and-place', methods: ['POST'])]
+    #[OA\RequestBody(  
+        description: 'Exemple of data to be supplied to create the memory and place',    
+        content: new OA\JsonContent(
+
+                    properties: [
+                        new OA\Property(property: 'memory', type: 'object', properties: [
+                            new OA\Property(property: 'title', type: 'string', example: "l'elysée en 1990"),
+                            new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
+                            new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
+                            new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
+                            new OA\Property(property: 'additional_pictures', type: 'array', items: new OA\Items(type: 'string'), example: ['URL_image_1', 'URL_image_2']),
+                        ]),
+                        new OA\Property(property: 'place', type: 'object', properties: [
+                            new OA\Property(property: 'name', type: 'string', example: "l'elysée"),
+                            new OA\Property(property: 'type', type: 'string', example: 'bâtiment'),
+                        ]),
+                        new OA\Property(property: 'location', type: 'object', properties: [
+                            new OA\Property(property: 'area', type:'string', example:'Île-de-France'),
+                            new OA\Property(property: 'department', type:'string', example:'Paris'),
+                            new OA\Property(property: 'district', type:'string', example:'Quartier latin',  nullable: true),
+                            new OA\Property(property: 'street', type:'string', example:'28 place du Panthéon'),
+                            new OA\Property(property: 'city', type:'string', example:'Paris'),
+                            new OA\Property(property: 'zipcode', type:'integer', example:75005),
+                            new OA\Property(property: 'latitude', type:'string', example:'48.84619800'),
+                            new OA\Property(property: 'longitude', type:'string', example:'2.34610500'),
+                    ]
+                    ),   
+    ]))]
+    #[OA\Response(
+        response: 201,
+        description: '')]
     #[OA\Tag(name: 'memory')]
     public function createMemoryAndLocationAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
     {
@@ -303,7 +383,9 @@ class MemoryController extends AbstractController
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
         
-        $user = $userRepository->find($data['user']['id']);
+          /** @var \App\Entity\User $user */
+          $user = $this->getUser();
+
         $locationData = $data['location'];
         $newLocation = (new Location ())
             ->setArea($locationData['area'])
@@ -387,6 +469,92 @@ class MemoryController extends AbstractController
      * 
      */
     #[Route('/api/secure/update/memory-and-place/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the memory",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\RequestBody(  
+        description: 'Example of data to be supplied to update the memory and place',    
+        content: new OA\JsonContent(
+            oneOf: [
+                new OA\Schema(
+                    properties: [
+                        new OA\Property(
+                            property: 'place',
+                            type: 'object',
+                            properties: [
+                                new OA\Property(property: 'update_place', type: 'boolean', example: true),
+                                new OA\Property(property: 'id', type: 'integer', example: 1),
+                                new OA\Property(property: 'name', type: 'string', example: 'new name'),
+                                new OA\Property(property: 'type', type: 'string', example: 'new type'),
+                            ]
+                        ),
+                        new OA\Property(
+                            property: 'memory',
+                            type: 'object',
+                            properties: [
+                                new OA\Property(property: 'id', type: 'integer', example: 7),
+                                new OA\Property(property: 'title', type: 'string', example: 'new title'),
+                                new OA\Property(property: 'content', type: 'string', example: 'new content'),
+                                new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1890-02-08T14:00:00Z'),
+                                new OA\Property(property: 'main_picture', type: 'string', example: 'nouvelle_URL'),
+                                new OA\Property(
+                                    property: 'additional_pictures',
+                                    type: 'array',
+                                    items: new OA\Items(
+                                        type: 'object',
+                                        properties: [
+                                            new OA\Property(property: 'id', type: 'integer', example: 7),
+                                            new OA\Property(property: 'URL_image', type: 'string', example: 'nouvelle_URL_image_12'),
+                                        ]
+                                    ),
+                                    example: [
+                                        ['id' => 7, 'URL_image' => 'nouvelle_URL_image_12'],
+                                        ['id' => 2, 'URL_image' => 'nouvelle_URL_image_24'],
+                                        ['URL_image' => 'nouvelle_URL_image_38'],
+                                    ],
+                                ),
+                            ]
+                        ),
+                    ]
+                ),
+                new OA\Schema(
+                    properties: [
+                        new OA\Property(
+                            property: 'place',
+                            type: 'object',
+                            properties: [
+                                new OA\Property(property: 'update_place', type: 'boolean', example: false),
+                            ]
+                        ),
+                        new OA\Property(
+                            property: 'memory',
+                            type: 'object',
+                            properties: [
+                                new OA\Property(property: 'id', type: 'integer', example: 7),
+                                new OA\Property(property: 'title', type: 'string', example: 'l\'elysée en 1990'),
+                                new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
+                                new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
+                                new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
+                                new OA\Property(
+                                    property: 'additional_pictures',
+                                    type: 'array',
+                                    items: new OA\Items(type: 'string'),
+                                    example: ['URL_image_1', 'URL_image_2'],
+                                ),
+                            ]
+                        ),
+                    ]
+                ),
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: '')]
     #[OA\Tag(name: 'memory')]
     public function updateMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, PlaceRepository $placeRepository, MemoryRepository $memoryRepository, PictureRepository $pictureRepository)
     {
@@ -409,7 +577,6 @@ class MemoryController extends AbstractController
         
     
         $memoryData = $data['memory'];
-    
         $currentMemory = $memoryRepository->find($data['memory']['id'])
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])

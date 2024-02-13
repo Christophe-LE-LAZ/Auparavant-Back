@@ -145,14 +145,14 @@ class LocationController extends AbstractController
         description: 'Exemple of data to be supplied to create the location',    
         content: new OA\JsonContent(
             properties: [
-                new OA\Property(property: 'area', type:'string', example: 'Île-de-France'),
-                new OA\Property(property: 'departement', type:'string', example: 'Paris'),
-                new OA\Property(property: 'district', type:'string', example: 'Quartier latin',  nullable: true),
-                new OA\Property(property: 'street', type:'string', example: '28 place du Panthéon'),
-                new OA\Property(property: 'city', type:'string', example: 'Paris'),
-                new OA\Property(property: 'zipcode', type:'integer', example: 75005),
-                new OA\Property(property: 'latitude', type:'decimal', example: '48.84619800'),
-                new OA\Property(property: 'longitude', type:'decimal', example: '2.34610500'),
+                new OA\Property(property: 'area', type:'string', example:'Île-de-France'),
+                new OA\Property(property: 'department', type:'string', example:'Paris'),
+                new OA\Property(property: 'district', type:'string', example:'Quartier latin',  nullable: true),
+                new OA\Property(property: 'street', type:'string', example:'28 place du Panthéon'),
+                new OA\Property(property: 'city', type:'string', example:'Paris'),
+                new OA\Property(property: 'zipcode', type:'integer', example:75005),
+                new OA\Property(property: 'latitude', type:'string', example:'48.84619800'),
+                new OA\Property(property: 'longitude', type:'string', example:'2.34610500'),
             ]
         )
     )]
