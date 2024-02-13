@@ -23,11 +23,11 @@ class MemoryRepository extends ServiceEntityRepository
 
     public function findTheLatestOnes()
     {
-        $sql = "SELECT *
-                FROM `memory`
-                ORDER BY `created_at` DESC
-                LIMIT 3";
-        $conn = $this->getEntityManager()->getConnection();
+        return $this->createQueryBuilder('memory')
+            ->orderBy('memory.createdAt', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

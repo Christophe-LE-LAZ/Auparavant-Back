@@ -64,6 +64,27 @@ class MemoryController extends AbstractController
     }
 
     /**
+     * Display the latest three memories by creation date
+     *
+     * @param MemoryRepository $memoryRepository
+     * @return Response
+     */
+    #[Route('/api/memories/latest', methods: ['GET'])]
+    public function latest(MemoryRepository $memoryRepository): Response
+    {
+        $latestMemories = $memoryRepository->findTheLatestOnes();
+
+        if (!$latestMemories) {
+            return $this->json(
+                "Erreur : Données introuvables", 404
+            );
+        }
+
+        return $this->json($latestMemories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user']]
+    );
+    }
+
+    /**
      * Create a new memory
      * @param SerializerInterface $serializer
      * @param EntityManagerInterface $entityManager
