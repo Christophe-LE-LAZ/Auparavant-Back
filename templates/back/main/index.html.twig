@@ -1,4 +1,4 @@
-{% extends 'back/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
 <div class="my-5 py-5 text-center">
@@ -30,14 +30,15 @@
                 <td>Photographies</td>
                 <td><a href="{{ path("app_picture_index") }}">Liste</a></td>
             </tr>
-            {# {% if is_granted('ROLE_ADMIN') %} #}
             <tr>
                 <td>Utilisateurs</td>
                 <td><a href="{{ path("app_user_index") }}">Liste</a></td>
             </tr>
-            {# {% endif %} #}
         </tbody>
     </table>
+        <a class="btn btn-lg btn-primary mt-5" href="{{ path("app_logout") }}">
+            Se déconnecter
+        </a>
         </div>
     </div>
 {% endblock %}
