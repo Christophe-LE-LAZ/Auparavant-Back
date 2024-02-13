@@ -21,7 +21,7 @@ class AuthenticationSuccessListener
             return;
         }
 
-        $data = array(
+        $data['user_data'] = array(
             'id' => $user->getId(),
             'username' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
