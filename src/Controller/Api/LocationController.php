@@ -2,25 +2,37 @@
 
 namespace App\Controller\Api;
 
+
+use DateTimeImmutable;
 use App\Entity\Location;
 use App\Repository\LocationRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use OpenApi\Annotations as OA;
+
 
 class LocationController extends AbstractController
 {
     /**
      * Display all locations
+     * 
+     * @OA\Response(
+     *     response=200,
+     *     description="Liste des localisations",
+     *     model=@Model(type=Location::class, groups={"get_location"})
+     * )
+     * @OA\Tag(name="Locations")
      * @param LocationRepository $locationRepository
      * @return Response
      */
     #[Route('/api/locations', methods: ['GET'])]
-    public function index(LocationRepository $locationRepository)
+    public function list(LocationRepository $locationRepository)
     {
         $locations = $locationRepository->findAll();
 
