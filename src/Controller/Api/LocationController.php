@@ -2,24 +2,50 @@
 
 namespace App\Controller\Api;
 
+
+use DateTimeImmutable;
 use App\Entity\Location;
 use App\Repository\LocationRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use OpenApi\Attributes as OA;
+
 
 class LocationController extends AbstractController
 {
     /**
      * Display all locations
+     
      * @param LocationRepository $locationRepository
      * @return Response
      */
     #[Route('/api/locations', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Retourne la liste des localisations',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Location::class, groups: ['get-locations'])),
+            example: [
+                [
+                    "id" => 1,
+		            "area" => "Bretagne",
+		            "department" => "Finistère",
+		            "district" => "St Pierre",
+		            "street" => "22 rue de Paul Éluard",
+		            "city" => "Brest",
+		            "zipcode" => 29200,
+		            "latitude" => "48.39039400",
+		            "longitude" => "-4.48607600"
+                ], ]
+    ))]
+    #[OA\Tag(name: 'locations')]
     public function index(LocationRepository $locationRepository)
     {
         $locations = $locationRepository->findAll();
