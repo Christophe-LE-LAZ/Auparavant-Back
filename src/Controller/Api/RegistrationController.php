@@ -5,6 +5,8 @@ namespace App\Controller\Api;
 use App\Entity\User;
 use OpenApi\Attributes as OA;
 use Doctrine\ORM\EntityManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +24,32 @@ class RegistrationController extends AbstractController
      * @return Response
      */
     #[Route('/api/register', name: 'api_register', methods: ['POST'])]
+    #[OA\RequestBody(  
+        description: 'Exemple of data to be supplied to create the user',    
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'firstname', type:'string', example:'John'),
+                new OA\Property(property: 'lastname', type:'string', example:'Doe'),
+                new OA\Property(property: 'email', type:'string', example:'john.doe@email.com'),
+                new OA\Property(property: 'password', type:'string', example:'pupuce'),
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Returns a newly created user',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: User::class, groups: ['get_user'])),
+            example: [
+                [
+                    "id" => 1,
+                    "firstname" => "John",
+                    "lastname" => "Doe",
+                    "email" => "john.doe@email.com",
+                ] 
+                ]
+    ))]
     #[OA\Tag(name: 'registration')]
     public function registerApi(UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, Request $request): JsonResponse
     {

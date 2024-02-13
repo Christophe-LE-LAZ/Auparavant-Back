@@ -72,6 +72,13 @@ class LocationController extends AbstractController
      * @return Response
      */
     #[Route('/api/location/{id<\d+>}', methods: ['GET'])]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the location",
+        schema: new OA\Schema(type: 'integer')
+    )]
     #[OA\Response(
         response: 200,
         description: 'Returns a single location',
@@ -92,13 +99,6 @@ class LocationController extends AbstractController
                 ] 
                 ]
     ))]
-    #[OA\Parameter(
-        name: "id",
-        in: "path",
-        required: true,
-        description: "ID of the location",
-        schema: new OA\Schema(type: 'integer')
-    )]
     #[OA\Tag(name: 'location')]
     public function read(Location $location = null )
     {
