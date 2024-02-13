@@ -94,6 +94,10 @@ class UserController extends AbstractController
 
     /**
      * Delete a user by its id
+     * 
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
     #[Route('/api/secure/delete/user/{id<\d+>}', methods: ['DELETE'])]
     public function delete(User $user, EntityManagerInterface $entityManager): Response

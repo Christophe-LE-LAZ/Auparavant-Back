@@ -98,6 +98,10 @@ class PictureController extends AbstractController
 
     /**
      * Delete a picture by its id
+     * 
+     * @param Picture $picture
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
     #[Route('/api/secure/delete/picture/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Picture $picture, EntityManagerInterface $entityManager): Response

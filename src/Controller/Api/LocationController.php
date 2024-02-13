@@ -103,6 +103,10 @@ class LocationController extends AbstractController
 
     /**
      * Delete a location by its id
+     * 
+     * @param Location $location
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
     #[Route('/api/secure/delete/location/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Location $location, EntityManagerInterface $entityManager): Response

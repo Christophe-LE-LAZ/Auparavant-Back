@@ -89,6 +89,10 @@ class PlaceController extends AbstractController
 
     /**
      * Delete a place by its id
+     * 
+     * @param Place $place
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
     #[Route('/api/secure/delete/place/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Place $place, EntityManagerInterface $entityManager): Response

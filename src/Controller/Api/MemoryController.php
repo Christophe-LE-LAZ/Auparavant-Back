@@ -24,6 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * This controller groups together all the methods that manage memories.
  * One method displays all memories.
  * One displays only one.
+ * One displays the last and latest three memories created.
  * Two methods create a memory:
  * -> One creates a memory from an existing locality and creates the name and type of the place if the existing ones are not suitable for this memory.
  * -> Another creates a memory and a new locality as well as the name and type of the corresponding place.
@@ -238,6 +239,7 @@ class MemoryController extends AbstractController
 
     /**
      * Update a memory by its id
+     * 
      * @param Memory $memory
      * @param Request $request
      * @param SerializerInterface $serializer
@@ -336,6 +338,10 @@ class MemoryController extends AbstractController
 
     /**
      * Delete a memory by its id
+     * 
+     * @param Memory $memory
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
     #[Route('/api/secure/delete/memory/{id<\d+>}', methods: ['DELETE'])]
     public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
