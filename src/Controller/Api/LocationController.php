@@ -28,10 +28,56 @@ class LocationController extends AbstractController
     #[Route('/api/locations', methods: ['GET'])]
     #[OA\Response(
         response: 200,
-        description: 'Retourne la liste des localisations',
+        description: 'Returns the location list',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Location::class, groups: ['get-locations'])),
+            items: new OA\Items(ref: new Model(type: Location::class, groups: ['get_location'])),
+            example: [
+                [
+                    "id" => 1,
+                    "area" => "Île-de-France",
+                    "department" => "Paris",
+                    "district" => "Quartier latin",
+                    "street" => "28 place du Panthéon",
+                    "city" => "Paris",
+                    "zipcode" => 75005,
+                    "latitude" => "48.84619800",
+                    "longitude" => "2.34610500"
+                ],
+                [
+                    "id"=> 2,
+                    "area"=> "Île-de-France",
+                    "department"=> "Paris",
+                    "district"=> "Gros-Caillou",
+                    "street"=> "5 avenue Anatole-France",
+                    "city"=> "Paris",
+                    "zipcode"=> 75007,
+                    "latitude"=> "48.85829600",
+                    "longitude"=> "2.29447900"
+                ],
+                ]
+    ))]
+    #[OA\Tag(name: 'location')]
+    public function index(LocationRepository $locationRepository)
+    {
+        $locations = $locationRepository->findAll();
+
+        return $this->json(
+            $locations, 200, [], ['groups' => ['get_location']]);
+    }
+
+    /**
+     * Display a single location by its id
+     * @param Location $location
+     * @return Response
+     */
+    #[Route('/api/location/{id<\d+>}', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns a single location',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Location::class, groups: ['get_location'])),
             example: [
                 [
                     "id" => 1,
@@ -43,24 +89,17 @@ class LocationController extends AbstractController
 		            "zipcode" => 29200,
 		            "latitude" => "48.39039400",
 		            "longitude" => "-4.48607600"
-                ], ]
+                ] 
+                ]
     ))]
-    #[OA\Tag(name: 'locations')]
-    public function index(LocationRepository $locationRepository)
-    {
-        $locations = $locationRepository->findAll();
-
-        return $this->json(
-            $locations, 200, [], ['groups' => ['get_location']]);
-
-    }
-
-    /**
-     * Display a single location by its id
-     * @param Location $location
-     * @return Response
-     */
-    #[Route('/api/location/{id<\d+>}', methods: ['GET'])]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the location",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'location')]
     public function read(Location $location = null )
     {
         if (!$location) {
@@ -81,6 +120,29 @@ class LocationController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/create/location', methods: ['POST'])]
+    #[OA\Response(
+        response: 201,
+        description: 'Returns a single location',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Location::class, groups: ['get_location'])),
+            example: [
+                [
+                    "id" => 1,
+		            "area" => "Bretagne",
+		            "department" => "Finistère",
+		            "district" => "St Pierre",
+		            "street" => "22 rue de Paul Éluard",
+		            "city" => "Brest",
+		            "zipcode" => 29200,
+		            "latitude" => "48.39039400",
+		            "longitude" => "-4.48607600"
+                ] 
+                ]
+    ))]
+    #[OA\RequestBody(new Model(type: Location::class, groups: ["location-create"]))]
+ 
+    #[OA\Tag(name: 'location')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $location = $serializer->deserialize($request->getContent(), Location::class, 'json');

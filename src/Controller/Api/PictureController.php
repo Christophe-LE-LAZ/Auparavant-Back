@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use OpenApi\Attributes as OA;
 
 class PictureController extends AbstractController
 {
@@ -20,6 +23,30 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/api/pictures', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns the picture list',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture', 'get_memory_id'])),
+            example: [
+                [
+                    "id" => 1,
+                    "picture" => "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c9\/Dome_Panth%C3%A9on_Paris_10.jpg\/1280px-Dome_Panth%C3%A9on_Paris_10.jpg",
+                    "memory" => [
+                        "id" => 2
+                    ]
+                ],
+                [
+                    "id" => 2,
+                    "picture" => "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/6\/67\/Dome_Panth%C3%A9on_Paris_16.jpg\/800px-Dome_Panth%C3%A9on_Paris_16.jpg",
+                    "memory" => [
+                        "id" => 2
+                    ]
+                ],
+                ]
+    ))]
+    #[OA\Tag(name: 'pictures')]
     public function index(PictureRepository $pictureRepository)
     {
         $pictures = $pictureRepository->findAll();
@@ -33,6 +60,30 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/api/picture/{id<\d+>}', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns a single picture',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture', 'get_memory_id'])),
+            example: [
+                [
+                    "id" => 1,
+                    "picture" => "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c9\/Dome_Panth%C3%A9on_Paris_10.jpg\/1280px-Dome_Panth%C3%A9on_Paris_10.jpg",
+                    "memory" => [
+                        "id" => 2
+                    ]
+                ] 
+                ]
+    ))]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the picture",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'picture')]
     public function read(Picture $picture = null )
     {
         if (!$picture) {

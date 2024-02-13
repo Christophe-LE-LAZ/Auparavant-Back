@@ -20,6 +20,35 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/users', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns the user list',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: User::class, groups: ['get_user'])),
+            example: [
+                [
+                    "id" => 1,
+		            "firstname" => "Aurélien",
+		            "lastname" => "ROUCHETTE-MARET",
+		            "email" => "aurelien.rouchette@orange.fr",
+		            "roles" => [
+			            "ROLE_USER",
+			            "ROLE_ADMIN"
+                    ]
+                ],
+                [
+                    "id" => 2,
+		            "firstname" => "Christophe",
+		            "lastname" => "LE LAZ",
+		            "email" => "christophe.le-laz@oclock.school",
+		            "roles" => [
+			            "ROLE_USER"
+                    ]
+                ],
+                ]
+    ))]
+    #[OA\Tag(name: 'users')]
     public function index(UserRepository $userRepository)
     {
         // Fonction qui permet de lister tous les utilisateurs
@@ -34,6 +63,33 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/user/{id<\d+>}', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns a single user',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: User::class, groups: ['get_user'])),
+            example: [
+                [
+                    "id" => 1,
+		            "firstname" => "Aurélien",
+		            "lastname" => "ROUCHETTE-MARET",
+		            "email" => "aurelien.rouchette@orange.fr",
+		            "roles" => [
+			            "ROLE_USER",
+			            "ROLE_ADMIN"
+                    ]
+                ]
+                ]
+    ))]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the user",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'user')]
     public function read(User $user = null )
     {
         // Si l'utilisateur n'existe pas, on renvoie un message et une erreur 404

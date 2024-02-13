@@ -28,7 +28,7 @@ class Location
         minMessage: 'La région doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'La région ne peut pas dépasser {{ limit }} caractères.',
     )]
-    #[Groups(['get_location'])]
+    #[Groups(['get_location', 'location-create'])]
     private ?string $area = null;
 
     #[ORM\Column(length: 30)]
@@ -38,7 +38,7 @@ class Location
         minMessage: 'Le département doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le département ne peut pas dépasser {{ limit }} caractères.',
     )]
-    #[Groups(['get_location'])]
+    #[Groups(['get_location', 'location-create'])]
     private ?string $department = null;
 
     #[ORM\Column(length: 20, nullable: true)]
@@ -48,7 +48,7 @@ class Location
         minMessage: 'Le quartier doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le quartier ne peut pas dépasser {{ limit }} caractères.',
     )]
-    #[Groups(['get_location'])]
+    #[Groups(['get_location', 'location-create'])]
     private ?string $district = null;
 
     #[ORM\Column(length: 50)]
@@ -58,7 +58,7 @@ class Location
         minMessage: 'Le numéro et le nom de la rue doivent comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le numéro et le nom de la rue ne peuvent pas dépasser {{ limit }} caractères.',
     )]
-    #[Groups(['get_location'])]
+    #[Groups(['get_location', 'location-create'])]
     private ?string $street = null;
 
     #[ORM\Column(length: 50)]
@@ -68,7 +68,7 @@ class Location
         minMessage: 'La ville doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'La ville ne peut pas dépasser {{ limit }} caractères.',
     )]
-    #[Groups(['get_location'])]
+    #[Groups(['get_location', 'location-create'])]
     private ?string $city = null;
 
     #[ORM\Column]
@@ -78,15 +78,15 @@ class Location
         minMessage: 'Le code postal doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le code postal ne peut pas dépasser {{ limit }} caractères.',
     )]
-    #[Groups(['get_location'])]
+    #[Groups(['get_location', 'location-create'])]
     private ?int $zipcode = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8)]
-    #[Groups(['get_location'])]
+    #[Groups(['get_location', 'location-create'])]
     private ?string $latitude = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 11, scale: 8)]
-    #[Groups(['get_location'])]
+    #[Groups(['get_location', 'location-create'])]
     private ?string $longitude = null;
 
     #[ORM\Column]
