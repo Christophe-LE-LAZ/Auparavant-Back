@@ -21,6 +21,15 @@ class MemoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Memory::class);
     }
 
+    public function findTheLatestOnes()
+    {
+        return $this->createQueryBuilder('memory')
+            ->orderBy('memory.createdAt', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Memory[] Returns an array of Memory objects
 //     */
