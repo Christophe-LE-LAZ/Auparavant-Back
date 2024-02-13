@@ -135,10 +135,23 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/update/user/{id<\d+>}', methods: ['PUT'])]
+    #[OA\RequestBody(  
+        description: 'Exemple of data to be supplied to update the user',    
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'id', type:'integer', example:'1'),
+                new OA\Property(property: 'firstname', type:'string', example:'John'),
+                new OA\Property(property: 'lastname', type:'string', example:'Doe'),
+                new OA\Property(property: 'email', type:'string', example:'updated@example.com'),
+                new OA\Property(property: 'password', type:'string', example:'newpassword'),  
+            ]
+        ))]
     #[OA\Response(
         response: 200,
         description: 'Updates a user\'s profile',
-    )]
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: User::class, groups: ['get_user']))))]
     #[OA\Parameter(
         name: "id",
         in: "path",
@@ -161,7 +174,7 @@ class UserController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->json($user, 200, []);
+        return $this->json(['user' => $user, 'message' => 'Utilisateur mis à jour'], Response::HTTP_OK, [], ['groups' => ['get_user','get_picture']]);
     }
 
     /**
