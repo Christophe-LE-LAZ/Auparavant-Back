@@ -115,8 +115,21 @@ class PictureController extends AbstractController
         )]
     ))]
     #[OA\Response(
-        response: 200,
-        description: 'save the image associated with the memory')]
+            response: 201,
+            description: 'save the image associated with the memory',
+            content: new OA\JsonContent(
+                type: 'array',
+                items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture'])),
+                example: [
+                              [
+                                  "id" => 1,
+                                  "picture" => "/pictures/assets/nomdufichier.jpg",
+                                  "memory" => [
+                                      "id" => 1
+                                  ]
+                              ]
+                ]
+        ))]
     #[OA\Tag(name: 'picture')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request, MemoryRepository $memoryRepository)
     {
@@ -135,7 +148,7 @@ class PictureController extends AbstractController
         $entityManager->persist($picture);
         $entityManager->flush();
 
-        return $this->json(['message' => 'Photo créé'], Response::HTTP_CREATED);
+        return $this->json(['picture' => $picture, 'message' => 'Photo enregistrée'], Response::HTTP_CREATED, [], ['groups' => ['get_picture', 'get_memory']]);
     }
 
     /**
@@ -167,6 +180,22 @@ class PictureController extends AbstractController
             ]
         )]
     ))]
+    #[OA\Response(
+        response: 200,
+        description: 'save the modified image associated with the memory',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture'])),
+            example: [
+                          [
+                              "id" => 1,
+                              "picture" => "/pictures/assets/nomdufichier.jpg",
+                              "memory" => [
+                                  "id" => 1
+                              ]
+                          ]
+            ]
+    ))]
     #[OA\Tag(name: 'picture')]
     public function update(Picture $picture, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
     {
@@ -186,7 +215,8 @@ class PictureController extends AbstractController
         $picture->setPicture($data['picture']);
 
     $entityManager->flush();
-    return $this->json(['message' => 'Les photos ont été mises à jour'], Response::HTTP_OK);
+    return $this->json(['picture' => $picture, 'message' => 'La photo a été mise à jour'], Response::HTTP_OK, [], ['groups' => ['get_picture','get_memory']]);
+
 }
 
 
