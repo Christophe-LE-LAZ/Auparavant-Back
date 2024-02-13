@@ -4,8 +4,11 @@ namespace App\Controller\Api;
 
 use App\Entity\Place;
 use DateTimeImmutable;
+use OpenApi\Attributes as OA;
 use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,7 +42,7 @@ class PlaceController extends AbstractController
                 ],
                 ]
     ))]
-    #[OA\Tag(name: 'places')]
+    #[OA\Tag(name: 'place')]
     public function index(PlaceRepository $placeRepository)
     {
         $places = $placeRepository->findAll();
@@ -95,6 +98,7 @@ class PlaceController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/create/place', methods: ['POST'])]
+    #[OA\Tag(name: 'hidden')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $place = $serializer->deserialize($request->getContent(), Place::class, 'json');
@@ -114,6 +118,7 @@ class PlaceController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/update/place/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Tag(name: 'hidden')]
     public function update(Place $place = null,  Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$place) {
@@ -133,6 +138,18 @@ class PlaceController extends AbstractController
      * Delete a place by its id
      */
     #[Route('/api/secure/delete/place/{id<\d+>}', methods: ['DELETE'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Deletes a place',
+    )]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the place",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'hidden')]
     public function delete(Place $place, EntityManagerInterface $entityManager): Response
     {
         if(!$place) {

@@ -3,19 +3,19 @@
 namespace App\Controller\Api;
 
 
+use OA\RequestBody;
 use DateTimeImmutable;
 use App\Entity\Location;
+use OpenApi\Attributes as OA;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Attributes as OA;
-
 
 class LocationController extends AbstractController
 {
@@ -81,14 +81,14 @@ class LocationController extends AbstractController
             example: [
                 [
                     "id" => 1,
-		            "area" => "Bretagne",
-		            "department" => "Finistère",
-		            "district" => "St Pierre",
-		            "street" => "22 rue de Paul Éluard",
-		            "city" => "Brest",
-		            "zipcode" => 29200,
-		            "latitude" => "48.39039400",
-		            "longitude" => "-4.48607600"
+                    "area" => "Île-de-France",
+                    "department" => "Paris",
+                    "district" => "Quartier latin",
+                    "street" => "28 place du Panthéon",
+                    "city" => "Paris",
+                    "zipcode" => 75005,
+                    "latitude" => "48.84619800",
+                    "longitude" => "2.34610500"
                 ] 
                 ]
     ))]
@@ -114,6 +114,7 @@ class LocationController extends AbstractController
 
     /**
      * Create a new location
+     * @Nelmio\Areas({"internal"})
      * @param SerializerInterface $serializer
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -122,27 +123,41 @@ class LocationController extends AbstractController
     #[Route('/api/secure/create/location', methods: ['POST'])]
     #[OA\Response(
         response: 201,
-        description: 'Returns a single location',
+        description: 'Returns a newly created location',
         content: new OA\JsonContent(
             type: 'array',
             items: new OA\Items(ref: new Model(type: Location::class, groups: ['get_location'])),
             example: [
                 [
                     "id" => 1,
-		            "area" => "Bretagne",
-		            "department" => "Finistère",
-		            "district" => "St Pierre",
-		            "street" => "22 rue de Paul Éluard",
-		            "city" => "Brest",
-		            "zipcode" => 29200,
-		            "latitude" => "48.39039400",
-		            "longitude" => "-4.48607600"
+                    "area" => "Île-de-France",
+                    "department" => "Paris",
+                    "district" => "Quartier latin",
+                    "street" => "28 place du Panthéon",
+                    "city" => "Paris",
+                    "zipcode" => 75005,
+                    "latitude" => "48.84619800",
+                    "longitude" => "2.34610500"
                 ] 
                 ]
     ))]
-    #[OA\RequestBody(new Model(type: Location::class, groups: ["location-create"]))]
- 
-    #[OA\Tag(name: 'location')]
+    #[OA\RequestBody(  
+        description: 'Exemple of data to be supplied to create the location',    
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'area', type:'string', example: 'Île-de-France'),
+                new OA\Property(property: 'departement', type:'string', example: 'Paris'),
+                new OA\Property(property: 'district', type:'string', example: 'Quartier latin',  nullable: true),
+                new OA\Property(property: 'street', type:'string', example: '28 place du Panthéon'),
+                new OA\Property(property: 'city', type:'string', example: 'Paris'),
+                new OA\Property(property: 'zipcode', type:'integer', example: 75005),
+                new OA\Property(property: 'latitude', type:'decimal', example: '48.84619800'),
+                new OA\Property(property: 'longitude', type:'decimal', example: '2.34610500'),
+            ]
+        )
+    )]
+    // #[Security(name: 'bearerAuth')]
+    #[OA\Tag(name: 'hidden')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $location = $serializer->deserialize($request->getContent(), Location::class, 'json');
@@ -162,6 +177,7 @@ class LocationController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/update/location/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Tag(name: 'hidden')]
     public function update(Location $location = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$location) {
@@ -181,6 +197,18 @@ class LocationController extends AbstractController
      * Delete a location by its id
      */
     #[Route('/api/secure/delete/location/{id<\d+>}', methods: ['DELETE'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Deletes a location',
+    )]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the location",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'hidden')]
     public function delete(Location $location, EntityManagerInterface $entityManager): Response
     {
         if(!$location) {

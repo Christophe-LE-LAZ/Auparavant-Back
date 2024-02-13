@@ -3,17 +3,21 @@
 namespace App\Controller\Api;
 
 use DateTime;
+use OA\RequestBody;
 use App\Entity\Place;
 use App\Entity\Memory;
 use DateTimeImmutable;
 use App\Entity\Picture;
 use App\Entity\Location;
+use OpenApi\Attributes as OA;
 use App\Repository\UserRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\MemoryRepository;
 use App\Repository\PictureRepository;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -113,7 +117,7 @@ class MemoryController extends AbstractController
                 ],
                 ]
     ))]
-    #[OA\Tag(name: 'memories')]
+    #[OA\Tag(name: 'memory')]
     public function index(MemoryRepository $memoryRepository)
     {
         $memories = $memoryRepository->findAll();
@@ -197,6 +201,7 @@ class MemoryController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/create/memory', methods: ['POST'])]
+    #[OA\Tag(name: 'hidden')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $memory = $serializer->deserialize($request->getContent(), Memory::class, 'json');
@@ -223,7 +228,8 @@ class MemoryController extends AbstractController
      * 
      */
     #[Route('/api/secure/create/memory-and-place', methods: ['POST'])]
-    public function createMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, LocationRepository $locationRepository, PlaceRepository $placeRepository)
+    #[OA\Tag(name: 'memory')]
+    public function createMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, LocationRepository $locationRepository, PlaceRepository $placeRepository)
     {
         $jsonContent = $request->getContent();
         // $jsonContent = {"user":{"id":1},"location":{"id":1},"place":{"create_new_place":true, "id": 1, "name":"l'elysée","type":"batiment"},"memory":{"title":"l'elysée en 1990","content":"que de souvenirs avec ce lieu","picture_date":"1990-02-08T14:00:00Z","main_picture":"URL","additional_pictures":["URL_image_1","URL_image_2"]}}
@@ -231,7 +237,9 @@ class MemoryController extends AbstractController
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
      
-        $user = $userRepository->find($data['user']['id']);
+        /** @var \App\Entity\User $user */
+         $user = $this->getUser();
+
         $location = $locationRepository->find($data['location']['id']);
         
         $placeData = $data['place'];
@@ -286,6 +294,7 @@ class MemoryController extends AbstractController
      * 
      */
     #[Route('/api/secure/create/memory-and-location-and-place', methods: ['POST'])]
+    #[OA\Tag(name: 'memory')]
     public function createMemoryAndLocationAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
     {
         $jsonContent = $request->getContent();
@@ -350,6 +359,7 @@ class MemoryController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/update/memory/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Tag(name: 'hidden')]
     public function update(Memory $memory = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$memory) {
@@ -377,6 +387,7 @@ class MemoryController extends AbstractController
      * 
      */
     #[Route('/api/secure/update/memory-and-place/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Tag(name: 'memory')]
     public function updateMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, PlaceRepository $placeRepository, MemoryRepository $memoryRepository, PictureRepository $pictureRepository)
     {
         $jsonContent = $request->getContent();
@@ -443,6 +454,18 @@ class MemoryController extends AbstractController
      * Delete a memory by its id
      */
     #[Route('/api/secure/delete/memory/{id<\d+>}', methods: ['DELETE'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Deletes a memory',
+    )]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the memory",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'memory')]
     public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
     {
         if(!$memory) {

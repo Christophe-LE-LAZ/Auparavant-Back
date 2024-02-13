@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\User;
+use OpenApi\Attributes as OA;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,7 @@ class RegistrationController extends AbstractController
      * @return Response
      */
     #[Route('/api/register', name: 'api_register', methods: ['POST'])]
+    #[OA\Tag(name: 'registration')]
     public function registerApi(UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);

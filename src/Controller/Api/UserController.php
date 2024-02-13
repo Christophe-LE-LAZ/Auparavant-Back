@@ -4,8 +4,11 @@ namespace App\Controller\Api;
 
 use App\Entity\User;
 use DateTimeImmutable;
+use OpenApi\Attributes as OA;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,7 +51,7 @@ class UserController extends AbstractController
                 ],
                 ]
     ))]
-    #[OA\Tag(name: 'users')]
+    #[OA\Tag(name: 'user')]
     public function index(UserRepository $userRepository)
     {
         // Fonction qui permet de lister tous les utilisateurs
@@ -111,6 +114,7 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/create/user', methods: ['POST'])]
+    #[OA\Tag(name: 'hidden')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         // Pour la creation d'un utilisateur, on récupère des données en JSON, on envoie la requête en BDD et on sauvegarde. Si c'est OK, on indique un code 201
@@ -131,6 +135,18 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/update/user/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Updates a user\'s profile',
+    )]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the user",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'user')]
     public function update(User $user = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         // Pour la modification, on récupère l'id et on vérifie si il y a un utilisateur. Sinon, on affiche une erreur 404.
@@ -152,6 +168,18 @@ class UserController extends AbstractController
      * Delete a user by its id
      */
     #[Route('/api/secure/delete/user/{id<\d+>}', methods: ['DELETE'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Deletes a user\'s profile',
+    )]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the user",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'user')]
     public function delete(User $user, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($user);

@@ -3,17 +3,17 @@
 namespace App\Controller\Api;
 
 use App\Entity\Picture;
+use OpenApi\Attributes as OA;
 use App\Repository\MemoryRepository;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
-use OpenApi\Attributes as OA;
 
 class PictureController extends AbstractController
 {
@@ -46,7 +46,7 @@ class PictureController extends AbstractController
                 ],
                 ]
     ))]
-    #[OA\Tag(name: 'pictures')]
+    #[OA\Tag(name: 'picture')]
     public function index(PictureRepository $pictureRepository)
     {
         $pictures = $pictureRepository->findAll();
@@ -104,6 +104,7 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/create/picture', methods: ['POST'])]
+    #[OA\Tag(name: 'picture')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $picture = $serializer->deserialize($request->getContent(), Picture::class, 'json');
@@ -125,6 +126,7 @@ class PictureController extends AbstractController
      */
 
     #[Route('/api/secure/update/picture/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Tag(name: 'picture')]
     public function update(Picture $picture, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
     {
     
@@ -151,6 +153,18 @@ class PictureController extends AbstractController
      * Delete a picture by its id
      */
     #[Route('/api/secure/delete/picture/{id<\d+>}', methods: ['DELETE'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Deletes a picture',
+    )]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the picture",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'picture')]
     public function delete(Picture $picture, EntityManagerInterface $entityManager): Response
     {
         if(!$picture) {
