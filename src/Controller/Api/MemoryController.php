@@ -274,7 +274,10 @@ class MemoryController extends AbstractController
     )]
     #[OA\Response(
         response: 201,
-        description: '')]
+        description: 'Retourne le souvenir créé, la localisation, la place et le user associés',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']))))]
     #[OA\Tag(name: 'memory')]
     public function createMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, LocationRepository $locationRepository, PlaceRepository $placeRepository)
     {
@@ -328,7 +331,7 @@ class MemoryController extends AbstractController
         }
                $entityManager->flush();
      
-        return $this->json(['message' => 'Souvenir créé'], Response::HTTP_CREATED);
+               return $this->json(['memory' => $newMemory, 'message' => 'Souvenir créé'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']]);
     }
 
     /**
@@ -373,13 +376,14 @@ class MemoryController extends AbstractController
     ]))]
     #[OA\Response(
         response: 201,
-        description: '')]
+        description: 'Retourne le souvenir créé, la localisation, la place et le user associés',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']))))]
     #[OA\Tag(name: 'memory')]
     public function createMemoryAndLocationAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
     {
         $jsonContent = $request->getContent();
-        // $jsonContent = {"user":{"id":1},"location":{"area": "xxx", "department": "xxx", "district": "xxx", "street": "xxx rue xxx", "city": "xxx", "zipcode": "00000", "latitude" : "00.000", "longitude": "0.0000"},"place":{"name":"l'elysée","type":"batiment"},"memory":{"title":"l'elysée en 1990","content":"que de souvenirs avec ce lieu","picture_date":"1990-02-08T14:00:00Z","main_picture":"URL","additional_pictures":["URL_image_1","URL_image_2"]}}
-
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
         
@@ -429,7 +433,8 @@ class MemoryController extends AbstractController
             }
         }
          $entityManager->flush();
-        return $this->json(['message' => 'Souvenir créé'], Response::HTTP_CREATED);
+      
+        return $this->json(['memory' => $newMemory, 'message' => 'Souvenir créé'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']]);
     }
 
     /**
@@ -554,14 +559,14 @@ class MemoryController extends AbstractController
     )]
     #[OA\Response(
         response: 200,
-        description: 'update a memory (and place)')]
+        description: 'Retourne le souvenir mis à jour, la localisation, la place et le user associés',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']))))]
     #[OA\Tag(name: 'memory')]
     public function updateMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, PlaceRepository $placeRepository, MemoryRepository $memoryRepository, PictureRepository $pictureRepository)
     {
         $jsonContent = $request->getContent();
-        // $jsonContent ={"place":{"update_place":true,"id":1,"name":"nouveau_nom","type":"nouveau_type"},"memory":{"id":1,"title":"nouveau_titre","content":"nouveau_contenu","picture_date":"1890-02-08T14:00:00Z","main_picture":"nouvelle_URL","additional_pictures":[{"id":1,"URL_image":"nouvelle_URL_image_12"},{"id":2,"URL_image":"nouvelle_URL_image_24"},{"URL_image":"nouvelle_URL_image_38"}]}}
-
-   
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
            
@@ -614,7 +619,7 @@ class MemoryController extends AbstractController
             }
         }
                $entityManager->flush();
-        return $this->json(['message' => 'Souvenir mis à jour'], Response::HTTP_OK);
+        return $this->json(['memory' => $currentMemory, 'message' => 'Souvenir mis à jour'], Response::HTTP_OK, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']]);
     }
 
     /**
