@@ -122,7 +122,7 @@ class MemoryController extends AbstractController
     {
         $memories = $memoryRepository->findAll();
 
-        return $this->json($memories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user']]);
+        return $this->json($memories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 
     /**
@@ -189,7 +189,7 @@ class MemoryController extends AbstractController
             );
         }
 
-        return $this->json($memory, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user']]
+        return $this->json($memory, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']]
     );
     }
 
@@ -554,7 +554,7 @@ class MemoryController extends AbstractController
     )]
     #[OA\Response(
         response: 200,
-        description: '')]
+        description: 'update a memory (and place)')]
     #[OA\Tag(name: 'memory')]
     public function updateMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, PlaceRepository $placeRepository, MemoryRepository $memoryRepository, PictureRepository $pictureRepository)
     {

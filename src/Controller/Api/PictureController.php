@@ -104,15 +104,38 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/create/picture', methods: ['POST'])]
+    #[OA\RequestBody(  
+        description: 'Exemple of data to be supplied to create the picture',    
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'picture', type:'string', example:'photo.jpg'),
+                new OA\Property(property:"memory", type:"object", properties:[
+                new OA\Property(property:"id", type:"integer", example: 9)
+            ]
+        )]
+    ))]
+    #[OA\Response(
+        response: 200,
+        description: 'save the image associated with the memory')]
     #[OA\Tag(name: 'picture')]
-    public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
+    public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request, MemoryRepository $memoryRepository)
     {
-        $picture = $serializer->deserialize($request->getContent(), Picture::class, 'json');
+        $jsonData = $request->getContent();
+        $data = $serializer->decode($jsonData, 'json');
+    
+        $memoryId = $data['memory']['id'];
+        $memory = $memoryRepository->find($memoryId);
+        if (!$memory) {
+            return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
+        }
+        $picture = (new Picture())
+        ->setMemory($memory)
+        ->setPicture($data['picture']);
 
         $entityManager->persist($picture);
         $entityManager->flush();
 
-        return $this->json($picture, 201, []);
+        return $this->json(['message' => 'Photo créé'], Response::HTTP_CREATED);
     }
 
     /**
@@ -126,6 +149,24 @@ class PictureController extends AbstractController
      */
 
     #[Route('/api/secure/update/picture/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the memory",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\RequestBody(  
+        description: 'Exemple of data to be supplied to update the picture',    
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'id', type:'integer', example:'20'),
+                new OA\Property(property: 'picture', type:'string', example:'photo.jpg'),
+                new OA\Property(property:"memory", type:"object", properties:[
+                new OA\Property(property:"id", type:"integer", example: 9)
+            ]
+        )]
+    ))]
     #[OA\Tag(name: 'picture')]
     public function update(Picture $picture, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
     {
