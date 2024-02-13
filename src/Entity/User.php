@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -18,6 +18,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_user'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
@@ -27,6 +28,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Votre prénom doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Votre prénom ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_user'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 30)]
@@ -36,12 +38,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Votre nom doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Votre nom ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_user'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Email(
         message: 'L\'adresse électronique {{ value }} n\'est pas valide.',
     )]
+    #[Groups(['get_user'])]
     private ?string $email = null;
 
     /**
@@ -51,6 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column]
+    #[Groups(['get_user'])]
     private array $roles = [];
 
     #[ORM\Column]
@@ -67,6 +72,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->createdAt = new DateTimeImmutable();
         $this->memories = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
+        // guarantee every user at least has ROLE_USER
+        $this->roles = ['ROLE_USER'];
     }
 
     public function getId(): ?int
@@ -102,16 +109,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
+        
         return array_unique($roles);
     }
 
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
-
         return $this;
     }
 

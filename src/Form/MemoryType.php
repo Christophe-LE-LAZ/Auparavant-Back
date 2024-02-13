@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Place;
 use App\Entity\Memory;
 use App\Entity\Location;
 use Symfony\Component\Form\AbstractType;
@@ -63,6 +64,14 @@ class MemoryType extends AbstractType
                 'class' => Location::class,
                 'choice_label' => function (Location $location) {
                     return $location->getStreet() . ' ' . $location->getZipcode() . ' ' . $location->getCity();
+                },
+            ])
+            ->add('place', EntityType::class, 
+            [
+                'label' => 'Endroit : ',
+                'class' => Place::class,
+                'choice_label' => function (Place $place) {
+                    return $place->getName() . ' ' . $place->getType();
                 },
             ]);
     }

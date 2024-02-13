@@ -15,6 +15,8 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $isEdit = $options['is_edit'];
+
         $builder
             ->add(
                 'firstname',
@@ -27,7 +29,7 @@ class UserType extends AbstractType
                 'lastname',
                 TextType::class,
                 [
-                    'label' => 'Nom de famille : '
+                    'label' => 'Nom : '
                 ]
             )
             ->add(
@@ -37,13 +39,13 @@ class UserType extends AbstractType
                     'label' => 'Adresse électronique : '
                 ]
             )
-            ->add(
-                'password',
-                PasswordType::class,
-                [
-                    'label' => 'Mot de passe : '
-                ]
-            )
+            // ->add(
+            //     'password',
+            //     PasswordType::class,
+            //     [
+            //         'label' => 'Mot de passe : '
+            //     ]
+            // )
             ->add(
                 'roles',
                 ChoiceType::class,
@@ -51,19 +53,31 @@ class UserType extends AbstractType
                     'label' => 'Rôle : ',
                     'choices'  => [
                         'Administrateur' => 'ROLE_ADMIN',
-                        'Responsable' => 'ROLE_MANAGER',
+                        'Modérateur' => 'ROLE_MODERATOR',
                         'Utilisateur' => 'ROLE_USER',
                     ],
                     'multiple' => true,
                     'expanded' => true
                 ]
             );
+            if (!$isEdit) {
+        
+                $builder->add(
+                    'password',
+                    PasswordType::class,
+                    [
+                        'label' => 'Mot de passe : ',
+                        'required' => !$isEdit, 
+                    ]
+                );
+            }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'is_edit' => false, 
         ]);
     }
 }

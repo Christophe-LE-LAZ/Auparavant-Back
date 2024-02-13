@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PictureRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
@@ -13,12 +14,14 @@ class Picture
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_picture'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 2000, nullable: true)]
     #[Assert\Url(
         message: 'L\'url {{ value }} n\'est pas valide',
     )]
+    #[Groups(['get_picture'])]
     private ?string $picture = null;
 
     #[ORM\Column]
@@ -27,8 +30,9 @@ class Picture
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'picture')]
+    #[ORM\ManyToOne(inversedBy: 'picture', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_picture'])]
     private ?Memory $memory = null;
 
     public function __construct()

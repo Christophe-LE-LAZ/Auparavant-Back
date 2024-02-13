@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlaceRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PlaceRepository::class)]
@@ -13,6 +16,7 @@ class Place
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_place'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30, nullable: true)]
@@ -22,6 +26,7 @@ class Place
         minMessage: 'Le nom de l\'endroit doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le nom de l\'endroit ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_place'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 30)]
@@ -31,6 +36,7 @@ class Place
         minMessage: 'Le type d\'endroit doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le type d\'endroit ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_place'])]
     private ?string $type = null;
 
     #[ORM\Column]
@@ -43,9 +49,13 @@ class Place
     #[ORM\JoinColumn(nullable: false)]
     private ?Location $location = null;
 
+    #[ORM\OneToMany(mappedBy: 'place', targetEntity: Memory::class, orphanRemoval: true)]
+    private Collection $memories;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
+        $this->memories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +119,36 @@ class Place
     public function setLocation(?Location $location): static
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Memory>
+     */
+    public function getMemories(): Collection
+    {
+        return $this->memories;
+    }
+
+    public function addMemory(Memory $memory): static
+    {
+        if (!$this->memories->contains($memory)) {
+            $this->memories->add($memory);
+            $memory->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMemory(Memory $memory): static
+    {
+        if ($this->memories->removeElement($memory)) {
+            // set the owning side to null (unless already changed)
+            if ($memory->getPlace() === $this) {
+                $memory->setPlace(null);
+            }
+        }
 
         return $this;
     }

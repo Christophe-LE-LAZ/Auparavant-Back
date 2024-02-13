@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MemoryRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MemoryRepository::class)]
@@ -16,6 +17,7 @@ class Memory
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_memory', 'get_memory_id'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
@@ -25,8 +27,9 @@ class Memory
         minMessage: 'Le titre doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le titre ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_memory'])]
     private ?string $title = null;
-
+  
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(
         min: 10,
@@ -34,15 +37,18 @@ class Memory
         minMessage: 'Le contenu doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le contenu ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_memory'])]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['get_memory'])]
     private ?\DateTimeInterface $picture_date = null;
 
     #[ORM\Column(length: 2000)]
     #[Assert\Url(
         message: 'L\'url {{ value }} n\'est pas valide',
     )]
+    #[Groups(['get_memory'])]
     private ?string $main_picture = null;
 
     #[ORM\Column(nullable: true)]
@@ -57,6 +63,7 @@ class Memory
    
     #[ORM\ManyToOne(inversedBy: 'memories')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_memory'])]
     private ?Location $location = null;
 
     #[ORM\OneToMany(mappedBy: 'memory', targetEntity: Picture::class, orphanRemoval: true)]
@@ -64,7 +71,13 @@ class Memory
 
     #[ORM\ManyToOne(inversedBy: 'memories')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_memory'])]
     private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'memories')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_memory'])]
+    private ?Place $place = null;
 
     public function __construct()
     {
@@ -212,6 +225,18 @@ class Memory
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPlace(): ?Place
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?Place $place): static
+    {
+        $this->place = $place;
 
         return $this;
     }

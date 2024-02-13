@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-
-<title>Souvenir</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Souvenir</h1>
@@ -26,6 +24,18 @@
             <tr>
                 <th>Date de la photographie</th>
                 <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nom et type de lieu</th>
+                <td>{{ memory.place.name }} {{ memory.place.type }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
+            </tr>
+            <tr>
+                <th>PUtilisateur</th>
+                <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
             </tr>
             {# <tr>
                 <th>PublishedAt</th>

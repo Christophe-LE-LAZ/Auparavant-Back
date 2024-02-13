@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-
-<title>Index des utilisateurs</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Index des utilisateurs</h1>
@@ -9,11 +7,11 @@
         <thead>
             <tr>
                 <th>Id</th>
-                 <th>Firstname</th>
-                 <th>Lastname</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Roles</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Adresse électronique</th>
+                <th>Mot de passe</th>
+                <th>Rôle</th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
@@ -44,5 +42,6 @@
     </table>
 
     <a href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a>
-{% endblock %}
+
  <a href="{{ path('app_main') }}">accueil</a>
+{% endblock %}

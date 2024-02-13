@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-
-<title>Utilisateur</title>
+{% extends 'back/base.html.twig' %}
 
 {% block body %}
     <h1>Utilisateur</h1>
@@ -12,23 +10,23 @@
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Firstname</th>
+                <th>Prénom</th>
                 <td>{{ user.firstname }}</td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th>Nom</th>
                 <td>{{ user.lastname }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>Adresse électronique</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>Mot de passe</th>
                 <td>{{ user.password }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
+                <th>Rôle</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
             {# <tr>

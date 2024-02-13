@@ -8,7 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location
@@ -16,6 +18,7 @@ class Location
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_location'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
@@ -25,6 +28,7 @@ class Location
         minMessage: 'La région doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'La région ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_location'])]
     private ?string $area = null;
 
     #[ORM\Column(length: 30)]
@@ -34,6 +38,7 @@ class Location
         minMessage: 'Le département doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le département ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_location'])]
     private ?string $department = null;
 
     #[ORM\Column(length: 20, nullable: true)]
@@ -43,6 +48,7 @@ class Location
         minMessage: 'Le quartier doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le quartier ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_location'])]
     private ?string $district = null;
 
     #[ORM\Column(length: 50)]
@@ -52,6 +58,7 @@ class Location
         minMessage: 'Le numéro et le nom de la rue doivent comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le numéro et le nom de la rue ne peuvent pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_location'])]
     private ?string $street = null;
 
     #[ORM\Column(length: 50)]
@@ -61,6 +68,7 @@ class Location
         minMessage: 'La ville doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'La ville ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_location'])]
     private ?string $city = null;
 
     #[ORM\Column]
@@ -70,12 +78,15 @@ class Location
         minMessage: 'Le code postal doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le code postal ne peut pas dépasser {{ limit }} caractères.',
     )]
+    #[Groups(['get_location'])]
     private ?int $zipcode = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8)]
+    #[Groups(['get_location'])]
     private ?string $latitude = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 11, scale: 8)]
+    #[Groups(['get_location'])]
     private ?string $longitude = null;
 
     #[ORM\Column]
