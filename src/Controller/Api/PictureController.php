@@ -153,7 +153,7 @@ class PictureController extends AbstractController
 
     /**
      * Update a picture by its id
-     * !TODO: Make it => Only accessible to the user who created the memory
+     * Only accessible to the user who created the memory
      * 
      * @param Picture $picture
      * @param Request $request
@@ -201,15 +201,21 @@ class PictureController extends AbstractController
     #[OA\Tag(name: 'picture')]
     public function update(Picture $picture, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
     {
-    
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $jsonData = $request->getContent();
+        $data = $serializer->decode($jsonData, 'json');
+        $memoryId = $data['memory']['id'];
+        $memory = $memoryRepository->find($memoryId);
+        if ($user !== $memory->getUser()) {
+            return $this->json("Erreur : Vous n'êtes pas autorisé à modifier cette photo.", 401);
+        
         if (!$picture) {
             return $this->json("Erreur : La photo n'existe pas", 404);
         }
-        $jsonData = $request->getContent();
-        $data = $serializer->decode($jsonData, 'json');
+        
     
-        $memoryId = $data['memory']['id'];
-        $memory = $memoryRepository->find($memoryId);
         if (!$memory) {
             return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
         }
@@ -218,7 +224,7 @@ class PictureController extends AbstractController
 
     $entityManager->flush();
     return $this->json(['picture' => $picture, 'message' => 'La photo a été mise à jour'], Response::HTTP_OK, [], ['groups' => ['get_picture','get_memory']]);
-
+    }
 }
 
 
