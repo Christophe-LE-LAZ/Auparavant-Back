@@ -482,7 +482,7 @@ class MemoryController extends AbstractController
     /**
      * Second method for creating a memory
      * 
-     * TODO: Create a new memory including name, type and location
+     * Create a new memory including name, type and location
      * 
      * @param Request $request
      * @param EntityManagerInterface $entityManager
@@ -617,7 +617,8 @@ class MemoryController extends AbstractController
     }
 
     /**
-     * TODO : Update a memory by its id
+     * Update a memory by its id
+     * !TODO: Make it => Only accessible to the user who created the memory
      * 
      * @param Request $request
      * @param EntityManagerInterface $entityManager
@@ -726,6 +727,16 @@ class MemoryController extends AbstractController
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
 
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $memoryId = $data['memory']['id'];
+        $currentMemory = $memoryRepository->find($memoryId);
+        
+        if ($user !== $currentMemory->getUser()) {
+            return $this->json("Erreur : Vous n'êtes pas autorisé à modifier ce contenu.", 404);
+        }
+
         $placeData = $data['place'];
         if ($placeData['update_place'] == true) {
             $currentPlace = $placeRepository->find($data['place']['id'])
@@ -738,13 +749,13 @@ class MemoryController extends AbstractController
 
 
         $memoryData = $data['memory'];
-        $currentMemory = $memoryRepository->find($data['memory']['id'])
+        $currentMemory 
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
             ->setPictureDate(new DateTime($memoryData['picture_date']))
             ->setMainPicture($memoryData['main_picture'])
-            ->setUpdatedAt(new DateTimeImmutable());
-        // ->setPlace($place);
+            ->setUpdatedAt(new DateTimeImmutable())
+            ->setPlace($currentPlace);
 
         $entityManager->persist($currentMemory);
 
@@ -780,6 +791,7 @@ class MemoryController extends AbstractController
 
     /**
      * Delete a memory by its id
+     * !TODO: Make it => Only accessible to the user who created the memory
      * 
      * @param Memory $memory
      * @param EntityManagerInterface $entityManager
