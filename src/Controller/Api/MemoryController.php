@@ -618,6 +618,7 @@ class MemoryController extends AbstractController
 
     /**
      * TODO : Update a memory by its id
+     * !TODO: Make it => Only accessible to the user who created the memory
      * 
      * @param Request $request
      * @param EntityManagerInterface $entityManager
@@ -780,6 +781,7 @@ class MemoryController extends AbstractController
 
     /**
      * Delete a memory by its id
+     * !TODO: Make it => Only accessible to the user who created the memory
      * 
      * @param Memory $memory
      * @param EntityManagerInterface $entityManager
