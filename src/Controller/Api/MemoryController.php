@@ -734,7 +734,7 @@ class MemoryController extends AbstractController
         $currentMemory = $memoryRepository->find($memoryId);
         
         if ($user !== $currentMemory->getUser()) {
-            return $this->json("Erreur : Vous n'êtes pas autorisé à modifier ce contenu.", 404);
+            return $this->json("Erreur : Vous n'êtes pas autorisé à modifier ce contenu.", 401);
         }
 
         $placeData = $data['place'];
@@ -746,7 +746,10 @@ class MemoryController extends AbstractController
             $entityManager->persist($currentPlace);
             $entityManager->flush();
         }
+        else {
 
+            $currentPlace = $placeRepository->find($currentMemory->getPlace());
+        }
 
         $memoryData = $data['memory'];
         $currentMemory 
