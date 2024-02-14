@@ -58,9 +58,4 @@ nelmio_api_doc:
         # host_patterns: # document only routes with a host of the form api.*
         #     - ^api\.
     use_validation_groups: true
- 
-
-    areas: # to filter documented areas
-        path_patterns:
-            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
 
