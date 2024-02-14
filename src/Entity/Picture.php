@@ -5,9 +5,11 @@ namespace App\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PictureRepository;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\Memory;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
 class Picture
@@ -33,12 +35,16 @@ class Picture
 
     #[ORM\ManyToOne(inversedBy: 'picture', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['get_picture'])]
+    #[Groups(['get_memory_id'])]
+
     private ?Memory $memory = null;
+
+   
 
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
+    
     }
 
     public function getId(): ?int
