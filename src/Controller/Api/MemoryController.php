@@ -815,12 +815,19 @@ class MemoryController extends AbstractController
     #[OA\Tag(name: 'memory')]
     public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
     {
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        if ($user !== $memory->getUser()) {
+            return $this->json("Erreur : Vous n'êtes pas autorisé à supprimer ce contenu.", 401);
+        }
+
         if (!$memory) {
             return $this->json(
                 "Erreur : Le souvenir n'existe pas",
                 404
             );
         }
+
         $entityManager->remove($memory);
         $entityManager->flush();
 
