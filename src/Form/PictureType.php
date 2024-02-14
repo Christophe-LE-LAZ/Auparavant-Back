@@ -21,9 +21,7 @@ class PictureType extends AbstractType
             'label' => 'Photo :',
             'mapped' => false,
             'required' => true,
-            'constraints' => [
-                
-                ],
+            
     ])
             ->add(
                 'memory',
