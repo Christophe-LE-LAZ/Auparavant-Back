@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Repository\PictureRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,15 +37,23 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/new', name: 'app_picture_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $picture = new Picture();
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $pictures = $form->get('picture')->getData();
+
+            if ($pictures) {
+                $newPicture = $fileUploader->upload($pictures);
+                $picture->setPicture($newPicture);
+            }
+            
             $entityManager->persist($picture);
             $entityManager->flush();
+
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
         }

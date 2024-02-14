@@ -5,6 +5,9 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
 
+    images_directory: '%kernel.project_dir%/public/assets/pictures'
+    #public: '%env(DOCUMENT_ROOT)%/assets/pictures'
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -22,11 +25,16 @@ services:
     App\Entity\:
         resource: '../src/Entity/'
 
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%images_directory%'
+
     acme_api.event.jwt_created_listener:
         class: App\EventListener\AuthenticationSuccessListener
         arguments: [ '@request_stack' ]
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
