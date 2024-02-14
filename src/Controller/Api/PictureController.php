@@ -230,10 +230,11 @@ class PictureController extends AbstractController
 
     /**
      * Delete a picture by its id
-     * !TODO: Make it => Only accessible to the user who created the memory
+     * Only accessible to the user who created the memory
      * 
      * @param Picture $picture
      * @param EntityManagerInterface $entityManager
+     * @param MemoryRepository $memoryRepository
      * @return Response
      */
     #[Route('/api/secure/delete/picture/{id<\d+>}', methods: ['DELETE'])]
@@ -249,8 +250,17 @@ class PictureController extends AbstractController
         schema: new OA\Schema(type: 'integer')
     )]
     #[OA\Tag(name: 'picture')]
-    public function delete(Picture $picture, EntityManagerInterface $entityManager): Response
+    public function delete(Picture $picture, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository): Response
     {
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $memoryId = $picture->getMemory();
+        $memory = $memoryRepository->find($memoryId);
+        if ($user !== $memory->getUser()) {
+            return $this->json("Erreur : Vous n'êtes pas autorisé à supprimer cette photo.", 401);
+        }
+
         if(!$picture) {
             return $this->json(
                 "Erreur : La photo n'existe pas", 404
