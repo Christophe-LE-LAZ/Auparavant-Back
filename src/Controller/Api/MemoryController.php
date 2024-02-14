@@ -28,6 +28,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * This controller groups together all the methods that manage memories.
  * One method displays all memories.
  * One displays only one.
+ * One displays the last and latest three memories created.
  * Two methods create a memory:
  * -> One creates a memory from an existing locality and creates the name and type of the place if the existing ones are not suitable for this memory.
  * -> Another creates a memory and a new locality as well as the name and type of the corresponding place.
@@ -190,6 +191,27 @@ class MemoryController extends AbstractController
         }
 
         return $this->json($memory, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']]
+    );
+    }
+
+    /**
+     * Display the latest three memories by creation date
+     *
+     * @param MemoryRepository $memoryRepository
+     * @return Response
+     */
+    #[Route('/api/memories/latest', methods: ['GET'])]
+    public function latest(MemoryRepository $memoryRepository): Response
+    {
+        $latestMemories = $memoryRepository->findTheLatestOnes();
+
+        if (!$latestMemories) {
+            return $this->json(
+                "Erreur : Données introuvables", 404
+            );
+        }
+
+        return $this->json($latestMemories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user']]
     );
     }
 
@@ -439,6 +461,7 @@ class MemoryController extends AbstractController
 
     /**
      * Update a memory by its id
+     * 
      * @param Memory $memory
      * @param Request $request
      * @param SerializerInterface $serializer
@@ -624,6 +647,10 @@ class MemoryController extends AbstractController
 
     /**
      * Delete a memory by its id
+     * 
+     * @param Memory $memory
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
     #[Route('/api/secure/delete/memory/{id<\d+>}', methods: ['DELETE'])]
     #[OA\Response(

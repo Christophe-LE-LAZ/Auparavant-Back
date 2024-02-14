@@ -2,7 +2,6 @@
 
 namespace App\Controller\Api;
 
-
 use OA\RequestBody;
 use DateTimeImmutable;
 use App\Entity\Location;
@@ -16,12 +15,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use OpenApi\Annotations as OA;
 
 class LocationController extends AbstractController
 {
     /**
      * Display all locations
-     
+     * 
+     * @OA\Response(
+     *     response=200,
+     *     description="Liste des localisations",
+     *     model=@Model(type=Location::class, groups={"get_location"})
+     * )
+     * @OA\Tag(name="Locations")
      * @param LocationRepository $locationRepository
      * @return Response
      */
@@ -195,6 +203,10 @@ class LocationController extends AbstractController
 
     /**
      * Delete a location by its id
+     * 
+     * @param Location $location
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
     #[Route('/api/secure/delete/location/{id<\d+>}', methods: ['DELETE'])]
     #[OA\Response(

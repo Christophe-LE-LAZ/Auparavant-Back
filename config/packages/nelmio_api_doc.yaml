@@ -1,8 +1,9 @@
 nelmio_api_doc:
     documentation:
+
         info:
             title: Auparavant
-            description: L'API d'Auparavant vous propose de récupérer des souvenirs, des localisations...
+            description: L'API d'Auparavant vous propose de récupérer des souvenirs, la localité, le nom et le type de l'endroit, les photos supplémentaires, les données des utilisateurs.
             version: 1.0.0
 
         paths:
@@ -13,7 +14,7 @@ nelmio_api_doc:
                         - Token
                     summary: Permet d'obtenir le token JWT pour se logger.
                     requestBody:
-                        description: Crée un nouveau token JWT
+                        description: Créer un nouveau token JWT
                         content:
                             application/json:
                                 schema:
@@ -57,3 +58,9 @@ nelmio_api_doc:
         # host_patterns: # document only routes with a host of the form api.*
         #     - ^api\.
     use_validation_groups: true
+ 
+
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+

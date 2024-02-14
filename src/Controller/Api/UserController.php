@@ -179,6 +179,10 @@ class UserController extends AbstractController
 
     /**
      * Delete a user by its id
+     * 
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
     #[Route('/api/secure/delete/user/{id<\d+>}', methods: ['DELETE'])]
     #[OA\Response(
@@ -195,6 +199,11 @@ class UserController extends AbstractController
     #[OA\Tag(name: 'user')]
     public function delete(User $user, EntityManagerInterface $entityManager): Response
     {
+        if(!$user) {
+            return $this->json(
+                "Erreur : Cet utilisateur n'existe pas", 404
+            );
+        }
         $entityManager->remove($user);
         $entityManager->flush();
 
