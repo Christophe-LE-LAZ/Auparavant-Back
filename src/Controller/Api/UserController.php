@@ -130,7 +130,6 @@ class UserController extends AbstractController
      * Update a user by its id
      * Only accessible to the user who created the account
      * 
-     * 
      * @param User $user
      * @param Request $request
      * @param SerializerInterface $serializer
