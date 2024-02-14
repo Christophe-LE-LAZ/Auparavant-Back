@@ -153,6 +153,8 @@ class PictureController extends AbstractController
 
     /**
      * Update a picture by its id
+     * !TODO: Make it => Only accessible to the user who created the memory
+     * 
      * @param Picture $picture
      * @param Request $request
      * @param SerializerInterface $serializer
@@ -222,6 +224,7 @@ class PictureController extends AbstractController
 
     /**
      * Delete a picture by its id
+     * !TODO: Make it => Only accessible to the user who created the memory
      * 
      * @param Picture $picture
      * @param EntityManagerInterface $entityManager
