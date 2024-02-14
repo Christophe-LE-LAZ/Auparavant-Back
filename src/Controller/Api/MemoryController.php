@@ -201,6 +201,115 @@ class MemoryController extends AbstractController
      * @return Response
      */
     #[Route('/api/memories/latest', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns the latest three memories',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user'])),
+            example: [
+                [
+                    "id" => 8,
+                    "title" => "Quartier Clause",
+                    "content" => "Projet d'aménagement urbain en 2023",
+                    "picture_date" => "2024-01-01T00:00:00+00:00",
+                    "main_picture" => "https:\/\/www.bretigny91.fr\/wp-content\/uploads\/2019\/08\/CLAUSE-BOIS-BADEAU_VUE-AERIENNE-PLACE-LORCA_02-_Thibault-dArgent-2018.jpg",
+                    "location" => [
+                        "id" => 5,
+                        "area" => "Île-de-France",
+                        "department" => "Essonne",
+                        "district" => "Clause",
+                        "street" => "Impasse du Blutin",
+                        "city" => "Brétigny",
+                        "zipcode" => 91220,
+                        "latitude" => "48.60870000",
+                        "longitude" => "2.30685000"
+                    ],
+                    "user" => [
+                        "id" => 1,
+                        "firstname" => "Aurélien",
+                        "lastname" => "ROUCHETTE-MARET",
+                        "email" => "aurelien.rouchette@orange.fr",
+                        "roles" => [
+                            "ROLE_USER",
+                            "ROLE_ADMIN"
+                        ]
+                    ],
+                    "place" => [
+                        "id" => 6,
+                        "name" => "Résidence Clause",
+                        "type" => "Résidence d'immeubles"
+                    ]
+                ],
+                [
+                    "id" => 7,
+                    "title" => "Propriété de M. Clause",
+                    "content" => "Propriété de M. Clause, édifiée en 1912",
+                    "picture_date" => "1912-01-01T00:00:00+00:00",
+                    "main_picture" => "https:\/\/p.cartorum.fr\/recto\/maxi\/000\/144\/678-bretigny-sur-orge-bretigny-sur-orge-propriete-clause.jpg",
+                    "location" => [
+                        "id" => 5,
+                        "area" => "Île-de-France",
+                        "department" => "Essonne",
+                        "district" => "Clause",
+                        "street" => "Impasse du Blutin",
+                        "city" => "Brétigny",
+                        "zipcode" => 91220,
+                        "latitude" => "48.60870000",
+                        "longitude" => "2.30685000"
+                    ],
+                    "user" => [
+                        "id" => 1,
+                        "firstname" => "Aurélien",
+                        "lastname" => "ROUCHETTE-MARET",
+                        "email" => "aurelien.rouchette@orange.fr",
+                        "roles" => [
+                            "ROLE_USER",
+                            "ROLE_ADMIN"
+                        ]
+                    ],
+                    "place" => [
+                        "id" => 5,
+                        "name" => "Propriété Clause",
+                        "type" => "Propriété"
+                    ]
+                ],
+                [
+                    "id" => 6,
+                    "title" => "Incendie de Notre-Dame",
+                    "content" => "L’incendie de Notre-Dame de Paris est un incendie majeur survenu à la cathédrale Notre-Dame de Paris, les 15 et 16 avril 2019, pendant près de 15 heures.",
+                    "picture_date" => "2019-04-15T00:00:00+00:00",
+                    "main_picture" => "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/3\/39\/Incendie_Notre_Dame_de_Paris.jpg\/280px-Incendie_Notre_Dame_de_Paris.jpg",
+                    "location" => [
+                        "id" => 3,
+                        "area" => "Île-de-France",
+                        "department" => "Paris",
+                        "district" => "Notre-Dame",
+                        "street" => "6 Parvis Notre-Dame - Place Jean-Paul II",
+                        "city" => "Paris",
+                        "zipcode" => 75004,
+                        "latitude" => "48.51110000",
+                        "longitude" => "2.20590000"
+                    ],
+                    "user" => [
+                        "id" => 1,
+                        "firstname" => "Aurélien",
+                        "lastname" => "ROUCHETTE-MARET",
+                        "email" => "aurelien.rouchette@orange.fr",
+                        "roles" => [
+                            "ROLE_USER",
+                            "ROLE_ADMIN"
+                        ]
+                    ],
+                    "place" => [
+                        "id" => 3,
+                        "name" => "Notre-Dame de Paris",
+                        "type" => "Cathédrale"
+                    ]
+                ]
+                ]
+    ))]
+    #[OA\Tag(name: 'memory')]
     public function latest(MemoryRepository $memoryRepository): Response
     {
         $latestMemories = $memoryRepository->findTheLatestOnes();
