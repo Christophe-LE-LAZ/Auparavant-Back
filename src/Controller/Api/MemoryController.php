@@ -116,8 +116,9 @@ class MemoryController extends AbstractController
                         "type" => "Mausolée"
                     ]
                 ],
-                ]
-    ))]
+            ]
+        )
+    )]
     #[OA\Tag(name: 'memory')]
     public function index(MemoryRepository $memoryRepository)
     {
@@ -171,9 +172,10 @@ class MemoryController extends AbstractController
                         "name" => "Le Panthéon",
                         "type" => "Mausolée"
                     ]
-                ] 
                 ]
-    ))]
+            ]
+        )
+    )]
     #[OA\Parameter(
         name: "id",
         in: "path",
@@ -182,16 +184,21 @@ class MemoryController extends AbstractController
         schema: new OA\Schema(type: 'integer')
     )]
     #[OA\Tag(name: 'memory')]
-    public function read(Memory $memory = null )
+    public function read(Memory $memory = null)
     {
         if (!$memory) {
             return $this->json(
-                "Erreur : Souvenir inexistant", 404
+                "Erreur : Souvenir inexistant",
+                404
             );
         }
 
-        return $this->json($memory, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']]
-    );
+        return $this->json(
+            $memory,
+            200,
+            [],
+            ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]
+        );
     }
 
     /**
@@ -307,8 +314,9 @@ class MemoryController extends AbstractController
                         "type" => "Cathédrale"
                     ]
                 ]
-                ]
-    ))]
+            ]
+        )
+    )]
     #[OA\Tag(name: 'memory')]
     public function latest(MemoryRepository $memoryRepository): Response
     {
@@ -316,12 +324,17 @@ class MemoryController extends AbstractController
 
         if (!$latestMemories) {
             return $this->json(
-                "Erreur : Données introuvables", 404
+                "Erreur : Données introuvables",
+                404
             );
         }
 
-        return $this->json($latestMemories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user']]
-    );
+        return $this->json(
+            $latestMemories,
+            200,
+            [],
+            ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user']]
+        );
     }
 
     /**
@@ -343,7 +356,7 @@ class MemoryController extends AbstractController
         return $this->json($memory, 201, []);
     }
 
-   
+
     /**
      * First method for creating a memory
      * Create a new memory as well as the name and type of place from a location selected on the map
@@ -359,8 +372,8 @@ class MemoryController extends AbstractController
      * 
      */
     #[Route('/api/secure/create/memory-and-place', methods: ['POST'])]
-    #[OA\RequestBody(  
-        description: 'Exemple of data to be supplied to create the memory and place',    
+    #[OA\RequestBody(
+        description: 'Exemple of data to be supplied to create the memory and place',
         content: new OA\JsonContent(
             oneOf: [
                 new OA\Schema(
@@ -408,35 +421,36 @@ class MemoryController extends AbstractController
         description: 'Retourne le souvenir créé, la localisation, la place et le user associés',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']))))]
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']))
+        )
+    )]
     #[OA\Tag(name: 'memory')]
     public function createMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, LocationRepository $locationRepository, PlaceRepository $placeRepository)
     {
         $jsonContent = $request->getContent();
         // $jsonContent = {"user":{"id":1},"location":{"id":1},"place":{"create_new_place":true, "id": 1, "name":"l'elysée","type":"batiment"},"memory":{"title":"l'elysée en 1990","content":"que de souvenirs avec ce lieu","picture_date":"1990-02-08T14:00:00Z","main_picture":"URL","additional_pictures":["URL_image_1","URL_image_2"]}}
-   
+
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
-     
+
         /** @var \App\Entity\User $user */
-         $user = $this->getUser();
+        $user = $this->getUser();
 
         $location = $locationRepository->find($data['location']['id']);
-        
+
         $placeData = $data['place'];
         if ($placeData['create_new_place'] == true) {
-        $newPlace = (new Place())
-            ->setName($placeData['name'])
-            ->setType($placeData['type'])
-            ->setLocation($location);
-        $entityManager->persist($newPlace);
-        $entityManager->flush();
-        $place = $placeRepository->find($newPlace); 
-        }
-        else {
+            $newPlace = (new Place())
+                ->setName($placeData['name'])
+                ->setType($placeData['type'])
+                ->setLocation($location);
+            $entityManager->persist($newPlace);
+            $entityManager->flush();
+            $place = $placeRepository->find($newPlace);
+        } else {
             $place = $placeRepository->find($data['place']['id']);
         }
-    
+
         $memoryData = $data['memory'];
         // dd($memory);
         $newMemory = (new Memory())
@@ -449,20 +463,20 @@ class MemoryController extends AbstractController
             ->setPlace($place);
 
         $entityManager->persist($newMemory);
-                   
+
 
         // additional image management //
-         if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
-             foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {
-                 $additionalPicture = (new Picture())
+        if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
+            foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {
+                $additionalPicture = (new Picture())
                     ->setPicture($additionalPictureUrl)
                     ->setMemory($newMemory);
-                 $entityManager->persist($additionalPicture);
-             }
+                $entityManager->persist($additionalPicture);
+            }
         }
-               $entityManager->flush();
-     
-               return $this->json(['memory' => $newMemory, 'message' => 'Souvenir créé'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']]);
+        $entityManager->flush();
+
+        return $this->json(['memory' => $newMemory, 'message' => 'Souvenir créé'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 
     /**
@@ -477,52 +491,59 @@ class MemoryController extends AbstractController
      * 
      */
     #[Route('/api/secure/create/memory-and-location-and-place', methods: ['POST'])]
-    #[OA\RequestBody(  
-        description: 'Exemple of data to be supplied to create the memory and place',    
+    #[OA\RequestBody(
+        description: 'Exemple of data to be supplied to create the memory and place',
         content: new OA\JsonContent(
 
+            properties: [
+                new OA\Property(property: 'memory', type: 'object', properties: [
+                    new OA\Property(property: 'title', type: 'string', example: "l'elysée en 1990"),
+                    new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
+                    new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
+                    new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
+                    new OA\Property(property: 'additional_pictures', type: 'array', items: new OA\Items(type: 'string'), example: ['URL_image_1', 'URL_image_2']),
+                ]),
+                new OA\Property(property: 'place', type: 'object', properties: [
+                    new OA\Property(property: 'name', type: 'string', example: "l'elysée"),
+                    new OA\Property(property: 'type', type: 'string', example: 'bâtiment'),
+                ]),
+                new OA\Property(
+                    property: 'location',
+                    type: 'object',
                     properties: [
-                        new OA\Property(property: 'memory', type: 'object', properties: [
-                            new OA\Property(property: 'title', type: 'string', example: "l'elysée en 1990"),
-                            new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
-                            new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
-                            new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
-                            new OA\Property(property: 'additional_pictures', type: 'array', items: new OA\Items(type: 'string'), example: ['URL_image_1', 'URL_image_2']),
-                        ]),
-                        new OA\Property(property: 'place', type: 'object', properties: [
-                            new OA\Property(property: 'name', type: 'string', example: "l'elysée"),
-                            new OA\Property(property: 'type', type: 'string', example: 'bâtiment'),
-                        ]),
-                        new OA\Property(property: 'location', type: 'object', properties: [
-                            new OA\Property(property: 'area', type:'string', example:'Île-de-France'),
-                            new OA\Property(property: 'department', type:'string', example:'Paris'),
-                            new OA\Property(property: 'district', type:'string', example:'Quartier latin',  nullable: true),
-                            new OA\Property(property: 'street', type:'string', example:'28 place du Panthéon'),
-                            new OA\Property(property: 'city', type:'string', example:'Paris'),
-                            new OA\Property(property: 'zipcode', type:'integer', example:75005),
-                            new OA\Property(property: 'latitude', type:'string', example:'48.84619800'),
-                            new OA\Property(property: 'longitude', type:'string', example:'2.34610500'),
+                        new OA\Property(property: 'area', type: 'string', example: 'Île-de-France'),
+                        new OA\Property(property: 'department', type: 'string', example: 'Paris'),
+                        new OA\Property(property: 'district', type: 'string', example: 'Quartier latin',  nullable: true),
+                        new OA\Property(property: 'street', type: 'string', example: '28 place du Panthéon'),
+                        new OA\Property(property: 'city', type: 'string', example: 'Paris'),
+                        new OA\Property(property: 'zipcode', type: 'integer', example: 75005),
+                        new OA\Property(property: 'latitude', type: 'string', example: '48.84619800'),
+                        new OA\Property(property: 'longitude', type: 'string', example: '2.34610500'),
                     ]
-                    ),   
-    ]))]
+                ),
+            ]
+        )
+    )]
     #[OA\Response(
         response: 201,
         description: 'Retourne le souvenir créé, la localisation, la place et le user associés',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']))))]
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']))
+        )
+    )]
     #[OA\Tag(name: 'memory')]
-    public function createMemoryAndLocationAndPlace(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
+    public function createMemoryAndLocationAndPlace(Request $request, EntityManagerInterface $entityManager)
     {
         $jsonContent = $request->getContent();
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
-        
-          /** @var \App\Entity\User $user */
-          $user = $this->getUser();
+
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         $locationData = $data['location'];
-        $newLocation = (new Location ())
+        $newLocation = (new Location())
             ->setArea($locationData['area'])
             ->setDepartment($locationData['department'])
             ->setDistrict($locationData['district'])
@@ -553,9 +574,9 @@ class MemoryController extends AbstractController
 
 
         $entityManager->persist($newMemory);
-                   
+
         // additional picture management //
-         if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
+        if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
             foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {
                 $additionalPicture = (new Picture())
                     ->setPicture($additionalPictureUrl)
@@ -563,9 +584,9 @@ class MemoryController extends AbstractController
                 $entityManager->persist($additionalPicture);
             }
         }
-         $entityManager->flush();
-      
-        return $this->json(['memory' => $newMemory, 'message' => 'Souvenir créé'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']]);
+        $entityManager->flush();
+
+        return $this->json(['memory' => $newMemory, 'message' => 'Souvenir créé'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 
     /**
@@ -581,12 +602,13 @@ class MemoryController extends AbstractController
     #[OA\Tag(name: 'hidden')]
     public function update(Memory $memory = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
-        if(!$memory) {
+        if (!$memory) {
             return $this->json(
-                "Erreur : Le souvenir n'existe pas", 404
+                "Erreur : Le souvenir n'existe pas",
+                404
             );
         }
-        $serializer->deserialize($request->getContent(), Memory::class, 'json', ['object_to_populate'=>$memory]);
+        $serializer->deserialize($request->getContent(), Memory::class, 'json', ['object_to_populate' => $memory]);
         $memory->setUpdatedAt(new DateTimeImmutable());
 
         $entityManager->flush();
@@ -613,8 +635,8 @@ class MemoryController extends AbstractController
         description: "ID of the memory",
         schema: new OA\Schema(type: 'integer')
     )]
-    #[OA\RequestBody(  
-        description: 'Example of data to be supplied to update the memory and place',    
+    #[OA\RequestBody(
+        description: 'Example of data to be supplied to update the memory and place',
         content: new OA\JsonContent(
             oneOf: [
                 new OA\Schema(
@@ -694,25 +716,27 @@ class MemoryController extends AbstractController
         description: 'Retourne le souvenir mis à jour, la localisation, la place et le user associés',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']))))]
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']))
+        )
+    )]
     #[OA\Tag(name: 'memory')]
     public function updateMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, PlaceRepository $placeRepository, MemoryRepository $memoryRepository, PictureRepository $pictureRepository)
     {
         $jsonContent = $request->getContent();
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
-           
+
         $placeData = $data['place'];
         if ($placeData['update_place'] == true) {
-        $currentPlace = $placeRepository->find($data['place']['id'])
-            ->setName($placeData['name'])
-            ->setType($placeData['type'])
-            ->setUpdatedAt(new DateTimeImmutable());
-        $entityManager->persist($currentPlace);
-        $entityManager->flush();
+            $currentPlace = $placeRepository->find($data['place']['id'])
+                ->setName($placeData['name'])
+                ->setType($placeData['type'])
+                ->setUpdatedAt(new DateTimeImmutable());
+            $entityManager->persist($currentPlace);
+            $entityManager->flush();
         }
-        
-    
+
+
         $memoryData = $data['memory'];
         $currentMemory = $memoryRepository->find($data['memory']['id'])
             ->setTitle($memoryData['title'])
@@ -720,15 +744,15 @@ class MemoryController extends AbstractController
             ->setPictureDate(new DateTime($memoryData['picture_date']))
             ->setMainPicture($memoryData['main_picture'])
             ->setUpdatedAt(new DateTimeImmutable());
-            // ->setPlace($place);
+        // ->setPlace($place);
 
         $entityManager->persist($currentMemory);
-                   
+
 
         // additional picture management //
         foreach ($memoryData['additional_pictures'] as $additionalPictureData) {
             $additionalPictureId = isset($additionalPictureData['id']) ? $additionalPictureData['id'] : null;
-        
+
             if ($additionalPictureId) {
                 // Update an existing picture
                 $additionalPicture = $pictureRepository->find($additionalPictureId);
@@ -737,7 +761,7 @@ class MemoryController extends AbstractController
                         ->setPicture($additionalPictureData['URL_image'])
                         ->setMemory($currentMemory)
                         ->setUpdatedAt(new DateTimeImmutable());
-        
+
                     $entityManager->persist($additionalPicture);
                 }
             } else {
@@ -746,12 +770,12 @@ class MemoryController extends AbstractController
                 $newAdditionalPicture
                     ->setPicture($additionalPictureData['URL_image'])
                     ->setMemory($currentMemory);
-        
+
                 $entityManager->persist($newAdditionalPicture);
             }
         }
-               $entityManager->flush();
-        return $this->json(['memory' => $currentMemory, 'message' => 'Souvenir mis à jour'], Response::HTTP_OK, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user','get_picture']]);
+        $entityManager->flush();
+        return $this->json(['memory' => $currentMemory, 'message' => 'Souvenir mis à jour'], Response::HTTP_OK, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 
     /**
@@ -776,9 +800,10 @@ class MemoryController extends AbstractController
     #[OA\Tag(name: 'memory')]
     public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
     {
-        if(!$memory) {
+        if (!$memory) {
             return $this->json(
-                "Erreur : Le souvenir n'existe pas", 404
+                "Erreur : Le souvenir n'existe pas",
+                404
             );
         }
         $entityManager->remove($memory);
