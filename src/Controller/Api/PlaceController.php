@@ -4,8 +4,11 @@ namespace App\Controller\Api;
 
 use App\Entity\Place;
 use DateTimeImmutable;
+use OpenApi\Attributes as OA;
 use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +23,26 @@ class PlaceController extends AbstractController
      * @return Response
      */
     #[Route('/api/places', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns the place list',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Place::class, groups: ['get_place'])),
+            example: [
+                [
+                    "id" => 1,
+                    "name" => "Le Panthéon",
+                    "type" => "Mausolée"
+                ],
+                [
+                    "id" => 2,
+                    "name" => "Tour Eiffel",
+                    "type" => "Tour autoportante"
+                ],
+                ]
+    ))]
+    #[OA\Tag(name: 'place')]
     public function index(PlaceRepository $placeRepository)
     {
         $places = $placeRepository->findAll();
@@ -33,6 +56,28 @@ class PlaceController extends AbstractController
      * @return Response
      */
     #[Route('/api/place/{id<\d+>}', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns a single place',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Place::class, groups: ['get_place'])),
+            example: [
+                [
+                    "id" => 1,
+                    "name" => "Le Panthéon",
+                    "type" => "Mausolée"
+                ]
+                ]
+    ))]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the place",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'place')]
     public function read(Place $place = null )
     {
         if (!$place) {
@@ -53,6 +98,7 @@ class PlaceController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/create/place', methods: ['POST'])]
+    #[OA\Tag(name: 'hidden')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         $place = $serializer->deserialize($request->getContent(), Place::class, 'json');
@@ -72,6 +118,7 @@ class PlaceController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/update/place/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Tag(name: 'hidden')]
     public function update(Place $place = null,  Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         if(!$place) {
@@ -95,6 +142,18 @@ class PlaceController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/delete/place/{id<\d+>}', methods: ['DELETE'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Deletes a place',
+    )]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the place",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'hidden')]
     public function delete(Place $place, EntityManagerInterface $entityManager): Response
     {
         if(!$place) {

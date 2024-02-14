@@ -4,8 +4,11 @@ namespace App\Controller\Api;
 
 use App\Entity\User;
 use DateTimeImmutable;
+use OpenApi\Attributes as OA;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +23,35 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/users', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns the user list',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: User::class, groups: ['get_user'])),
+            example: [
+                [
+                    "id" => 1,
+		            "firstname" => "Aurélien",
+		            "lastname" => "ROUCHETTE-MARET",
+		            "email" => "aurelien.rouchette@orange.fr",
+		            "roles" => [
+			            "ROLE_USER",
+			            "ROLE_ADMIN"
+                    ]
+                ],
+                [
+                    "id" => 2,
+		            "firstname" => "Christophe",
+		            "lastname" => "LE LAZ",
+		            "email" => "christophe.le-laz@oclock.school",
+		            "roles" => [
+			            "ROLE_USER"
+                    ]
+                ],
+                ]
+    ))]
+    #[OA\Tag(name: 'user')]
     public function index(UserRepository $userRepository)
     {
         // Fonction qui permet de lister tous les utilisateurs
@@ -34,6 +66,33 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/user/{id<\d+>}', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns a single user',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: User::class, groups: ['get_user'])),
+            example: [
+                [
+                    "id" => 1,
+		            "firstname" => "Aurélien",
+		            "lastname" => "ROUCHETTE-MARET",
+		            "email" => "aurelien.rouchette@orange.fr",
+		            "roles" => [
+			            "ROLE_USER",
+			            "ROLE_ADMIN"
+                    ]
+                ]
+                ]
+    ))]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the user",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'user')]
     public function read(User $user = null )
     {
         // Si l'utilisateur n'existe pas, on renvoie un message et une erreur 404
@@ -55,6 +114,7 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/create/user', methods: ['POST'])]
+    #[OA\Tag(name: 'hidden')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
         // Pour la creation d'un utilisateur, on récupère des données en JSON, on envoie la requête en BDD et on sauvegarde. Si c'est OK, on indique un code 201
@@ -75,6 +135,31 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/update/user/{id<\d+>}', methods: ['PUT'])]
+    #[OA\RequestBody(  
+        description: 'Exemple of data to be supplied to update the user',    
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'id', type:'integer', example:'1'),
+                new OA\Property(property: 'firstname', type:'string', example:'John'),
+                new OA\Property(property: 'lastname', type:'string', example:'Doe'),
+                new OA\Property(property: 'email', type:'string', example:'updated@example.com'),
+                new OA\Property(property: 'password', type:'string', example:'newpassword'),  
+            ]
+        ))]
+    #[OA\Response(
+        response: 200,
+        description: 'Updates a user\'s profile',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: User::class, groups: ['get_user']))))]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the user",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'user')]
     public function update(User $user = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
         // Pour la modification, on récupère l'id et on vérifie si il y a un utilisateur. Sinon, on affiche une erreur 404.
@@ -89,7 +174,7 @@ class UserController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->json($user, 200, []);
+        return $this->json(['user' => $user, 'message' => 'Utilisateur mis à jour'], Response::HTTP_OK, [], ['groups' => ['get_user','get_picture']]);
     }
 
     /**
@@ -100,6 +185,18 @@ class UserController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/delete/user/{id<\d+>}', methods: ['DELETE'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Deletes a user\'s profile',
+    )]
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the user",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Tag(name: 'user')]
     public function delete(User $user, EntityManagerInterface $entityManager): Response
     {
         if(!$user) {
