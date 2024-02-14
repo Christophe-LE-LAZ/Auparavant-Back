@@ -50,7 +50,7 @@ class Picture
         return $this->picture;
     }
 
-    public function setPicture(?string $picture): static
+    public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
 
