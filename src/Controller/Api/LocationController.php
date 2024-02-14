@@ -13,18 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Nelmio\ApiDocBundle\Annotation\Security;
 
 class LocationController extends AbstractController
 {
     /**
      * Display all locations
-     * 
-     * @OA\Response(
-     *     response=200,
-     *     description="Liste des localisations",
-     *     model=@Model(type=Location::class, groups={"get_location"})
-     * )
-     * @OA\Tag(name="Locations")
      * @param LocationRepository $locationRepository
      * @return Response
      */
