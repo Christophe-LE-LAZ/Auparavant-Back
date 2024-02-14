@@ -39,6 +39,8 @@ class MemoryController extends AbstractController
 {
     /**
      * Display all memories
+     * TODO: Retrieve additional pictures from memories
+     * 
      * @param MemoryRepository $memoryRepository
      * @return Response
      */
@@ -129,6 +131,8 @@ class MemoryController extends AbstractController
 
     /**
      * Display a single memory by its id
+     * TODO: Retrieve additional pictures from a memory
+     * 
      * @param Memory $memory
      * @return Response
      */
