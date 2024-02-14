@@ -66,7 +66,7 @@ INSERT INTO `memory` (`id`, `location_id`, `user_id`, `place_id`, `title`, `cont
 (3,	2,	1,	2,	'La naissance de la tour Eiffel',	'C’est à l’occasion de l’Exposition Universelle de 1889, date qui marquait le centenaire de la Révolution française qu\'il a été décidé de construire une tour de 300m.\r\n\r\nLes premiers coups de pelle sont donnés le 26 janvier 1887.\r\nLe 31 mars 1889, la Tour achevée en un temps record -2 ans, 2 mois et 5 jours- s’impose comme une véritable prouesse technique.',	'1887-01-26 00:00:00',	'https://www.toureiffel.paris/sites/default/files/styles/mobile_x1_560/public/2017-10/070601-014_1.JPEG?itok=3lGoqCZK',	NULL,	'2024-02-07 14:50:11',	NULL),
 (4,	2,	1,	2,	'La Tour Eiffel de nos jours',	'La tour Eiffel [tuʁɛfɛl] est une tour de fer puddlé de 330 m de hauteur située à Paris, à l’extrémité nord-ouest du parc du Champ-de-Mars en bordure de la Seine dans le 7ᵉ arrondissement. Son adresse officielle est 5, avenue Anatole-France.',	'2009-06-01 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg/260px-Tour_Eiffel_Wikimedia_Commons.jpg',	NULL,	'2024-02-07 14:51:04',	NULL),
 (5,	3,	1,	3,	'Notre-Dame',	'La cathédrale Notre-Dame de Paris, communément appelée Notre-Dame, est l\'un des monuments les plus emblématiques de Paris et de la France. Elle est située sur l\'île de la Cité et est un lieu de culte catholique, siège de l\'archidiocèse de Paris, dédié à la Vierge Marie.',	'2009-01-01 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Notre-Dame_de_Paris_2009-04-28.jpg/1024px-Notre-Dame_de_Paris_2009-04-28.jpg',	NULL,	'2024-02-08 09:48:14',	NULL),
-(6,	3,	1,	3,	'Incendie de Notre-Dame',	'L’incendie de Notre-Dame de Paris est un incendie majeur survenu à la cathédrale Notre-Dame de Paris, les 15 et 16 avril 2019, pendant près de 15 heures.',	'2019-04-15 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Incendie_Notre_Dame_de_Paris.jpg/280px-Incendie_Notre_Dame_de_Paris.jpg',	NULL,	'2024-02-08 09:50:03',	NULL),
+(6,	3,	1,	3,	'Incendie de Notre-Dame',	'L’incendie de Notre-Dame de Paris est un incendie majeur survenu à la cathédrale Notre-Dame de Paris, les 15 et 16 avril 2019, pendant près de 15 heures.',	'2019-04-15 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Incendie_Notre_Dame_de_Paris.jpg/280px-Incendie_Notre_Dame_de_Paris.jpg',	NULL,	'2024-02-08 09:50:03',	'2024-02-14 13:12:28'),
 (7,	5,	1,	5,	'Propriété de M. Clause',	'Propriété de M. Clause, édifiée en 1912',	'1912-01-01 00:00:00',	'https://p.cartorum.fr/recto/maxi/000/144/678-bretigny-sur-orge-bretigny-sur-orge-propriete-clause.jpg',	NULL,	'2024-02-12 10:18:15',	NULL),
 (8,	5,	1,	6,	'Quartier Clause',	'Projet d\'aménagement urbain en 2023',	'2024-01-01 00:00:00',	'https://www.bretigny91.fr/wp-content/uploads/2019/08/CLAUSE-BOIS-BADEAU_VUE-AERIENNE-PLACE-LORCA_02-_Thibault-dArgent-2018.jpg',	NULL,	'2024-02-12 10:24:58',	NULL);
 
@@ -88,7 +88,8 @@ INSERT INTO `picture` (`id`, `memory_id`, `picture`, `created_at`, `updated_at`)
 (3,	4,	'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Dimensions_Eiffel_Tower.svg/440px-Dimensions_Eiffel_Tower.svg.png',	'2024-02-07 14:51:29',	NULL),
 (4,	3,	'https://cloudfront-eu-central-1.images.arcpublishing.com/leparisien/VK5YKZHUCDVRZDNC3N3KTWFCWY.jpg',	'2024-02-07 14:51:44',	NULL),
 (5,	6,	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Fl%C3%A8che_en_feu_-_Spire_on_Fire.png/170px-Fl%C3%A8che_en_feu_-_Spire_on_Fire.png',	'2024-02-08 09:50:20',	NULL),
-(6,	5,	'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Notre-Dame_de_Paris_2013-07-24.jpg/280px-Notre-Dame_de_Paris_2013-07-24.jpg',	'2024-02-08 09:50:36',	NULL);
+(6,	5,	'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Notre-Dame_de_Paris_2013-07-24.jpg/280px-Notre-Dame_de_Paris_2013-07-24.jpg',	'2024-02-08 09:50:36',	NULL),
+(7,	6,	'https://cdn.unitycms.io/images/8a9OV8lsa6R9usSpOGmEEq.jpg?op=ocroped&val=1200,1200,1000,1000,0,0&sum=PZSclePyIyE',	'2024-02-14 13:12:28',	NULL);
 
 DROP TABLE IF EXISTS `place`;
 CREATE TABLE `place` (
@@ -128,4 +129,4 @@ INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `roles`,
 (1,	'Aurélien',	'ROUCHETTE-MARET',	'aurelien.rouchette@orange.fr',	'$2y$13$QQF8BE1NlrIp4QxrM062ietwpHynqiVZtoMJ1l2GZkMoc.OA.99Ke',	'[\"ROLE_USER\",\"ROLE_ADMIN\"]',	'2024-02-12 13:00:41',	NULL),
 (2,	'Christophe',	'LE LAZ',	'christophe.le-laz@oclock.school',	'$2y$13$DsiSBUOOlmQqqlVNWyINF.DRXSQGZWcr6EVZhHcSjmGszgQL7feby',	'[\"ROLE_USER\"]',	'2024-02-12 13:53:25',	NULL);
 
--- 2024-02-12 13:54:12
+-- 2024-02-14 13:13:06

@@ -128,6 +128,8 @@ class UserController extends AbstractController
 
     /**
      * Update a user by its id
+     * Only accessible to the user who created the account
+     * 
      * @param User $user
      * @param Request $request
      * @param SerializerInterface $serializer
@@ -162,6 +164,13 @@ class UserController extends AbstractController
     #[OA\Tag(name: 'user')]
     public function update(User $user = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
+        /** @var \App\Entity\User $user */
+        $userToken = $this->getUser();
+
+       
+        if ($userToken !== $user ) {
+            return $this->json("Erreur : Vous n'êtes pas autorisé à modifier ce compte.", 401);
+        }
         // Pour la modification, on récupère l'id et on vérifie si il y a un utilisateur. Sinon, on affiche une erreur 404.
         if(!$user) {
             return $this->json(
@@ -179,6 +188,7 @@ class UserController extends AbstractController
 
     /**
      * Delete a user by its id
+     * Only accessible to the user who created the account
      * 
      * @param User $user
      * @param EntityManagerInterface $entityManager
@@ -199,6 +209,13 @@ class UserController extends AbstractController
     #[OA\Tag(name: 'user')]
     public function delete(User $user, EntityManagerInterface $entityManager): Response
     {
+        /** @var \App\Entity\User $user */
+        $userToken = $this->getUser();
+
+       
+        if ($userToken !== $user ) {
+            return $this->json("Erreur : Vous n'êtes pas autorisé à supprimer ce compte.", 401);
+        }
         if(!$user) {
             return $this->json(
                 "Erreur : Cet utilisateur n'existe pas", 404

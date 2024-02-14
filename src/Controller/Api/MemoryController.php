@@ -618,7 +618,7 @@ class MemoryController extends AbstractController
 
     /**
      * Update a memory by its id
-     * !TODO: Make it => Only accessible to the user who created the memory
+     * Only accessible to the user who created the memory
      * 
      * @param Request $request
      * @param EntityManagerInterface $entityManager
@@ -734,7 +734,7 @@ class MemoryController extends AbstractController
         $currentMemory = $memoryRepository->find($memoryId);
         
         if ($user !== $currentMemory->getUser()) {
-            return $this->json("Erreur : Vous n'êtes pas autorisé à modifier ce contenu.", 404);
+            return $this->json("Erreur : Vous n'êtes pas autorisé à modifier ce contenu.", 401);
         }
 
         $placeData = $data['place'];
@@ -746,7 +746,10 @@ class MemoryController extends AbstractController
             $entityManager->persist($currentPlace);
             $entityManager->flush();
         }
+        else {
 
+            $currentPlace = $placeRepository->find($currentMemory->getPlace());
+        }
 
         $memoryData = $data['memory'];
         $currentMemory 
@@ -791,7 +794,7 @@ class MemoryController extends AbstractController
 
     /**
      * Delete a memory by its id
-     * !TODO: Make it => Only accessible to the user who created the memory
+     * Only accessible to the user who created the memory
      * 
      * @param Memory $memory
      * @param EntityManagerInterface $entityManager
@@ -812,12 +815,19 @@ class MemoryController extends AbstractController
     #[OA\Tag(name: 'memory')]
     public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
     {
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        if ($user !== $memory->getUser()) {
+            return $this->json("Erreur : Vous n'êtes pas autorisé à supprimer ce contenu.", 401);
+        }
+
         if (!$memory) {
             return $this->json(
                 "Erreur : Le souvenir n'existe pas",
                 404
             );
         }
+
         $entityManager->remove($memory);
         $entityManager->flush();
 
