@@ -230,7 +230,7 @@ class UserController extends AbstractController
         }
         $entityManager->remove($user);
         $entityManager->flush();
-
+s
         return new Response('Utilisateur supprimé', 200);
     }
 }
