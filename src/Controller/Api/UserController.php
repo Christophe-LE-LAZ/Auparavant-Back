@@ -177,6 +177,13 @@ class UserController extends AbstractController
                 "Erreur : L'utilisateur n'existe pas", 404
             );
         }
+
+        $jsonContent = $request->getContent();
+        $data = json_decode($jsonContent, true);
+        if (isset($data['roles'])) {
+        return $this->json("Erreur : La modification du champ 'rôles' n'est pas autorisée.", 403);
+        }
+
         // Si l'utilisateur existe, on récupère et modifie les données en JSON, on envoie la requête et on sauvegarde en BDD avec un code 201.
         $serializer->deserialize($request->getContent(), User::class, 'json', ['object_to_populate'=>$user]);
         $user->setUpdatedAt(new DateTimeImmutable());
