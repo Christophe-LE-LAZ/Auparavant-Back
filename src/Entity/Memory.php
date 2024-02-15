@@ -18,7 +18,7 @@ class Memory
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_memory', 'get_memory_id'])]
+    #[Groups(['get_memory'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
@@ -68,7 +68,7 @@ class Memory
     private ?Location $location = null;
 
     #[ORM\OneToMany(mappedBy: 'memory', targetEntity: Picture::class, orphanRemoval: true)]
-    #[Groups(['get_memory'])]
+    #[Groups(['get_memory', 'get_picture'])]
     private Collection $picture;
 
     #[ORM\ManyToOne(inversedBy: 'memories')]

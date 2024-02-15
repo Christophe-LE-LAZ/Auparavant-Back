@@ -34,8 +34,10 @@ class Picture
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'picture', cascade: ['persist'])]
+    
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['get_memory_id'])]
+    
+
     private ?Memory $memory = null;
 
    
