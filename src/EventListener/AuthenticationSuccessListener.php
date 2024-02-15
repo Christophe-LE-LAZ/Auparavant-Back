@@ -25,6 +25,7 @@ class AuthenticationSuccessListener
             'id' => $user->getId(),
             'username' => $user->getFirstname(),
             'lastname' => $user->getLastname(),
+            'email' => $user->getEmail(),
         );
 
         $event->setData($data);
