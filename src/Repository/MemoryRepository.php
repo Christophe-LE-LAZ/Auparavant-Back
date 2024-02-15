@@ -30,6 +30,16 @@ class MemoryRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByUserId($userId)
+    {
+        return $this->createQueryBuilder('memory')
+            ->join('memory.user', 'user')
+            ->where('user.id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Memory[] Returns an array of Memory objects
 //     */
