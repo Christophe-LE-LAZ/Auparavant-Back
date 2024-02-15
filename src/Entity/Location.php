@@ -103,7 +103,6 @@ class Location
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Place::class, orphanRemoval: true)]
     private Collection $places;
 
-
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();

@@ -38,7 +38,6 @@ class Picture
 
     private ?Memory $memory = null;
 
-
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
