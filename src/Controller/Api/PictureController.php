@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Memory;
 use App\Entity\Picture;
 use OpenApi\Attributes as OA;
 use App\Repository\MemoryRepository;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * This controller groups together all the methods that manage locations.
@@ -156,6 +158,31 @@ class PictureController extends AbstractController
         $entityManager->flush();
 
         return $this->json(['picture' => $picture, 'message' => 'Photo enregistrée'], Response::HTTP_CREATED, [], ['groups' => ['get_picture', 'get_memory_id']]);
+    }
+
+    /**
+     * @Route("/uploadFile", name="upload", methods={"POST"})
+     */
+    #[Route('/api/uploadFile/{id}', methods: ['POST'])]
+    public function upload(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager)
+    {
+        $picture = $request->files->get('file');
+
+				// enregistrement de l'image dans le dossier public du serveur
+				// paramas->get('public') =>  va chercher dans services.yaml la variable public
+        $picture->move($params->get('images_directory'), $picture->getClientOriginalName());
+
+				
+        // on ajoute uniqid() afin de ne pas avoir 2 fichiers avec le même nom
+        $newFilename = uniqid().'.'. $picture->getClientOriginalName();
+        // ne pas oublier d'ajouter l'url de l'image dans l'entitée aproprié
+				// $entity est l'entity qui doit recevoir votre image
+				$memory->setMainPicture($newFilename);
+                $entityManager->flush();
+
+        return $this->json([
+            'message' => 'Image uploaded successfully.'
+        ]);
     }
 
     /**
