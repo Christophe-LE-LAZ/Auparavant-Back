@@ -50,7 +50,7 @@ class MemoryController extends AbstractController
         description: 'Returns the memory list',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user'])),
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture'])),
             example: [
                 [
                     "id" => 1,
@@ -125,7 +125,7 @@ class MemoryController extends AbstractController
     public function index(MemoryRepository $memoryRepository)
     {
         $memories = $memoryRepository->findAll();
-
+      
         return $this->json($memories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 
@@ -142,7 +142,7 @@ class MemoryController extends AbstractController
         description: 'Returns a single memory',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user'])),
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture'])),
             example: [
                 [
                     "id" => 1,
@@ -217,7 +217,7 @@ class MemoryController extends AbstractController
         description: 'Returns the latest three memories',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user'])),
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture'])),
             example: [
                 [
                     "id" => 8,
@@ -337,7 +337,7 @@ class MemoryController extends AbstractController
             $latestMemories,
             200,
             [],
-            ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user']]
+            ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]
         );
     }
 
