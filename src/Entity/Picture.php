@@ -37,8 +37,7 @@ class Picture
     
 
     private ?Memory $memory = null;
-s
-   
+
 
     public function __construct()
     {
