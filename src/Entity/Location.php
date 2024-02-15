@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Place;
+use App\Entity\Memory;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -100,7 +102,6 @@ class Location
 
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Place::class, orphanRemoval: true)]
     private Collection $places;
-
 
     public function __construct()
     {

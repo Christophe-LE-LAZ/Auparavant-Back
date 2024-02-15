@@ -18,7 +18,7 @@ class Memory
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_memory', 'get_memory_id'])]
+    #[Groups(['get_memory'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
@@ -60,7 +60,6 @@ class Memory
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
-
    
     #[ORM\ManyToOne(inversedBy: 'memories')]
     #[ORM\JoinColumn(nullable: false)]

@@ -8,13 +8,20 @@ use OpenApi\Attributes as OA;
 use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * This controller groups together all the methods that manage places.
+ * A first one displays all places.
+ * A second one displays a single place by its id.
+ * A third one adds a new place.
+ * A fourth one updates a place by its id.
+ * A fifth and last one deletes a place by its id.
+ */
 class PlaceController extends AbstractController
 {
     /**

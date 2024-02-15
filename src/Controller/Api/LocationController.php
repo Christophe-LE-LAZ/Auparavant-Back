@@ -13,12 +13,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Nelmio\ApiDocBundle\Annotation\Security;
 
+/**
+ * This controller groups together all the methods that manage locations.
+ * One method displays all locations.
+ * One displays a single location by its id.
+ * Another one creates a new location.
+ * A last but one updates a location by its id.
+ * A last one deletes a location by its id.
+ */
 class LocationController extends AbstractController
 {
     /**
      * Display all locations
+     * 
      * @param LocationRepository $locationRepository
      * @return Response
      */
@@ -65,6 +73,7 @@ class LocationController extends AbstractController
 
     /**
      * Display a single location by its id
+     * 
      * @param Location $location
      * @return Response
      */
@@ -111,6 +120,7 @@ class LocationController extends AbstractController
 
     /**
      * Create a new location
+     * 
      * @Nelmio\Areas({"internal"})
      * @param SerializerInterface $serializer
      * @param EntityManagerInterface $entityManager
@@ -167,6 +177,7 @@ class LocationController extends AbstractController
 
     /**
      * Update a location by its id
+     * 
      * @param Location $location
      * @param Request $request
      * @param SerializerInterface $serializer
