@@ -21,9 +21,10 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  * A first one displays all pictures.
  * A second one displays a single picture by its id.
  * A third one adds a new picture.
- * A fourth one uploads a new picture.
- * A fifth one updates a picture by its id.
- * A sixth and last one deletes a picture by its id.
+ * A fourth one uploads the main memory picture.
+ * A fifth one uploads addditional memory pictures.
+ * A sixth one updates a picture by its id.
+ * A seventh and last one deletes a picture by its id.
  */
 class PictureController extends AbstractController
 {
@@ -175,7 +176,7 @@ class PictureController extends AbstractController
     }
 
     /**
-     * Uploads a new picture
+     * Upload the main memory picture
      * 
      * @param Memory $memory
      * @param Request $request
@@ -184,8 +185,8 @@ class PictureController extends AbstractController
      * @return Response
      * @Route("/uploadFile", name="upload", methods={"POST"})
      */
-    #[Route('/api/uploadFile/{id}', methods: ['POST'])]
-    public function upload(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager)
+    #[Route('/api/secure/uploadFile/{id<\d+>}', methods: ['POST'])]
+    public function uploadMainPicture(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager)
     {
         $picture = $request->files->get('file');
 
@@ -202,7 +203,21 @@ class PictureController extends AbstractController
         $entityManager->flush();
 
         return $this->json([
-            'message' => 'Image téléchargée avec succès.'
+            'message' => 'Image téléchargée et associée au souvenir avec succès.'
+        ]);
+    }
+
+    /**
+     * Upload additional memory pictures
+     * 
+     * @param
+     * @return Response
+     */
+    #[Route('api/', methods: ['POST'])]
+    public function uploadAddditionalPictures(): Response
+    {
+        return $this->json([
+            'message' => 'Images suplémentaires téléchargées avec succès.'
         ]);
     }
 

@@ -458,23 +458,11 @@ class MemoryController extends AbstractController
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
             ->setPictureDate(new DateTime($memoryData['picture_date']))
-            ->setMainPicture($memoryData['main_picture'])
             ->setUser($user)
             ->setLocation($location)
             ->setPlace($place);
 
         $entityManager->persist($newMemory);
-
-
-        // additional image management //
-        if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
-            foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {
-                $additionalPicture = (new Picture())
-                    ->setPicture($additionalPictureUrl)
-                    ->setMemory($newMemory);
-                $entityManager->persist($additionalPicture);
-            }
-        }
         $entityManager->flush();
 
         return $this->json(['memory' => $newMemory, 'message' => 'Souvenir créé'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
@@ -568,23 +556,12 @@ class MemoryController extends AbstractController
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
             ->setPictureDate(new DateTime($memoryData['picture_date']))
-            ->setMainPicture($memoryData['main_picture'])
             ->setUser($user)
             ->setPlace($newPlace)
             ->setLocation($newLocation);
 
 
         $entityManager->persist($newMemory);
-
-        // additional picture management //
-        if (isset($memoryData['additional_pictures']) && is_array($memoryData['additional_pictures'])) {
-            foreach ($memoryData['additional_pictures'] as $additionalPictureUrl) {
-                $additionalPicture = (new Picture())
-                    ->setPicture($additionalPictureUrl)
-                    ->setMemory($newMemory);
-                $entityManager->persist($additionalPicture);
-            }
-        }
         $entityManager->flush();
 
         return $this->json(['memory' => $newMemory, 'message' => 'Souvenir créé'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
