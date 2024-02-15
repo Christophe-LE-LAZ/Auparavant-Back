@@ -194,7 +194,7 @@ class PictureController extends AbstractController
         description: 'save the modified image associated with the memory',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture'])),
+            items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture', 'get_memory'])),
             example: [
                           [
                               "id" => 1,
