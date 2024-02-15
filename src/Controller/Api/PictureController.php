@@ -217,7 +217,7 @@ class PictureController extends AbstractController
     public function uploadAddditionalPictures(): Response
     {
         return $this->json([
-            'message' => 'Images suplémentaires téléchargées avec succès.'
+            'message' => 'Image(s) suplémentaire(s) téléchargée(s) et associée(s) au souvenir avec succès.'
         ]);
     }
 
