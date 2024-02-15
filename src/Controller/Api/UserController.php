@@ -156,7 +156,7 @@ class UserController extends AbstractController
             $contributions,
             200,
             [],
-            ['groups' => ['get_memory']]
+            ['groups' => ['get_memory', 'get_location', 'get_picture', 'get_user', 'get_place']]
         );
     }
 
