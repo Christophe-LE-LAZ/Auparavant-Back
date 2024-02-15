@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
- * This controller groups together all the methods that manage locations.
+ * This controller groups together all the methods that manage pictures.
  * A first one displays all pictures.
  * A second one displays a single picture by its id.
  * A third one adds a new picture.
