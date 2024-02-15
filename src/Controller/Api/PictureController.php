@@ -119,7 +119,7 @@ class PictureController extends AbstractController
             description: 'save the image associated with the memory',
             content: new OA\JsonContent(
                 type: 'array',
-                items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture'])),
+                items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture', 'get_memory_id'])),
                 example: [
                               [
                                   "id" => 1,
@@ -148,7 +148,7 @@ class PictureController extends AbstractController
         $entityManager->persist($picture);
         $entityManager->flush();
 
-        return $this->json(['picture' => $picture, 'message' => 'Photo enregistrée'], Response::HTTP_CREATED, [], ['groups' => ['get_picture', 'get_memory']]);
+        return $this->json(['picture' => $picture, 'message' => 'Photo enregistrée'], Response::HTTP_CREATED, [], ['groups' => ['get_picture', 'get_memory_id']]);
     }
 
     /**
