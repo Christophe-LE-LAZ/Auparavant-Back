@@ -27,13 +27,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * This controller groups together all the methods that manage memories.
  * One method displays all memories.
- * One displays only one.
+ * One displays a single memory.
  * One displays the last and latest three memories created.
  * Two methods create a memory:
- * -> One creates a memory from an existing locality and creates the name and type of the place if the existing ones are not suitable for this memory.
- * -> Another creates a memory and a new locality as well as the name and type of the corresponding place.
- * One updates a memory with its id by adding, modifying or deleting additional photos.
- * One last deletes a memory by its id and the data assigned to it.
+ * -> The first one creates a memory from an existing locality and creates the name and type of the place if the existing ones are not suitable for this memory.
+ * -> The second one creates a memory and a new locality as well as the name and type of the corresponding place.
+ * Another one updates a memory with its identifier by adding, modifying or deleting additional photos.
+ * A final one deletes a memory by its identifier and the data assigned to it.
  */
 class MemoryController extends AbstractController
 {

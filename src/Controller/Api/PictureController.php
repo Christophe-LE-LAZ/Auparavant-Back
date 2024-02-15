@@ -15,6 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * This controller groups together all the methods that manage locations.
+ * A first one displays all pictures.
+ * A second one displays a single picture by its id.
+ * A third one adds a new picture.
+ * A fourth one updates a picture by its id.
+ * A fifth and last one deletes a picture by its id.
+ */
 class PictureController extends AbstractController
 {
     /**
