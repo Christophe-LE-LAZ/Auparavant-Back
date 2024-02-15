@@ -60,7 +60,6 @@ class Memory
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
-
    
     #[ORM\ManyToOne(inversedBy: 'memories')]
     #[ORM\JoinColumn(nullable: false)]
