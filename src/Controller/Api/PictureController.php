@@ -21,8 +21,9 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  * A first one displays all pictures.
  * A second one displays a single picture by its id.
  * A third one adds a new picture.
- * A fourth one updates a picture by its id.
- * A fifth and last one deletes a picture by its id.
+ * A fourth one uploads a new picture.
+ * A fifth one updates a picture by its id.
+ * A sixth and last one deletes a picture by its id.
  */
 class PictureController extends AbstractController
 {
@@ -53,8 +54,9 @@ class PictureController extends AbstractController
                         "id" => 2
                     ]
                 ],
-                ]
-    ))]
+            ]
+        )
+    )]
     #[OA\Tag(name: 'picture')]
     public function index(PictureRepository $pictureRepository)
     {
@@ -82,9 +84,10 @@ class PictureController extends AbstractController
                     "memory" => [
                         "id" => 2
                     ]
-                ] 
                 ]
-    ))]
+            ]
+        )
+    )]
     #[OA\Parameter(
         name: "id",
         in: "path",
@@ -93,16 +96,21 @@ class PictureController extends AbstractController
         schema: new OA\Schema(type: 'integer')
     )]
     #[OA\Tag(name: 'picture')]
-    public function read(Picture $picture = null )
+    public function read(Picture $picture = null)
     {
         if (!$picture) {
             return $this->json(
-                "Erreur : Photo inexistante", 404
+                "Erreur : Photo inexistante",
+                404
             );
         }
 
-        return $this->json($picture, 200, [], ['groups' => ['get_picture', 'get_memory_id']]
-    );
+        return $this->json(
+            $picture,
+            200,
+            [],
+            ['groups' => ['get_picture', 'get_memory_id']]
+        );
     }
 
     /**
@@ -113,46 +121,52 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/create/picture', methods: ['POST'])]
-    #[OA\RequestBody(  
-        description: 'Exemple of data to be supplied to create the picture',    
+    #[OA\RequestBody(
+        description: 'Exemple of data to be supplied to create the picture',
         content: new OA\JsonContent(
             properties: [
-                new OA\Property(property: 'picture', type:'string', example:'photo.jpg'),
-                new OA\Property(property:"memory", type:"object", properties:[
-                new OA\Property(property:"id", type:"integer", example: 9)
+                new OA\Property(property: 'picture', type: 'string', example: 'photo.jpg'),
+                new OA\Property(
+                    property: "memory",
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "id", type: "integer", example: 9)
+                    ]
+                )
             ]
-        )]
-    ))]
+        )
+    )]
     #[OA\Response(
-            response: 201,
-            description: 'save the image associated with the memory',
-            content: new OA\JsonContent(
-                type: 'array',
-                items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture', 'get_memory_id'])),
-                example: [
-                              [
-                                  "id" => 1,
-                                  "picture" => "/pictures/assets/nomdufichier.jpg",
-                                  "memory" => [
-                                      "id" => 1
-                                  ]
-                              ]
+        response: 201,
+        description: 'save the image associated with the memory',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture', 'get_memory_id'])),
+            example: [
+                [
+                    "id" => 1,
+                    "picture" => "/pictures/assets/nomdufichier.jpg",
+                    "memory" => [
+                        "id" => 1
+                    ]
                 ]
-        ))]
+            ]
+        )
+    )]
     #[OA\Tag(name: 'picture')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request, MemoryRepository $memoryRepository)
     {
         $jsonData = $request->getContent();
         $data = $serializer->decode($jsonData, 'json');
-    
+
         $memoryId = $data['memory']['id'];
         $memory = $memoryRepository->find($memoryId);
         if (!$memory) {
             return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
         }
         $picture = (new Picture())
-        ->setMemory($memory)
-        ->setPicture($data['picture']);
+            ->setMemory($memory)
+            ->setPicture($data['picture']);
 
         $entityManager->persist($picture);
         $entityManager->flush();
@@ -161,6 +175,13 @@ class PictureController extends AbstractController
     }
 
     /**
+     * Uploads a new picture
+     * 
+     * @param Memory $memory
+     * @param Request $request
+     * @param ParameterBagInterface $params
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      * @Route("/uploadFile", name="upload", methods={"POST"})
      */
     #[Route('/api/uploadFile/{id}', methods: ['POST'])]
@@ -168,20 +189,20 @@ class PictureController extends AbstractController
     {
         $picture = $request->files->get('file');
 
-				// enregistrement de l'image dans le dossier public du serveur
-				// paramas->get('public') =>  va chercher dans services.yaml la variable public
+        // enregistrement de l'image dans le dossier public du serveur
+        // paramas->get('public') =>  va chercher dans services.yaml la variable public
         $picture->move($params->get('images_directory'), $picture->getClientOriginalName());
 
-				
+
         // on ajoute uniqid() afin de ne pas avoir 2 fichiers avec le même nom
-        $newFilename = uniqid().'.'. $picture->getClientOriginalName();
+        $newFilename = uniqid() . '.' . $picture->getClientOriginalName();
         // ne pas oublier d'ajouter l'url de l'image dans l'entitée aproprié
-				// $entity est l'entity qui doit recevoir votre image
-				$memory->setMainPicture($newFilename);
-                $entityManager->flush();
+        // $entity est l'entity qui doit recevoir votre image
+        $memory->setMainPicture($newFilename);
+        $entityManager->flush();
 
         return $this->json([
-            'message' => 'Image uploaded successfully.'
+            'message' => 'Image téléchargée avec succès.'
         ]);
     }
 
@@ -196,7 +217,6 @@ class PictureController extends AbstractController
      * @param MemoryRepository $memoryRepository
      * @return Response
      */
-
     #[Route('/api/secure/update/picture/{id<\d+>}', methods: ['PUT'])]
     #[OA\Parameter(
         name: "id",
@@ -205,17 +225,22 @@ class PictureController extends AbstractController
         description: "ID of the memory",
         schema: new OA\Schema(type: 'integer')
     )]
-    #[OA\RequestBody(  
-        description: 'Exemple of data to be supplied to update the picture',    
+    #[OA\RequestBody(
+        description: 'Exemple of data to be supplied to update the picture',
         content: new OA\JsonContent(
             properties: [
-                new OA\Property(property: 'id', type:'integer', example:'20'),
-                new OA\Property(property: 'picture', type:'string', example:'photo.jpg'),
-                new OA\Property(property:"memory", type:"object", properties:[
-                new OA\Property(property:"id", type:"integer", example: 9)
+                new OA\Property(property: 'id', type: 'integer', example: '20'),
+                new OA\Property(property: 'picture', type: 'string', example: 'photo.jpg'),
+                new OA\Property(
+                    property: "memory",
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "id", type: "integer", example: 9)
+                    ]
+                )
             ]
-        )]
-    ))]
+        )
+    )]
     #[OA\Response(
         response: 200,
         description: 'save the modified image associated with the memory',
@@ -223,15 +248,16 @@ class PictureController extends AbstractController
             type: 'array',
             items: new OA\Items(ref: new Model(type: Picture::class, groups: ['get_picture', 'get_memory'])),
             example: [
-                          [
-                              "id" => 1,
-                              "picture" => "/pictures/assets/nomdufichier.jpg",
-                              "memory" => [
-                                  "id" => 1
-                              ]
-                          ]
+                [
+                    "id" => 1,
+                    "picture" => "/pictures/assets/nomdufichier.jpg",
+                    "memory" => [
+                        "id" => 1
+                    ]
+                ]
             ]
-    ))]
+        )
+    )]
     #[OA\Tag(name: 'picture')]
     public function update(Picture $picture, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
     {
@@ -244,22 +270,22 @@ class PictureController extends AbstractController
         $memory = $memoryRepository->find($memoryId);
         if ($user !== $memory->getUser()) {
             return $this->json("Erreur : Vous n'êtes pas autorisé à modifier cette photo.", 401);
-        
-        if (!$picture) {
-            return $this->json("Erreur : La photo n'existe pas", 404);
-        }
-        
-    
-        if (!$memory) {
-            return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
-        }
-        $picture->setMemory($memory);
-        $picture->setPicture($data['picture']);
 
-    $entityManager->flush();
-    return $this->json(['picture' => $picture, 'message' => 'La photo a été mise à jour'], Response::HTTP_OK, [], ['groups' => ['get_picture','get_memory']]);
+            if (!$picture) {
+                return $this->json("Erreur : La photo n'existe pas", 404);
+            }
+
+
+            if (!$memory) {
+                return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
+            }
+            $picture->setMemory($memory);
+            $picture->setPicture($data['picture']);
+
+            $entityManager->flush();
+            return $this->json(['picture' => $picture, 'message' => 'La photo a été mise à jour'], Response::HTTP_OK, [], ['groups' => ['get_picture', 'get_memory']]);
+        }
     }
-}
 
 
     /**
@@ -295,9 +321,10 @@ class PictureController extends AbstractController
             return $this->json("Erreur : Vous n'êtes pas autorisé à supprimer cette photo.", 401);
         }
 
-        if(!$picture) {
+        if (!$picture) {
             return $this->json(
-                "Erreur : La photo n'existe pas", 404
+                "Erreur : La photo n'existe pas",
+                404
             );
         }
         $entityManager->remove($picture);
