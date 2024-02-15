@@ -133,17 +133,25 @@ class UserController extends AbstractController
      * @return Response
      * 
      */
-    #[Route('/api/{id<\d+>}/my-contributions', methods: ['GET'])]
+    #[Route('/api/secure/{id<\d+>}/my-contributions', methods: ['GET'])]
     public function mine(MemoryRepository $memoryRepository, Request $request): Response
     {
         $userId = $request->attributes->get('id');
+
+        // Fetch contributions directly filtered by user ID
         $contributions = $memoryRepository->findByUserId($userId);
 
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
-        if ($user !== $contributions->getUser()) {
-            return $this->json("Erreur : Vous n'êtes pas autorisé à accéder à ce contenu.", 401);
+
+        // Check if the user is the creator of all contributions
+        foreach ($contributions as $contribution) {
+            // Check if contribution's user is not null before accessing its ID
+            if ($contribution->getUser() !== null && $user !== null && $user->getId() !== $contribution->getUser()->getId()) {
+                return $this->json("Erreur : Vous n'êtes pas autorisé à accéder à ce contenu.", 401);
+            }
         }
+
         return $this->json(
             $contributions,
             200,
