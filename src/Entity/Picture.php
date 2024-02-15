@@ -5,8 +5,6 @@ namespace App\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PictureRepository;
-use Symfony\Component\HttpFoundation\File\File;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Memory;
@@ -34,7 +32,7 @@ class Picture
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'picture', cascade: ['persist'])]
-    
+    // #[Groups(['get_picture'])]
     #[ORM\JoinColumn(nullable: false)]
     
 

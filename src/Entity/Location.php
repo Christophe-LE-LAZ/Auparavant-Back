@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Place;
+use App\Entity\Memory;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
