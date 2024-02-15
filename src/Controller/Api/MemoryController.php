@@ -125,7 +125,7 @@ class MemoryController extends AbstractController
     public function index(MemoryRepository $memoryRepository)
     {
         $memories = $memoryRepository->findAll();
-
+      
         return $this->json($memories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 

@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\Picture;
 
 #[ORM\Entity(repositoryClass: MemoryRepository::class)]
 class Memory
@@ -67,6 +68,7 @@ class Memory
     private ?Location $location = null;
 
     #[ORM\OneToMany(mappedBy: 'memory', targetEntity: Picture::class, orphanRemoval: true)]
+    #[Groups(['get_memory'])]
     private Collection $picture;
 
     #[ORM\ManyToOne(inversedBy: 'memories')]
