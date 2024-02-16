@@ -35,13 +35,6 @@ class MemoryType extends AbstractType
                 ]
             )
             ->add(
-                'main_picture',
-                UrlType::class,
-                [
-                    'label' => 'Photo principale : '
-                ]
-            )
-            ->add(
                 'memory_date',
                 DateType::class,
                 [

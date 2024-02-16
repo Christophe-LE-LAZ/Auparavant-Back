@@ -17,12 +17,19 @@ class PictureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('picture', FileType::class, [
-            'label' => 'Photo :',
-            'mapped' => false,
-            'required' => true,
-            
-    ])
+            ->add(
+                'main_picture',
+                UrlType::class,
+                [
+                    'label' => 'Photo principale : '
+                ]
+            )
+            ->add('picture', FileType::class, [
+                'label' => 'Photo :',
+                'mapped' => false,
+                'required' => true,
+
+            ])
             ->add(
                 'memory',
                 EntityType::class,
