@@ -17,13 +17,13 @@
                 <th>Contenu</th>
                 <td>{{ memory.content }}</td>
             </tr>
-            {# <tr>
-                <th>Photographie principale</th>
-                <td>{{ picture.mainPicture }}</td>
-            </tr> #}
             <tr>
-                <th>Date du souvenir</th>
-                <td>{{ memory.memoryDate ? memory.memoryDate|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Photographie principale</th>
+                <td>{{ memory.mainPicture }}</td>
+            </tr>
+            <tr>
+                <th>Date de la photographie</th>
+                <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Nom et type de lieu</th>
@@ -34,7 +34,7 @@
                 <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
             </tr>
             <tr>
-                <th>Utilisateur</th>
+                <th>PUtilisateur</th>
                 <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
             </tr>
             {# <tr>
