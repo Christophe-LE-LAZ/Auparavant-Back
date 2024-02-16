@@ -189,6 +189,30 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/upload_update/main_picture/{id<\d+>}', methods: ['POST'])]
+    #[OA\RequestBody(
+        description: 'Exemple of data to be supplied to upload or update the picture',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'picture', type: 'file', example: 'photo.jpg'),
+                new OA\Property(
+                    property: "memory",
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "id", type: "integer", example: 9)
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Saves the image associated with the memory',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_picture', 'get_place', 'get_user']))
+        )
+    )]
+    #[OA\Tag(name: 'picture')]
     public function upload_update_main_picture(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager, LocationRepository $locationRepository, PlaceRepository $placeRepository)
     {
         /** @var \App\Entity\User $user */
