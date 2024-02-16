@@ -185,7 +185,7 @@ class PictureController extends AbstractController
      * @return Response
      * @Route("/uploadFile", name="upload", methods={"POST"})
      */
-    #[Route('/api/secure/uploadFile/{id<\d+>}', methods: ['POST'])]
+    #[Route('/api/secure/uploadFile/Main/{id<\d+>}', methods: ['POST'])]
     public function uploadMainPicture(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager)
     {
         $picture = $request->files->get('file');
@@ -213,7 +213,7 @@ class PictureController extends AbstractController
      * @param
      * @return Response
      */
-    #[Route('api/', methods: ['POST'])]
+    #[Route('api/secure/uploadFile/Additional/{id<\d+>}', methods: ['POST'])]
     public function uploadAddditionalPictures(): Response
     {
         return $this->json([
