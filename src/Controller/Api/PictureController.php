@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\Memory;
 use App\Entity\Picture;
+use App\Service\FileUploader;
 use OpenApi\Attributes as OA;
 use App\Repository\PlaceRepository;
 use App\Repository\MemoryRepository;
@@ -27,6 +28,15 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  */
 class PictureController extends AbstractController
 {
+
+    private $fileUploader;
+
+    public function __construct(FileUploader $fileUploader)
+    {
+        $this->fileUploader = $fileUploader;
+    }
+
+
     /**
      * Display all additional pictures
      * @param PictureRepository $ppictureRepository
@@ -200,15 +210,14 @@ class PictureController extends AbstractController
         }
         // Continue with the code to handle the case when a new picture is uploaded
 
-        // on ajoute uniqid() afin de ne pas avoir 2 fichiers avec le même nom
-        $newFilename = uniqid() . '.' . $picture->getClientOriginalExtension();
+        if ($memory->getMainPicture()) {
+            $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
+        }
 
-        // enregistrement de l'image dans le dossier public du serveur
-        // params->get('public') =>  va chercher dans services.yaml la variable public
-        $picture->move($params->get('images_directory'), $newFilename);
+        
+        $newFilename = $this->fileUploader->uploadImage($picture);
 
-        // ne pas oublier d'ajouter l'url de l'image dans l'entité appropriée
-        // $entity est l'entity qui doit recevoir votre image
+        
         $memory->setMainPicture($newFilename);
         $entityManager->flush();
 
@@ -222,11 +231,38 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('api/secure/upload/additional_pictures/{id<\d+>}', methods: ['POST'])]
-    public function upload_update_additional_pictures(): Response
+    public function upload_update_additional_pictures(Memory $memory, Request $request, ParameterBagInterface $params,FileUploader $fileUploader, EntityManagerInterface $entityManager): Response
     {
-        return $this->json([
-            'message' => 'Image(s) supplémentaire(s) téléchargée(s) et associée(s) au souvenir avec succès.'
-        ]);
+
+         /** @var \App\Entity\User $user */
+         $user = $this->getUser();
+
+         if ($user !== $memory->getUser()) {
+             return $this->json("Erreur : Vous n'êtes pas autorisé à ajouter de photo sur ce souvenir.", 401);
+         }
+         // Retrieve the uploaded picture file from the request
+         $pictures = $request->files->get('additional_pictures');
+         dd($pictures);
+
+        $newPictures = [];
+
+        foreach ($pictures as $picture) {
+
+        $newFilename = $this->fileUploader->uploadImage($picture);
+
+        // ne pas oublier d'ajouter l'url de l'image dans l'entité appropriée
+        // $entity est l'entity qui doit recevoir votre image
+        $newPicture = (new Picture())
+        ->setPicture($newFilename)
+        ->setMemory($memory);
+        $entityManager->persist($newPicture);
+        $newPictures[]= $newPicture;
+        }
+        $entityManager->flush();
+
+
+        return $this->json(['pictures' => $newPictures, 'message' => 'Image(s) téléchargée(s) et associée(s) au souvenir avec succès.'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
+
     }
 
     /**
@@ -251,7 +287,7 @@ class PictureController extends AbstractController
         schema: new OA\Schema(type: 'integer')
     )]
     #[OA\Tag(name: 'picture')]
-    public function delete(Picture $picture, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository): Response
+    public function delete(Picture $picture, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository, ParameterBagInterface $params, FileUploader $fileUploader): Response
     {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
@@ -268,6 +304,8 @@ class PictureController extends AbstractController
                 404
             );
         }
+
+        $fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
         $entityManager->remove($picture);
         $entityManager->flush();
 

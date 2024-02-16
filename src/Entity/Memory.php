@@ -46,8 +46,8 @@ class Memory
     private ?\DateTimeInterface $picture_date = null;
 
     #[ORM\Column(length: 2000)]
-    #[Assert\Url(
-        message: 'L\'url {{ value }} n\'est pas valide',
+    #[Assert\Image(
+        mimeTypesMessage: 'Veuillez télécharger une image valide.'
     )]
     #[Groups(['get_memory'])]
     private ?string $main_picture = null;

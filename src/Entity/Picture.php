@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
+use App\Entity\Memory;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PictureRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Entity\Memory;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
 class Picture
@@ -19,8 +19,8 @@ class Picture
     private ?int $id = null;
 
     #[ORM\Column(length: 2000, nullable: true)]
-    #[Assert\Url(
-        message: 'L\'url {{ value }} n\'est pas valide',
+    #[Image(
+        mimeTypesMessage: 'Veuillez télécharger une image valide.'
     )]
     #[Groups(['get_picture'])]
     private ?string $picture = null;
