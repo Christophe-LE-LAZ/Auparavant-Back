@@ -45,7 +45,7 @@ class Memory
     #[Groups(['get_memory'])]
     private ?\DateTimeInterface $picture_date = null;
 
-    #[ORM\Column(length: 2000)]
+    #[ORM\Column(length: 2000, nullable: true)]
     #[Assert\Url(
         message: 'L\'url {{ value }} n\'est pas valide',
     )]
