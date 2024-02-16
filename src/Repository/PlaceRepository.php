@@ -21,6 +21,19 @@ class PlaceRepository extends ServiceEntityRepository
         parent::__construct($registry, Place::class);
     }
 
+    public function findMemoriesWithPlace(Place $place, int $memoryId): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p, m')
+            ->leftJoin('p.memories', 'm')
+            ->where('p = :place')
+            ->andWhere('m.id != :memoryId')  // Exclure le souvenir actuel
+            ->setParameter('place', $place)
+            ->setParameter('memoryId', $memoryId)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Place[] Returns an array of Place objects
 //     */

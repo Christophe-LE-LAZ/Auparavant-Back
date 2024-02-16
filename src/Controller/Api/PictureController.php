@@ -18,18 +18,16 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * This controller groups together all the methods that manage pictures.
- * A first one displays all pictures.
- * A second one displays a single picture by its id.
- * A third one adds a new picture.
- * A fourth one uploads the main memory picture.
- * A fifth one uploads addditional memory pictures.
- * A sixth one updates a picture by its id.
- * A seventh and last one deletes a picture by its id.
+ * A first one displays all additional pictures.
+ * A second one displays a single additional picture by its id.
+ * A third one uploads or updates the main memory picture.
+ * A fourth one uploads or updates (an) addditional memory picture(s).
+ * A fifth and last one deletes a additional picture by its id.
  */
 class PictureController extends AbstractController
 {
     /**
-     * Display all pictures
+     * Display all additional pictures
      * @param PictureRepository $ppictureRepository
      * @return Response
      */
@@ -67,7 +65,7 @@ class PictureController extends AbstractController
     }
 
     /**
-     * Display a single picture by its id
+     * Display a single additional picture by its id
      * @param Picture $picture
      * @return Response
      */
@@ -114,6 +112,7 @@ class PictureController extends AbstractController
         );
     }
 
+    //!Method doomed to disappear________________________
     /**
      * Create a new picture
      * @param SerializerInterface $serializer
@@ -174,33 +173,80 @@ class PictureController extends AbstractController
 
         return $this->json(['picture' => $picture, 'message' => 'Photo enregistrée'], Response::HTTP_CREATED, [], ['groups' => ['get_picture', 'get_memory_id']]);
     }
+    //!____________________________________________________
 
     /**
-     * Upload the main memory picture
+     * Upload or update the main memory picture
      * 
      * @param Memory $memory
      * @param Request $request
      * @param ParameterBagInterface $params
      * @param EntityManagerInterface $entityManager
+     * @param LocationRepository $locationRepository
+     * @param PlaceRepository $placeRepository
      * @return Response
-     * @Route("/uploadFile", name="upload", methods={"POST"})
      */
-    #[Route('/api/secure/uploadFile/Main/{id<\d+>}', methods: ['POST'])]
-    public function uploadMainPicture(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager)
+    #[Route('/api/secure/upload_update/main_picture/{id<\d+>}', methods: ['POST'])]
+    public function upload_update_main_picture(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager, LocationRepository $locationRepository, PlaceRepository $placeRepository)
     {
-        $picture = $request->files->get('file');
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        if ($user !== $memory->getUser()) {
+            return $this->json("Erreur : Vous n'êtes pas autorisé à ajouter de photo sur ce souvenir.", 401);
+        }
+        $picture = $request->files->get('main_picture');
+
+        if ($picture === null) {
+
+            // If the memory had a main picture, keep it and update the memory
+            if ($memory->getMainPicture()) {
+                $entityManager->flush();
+                return $this->json([
+                    'message' => 'Le souvenir a bien été mis à jour.'
+                ]);
+            }
+
+            // Check if related entities (Location and Place) need to be removed
+            $location = $memory->getLocation();
+            $place = $memory->getPlace();
+
+            $otherMemoriesWithLocation = $locationRepository->findMemoriesWithLocation($location, $memory->getId());
+            $otherMemoriesWithPlace = $placeRepository->findMemoriesWithPlace($place, $memory->getId());
+
+            if (empty($otherMemoriesWithLocation) && empty($otherMemoriesWithPlace)) {
+                // Supprime la Location, la Place et le Memory s'il n'y a pas d'autres relations
+                $entityManager->remove($place);
+                $entityManager->remove($location);
+                $entityManager->remove($memory);
+                $entityManager->flush();
+            } elseif (empty($otherMemoriesWithLocation)) {
+                // Supprime la Location si elle n'a pas d'autres relations
+                $entityManager->remove($location);
+                $entityManager->remove($memory);
+                $entityManager->flush();
+            } elseif (empty($otherMemoriesWithPlace)) {
+                // Supprime la Place si elle n'a pas d'autres relations
+                $entityManager->remove($place);
+                $entityManager->remove($memory);
+                $entityManager->flush();
+            }
+
+            return $this->json("Erreur : Le souvenir doit contenir une image principale  .", 400);
+        }
 
         // enregistrement de l'image dans le dossier public du serveur
-        // paramas->get('public') =>  va chercher dans services.yaml la variable public
+        // params->get('public') =>  va chercher dans services.yaml la variable public
         $picture->move($params->get('images_directory'), $picture->getClientOriginalName());
 
 
         // on ajoute uniqid() afin de ne pas avoir 2 fichiers avec le même nom
         $newFilename = uniqid() . '.' . $picture->getClientOriginalName();
-        // ne pas oublier d'ajouter l'url de l'image dans l'entitée aproprié
+        // ne pas oublier d'ajouter l'url de l'image dans l'entité appropriée
         // $entity est l'entity qui doit recevoir votre image
         $memory->setMainPicture($newFilename);
         $entityManager->flush();
+
 
         return $this->json([
             'message' => 'Image téléchargée et associée au souvenir avec succès.'
@@ -208,19 +254,20 @@ class PictureController extends AbstractController
     }
 
     /**
-     * Upload additional memory pictures
+     * Upload or update (an/the) additional memory picture(s)
      * 
      * @param
      * @return Response
      */
-    #[Route('api/secure/uploadFile/Additional/{id<\d+>}', methods: ['POST'])]
-    public function uploadAddditionalPictures(): Response
+    #[Route('api/secure/upload/additional_pictures/{id<\d+>}', methods: ['POST'])]
+    public function upload_update_addditional_pictures(): Response
     {
         return $this->json([
             'message' => 'Image(s) suplémentaire(s) téléchargée(s) et associée(s) au souvenir avec succès.'
         ]);
     }
 
+    //!Method doomed to disappear________________________
     /**
      * Update a picture by its id
      * Only accessible to the user who created the memory
@@ -301,10 +348,11 @@ class PictureController extends AbstractController
             return $this->json(['picture' => $picture, 'message' => 'La photo a été mise à jour'], Response::HTTP_OK, [], ['groups' => ['get_picture', 'get_memory']]);
         }
     }
+    //!____________________________________________________
 
 
     /**
-     * Delete a picture by its id
+     * Delete an additional picture by its id
      * Only accessible to the user who created the memory
      * 
      * @param Picture $picture

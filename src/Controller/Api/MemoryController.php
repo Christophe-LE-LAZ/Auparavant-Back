@@ -338,6 +338,7 @@ class MemoryController extends AbstractController
 
     /**
      * Create a new memory
+     * 
      * @param SerializerInterface $serializer
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -455,7 +456,7 @@ class MemoryController extends AbstractController
         $newMemory = (new Memory())
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
-            ->setMainPicture($memoryData['main_picture'])
+            ->setMainPicture('')
             ->setPictureDate(new DateTime($memoryData['picture_date']))
             ->setUser($user)
             ->setLocation($location)
@@ -554,7 +555,7 @@ class MemoryController extends AbstractController
         $newMemory = (new Memory())
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
-            ->setMainPicture($memoryData['main_picture'])
+            ->setMainPicture('')
             ->setPictureDate(new DateTime($memoryData['picture_date']))
             ->setUser($user)
             ->setPlace($newPlace)

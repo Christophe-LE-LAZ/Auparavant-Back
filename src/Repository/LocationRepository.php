@@ -21,6 +21,19 @@ class LocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Location::class);
     }
 
+    public function findMemoriesWithLocation(Location $location, int $memoryId): array
+    {
+        return $this->createQueryBuilder('l')
+            ->select('l, m')
+            ->leftJoin('l.memories', 'm')
+            ->where('l = :location')
+            ->andWhere('m.id != :memoryId')  // Exclure le souvenir actuel
+            ->setParameter('location', $location)
+            ->setParameter('memoryId', $memoryId)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Location[] Returns an array of Location objects
 //     */
