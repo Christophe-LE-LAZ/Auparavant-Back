@@ -43,14 +43,14 @@ class PictureController extends AbstractController
             example: [
                 [
                     "id" => 1,
-                    "picture" => "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c9\/Dome_Panth%C3%A9on_Paris_10.jpg\/1280px-Dome_Panth%C3%A9on_Paris_10.jpg",
+                    "picture" => "fileName.jpg",
                     "memory" => [
                         "id" => 2
                     ]
                 ],
                 [
                     "id" => 2,
-                    "picture" => "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/6\/67\/Dome_Panth%C3%A9on_Paris_16.jpg\/800px-Dome_Panth%C3%A9on_Paris_16.jpg",
+                    "picture" => "fileName.jpg",
                     "memory" => [
                         "id" => 2
                     ]
@@ -81,7 +81,7 @@ class PictureController extends AbstractController
             example: [
                 [
                     "id" => 1,
-                    "picture" => "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/c\/c9\/Dome_Panth%C3%A9on_Paris_10.jpg\/1280px-Dome_Panth%C3%A9on_Paris_10.jpg",
+                    "picture" => "fileName.jpg",
                     "memory" => [
                         "id" => 2
                     ]
@@ -229,7 +229,7 @@ class PictureController extends AbstractController
     public function upload_update_addditional_pictures(): Response
     {
         return $this->json([
-            'message' => 'Image(s) suplémentaire(s) téléchargée(s) et associée(s) au souvenir avec succès.'
+            'message' => 'Image(s) supplémentaire(s) téléchargée(s) et associée(s) au souvenir avec succès.'
         ]);
     }
 
