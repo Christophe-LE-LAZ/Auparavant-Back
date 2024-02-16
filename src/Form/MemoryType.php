@@ -42,7 +42,7 @@ class MemoryType extends AbstractType
                 ]
             )
             ->add(
-                'picture_date',
+                'memory_date',
                 DateType::class,
                 [
                     'label' => 'Date de la photo : ',

@@ -10,7 +10,11 @@
                 <td>{{ picture.id }}</td>
             </tr>
             <tr>
-                <th>Photo</th>
+                <th>Photo principale</th>
+                <td>{{ picture.mainPicture }}</td>
+            </tr>
+            <tr>
+                <th>Photo additionnelle</th>
                 <td>{{ picture.picture }}</td>
                 <td><img src={{picture.picture}}></td>
                 <td><img src="{{('/assets/pictures/' ~ picture.picture)}}"></td>

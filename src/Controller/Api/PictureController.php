@@ -167,6 +167,7 @@ class PictureController extends AbstractController
         }
         $picture = (new Picture())
             ->setMemory($memory)
+            ->setMainPicture($data['main_picture'])
             ->setPicture($data['picture']);
 
         $entityManager->persist($picture);
@@ -199,7 +200,10 @@ class PictureController extends AbstractController
         $newFilename = uniqid() . '.' . $picture->getClientOriginalName();
         // ne pas oublier d'ajouter l'url de l'image dans l'entitée aproprié
         // $entity est l'entity qui doit recevoir votre image
-        $memory->setMainPicture($newFilename);
+        $newMainPicture = new Picture();
+        $newMainPicture->setMainPicture($newFilename);
+        $newMainPicture->setMemory($memory);
+        $entityManager->persist($newMainPicture);
         $entityManager->flush();
 
         return $this->json([
@@ -295,6 +299,7 @@ class PictureController extends AbstractController
                 return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
             }
             $picture->setMemory($memory);
+            $picture->setMainPicture($data['main_picture']);
             $picture->setPicture($data['picture']);
 
             $entityManager->flush();

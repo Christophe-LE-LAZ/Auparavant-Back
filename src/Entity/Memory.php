@@ -43,7 +43,7 @@ class Memory
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Groups(['get_memory'])]
-    private ?\DateTimeInterface $picture_date = null;
+    private ?\DateTimeInterface $memory_date = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $publishedAt = null;
@@ -108,14 +108,14 @@ class Memory
         return $this;
     }
 
-    public function getPictureDate(): ?\DateTimeInterface
+    public function getMemoryDate(): ?\DateTimeInterface
     {
-        return $this->picture_date;
+        return $this->memory_date;
     }
 
-    public function setPictureDate(\DateTimeInterface $picture_date): static
+    public function setMemoryDate(\DateTimeInterface $memory_date): static
     {
-        $this->picture_date = $picture_date;
+        $this->memory_date = $memory_date;
 
         return $this;
     }

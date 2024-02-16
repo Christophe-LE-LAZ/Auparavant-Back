@@ -181,7 +181,7 @@ CREATE TABLE `memory` (
   `place_id` int(11) NOT NULL,
   `title` varchar(30) NOT NULL,
   `content` longtext NOT NULL,
-  `picture_date` datetime NOT NULL,
+  `memory_date` datetime NOT NULL,
   `published_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `updated_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
@@ -192,7 +192,7 @@ CREATE TABLE `memory` (
   CONSTRAINT `FK_EA6D3435A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `memory` (`id`, `location_id`, `user_id`, `place_id`, `title`, `content`, `picture_date`, `published_at`, `created_at`, `updated_at`) VALUES
+INSERT INTO `memory` (`id`, `location_id`, `user_id`, `place_id`, `title`, `content`, `memory_date`, `published_at`, `created_at`, `updated_at`) VALUES
 (1,	1,	1,	1,	'Le Panthéon en 1792',	'Le Panthéon en 1792, avec La Renommée en son sommet.n',	'1792-01-01 00:00:00',	NULL,	'2024-02-07 13:52:16',	NULL),
 (2,	1,	1,	1,	'Le Panthéon de nos jours',	'Le Panthéon vu de la tour Montparnasse en 2016.',	'2016-01-01 00:00:00',	NULL,	'2024-02-07 13:52:58',	NULL),
 (3,	2,	1,	2,	'La naissance de la tour Eiffel',	'C’est à l’occasion de l’Exposition Universelle de 1889, date qui marquait le centenaire de la Révolution française qu\'il a été décidé de construire une tour de 300m.\r\n\r\nLes premiers coups de pelle sont donnés le 26 janvier 1887.\r\nLe 31 mars 1889, la Tour achevée en un temps record -2 ans, 2 mois et 5 jours- s’impose comme une véritable prouesse technique.',	'1887-01-26 00:00:00',	NULL,	'2024-02-07 14:50:11',	NULL),

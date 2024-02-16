@@ -9,8 +9,8 @@
                 <th>Id</th>
                 <th>Titre</th>
                 <th>Contenu</th>
-                <th>Photographie principale</th>
-                <th>Date de la photographie</th>
+                {# <th>Photographie principale</th> #}
+                <th>Date du souvenir</th>
                 <th>Nom et type de lieu</th>
                 <th>Adresse</th>
                 <th>Utilisateur</th>
@@ -26,8 +26,8 @@
                 <td>{{ memory.id }}</td>
                 <td>{{ memory.title }}</td>
                 <td>{{ memory.content }}</td>
-                <td>{{ memory.mainPicture }}</td>
-                <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d H:i:s') : '' }}</td>
+                {# <td>{{ picture.mainPicture }}</td> #}
+                <td>{{ memory.memoryDate ? memory.memoryDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ memory.place.name }} {{ memory.place.type }}</td>
                 <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
                 <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>

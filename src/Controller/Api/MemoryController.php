@@ -458,7 +458,6 @@ class MemoryController extends AbstractController
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
             ->setPictureDate(new DateTime($memoryData['picture_date']))
-
             ->setUser($user)
             ->setLocation($location)
             ->setPlace($place);
@@ -557,7 +556,6 @@ class MemoryController extends AbstractController
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
             ->setPictureDate(new DateTime($memoryData['picture_date']))
-
             ->setUser($user)
             ->setPlace($newPlace)
             ->setLocation($newLocation);
@@ -735,7 +733,6 @@ class MemoryController extends AbstractController
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
             ->setPictureDate(new DateTime($memoryData['picture_date']))
-            ->setMainPicture('null')
             ->setUpdatedAt(new DateTimeImmutable())
             ->setPlace($currentPlace);
 

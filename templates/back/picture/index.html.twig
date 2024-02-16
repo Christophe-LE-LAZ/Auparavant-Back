@@ -7,7 +7,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Photo</th>
+                <th>Photo principale</th>
+                <th>Photo additionnelle</th>
                 <th>Souvenir correspondant</th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
@@ -18,6 +19,7 @@
         {% for picture in pictures %}
             <tr>
                 <td>{{ picture.id }}</td>
+                <td>{{ picture.mainPicture }}</td>
                 <td>{{ picture.picture }}</td>
                 <td>{{ picture.memory.title }}</td>
                 {# <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
