@@ -212,10 +212,7 @@ class PictureController extends AbstractController
         $memory->setMainPicture($newFilename);
         $entityManager->flush();
 
-
-        return $this->json([
-            'message' => 'Image téléchargée et associée au souvenir avec succès.'
-        ]);
+        return $this->json(['memory' => $memory, 'message' => 'Image téléchargée et associée au souvenir avec succès.'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 
     /**
