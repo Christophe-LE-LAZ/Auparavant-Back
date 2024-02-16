@@ -38,7 +38,9 @@ INSERT INTO `location` (`id`, `area`, `department`, `district`, `street`, `city`
 (1,	'Île-de-France',	'Paris',	'Quartier latin',	'28 place du Panthéon',	'Paris',	75005,	48.84619800,	2.34610500,	'2024-02-07 13:48:00',	NULL),
 (2,	'Île-de-France',	'Paris',	'Gros-Caillou',	'5 avenue Anatole-France',	'Paris',	75007,	48.85829600,	2.29447900,	'2024-02-07 14:48:05',	NULL),
 (3,	'Île-de-France',	'Paris',	'Notre-Dame',	'6 Parvis Notre-Dame - Place Jean-Paul II',	'Paris',	75004,	48.51110000,	2.20590000,	'2024-02-08 09:45:03',	NULL),
-(5,	'Île-de-France',	'Essonne',	'Clause',	'Impasse du Blutin',	'Brétigny',	91220,	48.60870000,	2.30685000,	'2024-02-12 10:18:15',	NULL);
+(5,	'Île-de-France',	'Essonne',	'Clause',	'Impasse du Blutin',	'Brétigny',	91220,	48.60870000,	2.30685000,	'2024-02-12 10:18:15',	NULL),
+(6,	'',	'',	'Test',	'',	'',	47500,	0.00000000,	0.00000000,	'2024-02-15 13:11:51',	NULL),
+(7,	'',	'',	'Test2',	'',	'',	47000,	0.00000000,	0.00000000,	'2024-02-15 13:41:26',	NULL);
 
 DROP TABLE IF EXISTS `memory`;
 CREATE TABLE `memory` (
@@ -68,7 +70,9 @@ INSERT INTO `memory` (`id`, `location_id`, `user_id`, `place_id`, `title`, `cont
 (5,	3,	1,	3,	'Notre-Dame',	'La cathédrale Notre-Dame de Paris, communément appelée Notre-Dame, est l\'un des monuments les plus emblématiques de Paris et de la France. Elle est située sur l\'île de la Cité et est un lieu de culte catholique, siège de l\'archidiocèse de Paris, dédié à la Vierge Marie.',	'2009-01-01 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Notre-Dame_de_Paris_2009-04-28.jpg/1024px-Notre-Dame_de_Paris_2009-04-28.jpg',	NULL,	'2024-02-08 09:48:14',	NULL),
 (6,	3,	1,	3,	'Incendie de Notre-Dame',	'L’incendie de Notre-Dame de Paris est un incendie majeur survenu à la cathédrale Notre-Dame de Paris, les 15 et 16 avril 2019, pendant près de 15 heures.',	'2019-04-15 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Incendie_Notre_Dame_de_Paris.jpg/280px-Incendie_Notre_Dame_de_Paris.jpg',	NULL,	'2024-02-08 09:50:03',	'2024-02-14 13:12:28'),
 (7,	5,	1,	5,	'Propriété de M. Clause',	'Propriété de M. Clause, édifiée en 1912',	'1912-01-01 00:00:00',	'https://p.cartorum.fr/recto/maxi/000/144/678-bretigny-sur-orge-bretigny-sur-orge-propriete-clause.jpg',	NULL,	'2024-02-12 10:18:15',	NULL),
-(8,	5,	1,	6,	'Quartier Clause',	'Projet d\'aménagement urbain en 2023',	'2024-01-01 00:00:00',	'https://www.bretigny91.fr/wp-content/uploads/2019/08/CLAUSE-BOIS-BADEAU_VUE-AERIENNE-PLACE-LORCA_02-_Thibault-dArgent-2018.jpg',	NULL,	'2024-02-12 10:24:58',	NULL);
+(8,	5,	1,	6,	'Quartier Clause',	'Projet d\'aménagement urbain en 2023',	'2024-01-01 00:00:00',	'https://www.bretigny91.fr/wp-content/uploads/2019/08/CLAUSE-BOIS-BADEAU_VUE-AERIENNE-PLACE-LORCA_02-_Thibault-dArgent-2018.jpg',	NULL,	'2024-02-12 10:24:58',	NULL),
+(9,	6,	2,	7,	'Test',	'Test',	'2000-02-11 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/6/6b/Penne-d-Agenais_Altstadt.jpg',	NULL,	'2024-02-15 13:11:51',	NULL),
+(10,	7,	3,	8,	'Test2',	'Test2',	'1888-09-21 00:00:00',	'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Villeneuve-sur-Lot.JPG/1280px-Villeneuve-sur-Lot.JPG',	NULL,	'2024-02-15 13:41:26',	NULL);
 
 DROP TABLE IF EXISTS `picture`;
 CREATE TABLE `picture` (
@@ -109,7 +113,9 @@ INSERT INTO `place` (`id`, `location_id`, `name`, `type`, `created_at`, `updated
 (2,	2,	'Tour Eiffel',	'Tour autoportante',	'2024-02-07 14:48:49',	NULL),
 (3,	3,	'Notre-Dame de Paris',	'Cathédrale',	'2024-02-08 09:46:04',	NULL),
 (5,	5,	'Propriété Clause',	'Propriété',	'2024-02-12 10:18:15',	NULL),
-(6,	5,	'Résidence Clause',	'Résidence d\'immeubles',	'2024-02-12 10:24:58',	NULL);
+(6,	5,	'Résidence Clause',	'Résidence d\'immeubles',	'2024-02-12 10:24:58',	NULL),
+(7,	6,	'Test',	'Test',	'2024-02-15 13:11:51',	NULL),
+(8,	7,	'Test2',	'Test2',	'2024-02-15 13:41:26',	NULL);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -127,8 +133,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `roles`, `created_at`, `updated_at`) VALUES
 (1,	'Aurélien',	'ROUCHETTE-MARET',	'aurelien.rouchette@orange.fr',	'$2y$13$QQF8BE1NlrIp4QxrM062ietwpHynqiVZtoMJ1l2GZkMoc.OA.99Ke',	'[\"ROLE_USER\",\"ROLE_ADMIN\"]',	'2024-02-12 13:00:41',	NULL),
-(2,	'Christophe',	'LE LAZ',	'christophe.le-laz@oclock.school',	'$2y$13$DsiSBUOOlmQqqlVNWyINF.DRXSQGZWcr6EVZhHcSjmGszgQL7feby',	'[\"ROLE_USER\"]',	'2024-02-12 13:53:25',	'2024-02-14 13:44:17'),
+(2,	'Christophe',	'LE LAZ',	'christophe.le-laz@oclock.school',	'$2y$13$DsiSBUOOlmQqqlVNWyINF.DRXSQGZWcr6EVZhHcSjmGszgQL7feby',	'[\"ROLE_USER\",\"ROLE_ADMIN\"]',	'2024-02-12 13:53:25',	'2024-02-14 13:44:17'),
 (3,	'Lisa',	'Lapierre',	'lisa.lapierre@sfr.fr',	'$2y$13$25Xr0Xx30EbnFqaGyXIVLeuIXpBHAgxRyhGqTvCvaqcypdLbGgk.y',	'[\"ROLE_USER\"]',	'2024-02-15 13:03:08',	NULL),
 (4,	'Steven',	'Nguyen',	'steven.nguyen@oclock.school',	'$2y$13$NAKXQfNZT3mK1zMPKVEkfeLWuC.7Op0wC1D6FQbKzRUefuKuWeKGG',	'[\"ROLE_USER\"]',	'2024-02-15 13:05:22',	NULL);
 
--- 2024-02-15 13:06:46
+-- 2024-02-16 08:17:45
