@@ -22,7 +22,7 @@ class Picture
     #[Assert\Url(
         message: 'L\'url {{ value }} n\'est pas valide',
     )]
-    #[Groups(['get_memory'])]
+    #[Groups(['get_picture'])]
     private ?string $main_picture = null;
 
     #[ORM\Column(length: 2000, nullable: true)]
