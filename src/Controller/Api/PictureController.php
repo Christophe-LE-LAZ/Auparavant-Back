@@ -226,7 +226,7 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('api/secure/upload/additional_pictures/{id<\d+>}', methods: ['POST'])]
-    public function upload_update_addditional_pictures(): Response
+    public function upload_update_additional_pictures(): Response
     {
         return $this->json([
             'message' => 'Image(s) supplémentaire(s) téléchargée(s) et associée(s) au souvenir avec succès.'
