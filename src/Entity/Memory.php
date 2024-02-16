@@ -45,13 +45,6 @@ class Memory
     #[Groups(['get_memory'])]
     private ?\DateTimeInterface $picture_date = null;
 
-    #[ORM\Column(length: 2000)]
-    #[Assert\Url(
-        message: 'L\'url {{ value }} n\'est pas valide',
-    )]
-    #[Groups(['get_memory'])]
-    private ?string $main_picture = null;
-
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $publishedAt = null;
 
@@ -127,17 +120,6 @@ class Memory
         return $this;
     }
 
-    public function getMainPicture(): ?string
-    {
-        return $this->main_picture;
-    }
-
-    public function setMainPicture(string $main_picture): static
-    {
-        $this->main_picture = $main_picture;
-
-        return $this;
-    }
 
     public function getPublishedAt(): ?\DateTimeImmutable
     {

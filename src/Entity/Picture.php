@@ -18,6 +18,13 @@ class Picture
     #[Groups(['get_picture'])]
     private ?int $id = null;
 
+    #[ORM\Column(length: 2000)]
+    #[Assert\Url(
+        message: 'L\'url {{ value }} n\'est pas valide',
+    )]
+    #[Groups(['get_memory'])]
+    private ?string $main_picture = null;
+
     #[ORM\Column(length: 2000, nullable: true)]
     #[Assert\Url(
         message: 'L\'url {{ value }} n\'est pas valide',
@@ -45,6 +52,18 @@ class Picture
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getMainPicture(): ?string
+    {
+        return $this->main_picture;
+    }
+
+    public function setMainPicture(string $main_picture): static
+    {
+        $this->main_picture = $main_picture;
+
+        return $this;
     }
 
     public function getPicture(): ?string
