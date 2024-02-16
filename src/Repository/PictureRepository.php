@@ -21,6 +21,20 @@ class PictureRepository extends ServiceEntityRepository
         parent::__construct($registry, Picture::class);
     }
 
+    /**
+     * Retrieve all pictures ordered by memory_id.
+     *
+     * @return array
+     */
+    public function findAllPicturesOrderedByMemoryId(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.memory', 'm') // Assuming the property name for the Memory association is 'memory'
+            ->orderBy('m.id', 'ASC')    // Order by memory_id
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Picture[] Returns an array of Picture objects
 //     */
