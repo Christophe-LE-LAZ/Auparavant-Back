@@ -5,8 +5,10 @@ namespace App\Controller\Api;
 use App\Entity\Memory;
 use App\Entity\Picture;
 use OpenApi\Attributes as OA;
+use App\Repository\PlaceRepository;
 use App\Repository\MemoryRepository;
 use App\Repository\PictureRepository;
+use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Component\HttpFoundation\Request;
@@ -154,25 +156,25 @@ class PictureController extends AbstractController
         )
     )]
     #[OA\Tag(name: 'picture')]
-    public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request, MemoryRepository $memoryRepository)
-    {
-        $jsonData = $request->getContent();
-        $data = $serializer->decode($jsonData, 'json');
+    // public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request, MemoryRepository $memoryRepository)
+    // {
+    //     $jsonData = $request->getContent();
+    //     $data = $serializer->decode($jsonData, 'json');
 
-        $memoryId = $data['memory']['id'];
-        $memory = $memoryRepository->find($memoryId);
-        if (!$memory) {
-            return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
-        }
-        $picture = (new Picture())
-            ->setMemory($memory)
-            ->setPicture($data['picture']);
+    //     $memoryId = $data['memory']['id'];
+    //     $memory = $memoryRepository->find($memoryId);
+    //     if (!$memory) {
+    //         return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
+    //     }
+    //     $picture = (new Picture())
+    //         ->setMemory($memory)
+    //         ->setPicture($data['picture']);
 
-        $entityManager->persist($picture);
-        $entityManager->flush();
+    //     $entityManager->persist($picture);
+    //     $entityManager->flush();
 
-        return $this->json(['picture' => $picture, 'message' => 'Photo enregistrée'], Response::HTTP_CREATED, [], ['groups' => ['get_picture', 'get_memory_id']]);
-    }
+    //     return $this->json(['picture' => $picture, 'message' => 'Photo enregistrée'], Response::HTTP_CREATED, [], ['groups' => ['get_picture', 'get_memory_id']]);
+    // }
     //!____________________________________________________
 
     /**
@@ -321,33 +323,33 @@ class PictureController extends AbstractController
         )
     )]
     #[OA\Tag(name: 'picture')]
-    public function update(Picture $picture, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
-    {
-        /** @var \App\Entity\User $user */
-        $user = $this->getUser();
+    // public function update(Picture $picture, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository)
+    // {
+    //     /** @var \App\Entity\User $user */
+    //     $user = $this->getUser();
 
-        $jsonData = $request->getContent();
-        $data = $serializer->decode($jsonData, 'json');
-        $memoryId = $data['memory']['id'];
-        $memory = $memoryRepository->find($memoryId);
-        if ($user !== $memory->getUser()) {
-            return $this->json("Erreur : Vous n'êtes pas autorisé à modifier cette photo.", 401);
+    //     $jsonData = $request->getContent();
+    //     $data = $serializer->decode($jsonData, 'json');
+    //     $memoryId = $data['memory']['id'];
+    //     $memory = $memoryRepository->find($memoryId);
+    //     if ($user !== $memory->getUser()) {
+    //         return $this->json("Erreur : Vous n'êtes pas autorisé à modifier cette photo.", 401);
 
-            if (!$picture) {
-                return $this->json("Erreur : La photo n'existe pas", 404);
-            }
+    //         if (!$picture) {
+    //             return $this->json("Erreur : La photo n'existe pas", 404);
+    //         }
 
 
-            if (!$memory) {
-                return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
-            }
-            $picture->setMemory($memory);
-            $picture->setPicture($data['picture']);
+    //         if (!$memory) {
+    //             return $this->json("Erreur : Le souvenir associé n'existe pas", 404);
+    //         }
+    //         $picture->setMemory($memory);
+    //         $picture->setPicture($data['picture']);
 
-            $entityManager->flush();
-            return $this->json(['picture' => $picture, 'message' => 'La photo a été mise à jour'], Response::HTTP_OK, [], ['groups' => ['get_picture', 'get_memory']]);
-        }
-    }
+    //         $entityManager->flush();
+    //         return $this->json(['picture' => $picture, 'message' => 'La photo a été mise à jour'], Response::HTTP_OK, [], ['groups' => ['get_picture', 'get_memory']]);
+    //     }
+    // }
     //!____________________________________________________
 
 
