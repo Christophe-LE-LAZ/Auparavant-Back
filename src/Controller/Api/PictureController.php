@@ -197,9 +197,11 @@ class PictureController extends AbstractController
         if ($user !== $memory->getUser()) {
             return $this->json("Erreur : Vous n'êtes pas autorisé à ajouter de photo sur ce souvenir.", 401);
         }
+        // Retrieve the uploaded picture file from the request
         $picture = $request->files->get('main_picture');
 
         if ($picture === null) {
+            // Handle case where no picture is uploaded (possibly indicating removal of the main picture)
 
             // If the memory had a main picture, keep it and update the memory
             if ($memory->getMainPicture()) {
@@ -217,18 +219,18 @@ class PictureController extends AbstractController
             $otherMemoriesWithPlace = $placeRepository->findMemoriesWithPlace($place, $memory->getId());
 
             if (empty($otherMemoriesWithLocation) && empty($otherMemoriesWithPlace)) {
-                // Supprime la Location, la Place et le Memory s'il n'y a pas d'autres relations
+                // Remove Location, Place, and Memory if there are no other relations
                 $entityManager->remove($place);
                 $entityManager->remove($location);
                 $entityManager->remove($memory);
                 $entityManager->flush();
             } elseif (empty($otherMemoriesWithLocation)) {
-                // Supprime la Location si elle n'a pas d'autres relations
+                // Remove Location if it doesn't have other relations
                 $entityManager->remove($location);
                 $entityManager->remove($memory);
                 $entityManager->flush();
             } elseif (empty($otherMemoriesWithPlace)) {
-                // Supprime la Place si elle n'a pas d'autres relations
+                // Remove Place if it doesn't have other relations
                 $entityManager->remove($place);
                 $entityManager->remove($memory);
                 $entityManager->flush();
@@ -236,6 +238,7 @@ class PictureController extends AbstractController
 
             return $this->json("Erreur : Le souvenir doit contenir une image principale  .", 400);
         }
+        // Continue with the code to handle the case when a new picture is uploaded
 
         // enregistrement de l'image dans le dossier public du serveur
         // params->get('public') =>  va chercher dans services.yaml la variable public
