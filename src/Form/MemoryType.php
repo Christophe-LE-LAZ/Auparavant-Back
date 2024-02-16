@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use App\Entity\Place;
 use App\Entity\Memory;
+use App\Entity\Picture;
 use App\Entity\Location;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,11 +35,19 @@ class MemoryType extends AbstractType
                     'label' => 'Contenu : '
                 ]
             )
+            // ->add(
+            //     'main_picture',
+            //     EntityType::class,
+            //     [
+            //         'label' => 'Photo principale : ',
+            //         'class' => Picture::class,
+            //     ]
+            // )
             ->add(
                 'memory_date',
                 DateType::class,
                 [
-                    'label' => 'Date de la photo : ',
+                    'label' => 'Date du souvenir : ',
                     'placeholder' => ['année' => 'Année', 'mois' => 'Mois', 'jour' => 'Jour'],
                 ]
             )
