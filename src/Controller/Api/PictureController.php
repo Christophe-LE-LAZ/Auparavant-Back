@@ -240,13 +240,13 @@ class PictureController extends AbstractController
         }
         // Continue with the code to handle the case when a new picture is uploaded
 
+        // on ajoute uniqid() afin de ne pas avoir 2 fichiers avec le même nom
+        $newFilename = uniqid() . '.' . $picture->getClientOriginalExtension();
+
         // enregistrement de l'image dans le dossier public du serveur
         // params->get('public') =>  va chercher dans services.yaml la variable public
-        $picture->move($params->get('images_directory'), $picture->getClientOriginalName());
+        $picture->move($params->get('images_directory'), $newFilename);
 
-
-        // on ajoute uniqid() afin de ne pas avoir 2 fichiers avec le même nom
-        $newFilename = uniqid() . '.' . $picture->getClientOriginalName();
         // ne pas oublier d'ajouter l'url de l'image dans l'entité appropriée
         // $entity est l'entity qui doit recevoir votre image
         $memory->setMainPicture($newFilename);
