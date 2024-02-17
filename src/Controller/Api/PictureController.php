@@ -114,13 +114,8 @@ class PictureController extends AbstractController
                 404
             );
         }
+        return $this->json(['picture' => $picture], Response::HTTP_OK, [], ['groups' => ['get_picture', 'get_memory_id']]);
 
-        return $this->json(
-            $picture,
-            200,
-            [],
-            ['groups' => ['get_picture', 'get_memory_id']]
-        );
     }
 
     /**
@@ -228,13 +223,46 @@ class PictureController extends AbstractController
     }
 
     /**
-     * Upload or update (an/the) additional memory picture(s)
-     * 
-     * @param
+     * Upload (an/the) additional memory picture(s)
+     * @param Memory $memory
+     * @param Request $request
+     * @param ParameterBagInterface $params
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the memory",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\RequestBody(
+        description: 'Exemple of data to be supplied to upload the additional picture',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'picture', type: 'file', example: 'photo.jpg'),
+                new OA\Property(
+                    property: "memory",
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "id", type: "integer", example: 9)
+                    ]
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Saves the image associated with the memory',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_picture', 'get_place', 'get_user']))
+        )
+    )]
+    #[OA\Tag(name: 'picture')]
     #[Route('api/secure/upload/additional_pictures/{id<\d+>}', methods: ['POST'])]
-    public function upload_additional_pictures(Memory $memory, Request $request, ParameterBagInterface $params,FileUploader $fileUploader, EntityManagerInterface $entityManager): Response
+    public function upload_additional_pictures(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager): Response
     {
 
          /** @var \App\Entity\User $user */
@@ -268,13 +296,40 @@ class PictureController extends AbstractController
     }
 
       /**
-     * Upload or update (an/the) additional memory picture(s)
-     * 
-     * @param
+     * Update (an/the) additional memory picture(s)
+     * @param Picture $picture
+     * @param Request $request
+     * @param ParameterBagInterface $params
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the picture",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\RequestBody(
+        description: 'Exemple of data to be supplied to update the additional picture',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: "id", type: "integer", example: 9), 
+                new OA\Property(property: 'picture', type: 'file', example: 'photo.jpg'),
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Saves the image associated with the memory',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_picture', 'get_place', 'get_user']))
+        )
+    )]
+    #[OA\Tag(name: 'picture')]
     #[Route('api/secure/update/additional_pictures/{id<\d+>}', methods: ['POST'])]
-    public function update_additional_pictures(Picture $picture, Request $request, ParameterBagInterface $params,FileUploader $fileUploader, EntityManagerInterface $entityManager): Response
+    public function update_additional_pictures(Picture $picture, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager): Response
     {
 
          /** @var \App\Entity\User $user */
