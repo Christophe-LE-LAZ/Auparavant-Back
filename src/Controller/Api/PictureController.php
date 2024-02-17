@@ -242,7 +242,6 @@ class PictureController extends AbstractController
          }
          // Retrieve the uploaded picture file from the request
          $pictures = $request->files->get('additional_pictures');
-         dd($pictures);
 
         $newPictures = [];
 
@@ -256,6 +255,7 @@ class PictureController extends AbstractController
         ->setPicture($newFilename)
         ->setMemory($memory);
         $entityManager->persist($newPicture);
+
         $newPictures[]= $newPicture;
         }
         $entityManager->flush();
