@@ -211,7 +211,10 @@ class PictureController extends AbstractController
         // Continue with the code to handle the case when a new picture is uploaded
 
         if ($memory->getMainPicture()) {
-            $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
+            $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
+            if (!$deleteFileResult) {
+            return $this->json("Erreur : Échec de suppression de la photo", 500);
+            }
         }
 
         
@@ -231,7 +234,7 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('api/secure/upload/additional_pictures/{id<\d+>}', methods: ['POST'])]
-    public function upload_update_additional_pictures(Memory $memory, Request $request, ParameterBagInterface $params,FileUploader $fileUploader, EntityManagerInterface $entityManager): Response
+    public function upload_additional_pictures(Memory $memory, Request $request, ParameterBagInterface $params,FileUploader $fileUploader, EntityManagerInterface $entityManager): Response
     {
 
          /** @var \App\Entity\User $user */
@@ -262,7 +265,42 @@ class PictureController extends AbstractController
 
 
         return $this->json(['pictures' => $newPictures, 'message' => 'Image(s) téléchargée(s) et associée(s) au souvenir avec succès.'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
+    }
 
+      /**
+     * Upload or update (an/the) additional memory picture(s)
+     * 
+     * @param
+     * @return Response
+     */
+    #[Route('api/secure/update/additional_pictures/{id<\d+>}', methods: ['POST'])]
+    public function update_additional_pictures(Picture $picture, Request $request, ParameterBagInterface $params,FileUploader $fileUploader, EntityManagerInterface $entityManager): Response
+    {
+
+         /** @var \App\Entity\User $user */
+         $user = $this->getUser();
+
+         if ($user !== $picture->getMemory()->getUser()) {
+             return $this->json("Erreur : Vous n'êtes pas autorisé à ajouter de photo sur ce souvenir.", 401);
+         }
+         
+         $newPicture = $request->files->get('additional_pictures');
+
+         if ($newPicture === null) {
+            $picture->getPicture();
+            $entityManager->flush();
+            return $this->json(['message' => 'Le souvenir a bien été mis à jour.']);
+            }
+        $currentPictureDeleteResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
+        if (!$currentPictureDeleteResult) {
+            return $this->json("Erreur : Échec de suppression de l'ancienne photo", 500);
+        }
+
+        $newFilename = $this->fileUploader->uploadImage($newPicture);
+        $picture->setPicture($newFilename);
+        $entityManager->flush();
+
+        return $this->json(['picture' => $picture, 'message' => 'Image mise à jour avec succès.'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 
     /**
@@ -305,7 +343,11 @@ class PictureController extends AbstractController
             );
         }
 
-        $fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
+        $deleteFileResult = $fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
+
+        if (!$deleteFileResult) {
+            return $this->json("Erreur : Échec de suppression de la photo", 500);
+        }
         $entityManager->remove($picture);
         $entityManager->flush();
 

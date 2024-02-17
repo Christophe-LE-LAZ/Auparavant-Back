@@ -54,7 +54,9 @@ class FileUploader
     // Vérifier si le fichier existe avant de le supprimer
     if (file_exists($filePath)) {
         unlink($filePath);
+        return true;
     }
+    return false;
 }
 
 
