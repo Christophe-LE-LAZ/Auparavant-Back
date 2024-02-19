@@ -1,0 +1,39 @@
+# translations/messages.fr.yaml
+
+hello: Bonjour, ceci est un message traduit !
+welcome: Bienvenue sur notre site web, %name% !
+
+confirmation:
+    location_creation: La localité a été créée avec succès.
+    location_update: La localité a été modifiée avec succès.
+    location_deletion: La localité a été supprimée avec succès.
+    memory_creation: Le souvenir a été créé avec succès.
+    memory_update: Le souvenir a été modifié avec succès.
+    memory_deletion: Le souvenir a été supprimé avec succès.
+    picture_creation: La photo a été téléchargée avec succès.
+    picture_update: La photo a été mise à jour avec succès.
+    picture_deletion: La photo a été supprimée avec succès.
+    place_creation: L'endroit a été créé avec succès.
+    place_update: L'endroit a été modifié avec succès.
+    place_deletion: L'endroit a été supprimé avec succès.
+    user_creation: Le compte a été créé avec succès.
+    user_update: Le compte a été modifié avec succès.
+    user_deletion: Le compte a été supprimé avec succès.
+errors:
+    not_found: La page demandée n'a pas été trouvée.
+    resource_not_found: La ressource demandée n'a pas été trouvée.
+    picture_deletion_failure: La suppression de l'image a échoué.
+    former_picture_deletion_failure: La suppression de l'image précédente a échoué.
+mandatory_fields:
+    picture: Le souvenir doit contenir une photo.
+non-existent_entities:
+    location: Cette localité n'existe pas.
+    memory: Ce souvenir n'existe pas.
+    picture: Cette photographie n'existe pas.
+    place: Cet endroit n'existe pas.
+    user: Ce compte n'existe pas.
+unauthorized_access:
+    page: Vous n'êtes pas autorisé à accéder à cette page.
+    view: Vous n'êtes pas autorisé à visualiser ce contenu.
+    modification: Vous n'êtes pas autorisé à modifier ce contenu.
+    deletion: Vous n'êtes pas autorisé à supprimer ce contenu.

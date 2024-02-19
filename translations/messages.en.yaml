@@ -1,0 +1,39 @@
+# translations/messages.en.yaml
+
+hello: Hello, this is a translated message!
+welcome: Welcome to our website, %name%!
+
+confirmation:
+    location_creation: The location has been successfully created.
+    location_update: The location has been successfully updated.
+    location_deletion: The location has been successfully deleted.
+    memory_creation: The memory has been successfully created.
+    memory_update: The memory has been successfully updated.
+    memory_deletion: The memory has been successfully deleted.
+    picture_creation: The picture has been successfully uploaded.
+    picture_update: The picture has been successfully updated.
+    picture_deletion: The picture has been successfully deleted.
+    place_creation: The place has been successfully created.
+    place_update: The place has been successfully updated.
+    place_deletion: The place has been successfully deleted.
+    user_creation: The account has been successfully created.
+    user_update: The account has been successfully updated.
+    user_deletion: The account has been successfully deleted.
+errors:
+    not_found: The page you requested was not found.
+    resource_not_found: The requested resource was not found.
+    picture_deletion_failure: Picture deletion failed.
+    former_picture_deletion_failure: Previous picture deletion failed.
+mandatory_fields:
+    picture: The memory must include a main picture.
+non-existent_entities:
+    location: The location does not exist.
+    memory: The memory does not exist.
+    picture: The picture does not exist.
+    place: The place does not exist.
+    user: The user does not exist.
+unauthorized_access:
+    page: You are not authorized to access this page.
+    view: You are not authorized to view this content.
+    modification: You are not authorized to modify this content.
+    deletion: You are not authorized to delete this content.
