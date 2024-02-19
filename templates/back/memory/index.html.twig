@@ -27,7 +27,7 @@
                 <td>{{ memory.title }}</td>
                 <td>{{ memory.content }}</td>
                 <td>{{ memory.mainPicture }}</td>
-                <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ memory.pictureDate ? memory.pictureDate|date('d-m-Y') : '' }}</td>
                 <td>{{ memory.place.name }} {{ memory.place.type }}</td>
                 <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
                 <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
