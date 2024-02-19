@@ -37,3 +37,30 @@ unauthorized_access:
     view: Vous n'êtes pas autorisé à visualiser ce contenu.
     modification: Vous n'êtes pas autorisé à modifier ce contenu.
     deletion: Vous n'êtes pas autorisé à supprimer ce contenu.
+
+## Backoffice
+localité :
+create.success : 'Localité créée avec succès.'
+update.success : 'Localité mise à jour avec succès.'
+delete.success : 'Localité supprimée avec succès.'
+not_found : "Localité non trouvée".
+souvenir :
+create.success : 'Souvenir créé avec succès.'
+update.success : 'Souvenir mis à jour avec succès.'
+delete.success : 'Souvenir supprimée avec succès.'
+not_found : "Souvenir non trouvé".
+image :
+create.success : 'Image téléchargée avec succès.'
+update.success : 'Image mise à jour avec succès.'
+delete.success : 'Image supprimée avec succès.'
+not_found : "Image non trouvée".
+place :
+create.success : 'Lieu créé avec succès.'
+update.success : 'Lieu mis à jour avec succès.'
+delete.success : 'Lieu supprimé avec succès.'
+not_found : "Lieu non trouvé".
+user :
+create.success : 'Compte créé avec succès.'
+update.success : 'Compte mis à jour avec succès.'
+delete.success : 'Compte supprimé avec succès.'
+not_found : "Compte non trouvé".

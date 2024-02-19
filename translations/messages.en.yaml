@@ -3,6 +3,7 @@
 hello: Hello, this is a translated message!
 welcome: Welcome to our website, %name%!
 
+## A.P.I
 confirmation:
     location_creation: The location has been successfully created.
     location_update: The location has been successfully updated.
@@ -37,3 +38,31 @@ unauthorized_access:
     view: You are not authorized to view this content.
     modification: You are not authorized to modify this content.
     deletion: You are not authorized to delete this content.
+
+
+## Backoffice
+location:
+    create.success: 'Location created successfully.'
+    update.success: 'Location updated successfully.'
+    delete.success: 'Location deleted successfully.'
+    not_found: 'Location not found.'
+memory:
+    create.success: 'Memory created successfully.'
+    update.success: 'Memory updated successfully.'
+    delete.success: 'Memory deleted successfully.'
+    not_found: 'Memory not found.'
+picture:
+    create.success: 'Picture uploaded successfully.'
+    update.success: 'Picture updated successfully.'
+    delete.success: 'Picture deleted successfully.'
+    not_found: 'Picture not found.'
+place:
+    create.success: 'Place created successfully.'
+    update.success: 'Place updated successfully.'
+    delete.success: 'Place deleted successfully.'
+    not_found: 'Place not found.'
+user:
+    create.success: 'Account created successfully.'
+    update.success: 'Account updated successfully.'
+    delete.success: 'Account deleted successfully.'
+    not_found: 'Account not found.'
