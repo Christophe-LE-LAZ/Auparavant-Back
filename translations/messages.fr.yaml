@@ -3,6 +3,7 @@
 hello: Bonjour, ceci est un message traduit !
 welcome: Bienvenue sur notre site web, %name% !
 
+## A.P.I
 confirmation:
     location_creation: La localité a été créée avec succès.
     location_update: La localité a été modifiée avec succès.
