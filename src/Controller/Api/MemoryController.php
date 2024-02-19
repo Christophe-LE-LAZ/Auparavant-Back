@@ -75,6 +75,17 @@ class MemoryController extends AbstractController
                         "latitude" => "48.84619800",
                         "longitude" => "2.34610500"
                     ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
                     "user" => [
                         "id" => 1,
                         "firstname" => "Aurélien",
@@ -108,6 +119,17 @@ class MemoryController extends AbstractController
                         "latitude" => "48.84619800",
                         "longitude" => "2.34610500"
                     ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
                     "user" => [
                         "id" => 1,
                         "firstname" => "Aurélien",
@@ -167,6 +189,17 @@ class MemoryController extends AbstractController
                         "latitude" => "48.84619800",
                         "longitude" => "2.34610500"
                     ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
                     "user" => [
                         "id" => 1,
                         "firstname" => "Aurélien",
@@ -181,7 +214,7 @@ class MemoryController extends AbstractController
                         "id" => 1,
                         "name" => "Le Panthéon",
                         "type" => "Mausolée"
-                    ]
+                    ],
                 ]
             ]
         )
@@ -242,6 +275,17 @@ class MemoryController extends AbstractController
                         "latitude" => "48.60870000",
                         "longitude" => "2.30685000"
                     ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
                     "user" => [
                         "id" => 1,
                         "firstname" => "Aurélien",
@@ -275,6 +319,17 @@ class MemoryController extends AbstractController
                         "latitude" => "48.60870000",
                         "longitude" => "2.30685000"
                     ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
                     "user" => [
                         "id" => 1,
                         "firstname" => "Aurélien",
@@ -308,6 +363,17 @@ class MemoryController extends AbstractController
                         "latitude" => "48.51110000",
                         "longitude" => "2.20590000"
                     ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
                     "user" => [
                         "id" => 1,
                         "firstname" => "Aurélien",
