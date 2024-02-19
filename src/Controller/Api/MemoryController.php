@@ -27,6 +27,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  * One method displays all memories.
  * One displays a single memory.
  * One displays the last and latest three memories created.
+ * One displays two random memory pictures: The pictures of an old and a recent memory of a place with the same address. Before/after pictures.
  * Two methods create a memory:
  * -> The first one creates a memory from an existing locality and creates the name and type of the place if the existing ones are not suitable for this memory.
  * -> The second one creates a memory and a new locality as well as the name and type of the corresponding place.
@@ -344,6 +345,33 @@ class MemoryController extends AbstractController
             200,
             [],
             ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]
+        );
+    }
+
+    /**
+     * Display two random memory pictures (Before/after pictures)
+     *
+     * @param MemoryRepository $memoryRepository
+     * @param
+     * @return Response
+     */
+    #[Route('api/memories/random', methods: ['GET'])]
+    public function random(MemoryRepository $memoryRepository): Response
+    {
+        $pictures = $memoryRepository->findTwoRandomMemoryPictures();
+
+        if (!$pictures) {
+            return $this->json(
+                "Erreur : Données introuvables",
+                404
+            );
+        }
+
+        return $this->json(
+            $pictures,
+            200,
+            [],
+            ['groups' => ['get_picture']]
         );
     }
 
