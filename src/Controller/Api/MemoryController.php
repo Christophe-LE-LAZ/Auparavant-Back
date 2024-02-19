@@ -7,6 +7,7 @@ use App\Entity\Place;
 use App\Entity\Memory;
 use DateTimeImmutable;
 use App\Entity\Location;
+use App\Service\FileUploader;
 use OpenApi\Attributes as OA;
 use App\Repository\UserRepository;
 use App\Repository\PlaceRepository;
@@ -19,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * This controller groups together all the methods that manage memories.
@@ -33,6 +35,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class MemoryController extends AbstractController
 {
+
+
+    public function __construct(FileUploader $fileUploader)
+    {
+        $this->fileUploader = $fileUploader;
+    }
+
+
     /**
      * Display all memories
      * 
@@ -52,7 +62,7 @@ class MemoryController extends AbstractController
                     "title" => "Le Panthéon en 1792",
                     "content" => "Le Panthéon en 1792, avec La Renommée en son sommet.n",
                     "picture_date" => "1792-01-01T00:00:00+00:00",
-                    "main_picture" => "https =>\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/3\/31\/Pierre-Antoine_de_Machy_-_Le_Panth%C3%A9on.jpg\/1280px-Pierre-Antoine_de_Machy_-_Le_Panth%C3%A9on.jpg",
+                    "main_picture" => "fileName.jpg",
                     "location" => [
                         "id" => 1,
                         "area" => "Île-de-France",
@@ -85,7 +95,7 @@ class MemoryController extends AbstractController
                     "title" => "Le Panthéon de nos jours",
                     "content" => "Le Panthéon vu de la tour Montparnasse en 2016.",
                     "picture_date" => "2016-01-01T00:00:00+00:00",
-                    "main_picture" => "https =>\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/b\/bb\/Panth%C3%A9on_vu_de_la_tour_Montparnasse_en_2016.jpg\/1280px-Panth%C3%A9on_vu_de_la_tour_Montparnasse_en_2016.jpg",
+                    "main_picture" => "fileName.jpg",
                     "location" => [
                         "id" => 1,
                         "area" => "Île-de-France",
@@ -144,7 +154,7 @@ class MemoryController extends AbstractController
                     "title" => "Le Panthéon en 1792",
                     "content" => "Le Panthéon en 1792, avec La Renommée en son sommet.n",
                     "picture_date" => "1792-01-01T00:00:00+00:00",
-                    "main_picture" => "https =>\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/3\/31\/Pierre-Antoine_de_Machy_-_Le_Panth%C3%A9on.jpg\/1280px-Pierre-Antoine_de_Machy_-_Le_Panth%C3%A9on.jpg",
+                    "main_picture" => "fileName.jpg",
                     "location" => [
                         "id" => 1,
                         "area" => "Île-de-France",
@@ -219,7 +229,7 @@ class MemoryController extends AbstractController
                     "title" => "Quartier Clause",
                     "content" => "Projet d'aménagement urbain en 2023",
                     "picture_date" => "2024-01-01T00:00:00+00:00",
-                    "main_picture" => "https:\/\/www.bretigny91.fr\/wp-content\/uploads\/2019\/08\/CLAUSE-BOIS-BADEAU_VUE-AERIENNE-PLACE-LORCA_02-_Thibault-dArgent-2018.jpg",
+                    "main_picture" => "fileName.jpg",
                     "location" => [
                         "id" => 5,
                         "area" => "Île-de-France",
@@ -252,7 +262,7 @@ class MemoryController extends AbstractController
                     "title" => "Propriété de M. Clause",
                     "content" => "Propriété de M. Clause, édifiée en 1912",
                     "picture_date" => "1912-01-01T00:00:00+00:00",
-                    "main_picture" => "https:\/\/p.cartorum.fr\/recto\/maxi\/000\/144\/678-bretigny-sur-orge-bretigny-sur-orge-propriete-clause.jpg",
+                    "main_picture" => "fileName.jpg",
                     "location" => [
                         "id" => 5,
                         "area" => "Île-de-France",
@@ -285,7 +295,7 @@ class MemoryController extends AbstractController
                     "title" => "Incendie de Notre-Dame",
                     "content" => "L’incendie de Notre-Dame de Paris est un incendie majeur survenu à la cathédrale Notre-Dame de Paris, les 15 et 16 avril 2019, pendant près de 15 heures.",
                     "picture_date" => "2019-04-15T00:00:00+00:00",
-                    "main_picture" => "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/3\/39\/Incendie_Notre_Dame_de_Paris.jpg\/280px-Incendie_Notre_Dame_de_Paris.jpg",
+                    "main_picture" => "fileName.jpg",
                     "location" => [
                         "id" => 3,
                         "area" => "Île-de-France",
@@ -344,7 +354,7 @@ class MemoryController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/api/secure/create/memory', methods: ['POST'])]
+    #[Route('api/secure/create/memory', methods: ['POST'])]
     #[OA\Tag(name: 'hidden')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
@@ -389,7 +399,7 @@ class MemoryController extends AbstractController
                         new OA\Property(property: 'memory', type: 'object', properties: [
                             new OA\Property(property: 'title', type: 'string', example: "l'elysée en 1990"),
                             new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
-                            new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
+                            new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08'),
                             new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
                             new OA\Property(property: 'additional_pictures', type: 'array', items: new OA\Items(type: 'string'), example: ['URL_image_1', 'URL_image_2']),
                         ]),
@@ -764,7 +774,7 @@ class MemoryController extends AbstractController
         schema: new OA\Schema(type: 'integer')
     )]
     #[OA\Tag(name: 'memory')]
-    public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
+    public function delete(Memory $memory, EntityManagerInterface $entityManager, ParameterBagInterface $params): Response
     {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
@@ -777,6 +787,23 @@ class MemoryController extends AbstractController
                 "Erreur : Le souvenir n'existe pas",
                 404
             );
+        }
+
+        // Delete the main picture
+        $deleteFileMainPictureResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
+        if (!$deleteFileMainPictureResult) {
+            return $this->json("Erreur : Échec de suppression de la photo", 500);
+        }
+        
+        // Delete the additional picture(s)
+        $deleteFilesAdditionalPictures = $memory->getPicture();
+        if ($deleteFilesAdditionalPictures !== null) {
+            foreach ($deleteFilesAdditionalPictures as $additionalPicture) {
+                $deleteFilesAdditionalPictureResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $additionalPicture->getPicture());
+                if (!$deleteFilesAdditionalPictureResult) {
+                    return $this->json("Erreur : Échec de suppression de la photo", 500);
+                }
+            }
         }
 
         $entityManager->remove($memory);
