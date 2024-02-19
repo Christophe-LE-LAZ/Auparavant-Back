@@ -21,7 +21,12 @@ class MemoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Memory::class);
     }
 
-    public function findTheLatestOnes()
+    /**
+     * Fetch the latest three memories by creation date
+     *
+     * @return array|null
+     */
+    public function findTheLatestOnes(): ?array
     {
         return $this->createQueryBuilder('memory')
             ->orderBy('memory.createdAt', 'DESC')
@@ -30,7 +35,13 @@ class MemoryRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByUserId($userId)
+    /**
+     * Fetch a user's contributions by his id
+     *
+     * @param [type] $userId
+     * @return array|null
+     */
+    public function findByUserId($userId): ?array
     {
         return $this->createQueryBuilder('memory')
             ->join('memory.user', 'user')
@@ -40,28 +51,45 @@ class MemoryRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-//    /**
-//     * @return Memory[] Returns an array of Memory objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Fetch two random memory pictures for any address.
+     *
+     * @return array|null
+     */
+    public function findTwoRandomMemoryPictures(): ?array
+    {
+        return $this->createQueryBuilder('memory1')
+            ->select('memory1.main_picture as picture1', 'memory2.main_picture as picture2')
+            ->join('memory1.location', 'location')
+            ->join('App\Entity\Memory', 'memory2', 'WITH', 'memory1.location = memory2.location AND memory1.id != memory2.id')
+            ->orderBy('RAND()')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Memory
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Memory[] Returns an array of Memory objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('m')
+    //            ->andWhere('m.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('m.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Memory
+    //    {
+    //        return $this->createQueryBuilder('m')
+    //            ->andWhere('m.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
