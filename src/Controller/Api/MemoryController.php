@@ -7,6 +7,7 @@ use App\Entity\Place;
 use App\Entity\Memory;
 use DateTimeImmutable;
 use App\Entity\Location;
+use App\Service\FileUploader;
 use OpenApi\Attributes as OA;
 use App\Repository\UserRepository;
 use App\Repository\PlaceRepository;
@@ -19,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * This controller groups together all the methods that manage memories.
@@ -33,6 +35,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class MemoryController extends AbstractController
 {
+
+
+    public function __construct(FileUploader $fileUploader)
+    {
+        $this->fileUploader = $fileUploader;
+    }
+
+
     /**
      * Display all memories
      * 
@@ -764,7 +774,7 @@ class MemoryController extends AbstractController
         schema: new OA\Schema(type: 'integer')
     )]
     #[OA\Tag(name: 'memory')]
-    public function delete(Memory $memory, EntityManagerInterface $entityManager): Response
+    public function delete(Memory $memory, EntityManagerInterface $entityManager, ParameterBagInterface $params): Response
     {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
@@ -777,6 +787,23 @@ class MemoryController extends AbstractController
                 "Erreur : Le souvenir n'existe pas",
                 404
             );
+        }
+
+        // Delete the main picture
+        $deleteFileMainPictureResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
+        if (!$deleteFileMainPictureResult) {
+            return $this->json("Erreur : Échec de suppression de la photo", 500);
+        }
+        
+        // Delete the additional picture(s)
+        $deleteFilesAdditionalPictures = $memory->getPicture();
+        if ($deleteFilesAdditionalPictures !== null) {
+            foreach ($deleteFilesAdditionalPictures as $additionalPicture) {
+                $deleteFilesAdditionalPictureResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $additionalPicture->getPicture());
+                if (!$deleteFilesAdditionalPictureResult) {
+                    return $this->json("Erreur : Échec de suppression de la photo", 500);
+                }
+            }
         }
 
         $entityManager->remove($memory);
