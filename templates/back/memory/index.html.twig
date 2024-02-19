@@ -6,48 +6,88 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Titre</th>
+                <th>Id
+                    <a class="text-decoration-none" href="{{ path('app_sort_memory_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_memory_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
+                <th>Titre
+                    <a href="{{ path('app_sort_memory_by', {'order': 'title', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_memory_by', {'order': 'title', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
                 <th>Contenu</th>
                 <th>Photographie principale</th>
-                <th>Date de la photographie</th>
-                <th>Nom et type de lieu</th>
-                <th>Adresse</th>
-                <th>Utilisateur</th>
-                {# <th>PublishedAt</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th> #}
+                <th>Date de la photographie
+                    <a class="text-decoration-none" href="{{ path('app_sort_memory_by', {'order': 'picture_date', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_memory_by', {'order': 'picture_date', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
+                <th>Nom et type de lieu
+                    <a href="{{ path('app_sort_memory_by', {'order': 'place', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_memory_by', {'order': 'place', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Adresse
+                    <a href="{{ path('app_sort_memory_by', {'order': 'location', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_memory_by', {'order': 'location', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Utilisateur
+                    <a href="{{ path('app_sort_memory_by', {'order': 'user', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_memory_by', {'order': 'user', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
                 <th>actions</th>
             </tr>
         </thead>
-        <tbody>
-        {% for memory in memories %}
-            <tr>
-                <td>{{ memory.id }}</td>
-                <td>{{ memory.title }}</td>
-                <td>{{ memory.content }}</td>
-                <td>{{ memory.mainPicture }}</td>
-                <td>{{ memory.pictureDate ? memory.pictureDate|date('d-m-Y') : '' }}</td>
-                <td>{{ memory.place.name }} {{ memory.place.type }}</td>
-                <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
-                <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
-                {# <td>{{ memory.publishedAt ? memory.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ memory.createdAt ? memory.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ memory.updatedAt ? memory.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
-                <td>
-                    <a href="{{ path('app_memory_show', {'id': memory.id}) }}">voir</a>
-                    <a href="{{ path('app_memory_edit', {'id': memory.id}) }}">modifier</a>
-                </td>
-            </tr>
+       <tbody>
+    {% if order is defined and order is same as ('location')%}
+        {% if streets is not empty %}
+            {% for street in streets %}
+                <tr>
+                    <td>{{ street.id }}</td>
+                    <td>{{ street.title }}</td>
+                    <td>{{ street.content }}</td>
+                    <td>{{ street.main_picture }}</td>
+                    <td>{{ street.picture_date ? street.picture_date|date('Y-m-d') : '' }}</td>
+                    <td>{{ street.placeName }} {{ street.type }}</td>
+                    <td>{{ street.street }} {{ street.zipcode }} {{ street.city }}</td>
+                    <td>{{ street.userFirstName }} {{ street.userLastName }}</td>
+                    <td>
+                        <a href="{{ path('app_memory_show', {'id': street.id}) }}">voir</a>
+                        <a href="{{ path('app_memory_edit', {'id': street.id}) }}">modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
         {% else %}
             <tr>
                 <td colspan="9">Aucun élément n'a été trouvé</td>
             </tr>
-        {% endfor %}
-        </tbody>
+        {% endif %}
+    {% else %}
+        {% if memories is not empty %}
+            {% for memory in memories %}
+                <tr>
+                    <td>{{ memory.id }}</td>
+                    <td>{{ memory.title }}</td>
+                    <td>{{ memory.content }}</td>
+                    <td>{{ memory.mainPicture }}</td>
+                    <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d') : '' }}</td>
+                    <td>{{ memory.place.name }} {{ memory.place.type }}</td>
+                    <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
+                    <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
+                    <td>
+                        <a href="{{ path('app_memory_show', {'id': memory.id}) }}">voir</a>
+                        <a href="{{ path('app_memory_edit', {'id': memory.id}) }}">modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="9">Aucun élément n'a été trouvé</td>
+            </tr>
+        {% endif %}
+    {% endif %}
+</tbody>
+
     </table>
 
     <a href="{{ path('app_memory_new') }}">Créer un nouveau souvenir</a>
 
-<a href="{{ path('app_main') }}">accueil</a>
+    <a href="{{ path('app_main') }}">accueil</a>
 {% endblock %}

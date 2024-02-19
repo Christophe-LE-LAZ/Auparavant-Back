@@ -15,7 +15,7 @@ class LocationSortController extends AbstractController
     #[Route('/', name: 'app_sort_location_by', methods: ['GET'])]
     public function sortBy(Request $request, LocationRepository $locationRepository) {
 
-        $order = $request->query->get('order', 'id');
+        $order = $request->query->get('order', '');
         $selectedDirection = $request->query->get('selectedDirection', 'asc');
 
         $direction = in_array($selectedDirection, ['asc', 'desc']) ? $selectedDirection : 'asc';

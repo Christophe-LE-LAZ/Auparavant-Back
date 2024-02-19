@@ -34,6 +34,21 @@ class LocationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByOrderAlphabetical($direction): array
+    {
+        $sql = "SELECT l.id as locationId, l.street, l.zipcode, l.city, m.* , p.name as placeName, p.type, u.firstname as userFirstName, u.lastname as userLastName
+                FROM location l
+                LEFT JOIN memory m ON l.id = m.location_id
+                LEFT JOIN place p ON l.id = p.location_id
+                LEFT JOIN user u ON m.user_id = u.id
+                ORDER BY SUBSTRING(l.street, LOCATE(' ', l.street) + 1) $direction";
+    
+        $conn = $this->getEntityManager()->getConnection();
+        $resultSet = $conn->executeQuery($sql);
+        return $resultSet->fetchAllAssociative();
+    }
+    
+
 //    /**
 //     * @return Location[] Returns an array of Location objects
 //     */
