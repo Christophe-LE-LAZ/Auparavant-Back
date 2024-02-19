@@ -10,23 +10,35 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\PlaceRepository;
 
 #[Route('/back/sort/memory')]
 class MemorySortController extends AbstractController
 {
     #[Route('/', name: 'app_sort_memory_by', methods: ['GET'])]
-    public function sortBy(Request $request, MemoryRepository $memoryRepository, LocationRepository $locationRepository) {
+    public function sortBy(Request $request, MemoryRepository $memoryRepository, LocationRepository $locationRepository, PlaceRepository $placeRepository) {
 
         $order = $request->query->get('order', '');
         $selectedDirection = $request->query->get('selectedDirection', 'asc');
 
         $direction = in_array($selectedDirection, ['asc', 'desc']) ? $selectedDirection : 'asc';
 
-        $streets = null;
+        $sortResults = null;
         $memories = null;
 
         if ($order === 'location') {
-            $streets = $locationRepository->findByOrderAlphabetical($direction);
+            $sortResults = $locationRepository->findByOrderAlphabeticalStreet($direction);
+            //   foreach ($sortResults as $sort ) {
+            //     dump ($sort);
+            //        dd ($sort['id']);
+            // }
+        }
+
+        if ($order === 'place') {
+            $sortResults = $placeRepository->findByOrderAlphabeticalPlace($direction);
+            foreach ($sortResults as $sort ) {
+                   dump($sort['id']);   
+            }
         }
 
         $memories = $memoryRepository->findBy([], [$order => $direction]);
@@ -35,7 +47,7 @@ class MemorySortController extends AbstractController
         return $this->render('back/memory/index.html.twig', [
             'memories' => $memories,
             'order' => $order, 
-            'streets' => $streets,
+            'sortResults' => $sortResults,
         ]);
     }
 }

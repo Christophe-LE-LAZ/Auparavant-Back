@@ -36,21 +36,22 @@
             </tr>
         </thead>
        <tbody>
-    {% if order is defined and order is same as ('location')%}
-        {% if streets is not empty %}
-            {% for street in streets %}
+    {# {% if order is defined and order is same as (('location') or ('place')) %} #}
+    {% if order is defined and order in ['location', 'place'] %}
+        {% if sortResults is not empty %}
+            {% for sortResult in sortResults %}
                 <tr>
-                    <td>{{ street.id }}</td>
-                    <td>{{ street.title }}</td>
-                    <td>{{ street.content }}</td>
-                    <td>{{ street.main_picture }}</td>
-                    <td>{{ street.picture_date ? street.picture_date|date('Y-m-d') : '' }}</td>
-                    <td>{{ street.placeName }} {{ street.type }}</td>
-                    <td>{{ street.street }} {{ street.zipcode }} {{ street.city }}</td>
-                    <td>{{ street.userFirstName }} {{ street.userLastName }}</td>
+                    <td>{{ sortResult.id }}</td>
+                    <td>{{ sortResult.title }}</td>
+                    <td>{{ sortResult.content }}</td>
+                    <td>{{ sortResult.main_picture }}</td>
+                    <td>{{ sortResult.picture_date ? sortResult.picture_date|date('Y-m-d') : '' }}</td>
+                    <td>{{ sortResult.placeName }} {{ sortResult.type }}</td>
+                    <td>{{ sortResult.street }} {{ sortResult.zipcode }} {{ sortResult.city }}</td>
+                    <td>{{ sortResult.userFirstName }} {{ sortResult.userLastName }}</td>
                     <td>
-                        <a href="{{ path('app_memory_show', {'id': street.id}) }}">voir</a>
-                        <a href="{{ path('app_memory_edit', {'id': street.id}) }}">modifier</a>
+                        <a href="{{ path('app_memory_show', {'id': sortResult.id}) }}">voir</a>
+                        <a href="{{ path('app_memory_edit', {'id': sortResult.id}) }}">modifier</a>
                     </td>
                 </tr>
             {% endfor %}
