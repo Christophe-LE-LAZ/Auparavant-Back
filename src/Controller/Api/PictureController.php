@@ -148,11 +148,45 @@ class PictureController extends AbstractController
     )]
     #[OA\Response(
         response: 201,
-        description: 'Saves the image associated with the memory',
+        description: 'Returns the memory with the main picture',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_picture', 'get_place', 'get_user']))
-        )
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture'])),
+            example: [
+                [
+                    "id" => 1,
+                    "title" => "Le Panthéon en 1792",
+                    "content" => "Le Panthéon en 1792, avec La Renommée en son sommet.n",
+                    "picture_date" => "1792-01-01T00:00:00+00:00",
+                    "main_picture" => "fileName.jpg",
+                    "location" => [
+                        "id" => 1,
+                        "area" => "Île-de-France",
+                        "department" => "Paris",
+                        "district" => "Quartier latin",
+                        "street" => "28 place du Panthéon",
+                        "city" => "Paris",
+                        "zipcode" => 75005,
+                        "latitude" => "48.84619800",
+                        "longitude" => "2.34610500"
+                    ],
+                    "user" => [
+                        "id" => 1,
+                        "firstname" => "Aurélien",
+                        "lastname" => "ROUCHETTE-MARET",
+                        "email" => "aurelien.rouchette@orange.fr",
+                        "roles" => [
+                            "ROLE_USER",
+                            "ROLE_ADMIN"
+                        ]
+                    ],
+                    "place" => [
+                        "id" => 1,
+                        "name" => "Le Panthéon",
+                        "type" => "Mausolée"
+                    ]
+                ],
+    ])
     )]
     #[OA\Tag(name: 'picture')]
     public function upload_update_main_picture(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager, LocationRepository $locationRepository, PlaceRepository $placeRepository)
@@ -253,11 +287,24 @@ class PictureController extends AbstractController
     )]
     #[OA\Response(
         response: 201,
-        description: 'Saves the image associated with the memory',
+        description: 'Returns the additional pictures',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_picture', 'get_place', 'get_user']))
-        )
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture'])),
+            example: [
+                [
+                    "pictures" => [
+                    [
+                        "id" => 1,
+                        "picture" => "fileName.jpg",
+                    ],
+                    [
+                        "id" => 2,
+                        "picture" => "fileName.jpg",
+                    ]
+                    ],         
+                ],
+    ])
     )]
     #[OA\Tag(name: 'picture')]
     #[Route('api/secure/upload/additional_pictures/{id<\d+>}', methods: ['POST'])]
@@ -320,11 +367,20 @@ class PictureController extends AbstractController
     )]
     #[OA\Response(
         response: 201,
-        description: 'Saves the image associated with the memory',
+        description: 'Returns the additional picture',
         content: new OA\JsonContent(
             type: 'array',
-            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_picture', 'get_place', 'get_user']))
-        )
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture'])),
+            example: [
+                [
+                    "picture" => [
+                    [
+                        "id" => 1,
+                        "picture" => "fileName.jpg",
+                    ],
+                    ],         
+                ],
+    ])
     )]
     #[OA\Tag(name: 'picture')]
     #[Route('api/secure/update/additional_pictures/{id<\d+>}', methods: ['POST'])]
