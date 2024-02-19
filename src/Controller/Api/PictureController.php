@@ -40,7 +40,7 @@ class PictureController extends AbstractController
 
     /**
      * Display all additional pictures
-     * @param PictureRepository $ppictureRepository
+     * @param PictureRepository $pictureRepository
      * @return Response
      */
     #[Route('/api/pictures', methods: ['GET'])]
