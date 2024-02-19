@@ -36,6 +36,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class MemoryController extends AbstractController
 {
 
+    private $fileUploader;
 
     public function __construct(FileUploader $fileUploader)
     {

@@ -9,6 +9,10 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class FileUploader
 {
+    private $params;
+    private $targetDirectory;
+    private $slugger;
+
     public function __construct(ParameterBagInterface $params, string $targetDirectory, SluggerInterface $slugger)
     {
         $this->params = $params;
