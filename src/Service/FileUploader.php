@@ -5,7 +5,6 @@ namespace App\Service;
 
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class FileUploader
