@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  * A third one uploads or updates the main memory picture.
  * A fourth one uploads (an) addditional memory picture(s).
  * A fifth one updates an addditional memory picture.
- * A sixth and last one deletes a additional picture by its id.
+ * A sixth and last one deletes an additional picture by its id.
  */
 class PictureController extends AbstractController
 {
