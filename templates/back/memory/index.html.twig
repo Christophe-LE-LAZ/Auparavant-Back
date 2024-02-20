@@ -50,11 +50,8 @@
                     <td>{{ sortResult.street }} {{ sortResult.zipcode }} {{ sortResult.city }}</td>
                     <td>{{ sortResult.userFirstName }} {{ sortResult.userLastName }}</td>
                     <td>
-                        {# <a href="{{ path('app_memory_show', {'id': sortResult.id}) }}">voir</a> #}
-                        {# <a href="{{ path('app_memory_edit', {'id': sortResult.id}) }}">modifier</a> #}
                        <a href="{{ path('app_location_edit', {'id': sortResult.id}) }}" title= "accéder au souvenir" aria-label ="accéder au souvenir"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>   
                        <a href="{{ path('app_location_edit', {'id': sortResult.id}) }}" title= "éditer le souvenir" aria-label ="éditer le souvenir"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>   
-                        {# <a href="{{ path('app_memory_edit', {'id': sortResult.id}) }}"title= "éditer le souvenir" aria-label ="éditer le souvenir"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></a> #}
                     </td>
                 </tr>
             {% endfor %}
@@ -76,8 +73,8 @@
                     <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
                     <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
                     <td>
-                        {# <a href="{{ path('app_memory_show', {'id': memory.id}) }}"  title= "accéder au souvenir" aria-label ="accéder au souvenir"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></a>
-                        <a href="{{ path('app_memory_edit', {'id': memory.id}) }}"title= "éditer le souvenir" aria-label ="éditer le souvenir"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></a> #}
+                       <a href="{{ path('app_location_edit', {'id': memory.id}) }}" title= "accéder au souvenir" aria-label ="accéder au souvenir"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>   
+                       <a href="{{ path('app_location_edit', {'id': memory.id}) }}" title= "éditer le souvenir" aria-label ="éditer le souvenir"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>  
                     </td>
                 </tr>
             {% endfor %}
@@ -93,5 +90,5 @@
 
     <a class="btn btn-lg btn-success m-5" href="{{ path('app_memory_new') }}">Créer un nouveau souvenir</a>
 
-    <a  class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">accueil</a>
+    <a  class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">Accueil</a>
 {% endblock %}
