@@ -46,7 +46,7 @@ class LocationController extends AbstractController
             $entityManager->persist($location);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La localite a bien ete ajoutee');
+            $this->addFlash('success', 'La localité a bien été ajoutée');
 
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
