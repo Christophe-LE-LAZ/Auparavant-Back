@@ -6,12 +6,27 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Adresse électronique</th>
+                <th>Id
+                    <a class= "text-decoration-none" href="{{ path('app_sort_user_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
+                <th>Prénom
+                    <a href="{{ path('app_sort_user_by', {'order': 'firstname', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'firstname', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Nom
+                    <a href="{{ path('app_sort_user_by', {'order': 'lastname', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'lastname', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Adresse électronique
+                    <a href="{{ path('app_sort_user_by', {'order': 'email', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'email', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
                 <th>Mot de passe</th>
-                <th>Rôle</th>
+                 <th>Rôle
+                    <a href="{{ path('app_sort_user_by', {'order': 'roles', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'roles', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
