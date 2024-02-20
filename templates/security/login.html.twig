@@ -1,31 +1,46 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col d-flex justify-content-center align-items-center flex-column">
+                <h1 class="m-5 col text-center">
+                    Bienvenue dans le backoffice d'Auparavant</h1>
 
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                {% if not app.user %}
+                    <form method="post">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="mb-2" for="inputEmail">Adresse électronique :</label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2" autocomplete="email" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label class="my-2" for="inputPassword">Mot de passe :</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control mb-5" autocomplete="current-password" required>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center m-auto">
+                                <button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
+                            </div>
+                        </div>
+                    </form>
+                {% else %}
+                    <div class="mb-3 text-center">
+                        Vous êtes connecté en tant que <b>{{ app.user.userIdentifier }} </b>
+                    </div>
+                    <div class="col text-center m-auto">
+                        <a class="btn btn-lg btn-primary" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </div>
+                {% endif %}
+
+                <img class="col img-fluid" src="{{ asset('css/pictures/appareilphotovintage.png') }}" alt="">
+            </div>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Merci de vous connecter</h1>
-    <label for="inputEmail">Adresse électronique : </label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <br>
-    <label for="inputPassword">Mot de passe : </label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-    <br>
-    <button class="btn btn-lg btn-primary" type="submit">
-        Se connecter
-    </button>
-</form>
+    </div>
 {% endblock %}
