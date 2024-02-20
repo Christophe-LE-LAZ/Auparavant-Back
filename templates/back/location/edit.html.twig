@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Modifier une localité</h1>
-    <div class="">
-    {{ include('back/location/_form.html.twig', {'button_label': 'Valider'}) }}
+	<h1 class="mb-5 mx-3">Modifier une localité</h1>
 
-    <a href="{{ path('app_location_index') }}">retour à la liste</a>
+	<div class="container">
+		<div class="row">
+			<div class="col">{{ include('back/location/_form.html.twig', {'button_label': 'Valider'}) }}</div>
+		</div>
 
-    {{ include('back/location/_delete_form.html.twig') }}
-    </div>
+		<div class="row mt-5 d-flex justify-content-center align-items-center">
+
+			<div class="col-1">
+				{{ include('back/location/_delete_form.html.twig') }}
+			</div>
+		</div>
+	</div>
 {% endblock %}

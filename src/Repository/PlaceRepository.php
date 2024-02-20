@@ -34,6 +34,26 @@ class PlaceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByOrderAlphabeticalPlace($direction): array
+    {
+        $sql = "SELECT
+        p.id as placeId, p.name as placeName, p.type as type,
+        m.*,
+        l.street as street, l.zipcode as zipcode, l.city as city,
+        u.firstname as userFirstName, u.lastname as userLastName
+    FROM place p
+    LEFT JOIN memory m ON p.id = m.place_id
+    LEFT JOIN location l ON m.location_id = l.id
+    LEFT JOIN user u ON m.user_id = u.id
+
+    ORDER BY
+        p.name $direction";
+    
+        $conn = $this->getEntityManager()->getConnection();
+        $resultSet = $conn->executeQuery($sql);
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Place[] Returns an array of Place objects
 //     */

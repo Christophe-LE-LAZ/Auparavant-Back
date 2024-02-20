@@ -1,17 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Index des utilisateurs</h1>
+    <h1 class="mb-5 mx-3">Index des utilisateurs</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Adresse électronique</th>
+                <th>Id
+                    <a class= "text-decoration-none" href="{{ path('app_sort_user_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
+                <th>Prénom
+                    <a href="{{ path('app_sort_user_by', {'order': 'firstname', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'firstname', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Nom
+                    <a href="{{ path('app_sort_user_by', {'order': 'lastname', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'lastname', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Adresse électronique
+                    <a href="{{ path('app_sort_user_by', {'order': 'email', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'email', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
                 <th>Mot de passe</th>
-                <th>Rôle</th>
+                 <th>Rôle
+                    <a href="{{ path('app_sort_user_by', {'order': 'roles', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_user_by', {'order': 'roles', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
@@ -29,8 +44,8 @@
                 {# <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">voir</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">modifier</a>
+                  <a href="{{ path('app_user_show', {'id': user.id}) }}" title= "accéder à l'utilisateur" aria-label ="accéder à l'utilisateur"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" title= "éditer l'utilisateur" aria-label ="éditer l'utilisateur"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a> 
                 </td>
             </tr>
         {% else %}
@@ -41,7 +56,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a>
+    <a class="btn btn-lg btn-success m-5" href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a>
 
- <a href="{{ path('app_main') }}">accueil</a>
+ <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">Accueil</a>
 {% endblock %}

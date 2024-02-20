@@ -1,41 +1,70 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Index des photos</h1>
+    <h1 class="mb-5 mx-3">Index des photos</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Id
+                    <a class= "text-decoration-none" href="{{ path('app_sort_picture_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_picture_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
                 <th>Photo</th>
-                <th>Souvenir correspondant</th>
+                <th>Souvenir correspondant
+                    <a href="{{ path('app_sort_picture_by', {'order': 'memory', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_picture_by', {'order': 'memory', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for picture in pictures %}
-            <tr>
-                <td>{{ picture.id }}</td>
-                <td>{{ picture.picture }}</td>
-                <td>{{ picture.memory.title }}</td>
-                {# <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
-                <td>
-                    <a href="{{ path('app_picture_show', {'id': picture.id}) }}">voir</a>
-                    <a href="{{ path('app_picture_edit', {'id': picture.id}) }}">modifier</a>
-                </td>
-            </tr>
+         {% if order is defined and order is same as ('memory') %}
+            {% if sortResults is not empty %}
+                {% for sortResult in sortResults %}
+                  <tr>
+                    <td>{{ sortResult.id }}</td>
+                    <td> <img src="https://auparavant.fr/assets/pictures/{{ sortResult.picture }} "class="img-thumbnail"></td>
+                    <td>{{ sortResult.title }}</td>
+                    <td>
+                        <a href="{{ path('app_picture_show', {'id': sortResult.id}) }}" title= "accéder à la photo" aria-label ="accéder à la photo"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
+                        <a href="{{ path('app_picture_edit', {'id': sortResult.id}) }}" title= "éditer la photo" aria-label ="éditer la photo"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a> 
+                    </td>
+                 </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun élément n'a été trouvé</td>
+                </tr>
+        {% endif %}
+        {% else %}
+          {% if pictures is not empty %}
+            {% for picture in pictures %}
+                <tr>
+                    <td>{{ picture.id }}</td>
+                    <td> <img src="https://auparavant.fr/assets/pictures/{{picture.picture }} "class="img-thumbnail"></td>
+                    <td>{{ picture.memory.title }}</td>
+                    {# <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
+                    <td>
+                        <a href="{{ path('app_picture_show', {'id': picture.id}) }}" title= "accéder à la photo" aria-label ="accéder à la photo"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
+                        <a href="{{ path('app_picture_edit', {'id': picture.id}) }}" title= "éditer la photo" aria-label ="éditer la photo"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a> 
+                    </td>
+                </tr>
+            {% endfor %}
+
         {% else %}
             <tr>
                 <td colspan="5">Aucun élément n'a été trouvé</td>
             </tr>
-        {% endfor %}
+        {% endif %}
+    {% endif %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_picture_new') }}">Ajouter une nouvelle photo</a>
+<a class="btn btn-lg btn-success m-5" href="{{ path('app_picture_new') }}">Ajouter une nouvelle photo</a>
 
-<a href="{{ path('app_main') }}">accueil</a>
+<a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">Accueil</a>
 {% endblock %}

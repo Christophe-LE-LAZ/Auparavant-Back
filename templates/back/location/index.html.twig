@@ -1,23 +1,50 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Index des localités</h1>
+    <h1 class="mb-5 mx-3">Index des localités</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Région</th>
-                <th>Département</th>
-                <th>Quartier</th>
-                <th>Rue</th>
-                <th>Code postal</th>
-                <th>Ville</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
+                 <th>Id
+                    <a class= "text-decoration-none" href="{{ path('app_sort_location_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_location_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
+                <th>Région
+                    <a href="{{ path('app_sort_location_by', {'order': 'area', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_location_by', {'order': 'area', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Département
+                    <a href="{{ path('app_sort_location_by', {'order': 'department', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_location_by', {'order': 'department', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Quartier
+                    <a href="{{ path('app_sort_location_by', {'order': 'district', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_location_by', {'order': 'district', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Rue
+                    <a href="{{ path('app_sort_location_by', {'order': 'street', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_location_by', {'order': 'street', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Code postal
+                    <a href="{{ path('app_sort_location_by', {'order': 'zipcode', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_location_by', {'order': 'zipcode', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
+                <th>Ville
+                    <a href="{{ path('app_sort_location_by', {'order': 'city', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_location_by', {'order': 'city', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
+                <th>Latitude
+                    <a href="{{ path('app_sort_location_by', {'order': 'latitude', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_location_by', {'order': 'latitude', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
+                <th>Longitude
+                    <a href="{{ path('app_sort_location_by', {'order': 'longitude', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_location_by', {'order': 'longitude', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,8 +62,8 @@
                 {# <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ location.updatedAt ? location.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_location_show', {'id': location.id}) }}">voir</a>
-                    <a href="{{ path('app_location_edit', {'id': location.id}) }}">modifier</a>                    
+                    <a href="{{ path('app_location_show', {'id': location.id}) }}" title= "accéder à la localité" aria-label ="accéder à la localité"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
+                    <a href="{{ path('app_location_edit', {'id': location.id}) }}" title= "éditer la localité" aria-label ="éditer la localité"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>                    
                 </td>
             </tr>
         {% else %}
@@ -47,7 +74,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_location_new') }}">Créer une nouvelle localité</a>
+    <a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}">Créer une nouvelle localité</a>
 
-<a href="{{ path('app_main') }}">accueil</a>
+<a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">Accueil</a>
 {% endblock %}
