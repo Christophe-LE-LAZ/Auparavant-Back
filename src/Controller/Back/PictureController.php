@@ -96,6 +96,8 @@ class PictureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'La photo a bien ete mise a jour');
+
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -118,6 +120,8 @@ class PictureController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
             $entityManager->remove($picture);
             $entityManager->flush();
+
+            $this->addFlash('success', 'La photo a bien ete supprimee');
         }
 
         return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
