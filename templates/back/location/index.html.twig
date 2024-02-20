@@ -6,62 +6,62 @@
     <table class="table">
         <thead>
             <tr>
-                 <th>Id
+                 <th class="text-center align-middle">Id
                     <a class= "text-decoration-none" href="{{ path('app_sort_location_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
-                <th>Région
+                <th class="text-center align-middle">Région
                     <a href="{{ path('app_sort_location_by', {'order': 'area', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'area', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>Département
+                <th class="text-center align-middle">Département
                     <a href="{{ path('app_sort_location_by', {'order': 'department', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'department', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>Quartier
+                <th class="text-center align-middle">Quartier
                     <a href="{{ path('app_sort_location_by', {'order': 'district', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'district', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>Rue
+                <th class="text-center align-middle">Rue
                     <a href="{{ path('app_sort_location_by', {'order': 'street', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'street', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>Code postal
+                <th class="text-center align-middle">Code postal
                     <a href="{{ path('app_sort_location_by', {'order': 'zipcode', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'zipcode', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
-                <th>Ville
+                <th class="text-center align-middle">Ville
                     <a href="{{ path('app_sort_location_by', {'order': 'city', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'city', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>Latitude
+                <th class="text-center align-middle">Latitude
                     <a href="{{ path('app_sort_location_by', {'order': 'latitude', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'latitude', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
-                <th>Longitude
+                <th class="text-center align-middle">Longitude
                     <a href="{{ path('app_sort_location_by', {'order': 'longitude', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'longitude', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
-                <th>Actions</th>
+                <th class="text-center align-middle">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for location in locations %}
             <tr>
-                <td>{{ location.id }}</td>
-                <td>{{ location.area }}</td>
-                <td>{{ location.department }}</td>
-                <td>{{ location.district }}</td>
-                <td>{{ location.street }}</td>
-                <td>{{ location.zipcode }}</td>
-                <td>{{ location.city }}</td>
-                <td>{{ location.latitude }}</td>
-                <td>{{ location.longitude }}</td>
+                <td class="text-center align-middle">{{ location.area }}</td>
+                <td class="text-center align-middle">{{ location.id }}</td>
+                <td class="text-center align-middle">{{ location.department }}</td>
+                <td class="text-center align-middle">{{ location.district }}</td>
+                <td class="text-center align-middle">{{ location.street }}</td>
+                <td class="text-center align-middle">{{ location.zipcode }}</td>
+                <td class="text-center align-middle">{{ location.city }}</td>
+                <td class="text-center align-middle">{{ location.latitude }}</td>
+                <td class="text-center align-middle">{{ location.longitude }}</td>
                 {# <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ location.updatedAt ? location.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
-                <td>
+                <td class="text-center align-middle">
                     <a href="{{ path('app_location_show', {'id': location.id}) }}" title= "accéder à la localité" aria-label ="accéder à la localité"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
                     <a href="{{ path('app_location_edit', {'id': location.id}) }}" title= "éditer la localité" aria-label ="éditer la localité"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>                    
                 </td>
