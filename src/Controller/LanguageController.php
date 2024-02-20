@@ -12,9 +12,7 @@ class LanguageController extends AbstractController
     {
         $request->getSession()->set('_locale', $locale);
 
-        $referer = $request->headers->get('referer');
-
         // Redirect back to the referring page
-        return $this->redirect($referer);
+        return $this->redirect($request->headers->get('referer'));
     }
 }

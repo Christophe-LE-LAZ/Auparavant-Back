@@ -1,12 +1,6 @@
 <!doctype html>
-<html lang="fr">
-
+<html lang="{{ app.request.locale }}">
 <head>
-    <div>
-        <a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'en'}) }}">{{ 'English'|trans }}</a>
-        <a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'fr'}) }}">{{ 'French'|trans }}</a>
-    </div>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,16 +19,22 @@
 </head>
 
 <body>
+    <header>   
+        <nav>
+                <!-- Language Switching Links -->
+            <div>
+                <a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'en'}) }}">{{ 'English'|trans }}</a>
+                <a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'fr'}) }}">{{ 'French'|trans }}</a>
+            </div>
 
-<nav>
-
-
-
-</nav>
-{% block body %}{% endblock %}
+        </nav>
+    </header>
+    <main>
+    {% block body %}{% endblock %}
+    </main>
 </body>
 
-<footer>
-</footer>
+    <footer>
+    </footer>
 
 </html>
