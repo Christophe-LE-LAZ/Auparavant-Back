@@ -2,6 +2,10 @@
 <html lang="fr">
 
 <head>
+    <ul>
+        <li><a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'en'}) }}">English</a></li>
+        <li><a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'fr'}) }}">Français</a></li>
+    </ul>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,11 +16,11 @@
     <!-- Bootstrap icons -->
     {# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> #}
     <!-- Our custom CSS -->
-    {# <link rel="stylesheet" href="{{ asset('css/style.css') }}"> #}
+    {# <link rel="stylesheet" href="{{ asset('assets/style.css') }}"> #}
     <!-- favicon -->
-    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
+    {# <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon"> #}
 
-    <title>Backoffice d'Auparavant</title>
+    <title>{{ 'main.title'|trans }}</title>
 </head>
 
 <body>

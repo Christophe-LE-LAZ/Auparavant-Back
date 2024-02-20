@@ -1,6 +1,7 @@
 # translations/messages.en.yaml
 
-hello: Hello, this is a translated message!
+main.title: What did there use to be? backoffice
+page.title: Welcome to What did there use to be? backoffice
 welcome: Welcome to our website, %name%!
 
 ## A.P.I
@@ -41,27 +42,107 @@ unauthorized_access:
 
 
 ## Backoffice
+
+### _delete_form
+deletion_confirmation: Are you sure you want to delete this item?
+button.delete: Delete
+
+### _form
+button.submit: Save
+
+### edit
+# title: Edit Entity
+button.update: Update
+button.back: back to list
+
+## index
+# title.reversed: Entity index
+button.show: show
+button.edit: edit
+warning: no records found
+button.create: Create new
+button.home: home
+
+# new
+# title.new: Create new Entity
+# button.back: back to list
+
+# show
+# title: Entity
+# button.back: back to list
+# button.edit: edit
+
 location:
+    ### edit
+    title.edit: Edit Location
+    ### index
+    title.index: Location index
+    new: Add a new location
+    ### new
+    title.new: Create new Location
+    ### show:
+    title: Location
+    ### success
     create.success: 'Location created successfully.'
     update.success: 'Location updated successfully.'
     delete.success: 'Location deleted successfully.'
     not_found: 'Location not found.'
 memory:
+    ### edit
+    title.edit: Edit Memory
+    ### index
+    title.index: Memory index
+    new: Add a new memory
+    ### new
+    title.new: Create new Memory
+    ### show:
+    title: Memory
+    ### success
     create.success: 'Memory created successfully.'
     update.success: 'Memory updated successfully.'
     delete.success: 'Memory deleted successfully.'
     not_found: 'Memory not found.'
 picture:
+    ### edit
+    title.edit: Edit Picture
+    ### index
+    title.index: Picture index
+    new: Upload a new picture
+    ### new
+    title.new: Upload new Picture
+    ### show:
+    title: Picture
+    ### success
     create.success: 'Picture uploaded successfully.'
     update.success: 'Picture updated successfully.'
     delete.success: 'Picture deleted successfully.'
     not_found: 'Picture not found.'
 place:
+    ### edit
+    ttitle.edit: Edit Place
+    ### index
+    title.index: Place index
+    new: Add a new place
+    ### new
+    title.new: Create new Place
+    ### show:
+    title: Place
+    ### success
     create.success: 'Place created successfully.'
     update.success: 'Place updated successfully.'
     delete.success: 'Place deleted successfully.'
     not_found: 'Place not found.'
 user:
+    ### edit
+    title.edit: Edit a user's account
+    ### index
+    title.index: User index
+    new: Add a new user
+    ### new
+    title.new: Create a new user account
+    ### show:
+    title: User
+    ### success
     create.success: 'Account created successfully.'
     update.success: 'Account updated successfully.'
     delete.success: 'Account deleted successfully.'

@@ -1,6 +1,7 @@
 # translations/messages.fr.yaml
 
-hello: Bonjour, ceci est un message traduit !
+main.title: Backoffice d'Auparavant
+page.title: Bienvenue sur le backoffice de Y'avait quoi avant
 welcome: Bienvenue sur notre site web, %name% !
 
 ## A.P.I
@@ -40,28 +41,108 @@ unauthorized_access:
     deletion: Vous n'êtes pas autorisé à supprimer ce contenu.
 
 ## Backoffice
-localité :
-create.success : 'Localité créée avec succès.'
-update.success : 'Localité mise à jour avec succès.'
-delete.success : 'Localité supprimée avec succès.'
-not_found : "Localité non trouvée".
-souvenir :
-create.success : 'Souvenir créé avec succès.'
-update.success : 'Souvenir mis à jour avec succès.'
-delete.success : 'Souvenir supprimée avec succès.'
-not_found : "Souvenir non trouvé".
-image :
-create.success : 'Image téléchargée avec succès.'
-update.success : 'Image mise à jour avec succès.'
-delete.success : 'Image supprimée avec succès.'
-not_found : "Image non trouvée".
-place :
-create.success : 'Lieu créé avec succès.'
-update.success : 'Lieu mis à jour avec succès.'
-delete.success : 'Lieu supprimé avec succès.'
-not_found : "Lieu non trouvé".
-user :
-create.success : 'Compte créé avec succès.'
-update.success : 'Compte mis à jour avec succès.'
-delete.success : 'Compte supprimé avec succès.'
-not_found : "Compte non trouvé".
+
+### _delete_form
+deletion_confirmation: Êtes-vous sûr de vouloir supprimer cet élément ?
+button.delete: Supprimer
+
+### _form
+button.submit: Valider
+
+### edit
+# title: Modifier une entité
+button.update: Mettre à jour
+button.back: retour à la liste
+
+## index
+# title.reversed: Index des entités
+button.show: voir
+button.edit: modifier
+warning: Aucun élément n'a été trouvé
+# button.create: Créer une nouvelle entité
+button.home: accueil
+
+# new
+# title.new: Créer une nouvelle entité
+# button.back: back to list
+
+# show
+# title: Entity
+# button.back: back to list
+# button.edit: edit
+
+location:
+    ### edit
+    title.edit: Modifier une localité
+    ### index
+    title.index: Index des localités
+    new: Ajouter une nouvelle localité
+    ### new
+    title.new: Créer une nouvelle localité
+    ### show:
+    title: Localité
+    ### success
+    create.success : Localité créée avec succès
+    update.success : Localité mise à jour avec succès
+    delete.success : Localité supprimée avec succès
+    not_found : Localité non trouvée
+memory:
+    ### edit
+    title.edit: Modifier un souvenir
+    ### index
+    title.index: Index des souvenirs
+    new: Ajouter un nouveau souvenir
+    ### new
+    title.new: Créer un nouveau souvenir
+    ### show:
+    title: Souvenir
+    ### success
+    create.success : Souvenir créé avec succès
+    update.success : Souvenir mis à jour avec succès
+    delete.success : Souvenir supprimée avec succès
+    not_found : Souvenir non trouvé
+picture:
+    ### edit
+    title.edit: Modifier une photo
+    ### index
+    title.index: Index des photos
+    new: Ajouter une nouvelle photo
+    ### new
+    title.new: Ajouter une nouvelle photo
+    ### show:
+    title: Photo
+    ### success
+    create.success : Image téléchargée avec succès
+    update.success : Image mise à jour avec succès
+    delete.success : Image supprimée avec succès
+    not_found : Image non trouvée
+place:
+    ### edit
+    title.edit: Modifier un endroit
+    ### index
+    title.index: Index des endroits
+    new: Ajouter un nouvel endroit
+    ### new
+    title.new: Créer un nouvel endroit
+    ### show:
+    title: Place
+    ### success
+    create.success : Lieu créé avec succès
+    update.success : Lieu mis à jour avec succès
+    delete.success : Lieu supprimé avec succès
+    not_found : Lieu non trouvé
+user:
+    ### edit
+    title.edit: Modifier le compte d'un utilisateur
+    ### index
+    title.index: Index des utilisateurs
+    new: Ajouter un nouvel utilisateur
+    ### new
+    title.new: Créer un nouveau compte utilisateur
+    ### show:
+    title: Utilisateur
+    ### success
+    create.success : Compte créé avec succès
+    update.success : Compte mis à jour avec succès
+    delete.success : Compte supprimé avec succès
+    not_found : Compte non trouvé
