@@ -46,7 +46,7 @@ class PlaceController extends AbstractController
             $entityManager->persist($place);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le lieu a bien ete ajoute');
+            $this->addFlash('success', 'Le lieu a bien été ajouté');
 
             return $this->redirectToRoute('app_place_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -87,7 +87,7 @@ class PlaceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le lieu a bien ete modifie');
+            $this->addFlash('success', 'Le lieu a bien été modifié');
 
             return $this->redirectToRoute('app_place_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -112,7 +112,7 @@ class PlaceController extends AbstractController
             $entityManager->remove($place);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le lieu a bien ete supprime');
+            $this->addFlash('success', 'Le lieu a bien été supprimé');
         }
 
         return $this->redirectToRoute('app_place_index', [], Response::HTTP_SEE_OTHER);

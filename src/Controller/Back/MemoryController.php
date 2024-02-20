@@ -46,7 +46,7 @@ class MemoryController extends AbstractController
             $entityManager->persist($memory);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le souvenir a bien ete ajoute');
+            $this->addFlash('success', 'Le souvenir a bien été ajouté');
 
             return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -87,7 +87,7 @@ class MemoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le souvenir a bien ete modifie');
+            $this->addFlash('success', 'Le souvenir a bien été modifié');
 
             return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -112,7 +112,7 @@ class MemoryController extends AbstractController
             $entityManager->remove($memory);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le souvenir a bien ete supprime');
+            $this->addFlash('success', 'Le souvenir a bien été supprimé');
         }
 
         return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);

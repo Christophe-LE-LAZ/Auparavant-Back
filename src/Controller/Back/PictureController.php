@@ -54,7 +54,7 @@ class PictureController extends AbstractController
             $entityManager->persist($picture);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La photo a bien ete ajoute');
+            $this->addFlash('success', 'La photo a bien été ajoutée');
 
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
@@ -96,7 +96,7 @@ class PictureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'La photo a bien ete mise a jour');
+            $this->addFlash('success', 'La photo a bien été mise à jour');
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -121,7 +121,7 @@ class PictureController extends AbstractController
             $entityManager->remove($picture);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La photo a bien ete supprimee');
+            $this->addFlash('success', 'La photo a bien été supprimée');
         }
 
         return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
