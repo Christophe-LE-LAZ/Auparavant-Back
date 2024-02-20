@@ -23,21 +23,21 @@ class RegistrationFormType extends AbstractType
                 'firstname',
                 TextType::class,
                 [
-                    'label' => 'Prénom : '
+                    'label' => 'user_access.firstname'
                 ]
             )
             ->add(
                 'lastname',
                 TextType::class,
                 [
-                    'label' => 'Nom : '
+                    'label' => 'user_access.lastname'
                 ]
             )
             ->add(
                 'email',
                 EmailType::class,
                 [
-                    'label' => 'Adresse électronique : '
+                    'label' => 'user_access.email'
                 ]
             )
             ->add(
@@ -49,7 +49,7 @@ class RegistrationFormType extends AbstractType
                     [
                         new IsTrue(
                             [
-                                'message' => 'Vous devez accepter nos conditions.',
+                                'message' => 'register.terms.must',
                             ]
                         ),
                     ],
@@ -62,11 +62,11 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Le mot de passe ne peut pas être vide',
+                        'message' => 'password_message',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Le mot de passe doit faire au minimum {{ limit }} caractères',
+                        'minMessage' => 'password_min_message',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

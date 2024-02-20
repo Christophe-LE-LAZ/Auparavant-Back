@@ -161,8 +161,8 @@ picture:
     update.success: Picture updated successfully
     delete.success: Picture deleted successfully
     not_found: Picture not found
-    picture: Picture
-    memory: Corresponding memory
+    picture: 'Picture:'
+    memory: 'Corresponding memory:'
 place:
     ### edit
     ttitle.edit: Edit Place
@@ -178,9 +178,9 @@ place:
     update.success: Place updated successfully
     delete.success: Place deleted successfully
     not_found: Place not found
-    name: Name
-    type: Type
-    address: Address
+    name: 'Name:'
+    type: 'Type:'
+    address: 'Address:'
 user:
     ### edit
     title.edit: Edit a user's account
@@ -201,14 +201,21 @@ user:
     email: Email address
     password: Password
     role: Role
+    admin: Administrator
+    moderator: Moderator
+    user: User
 user_access:
     firstname: 'Firstname: '
     lastname: 'Lastname: '
     email: 'Email address: '
     password: 'Password: '
+    role: 'Role: '
 register:
     registration_page: Registration page
     terms: Accept terms and conditions
+    terms.must: You must accept our terms and conditions.
+    password_message: Password cannot be blank.
+    password_min_message: Password must be at least {{ limit }} characters long.
     button: Register
 login:
     message: You are logged in as

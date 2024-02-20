@@ -161,8 +161,8 @@ picture:
     update.success : Photo mise à jour avec succès
     delete.success : Photo supprimée avec succès
     not_found : Photo non trouvée
-    icture: Photographie
-    memory: Souvenir correspondant
+    picture: 'Photographie :'
+    memory: 'Souvenir correspondant :'
 place:
     ### edit
     title.edit: Modifier un lieu
@@ -178,9 +178,9 @@ place:
     update.success : Lieu mis à jour avec succès
     delete.success : Lieu supprimé avec succès
     not_found : Lieu non trouvé
-    name: Nom
-    type: Type
-    address: Adresse
+    name: 'Nom :'
+    type: 'Type :'
+    address: 'Adresse :'
 user:
     ### edit
     title.edit: Modifier le compte d'un utilisateur
@@ -201,14 +201,21 @@ user:
     email: Adresse électronique
     password: Mot de passe
     role: Rôle
+    admin: Administrateur
+    moderator: Modérateur
+    user: Utilisateur
 user_access:
     firstname: 'Prénom : '
     lastname: 'Nom : '
     email: 'Adresse électronique : '
     password: 'Mot de passe : '
+    role: 'Rôle : '
 register:
     registration_page: Page d'inscription
     terms: Accepter les conditions d'utilisation
+    terms.must: Vous devez accepter nos conditions.
+    password_message: Le mot de passe ne peut pas être vide.
+    password_min_message: Le mot de passe doit faire au minimum {{ limit }} caractères.
     button: S'inscrire
 login:
     message: Vous êtes connecté en tant que
