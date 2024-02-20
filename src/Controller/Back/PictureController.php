@@ -47,12 +47,14 @@ class PictureController extends AbstractController
             $pictures = $form->get('picture')->getData();
 
             if ($pictures) {
-                $newPicture = $fileUploader->upload($pictures);
+                $newPicture = $fileUploader->uploadImage($pictures);
                 $picture->setPicture($newPicture);
             }
             
             $entityManager->persist($picture);
             $entityManager->flush();
+
+            $this->addFlash('success', 'La photo a bien ete ajoute');
 
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
