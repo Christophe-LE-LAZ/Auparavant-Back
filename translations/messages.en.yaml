@@ -55,7 +55,7 @@ button.submit: Save
 
 ### edit
 # title: Edit Entity
-button.update: Updaaaate
+button.update: Update
 button.back: back to list
 
 ## index
@@ -107,6 +107,15 @@ location:
     city: City
     latitude: Latitude
     longitude: Longitude
+    form:
+        area: 'Region:'
+        department: 'Department:'
+        district: 'District:'
+        street: 'Street:'
+        city: 'City:'
+        zipcode: 'Zip Code:'
+        latitude: 'Latitude:'
+        longitude: 'Longitude:'
 memory:
     ### edit
     title.edit: Edit Memory
@@ -129,6 +138,14 @@ memory:
     place: Name and type of location
     address: Address
     user: Creator
+    form:
+        title: 'Title:'
+        content: 'Content:'
+        main_picture: 'Main Picture:'
+        picture_date: 'Picture Date:'
+        user: 'Creator:'
+        location: 'Address:'
+        place: 'Place:'
 picture:
     ### edit
     title.edit: Edit Picture

@@ -19,56 +19,56 @@ class LocationType extends AbstractType
                 'area',
                 TextType::class,
                 [
-                    'label' => 'Région : '
+                    'label' => 'location.form.area'
                 ]
             )
             ->add(
                 'department',
                 TextType::class,
                 [
-                    'label' => 'Département : '
+                    'label' => 'location.form.department'
                 ]
             )
             ->add(
                 'district',
                 TextType::class,
                 [
-                    'label' => 'Quartier: '
+                    'label' => 'location.form.district'
                 ]
             )
             ->add(
                 'street',
                 TextType::class,
                 [
-                    'label' => 'Rue : '
+                    'label' => 'location.form.street'
                 ]
             )
             ->add(
                 'city',
                 TextType::class,
                 [
-                    'label' => 'Ville : '
+                    'label' => 'location.form.city'
                 ]
             )
             ->add(
                 'zipcode',
                 IntegerType::class,
                 [
-                    'label' => 'Code postal : '
+                    'label' => 'location.form.zipcode'
                 ]
             )
             ->add(
                 'latitude',
                 NumberType::class,
                 [
-                    'label' => 'Latitude : '
+                    'label' => 'location.form.latitude'
                 ]
             )
             ->add(
                 'longitude',
                 NumberType::class,
                 [
-                    'label' => 'Longitude : '
+                    'label' => 'location.form.longitude'
                 ]
             );
     }

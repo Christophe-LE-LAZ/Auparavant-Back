@@ -106,6 +106,15 @@ location:
     city: Ville
     latitude: Latitude
     longitude: Longitude
+    form:
+        area: 'Région :'
+        department: 'Département :'
+        district: 'Quartier :'
+        street: 'Rue :'
+        city: 'Ville :'
+        zipcode: 'Code postal :'
+        latitude: 'Latitude :'
+        longitude: 'Longitude :'
 memory:
     ### edit
     title.edit: Modifier un souvenir
@@ -128,6 +137,15 @@ memory:
     place: Nom et type de lieu
     address: Adresse
     user: Créateur
+    form:
+        title: 'Titre :'
+        content: 'Contenu :'
+        main_picture: 'Photo principale :'
+        picture_date: 'Date de la photo :'
+        user: 'Créateur :'
+        location: 'Adresse :'
+        place: 'Lieu :'
+
 picture:
     ### edit
     title.edit: Modifier une photo

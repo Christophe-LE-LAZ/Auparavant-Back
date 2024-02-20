@@ -3,7 +3,7 @@
 {% block body %}
     <h1>{{ 'picture.title.edit'|trans }}</h1>
 
-    {{ include('back/picture/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('back/picture/_form.html.twig', {'button_label': 'button.update'|trans}) }}
 
     <a href="{{ path('app_picture_index') }}">{{ 'button.back'|trans }}</a>
 
