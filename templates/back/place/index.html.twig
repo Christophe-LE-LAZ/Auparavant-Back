@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Index des endroits</h1>
+    <h1 class="mb-5 mx-3">Index des endroits</h1>
 
     <table class="table">
         <thead>
@@ -24,7 +24,7 @@
                 </th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -58,8 +58,10 @@
                 {# <td>{{ place.createdAt ? place.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ place.updatedAt ? place.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_place_show', {'id': place.id}) }}">voir</a>
-                    <a href="{{ path('app_place_edit', {'id': place.id}) }}">modifier</a>
+                    {# <a href="{{ path('app_place_show', {'id': place.id}) }}">voir</a> #}
+                    {# <a href="{{ path('app_place_edit', {'id': place.id}) }}">modifier</a> #}
+                     <a href="{{ path('app_place_show', {'id': place.id}) }}" title= "accéder à la place" aria-label ="accéder à la place"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
+                    <a href="{{ path('app_place_edit', {'id': place.id}) }}" title= "éditer la place" aria-label ="éditer la place"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>       
                 </td>
             </tr>
             {% endfor %}
@@ -72,7 +74,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_place_new') }}">Créer un nouvel endroit</a>
+    <a class="btn btn-lg btn-success m-5"  href="{{ path('app_place_new') }}">Créer un nouvel endroit</a>
 
-<a href="{{ path('app_main') }}">accueil</a>
+<a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">Accueil</a>
 {% endblock %}

@@ -26,7 +26,7 @@
                 {% for sortResult in sortResults %}
                   <tr>
                     <td>{{ sortResult.id }}</td>
-                    <td class="img-thumbnail">{{ sortResult.picture }}</td>
+                    <td> <img src="https://auparavant.fr/assets/pictures/{{ sortResult.picture }} "class="img-thumbnail"></td>
                     <td>{{ sortResult.title }}</td>
                     <td>
                         <a href="{{ path('app_picture_show', {'id': sortResult.id}) }}">voir</a>
@@ -44,7 +44,7 @@
             {% for picture in pictures %}
                 <tr>
                     <td>{{ picture.id }}</td>
-                    <td class="img-thumbnail">{{ picture.picture }}</td>
+                    <td> <img src="https://auparavant.fr/assets/pictures/{{picture.picture }} "class="img-thumbnail"></td>
                     <td>{{ picture.memory.title }}</td>
                     {# <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
@@ -64,7 +64,7 @@
         </tbody>
     </table>
 
-<a href="{{ path('app_picture_new') }}">Ajouter une nouvelle photo</a>
+<a class="btn btn-lg btn-success m-5" href="{{ path('app_picture_new') }}">Ajouter une nouvelle photo</a>
 
-<a href="{{ path('app_main') }}">accueil</a>
+<a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">Accueil</a>
 {% endblock %}
