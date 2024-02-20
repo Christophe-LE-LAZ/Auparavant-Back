@@ -35,6 +35,19 @@ class PictureRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByOrderAlphabeticalMemory($direction): array
+    {
+        $sql = "SELECT  m.title, 
+                p.*
+                FROM picture as p
+                LEFT JOIN memory m ON p.memory_id = m.id
+                ORDER BY m.title $direction";
+    
+        $conn = $this->getEntityManager()->getConnection();
+        $resultSet = $conn->executeQuery($sql);
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Picture[] Returns an array of Picture objects
 //     */

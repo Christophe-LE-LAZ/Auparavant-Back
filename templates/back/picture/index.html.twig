@@ -6,36 +6,65 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Id
+                    <a class= "text-decoration-none" href="{{ path('app_sort_picture_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
+                    <a href="{{ path('app_sort_picture_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
+                </th>
                 <th>Photo</th>
-                <th>Souvenir correspondant</th>
+                <th>Souvenir correspondant
+                    <a href="{{ path('app_sort_picture_by', {'order': 'memory', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
+                    <a href="{{ path('app_sort_picture_by', {'order': 'memory', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
+                </th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for picture in pictures %}
-            <tr>
-                <td>{{ picture.id }}</td>
-                <td>{{ picture.picture }}</td>
-                <td>{{ picture.memory.title }}</td>
-                {# <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
-                <td>
-                    <a href="{{ path('app_picture_show', {'id': picture.id}) }}">voir</a>
-                    <a href="{{ path('app_picture_edit', {'id': picture.id}) }}">modifier</a>
-                </td>
-            </tr>
+         {% if order is defined and order is same as ('memory') %}
+            {% if sortResults is not empty %}
+                {% for sortResult in sortResults %}
+                  <tr>
+                    <td>{{ sortResult.id }}</td>
+                    <td class="img-thumbnail">{{ sortResult.picture }}</td>
+                    <td>{{ sortResult.title }}</td>
+                    <td>
+                        <a href="{{ path('app_picture_show', {'id': sortResult.id}) }}">voir</a>
+                        <a href="{{ path('app_picture_edit', {'id': sortResult.id}) }}">modifier</a>
+                    </td>
+                 </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun élément n'a été trouvé</td>
+                </tr>
+        {% endif %}
+        {% else %}
+          {% if pictures is not empty %}
+            {% for picture in pictures %}
+                <tr>
+                    <td>{{ picture.id }}</td>
+                    <td class="img-thumbnail">{{ picture.picture }}</td>
+                    <td>{{ picture.memory.title }}</td>
+                    {# <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
+                    <td>
+                        <a href="{{ path('app_picture_show', {'id': picture.id}) }}">voir</a>
+                        <a href="{{ path('app_picture_edit', {'id': picture.id}) }}">modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
         {% else %}
             <tr>
                 <td colspan="5">Aucun élément n'a été trouvé</td>
             </tr>
-        {% endfor %}
+        {% endif %}
+    {% endif %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_picture_new') }}">Ajouter une nouvelle photo</a>
+<a href="{{ path('app_picture_new') }}">Ajouter une nouvelle photo</a>
 
 <a href="{{ path('app_main') }}">accueil</a>
 {% endblock %}

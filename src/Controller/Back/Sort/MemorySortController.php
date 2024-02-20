@@ -28,17 +28,10 @@ class MemorySortController extends AbstractController
 
         if ($order === 'location') {
             $sortResults = $locationRepository->findByOrderAlphabeticalStreet($direction);
-            //   foreach ($sortResults as $sort ) {
-            //     dump ($sort);
-            //        dd ($sort['id']);
-            // }
         }
 
         if ($order === 'place') {
             $sortResults = $placeRepository->findByOrderAlphabeticalPlace($direction);
-            foreach ($sortResults as $sort ) {
-                   dump($sort['id']);   
-            }
         }
 
         $memories = $memoryRepository->findBy([], [$order => $direction]);
