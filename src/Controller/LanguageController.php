@@ -10,10 +10,11 @@ class LanguageController extends AbstractController
 {
     public function switchLanguage(Request $request, string $locale): Response
     {
-        dump("Switching language to: " . $locale);
         $request->getSession()->set('_locale', $locale);
 
+        $referer = $request->headers->get('referer');
+
         // Redirect back to the referring page
-        return $this->redirect($request->headers->get('referer'));
+        return $this->redirect($referer);
     }
 }

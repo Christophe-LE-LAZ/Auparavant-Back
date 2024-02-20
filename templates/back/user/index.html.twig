@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Index des utilisateurs</h1>
+    <h1>{{ 'user.title.index'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Adresse électronique</th>
-                <th>Mot de passe</th>
-                <th>Rôle</th>
+                <th>{{ 'user.firstname'|trans }}</th>
+                <th>{{ 'user.lastname'|trans }}</th>
+                <th>{{ 'user.email'|trans }}</th>
+                <th>{{ 'user.password'|trans }}</th>
+                <th>{{ 'user.role'|trans }}</th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
@@ -29,19 +29,19 @@
                 {# <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">voir</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">modifier</a>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">{{ 'button.show'|trans }}</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">{{ 'button.edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">Aucun élément n'a été trouvé</td>
+                <td colspan="9">{{ 'no_records_found'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Créer un nouvel utilisateur</a>
+    <a href="{{ path('app_user_new') }}">{{ 'place.new'|trans }}</a>
 
- <a href="{{ path('app_main') }}">accueil</a>
+ <a href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
 {% endblock %}

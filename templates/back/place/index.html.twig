@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Index des endroits</h1>
+    <h1>{{ 'place.title.index'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nom</th>
-                <th>Type</th>
-                <th>Adresse</th>
+                <th>{{ 'place.name'|trans }}</th>
+                <th>{{ 'place.type'|trans }}</th>
+                <th>{{ 'place.address'|trans }}</th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
@@ -25,19 +25,19 @@
                 {# <td>{{ place.createdAt ? place.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ place.updatedAt ? place.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_place_show', {'id': place.id}) }}">voir</a>
-                    <a href="{{ path('app_place_edit', {'id': place.id}) }}">modifier</a>
+                    <a href="{{ path('app_place_show', {'id': place.id}) }}">{{ 'button.show'|trans }}</a>
+                    <a href="{{ path('app_place_edit', {'id': place.id}) }}">{{ 'button.edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">Aucun élément n'a été trouvé</td>
+                <td colspan="6">{{ 'no_records_found'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_place_new') }}">Créer un nouvel endroit</a>
+    <a href="{{ path('app_place_new') }}">{{ 'place.new'|trans }}</a>
 
-<a href="{{ path('app_main') }}">accueil</a>
+<a href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
 {% endblock %}

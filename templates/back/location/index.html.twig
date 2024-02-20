@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Index des localités</h1>
+    <h1>{{ 'location.title.index'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Région</th>
-                <th>Département</th>
-                <th>Quartier</th>
-                <th>Rue</th>
-                <th>Code postal</th>
-                <th>Ville</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
+                <th>{{ 'location.area'|trans }}</th>
+                <th>{{ 'location.department'|trans }}</th>
+                <th>{{ 'location.district'|trans }}</th>
+                <th>{{ 'location.street'|trans }}</th>
+                <th>{{ 'location.zipcode'|trans }}</th>
+                <th>{{ 'location.street'|trans }}</th>
+                <th>{{ 'location.latitude'|trans }}</th>
+                <th>{{ 'location.longitude'|trans }}</th>
                 {# <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
                 <th>actions</th>
@@ -35,19 +35,19 @@
                 {# <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ location.updatedAt ? location.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_location_show', {'id': location.id}) }}">voir</a>
-                    <a href="{{ path('app_location_edit', {'id': location.id}) }}">modifier</a>                    
+                    <a href="{{ path('app_location_show', {'id': location.id}) }}">{{ 'button.show'|trans }}</a>
+                    <a href="{{ path('app_location_edit', {'id': location.id}) }}">{{ 'button.edit'|trans }}</a>                    
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="12">Aucun élément n'a été trouvé</td>
+                <td colspan="12">{{ 'no_records_found'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_location_new') }}">Créer une nouvelle localité</a>
+    <a href="{{ path('app_location_new') }}">{{ 'location.new'|trans }}</a>
 
-<a href="{{ path('app_main') }}">accueil</a>
+<a href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
 {% endblock %}

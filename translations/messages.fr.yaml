@@ -1,8 +1,11 @@
 # translations/messages.fr.yaml
 
+English: Anglais
+French: Français
 main.title: Backoffice d'Auparavant
-page.title: Bienvenue sur le backoffice de Y'avait quoi avant
-welcome: Bienvenue sur notre site web, %name% !
+page.title: Bienvenue sur le backoffice d'«Auparavant»
+button.login: Se connecter
+button.logout: Se déconnecter
 
 ## A.P.I
 confirmation:
@@ -71,6 +74,15 @@ button.home: accueil
 # button.back: back to list
 # button.edit: edit
 
+main:
+    name: Nom
+    list: Liste
+    locations: Localités
+    places: Lieux
+    memories: Souvenirs
+    pictures: Photos
+    users: Utilisateurs
+
 location:
     ### edit
     title.edit: Modifier une localité
@@ -86,6 +98,14 @@ location:
     update.success : Localité mise à jour avec succès
     delete.success : Localité supprimée avec succès
     not_found : Localité non trouvée
+    area: Région
+    department: Département
+    district: Quartier
+    street: Rue
+    zipcode: Code postal
+    city: Ville
+    latitude: Latitude
+    longitude: Longitude
 memory:
     ### edit
     title.edit: Modifier un souvenir
@@ -101,6 +121,13 @@ memory:
     update.success : Souvenir mis à jour avec succès
     delete.success : Souvenir supprimée avec succès
     not_found : Souvenir non trouvé
+    article.title: Titre
+    content: Contenu
+    main_picture: Photograghie principale
+    picture_date: Date de la photographie
+    place: Nom et type de lieu
+    address: Adresse
+    user: Créateur
 picture:
     ### edit
     title.edit: Modifier une photo
@@ -112,25 +139,30 @@ picture:
     ### show:
     title: Photo
     ### success
-    create.success : Image téléchargée avec succès
-    update.success : Image mise à jour avec succès
-    delete.success : Image supprimée avec succès
-    not_found : Image non trouvée
+    create.success : Photo téléchargée avec succès
+    update.success : Photo mise à jour avec succès
+    delete.success : Photo supprimée avec succès
+    not_found : Photo non trouvée
+    icture: Photographie
+    memory: Souvenir correspondant
 place:
     ### edit
-    title.edit: Modifier un endroit
+    title.edit: Modifier un lieu
     ### index
-    title.index: Index des endroits
-    new: Ajouter un nouvel endroit
+    title.index: Index des lieux
+    new: Ajouter un nouvel lieu
     ### new
-    title.new: Créer un nouvel endroit
+    title.new: Créer un nouvel lieu
     ### show:
-    title: Place
+    title: Lieu
     ### success
     create.success : Lieu créé avec succès
     update.success : Lieu mis à jour avec succès
     delete.success : Lieu supprimé avec succès
     not_found : Lieu non trouvé
+    name: Nom
+    type: Type
+    address: Adresse
 user:
     ### edit
     title.edit: Modifier le compte d'un utilisateur
@@ -146,3 +178,8 @@ user:
     update.success : Compte mis à jour avec succès
     delete.success : Compte supprimé avec succès
     not_found : Compte non trouvé
+    firstname: Prénom
+    lastname: Nom
+    email: Adresse électronique
+    password: Mot de passe
+    role: Rôle

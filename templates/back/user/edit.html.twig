@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Modifier un utilisateur</h1>
+    <h1>{{ 'user.title.edit'|trans }}</h1>
 
-    {{ include('back/user/_form.html.twig', {'button_label': 'Valider'}) }}
+    {{ include('back/user/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_user_index') }}">retour à la liste</a>
+    <a href="{{ path('app_user_index') }}">{{ 'button.back'|trans }}</a>
 
     {{ include('back/user/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Index des souvenirs</h1>
+    <h1>{{ 'memory.title.index'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Titre</th>
-                <th>Contenu</th>
-                <th>Photographie principale</th>
-                <th>Date de la photographie</th>
-                <th>Nom et type de lieu</th>
-                <th>Adresse</th>
-                <th>Utilisateur</th>
+                <th>{{ 'memory.article.title'|trans }}</th>
+                <th>{{ 'memory.content'|trans }}</th>
+                <th>{{ 'memory.main_picture'|trans }}</th>
+                <th>{{ 'memory.picture_date'|trans }}</th>
+                <th>{{ 'memory.place'|trans }}</th>
+                <th>{{ 'memory.address'|trans }}</th>
+                <th>{{ 'memory.user'|trans }}</th>
                 {# <th>PublishedAt</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th> #}
@@ -35,19 +35,19 @@
                 <td>{{ memory.createdAt ? memory.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ memory.updatedAt ? memory.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_memory_show', {'id': memory.id}) }}">voir</a>
-                    <a href="{{ path('app_memory_edit', {'id': memory.id}) }}">modifier</a>
+                    <a href="{{ path('app_memory_show', {'id': memory.id}) }}">{{ 'button.show'|trans }}</a>
+                    <a href="{{ path('app_memory_edit', {'id': memory.id}) }}">{{ 'button.edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">Aucun élément n'a été trouvé</td>
+                <td colspan="9">{{ 'no_records_found'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_memory_new') }}">Créer un nouveau souvenir</a>
+    <a href="{{ path('app_memory_new') }}">{{ 'memory.new'|trans }}</a>
 
-<a href="{{ path('app_main') }}">accueil</a>
+<a href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
 {% endblock %}

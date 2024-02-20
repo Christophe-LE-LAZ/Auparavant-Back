@@ -1,8 +1,11 @@
 # translations/messages.en.yaml
 
+English: English
+French: French
 main.title: What did there use to be? backoffice
-page.title: Welcome to What did there use to be? backoffice
-welcome: Welcome to our website, %name%!
+page.title: Welcome to "What did there use to be?" backoffice
+button.login: Login
+button.logout: Logout
 
 ## A.P.I
 confirmation:
@@ -52,14 +55,14 @@ button.submit: Save
 
 ### edit
 # title: Edit Entity
-button.update: Update
+button.update: Updaaaate
 button.back: back to list
 
 ## index
 # title.reversed: Entity index
 button.show: show
 button.edit: edit
-warning: no records found
+no_records_found: no records found
 button.create: Create new
 button.home: home
 
@@ -72,6 +75,15 @@ button.home: home
 # button.back: back to list
 # button.edit: edit
 
+main:
+    name: Name
+    list: List
+    locations: Locations
+    places: Places
+    memories: Memories
+    pictures: Pictures
+    users: Users
+
 location:
     ### edit
     title.edit: Edit Location
@@ -83,10 +95,18 @@ location:
     ### show:
     title: Location
     ### success
-    create.success: 'Location created successfully.'
-    update.success: 'Location updated successfully.'
-    delete.success: 'Location deleted successfully.'
-    not_found: 'Location not found.'
+    create.success: Location created successfully
+    update.success: Location updated successfully
+    delete.success: Location deleted successfully
+    not_found: Location not found
+    area: Area
+    department: Department
+    district: District
+    street: Street
+    zipcode: Zipcode
+    city: City
+    latitude: Latitude
+    longitude: Longitude
 memory:
     ### edit
     title.edit: Edit Memory
@@ -98,10 +118,17 @@ memory:
     ### show:
     title: Memory
     ### success
-    create.success: 'Memory created successfully.'
-    update.success: 'Memory updated successfully.'
-    delete.success: 'Memory deleted successfully.'
-    not_found: 'Memory not found.'
+    create.success: Memory created successfully
+    update.success: Memory updated successfully
+    delete.success: Memory deleted successfully
+    not_found: Memory not found
+    article.title: Title
+    content: Content
+    main_picture: Main picture
+    picture_date: Picture date
+    place: Name and type of location
+    address: Address
+    user: Creator
 picture:
     ### edit
     title.edit: Edit Picture
@@ -113,10 +140,12 @@ picture:
     ### show:
     title: Picture
     ### success
-    create.success: 'Picture uploaded successfully.'
-    update.success: 'Picture updated successfully.'
-    delete.success: 'Picture deleted successfully.'
-    not_found: 'Picture not found.'
+    create.success: Picture uploaded successfully
+    update.success: Picture updated successfully
+    delete.success: Picture deleted successfully
+    not_found: Picture not found
+    picture: Picture
+    memory: Corresponding memory
 place:
     ### edit
     ttitle.edit: Edit Place
@@ -128,10 +157,13 @@ place:
     ### show:
     title: Place
     ### success
-    create.success: 'Place created successfully.'
-    update.success: 'Place updated successfully.'
-    delete.success: 'Place deleted successfully.'
-    not_found: 'Place not found.'
+    create.success: Place created successfully
+    update.success: Place updated successfully
+    delete.success: Place deleted successfully
+    not_found: Place not found
+    name: Name
+    type: Type
+    address: Address
 user:
     ### edit
     title.edit: Edit a user's account
@@ -143,7 +175,12 @@ user:
     ### show:
     title: User
     ### success
-    create.success: 'Account created successfully.'
-    update.success: 'Account updated successfully.'
-    delete.success: 'Account deleted successfully.'
-    not_found: 'Account not found.'
+    create.success: Account created successfully
+    update.success: Account updated successfully
+    delete.success: Account deleted successfully
+    not_found: Account not found
+    firstname: Firstname
+    lastname: Lastname
+    email: Email address
+    password: Password
+    role: Role

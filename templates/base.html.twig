@@ -2,10 +2,11 @@
 <html lang="fr">
 
 <head>
-    <ul>
-        <li><a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'en'}) }}">English</a></li>
-        <li><a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'fr'}) }}">Français</a></li>
-    </ul>
+    <div>
+        <a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'en'}) }}">{{ 'English'|trans }}</a>
+        <a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'fr'}) }}">{{ 'French'|trans }}</a>
+    </div>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

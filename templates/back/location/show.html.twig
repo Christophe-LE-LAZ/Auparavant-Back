@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Localité</h1>
+    <h1>{{ 'location.title'|trans }}</h1>
 
     <table class="table">
         <tbody>
@@ -10,35 +10,35 @@
                 <td>{{ location.id }}</td>
             </tr>
             <tr>
-                <th>Région</th>
+                <th>{{ 'location.area'|trans }}</th>
                 <td>{{ location.area }}</td>
             </tr>
             <tr>
-                <th>Département</th>
+                <th>{{ 'location.department'|trans }}</th>
                 <td>{{ location.department }}</td>
             </tr>
             <tr>
-                <th>Quartier</th>
+                <th>{{ 'location.district'|trans }}</th>
                 <td>{{ location.district }}</td>
             </tr>
             <tr>
-                <th>Rue</th>
+                <th>{{ 'location.street'|trans }}</th>
                 <td>{{ location.street }}</td>
             </tr>
             <tr>
-                <th>Code postal</th>
+                <th>{{ 'location.zipcode'|trans }}</th>
                 <td>{{ location.zipcode }}</td>
             </tr>
             <tr>
-                <th>Ville</th>
+                <th>{{ 'location.street'|trans }}</th>
                 <td>{{ location.city }}</td>
             </tr>
             <tr>
-                <th>Latitude</th>
+                <th>{{ 'location.latitude'|trans }}</th>
                 <td>{{ location.latitude }}</td>
             </tr>
             <tr>
-                <th>Longitude</th>
+                <th>{{ 'location.longitude'|trans }}</th>
                 <td>{{ location.longitude }}</td>
             </tr>
             {# <tr>
@@ -52,9 +52,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_location_index') }}">retour à la liste</a>
+    <a href="{{ path('app_location_index') }}">{{ 'button.back'|trans }}</a>
 
-    <a href="{{ path('app_location_edit', {'id': location.id}) }}">modifier</a>
+    <a href="{{ path('app_location_edit', {'id': location.id}) }}">{{ 'button.edit'|trans }}</a>
 
     {{ include('back/location/_delete_form.html.twig') }}
 {% endblock %}

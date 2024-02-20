@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Créer une nouvelle localité</h1>
+    <h1>{{ 'location.title.new'|trans }}</h1>
 
     {{ include('back/location/_form.html.twig') }}
 
-    <a href="{{ path('app_location_index') }}">retour à la liste</a>
+    <a href="{{ path('app_location_index') }}">{{ 'button.back'|trans }}</a>
 {% endblock %}

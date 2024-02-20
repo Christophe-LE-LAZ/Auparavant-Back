@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Souvenir</h1>
+    <h1>{{ 'memory.title'|trans }}</h1>
 
     <table class="table">
         <tbody>
@@ -10,31 +10,31 @@
                 <td>{{ memory.id }}</td>
             </tr>
             <tr>
-                <th>Titre</th>
+                <th>{{ 'memory.article.title'|trans }}</th>
                 <td>{{ memory.title }}</td>
             </tr>
             <tr>
-                <th>Contenu</th>
+                <th>{{ 'memory.content'|trans }}</th>
                 <td>{{ memory.content }}</td>
             </tr>
             <tr>
-                <th>Photographie principale</th>
+                <th>{{ 'memory.main_picture'|trans }}</th>
                 <td>{{ memory.mainPicture }}</td>
             </tr>
             <tr>
-                <th>Date de la photographie</th>
+                <th>{{ 'memory.picture_date'|trans }}</th>
                 <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Nom et type de lieu</th>
+                <th>{{ 'memory.place'|trans }}</th>
                 <td>{{ memory.place.name }} {{ memory.place.type }}</td>
             </tr>
             <tr>
-                <th>Adresse</th>
+                <th>{{ 'memory.address'|trans }}</th>
                 <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
             </tr>
             <tr>
-                <th>PUtilisateur</th>
+                <th>{{ 'memory.user'|trans }}</th>
                 <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
             </tr>
             {# <tr>
@@ -52,9 +52,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_memory_index') }}">retour à la liste</a>
+    <a href="{{ path('app_memory_index') }}">{{ 'button.back'|trans }}</a>
 
-    <a href="{{ path('app_memory_edit', {'id': memory.id}) }}">modifier</a>
+    <a href="{{ path('app_memory_edit', {'id': memory.id}) }}">{{ 'button.edit'|trans }}</a>
 
     {{ include('back/memory/_delete_form.html.twig') }}
 {% endblock %}
