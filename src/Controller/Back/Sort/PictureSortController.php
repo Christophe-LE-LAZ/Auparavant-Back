@@ -24,7 +24,7 @@ class PictureSortController extends AbstractController
         $direction = in_array($selectedDirection, ['asc', 'desc']) ? $selectedDirection : 'asc';
 
         $sortResults = null;
-        $memories = null;
+        $pictures = null;
 
         if ($order === 'memory') {
             $sortResults = $pictureRepository->findByOrderAlphabeticalMemory($direction);
