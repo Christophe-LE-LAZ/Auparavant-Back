@@ -183,3 +183,15 @@ user:
     email: Adresse électronique
     password: Mot de passe
     role: Rôle
+user_access:
+    firstname: 'Prénom : '
+    lastname: 'Nom : '
+    email: 'Adresse électronique : '
+    password: 'Mot de passe : '
+register:
+    registration_page: Page d'inscription
+    terms: Accepter les conditions d'utilisation
+    button: S'inscrire
+login:
+    message: Vous êtes connecté en tant que
+    instruction: Veuillez vous connecter

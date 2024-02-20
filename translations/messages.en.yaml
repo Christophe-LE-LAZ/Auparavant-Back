@@ -184,3 +184,17 @@ user:
     email: Email address
     password: Password
     role: Role
+user_access:
+    firstname: 'Firstname: '
+    lastname: 'Lastname: '
+    email: 'Email address: '
+    password: 'Password: '
+register:
+    registration_page: Registration page
+    terms: Accept terms and conditions
+    button: Register
+login:
+    message: You are logged in as
+    instruction: Please log in
+
+
