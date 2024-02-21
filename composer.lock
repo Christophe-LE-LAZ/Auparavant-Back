@@ -7650,6 +7650,7 @@
         },
         {
             "name": "symfony/maker-bundle",
+<<<<<<< HEAD
             "version": "v1.55.1",
             "source": {
                 "type": "git",
@@ -7660,6 +7661,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/11a9d3125c5b93ab4043f0f2e9927fdc55881c17",
                 "reference": "11a9d3125c5b93ab4043f0f2e9927fdc55881c17",
+=======
+            "version": "v1.55.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/maker-bundle.git",
+                "reference": "d344744ee8b35879b25777cea18c0d440f139777"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/d344744ee8b35879b25777cea18c0d440f139777",
+                "reference": "d344744ee8b35879b25777cea18c0d440f139777",
+>>>>>>> 2670e7e (fix permission)
                 "shasum": ""
             },
             "require": {
@@ -7722,7 +7735,11 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/symfony/maker-bundle/tree/v1.55.1"
+=======
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.55.0"
+>>>>>>> 2670e7e (fix permission)
             },
             "funding": [
                 {
@@ -7738,7 +7755,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2024-02-21T13:41:51+00:00"
+=======
+            "time": "2024-02-21T03:37:48+00:00"
+>>>>>>> 2670e7e (fix permission)
         },
         {
             "name": "symfony/process",
