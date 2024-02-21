@@ -1,7 +1,13 @@
 /* Set up backoffice css */
+
 .img-thumbnail {
     height: 100px;
     width: 100px;
     object-fit: cover;
+}
+
+.navbar-logo {
+    max-width: 50px; /* Adjust the max-width to your preference */
+    height: auto; /* Maintain aspect ratio */
 }
 
