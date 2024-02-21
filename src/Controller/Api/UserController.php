@@ -132,6 +132,47 @@ class UserController extends AbstractController
      * @return Response
      * 
      */
+    #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the user",
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Display a user\'s contributions by his id',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place','get_picture'])),
+            example: [
+                [
+                    "id" => 1,
+                    "title" => "Le Panthéon en 1792",
+                    "content" => "Le Panthéon en 1792, avec La Renommée en son sommet.n",
+                    "picture_date" => "1792-01-01T00:00:00+00:00",
+                    "main_picture" => "fileName.jpg",
+                    "location" => [
+                        "id" => 1,
+                        "area" => "Île-de-France",
+                        "department" => "Paris",
+                        "district" => "Quartier latin",
+                        "street" => "28 place du Panthéon",
+                        "city" => "Paris",
+                        "zipcode" => 75005,
+                        "latitude" => "48.84619800",
+                        "longitude" => "2.34610500"
+                    ],
+                    "place" => [
+                        "id" => 1,
+                        "name" => "Le Panthéon",
+                        "type" => "Mausolée"
+                    ]
+                ]
+            ]
+        )
+    )]
+    #[OA\Tag(name: 'user')]
     #[Route('/api/secure/{id<\d+>}/my-contributions', methods: ['GET'])]
     public function mine(MemoryRepository $memoryRepository, Request $request): Response
     {

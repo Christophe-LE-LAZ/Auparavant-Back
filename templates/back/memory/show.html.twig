@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <th>{{ 'memory.picture_date'|trans }}</th>
-                <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ memory.pictureDate ? memory.pictureDate|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
                 <th>{{ 'memory.place'|trans }}</th>
@@ -37,18 +37,6 @@
                 <th>{{ 'memory.user'|trans }}</th>
                 <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
             </tr>
-            {# <tr>
-                <th>PublishedAt</th>
-                <td>{{ memory.publishedAt ? memory.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ memory.createdAt ? memory.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ memory.updatedAt ? memory.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr> #}
         </tbody>
     </table>
 

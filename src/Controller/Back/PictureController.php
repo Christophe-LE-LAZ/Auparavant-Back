@@ -47,12 +47,14 @@ class PictureController extends AbstractController
             $pictures = $form->get('picture')->getData();
 
             if ($pictures) {
-                $newPicture = $fileUploader->upload($pictures);
+                $newPicture = $fileUploader->uploadImage($pictures);
                 $picture->setPicture($newPicture);
             }
             
             $entityManager->persist($picture);
             $entityManager->flush();
+
+            $this->addFlash('success', 'La photo a bien été ajoutée');
 
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
@@ -94,6 +96,8 @@ class PictureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'La photo a bien été mise à jour');
+
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -116,6 +120,8 @@ class PictureController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
             $entityManager->remove($picture);
             $entityManager->flush();
+
+            $this->addFlash('success', 'La photo a bien été supprimée');
         }
 
         return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);

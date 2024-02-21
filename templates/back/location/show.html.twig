@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ 'location.title'|trans }}</h1>
+	<h1 class="mx-3 mb-5">{{ 'location.title'|trans }}</h1>
 
-    <table class="table">
-        <tbody>
+	<table class="table">
+		<tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ location.id }}</td>
@@ -41,20 +41,21 @@
                 <th>{{ 'location.longitude'|trans }}</th>
                 <td>{{ location.longitude }}</td>
             </tr>
-            {# <tr>
-                <th>CreatedAt</th>
-                <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ location.updatedAt ? location.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr> #}
-        </tbody>
-    </table>
+     </tbody>
+	</table>
+	<div class="row">
 
-    <a href="{{ path('app_location_index') }}">{{ 'button.back'|trans }}</a>
+		<div class="ms-5 col-2">
+			<a class="btn btn-lg btn-secondary text-white d-inline-block" href="{{ path('app_location_index') }}">{{ 'button.back'|trans }}</a>
+		</div>
 
-    <a href="{{ path('app_location_edit', {'id': location.id}) }}">{{ 'button.edit'|trans }}</a>
+		<div class="col-1">
+			<a class="btn btn-lg btn-success" href="{{ path('app_location_edit', {'id': location.id}) }}">{{ 'button.edit'|trans }}</a>
+		</div>
 
-    {{ include('back/location/_delete_form.html.twig') }}
+		<div class="col-1">
+			{{ include('back/location/_delete_form.html.twig') }}
+		</div>
+    
+	</div>
 {% endblock %}

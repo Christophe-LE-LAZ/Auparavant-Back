@@ -46,6 +46,8 @@ class LocationController extends AbstractController
             $entityManager->persist($location);
             $entityManager->flush();
 
+            $this->addFlash('success', 'La localité a bien été ajoutée');
+
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -85,6 +87,8 @@ class LocationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'La localité a bien été modifiée');
+
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -107,6 +111,8 @@ class LocationController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$location->getId(), $request->request->get('_token'))) {
             $entityManager->remove($location);
             $entityManager->flush();
+
+            $this->addFlash('success', 'La localité a bien été supprimée');
         }
 
         return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);

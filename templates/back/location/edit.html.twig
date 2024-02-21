@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ 'location.title.edit'|trans }}</h1>
-    <div class="">
-    {{ include('back/location/_form.html.twig', {'button_label': 'button.update'|trans}) }}
-
-    <a href="{{ path('app_location_index') }}">{{ 'button.back'|trans }}</a>
-
-    {{ include('back/location/_delete_form.html.twig') }}
+    <h1 class="mb-5 mx-3">{{ 'location.title.edit'|trans }}</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    {{ include('back/location/_form.html.twig', {'button_label': 'button.update'|trans}) }}
+                    <div class="col-1">
+			              {{ include('back/location/_delete_form.html.twig') }}
+		                </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
