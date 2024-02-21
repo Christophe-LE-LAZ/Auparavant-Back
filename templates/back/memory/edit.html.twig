@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ 'memory.title.edit'|trans }}</h1>
-
-    {{ include('back/memory/_form.html.twig', {'button_label': 'button.update'|trans}) }}
-
-    <a href="{{ path('app_memory_index') }}">{{ 'button.back'|trans }}</a>
-
-    {{ include('back/memory/_delete_form.html.twig') }}
+    <h1 class="mb-5 mx-3">{{ 'memory.title.edit'|trans }}</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    {{ include('back/memory/_form.html.twig', {'button_label': 'button.update'|trans}) }}
+                    <div class="col-1">
+                        {{ include('back/memory/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

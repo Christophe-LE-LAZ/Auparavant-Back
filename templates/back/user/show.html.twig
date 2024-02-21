@@ -39,10 +39,16 @@
             </tr> #}
         </tbody>
     </table>
+    <div class="row">
 
-    <a href="{{ path('app_user_index') }}">{{ 'button.back'|trans }}</a>
-
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">{{ 'button.edit'|trans }}</a>
-
-    {{ include('back/user/_delete_form.html.twig') }}
+        <div class="ms-5 col-2">
+            <a class="btn btn-lg btn-secondary text-white d-inline-block" href="{{ path('app_user_index') }}">{{ 'button.back'|trans }}</a>
+        </div>
+        <div class="col-1">
+            <a class="btn btn-lg btn-success" href="{{ path('app_user_edit', {'id': user.id}) }}">{{ 'button.edit'|trans }}</a>
+        </div>
+        <div class="col-1">
+            {{ include('back/user/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

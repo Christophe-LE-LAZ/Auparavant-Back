@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ 'memory.title.new'|trans }}</h1>
-
-    {{ include('back/memory/_form.html.twig') }}
-
-    <a href="{{ path('app_memory_index') }}">{{ 'button.back'|trans }}</a>
+    <h1 class="mx-3 mb-5">{{ 'memory.title.new'|trans }}</h1>
+    <div class="container">
+		<div class="row">
+			<div class="col">
+                {{ include('back/memory/_form.html.twig') }}
+            </div>
+		</div>  
+	</div> 
 {% endblock %}

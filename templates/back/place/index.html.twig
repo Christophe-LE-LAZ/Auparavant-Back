@@ -56,7 +56,7 @@
                 {# <td>{{ place.createdAt ? place.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ place.updatedAt ? place.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                     <a href="{{ path('app_place_show', {'id': place.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
+                    <a href="{{ path('app_place_show', {'id': place.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
                     <a href="{{ path('app_place_edit', {'id': place.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>       
                 </td>
             </tr>

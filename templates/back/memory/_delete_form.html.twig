@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_memory_delete', {'id': memory.id}) }}" onsubmit="return confirm('{{ 'deletion_confirmation'|trans }}');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ memory.id) }}">
-    <button class="btn">{{ 'button.delete'|trans }}</button>
+    <button class="btn btn-lg text-white mb-2 btn-danger">{{ 'button.delete'|trans }}</button>
 </form>
