@@ -79,6 +79,7 @@ button.home: accueil
 main:
     name: Nom
     list: Liste
+    view: Voir
     locations: Localités
     places: Lieux
     memories: Souvenirs
@@ -220,5 +221,6 @@ register:
     password_min_message: Le mot de passe doit faire au minimum {{ limit }} caractères.
     button: S'inscrire
 login:
+    greeting: Bonjour
     message: Vous êtes connecté en tant que
     instruction: Veuillez vous connecter

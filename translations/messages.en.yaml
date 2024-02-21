@@ -80,6 +80,7 @@ button.home: home
 main:
     name: Name
     list: List
+    view: View
     locations: Locations
     places: Places
     memories: Memories
@@ -220,6 +221,7 @@ register:
     password_min_message: Password must be at least {{ limit }} characters long.
     button: Register
 login:
+    greeting: Hi
     message: You are logged in as
     instruction: Please log in
 
