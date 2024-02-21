@@ -437,7 +437,7 @@ class MemoryController extends AbstractController
             $pictures,
             200,
             [],
-            ['groups' => ['get_picture']]
+            ['groups' => ['get_picture', 'get_memory', 'get_place', 'get_user', 'get_location']]
         );
     }
 
