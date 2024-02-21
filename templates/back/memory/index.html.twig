@@ -35,11 +35,11 @@
                 <th>actions</th>
             </tr>
         </thead>
-       <tbody>
-    {# {% if order is defined and order is same as (('location') or ('place')) %} #}
-    {% if order is defined and order in ['location', 'place'] %}
-        {% if sortResults is not empty %}
-            {% for sortResult in sortResults %}
+        <tbody>
+        {# {% if order is defined and order is same as (('location') or ('place')) %} #}
+        {% if order is defined and order in ['location', 'place'] %}
+            {% if sortResults is not empty %}
+                {% for sortResult in sortResults %}
                 <tr>
                     <td>{{ sortResult.id }}</td>
                     <td>{{ sortResult.title }}</td>
@@ -60,7 +60,7 @@
                 <td colspan="9">{{ 'no_records_found'|trans }}</td>
             </tr>
         {% endif %}
-    {% else %}
+        {% else %}
         {% if memories is not empty %}
             {% for memory in memories %}
                 <tr>

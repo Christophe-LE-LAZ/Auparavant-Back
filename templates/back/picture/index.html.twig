@@ -19,10 +19,10 @@
             </tr>
         </thead>
         <tbody>
-         {% if order is defined and order is same as ('memory') %}
+        {% if order is defined and order is same as ('memory') %}
             {% if sortResults is not empty %}
                 {% for sortResult in sortResults %}
-                  <tr>
+                <tr>
                     <td>{{ sortResult.id }}</td>
                     <td> <img src="/assets/pictures/{{ sortResult.picture }} "class="img-thumbnail"></td>
                     <td>{{ sortResult.title }}</td>
@@ -30,7 +30,7 @@
                         <a href="{{ path('app_picture_show', {'id': sortResult.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
                         <a href="{{ path('app_picture_edit', {'id': sortResult.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a> 
                     </td>
-                 </tr>
+                </tr>
                 {% endfor %}
             {% else %}
                 <tr>
@@ -38,8 +38,8 @@
                 </tr>
         {% endif %}
         {% else %}
-          {% if pictures is not empty %}
-            {% for picture in pictures %}
+            {% if pictures is not empty %}
+                {% for picture in pictures %}
                 <tr>
                     <td>{{ picture.id }}</td>
                     <td> <img src="/assets/pictures/{{picture.picture }} "class="img-thumbnail"></td>
@@ -49,13 +49,13 @@
                         <a href="{{ path('app_picture_edit', {'id': picture.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a> 
                     </td>
                 </tr>
-            {% endfor %}
-        {% else %}
+                {% endfor %}
+            {% else %}
             <tr>
                 <td colspan="5">{{ 'no_records_found'|trans }}</td>
             </tr>
+            {% endif %}
         {% endif %}
-    {% endif %}
         </tbody>
     </table>
 
