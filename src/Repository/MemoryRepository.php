@@ -59,7 +59,7 @@ class MemoryRepository extends ServiceEntityRepository
     public function findTwoRandomMemoryPictures(): ?array
     {
         return $this->createQueryBuilder('memory1')
-            ->select('memory1.main_picture as picture1', 'memory2.main_picture as picture2')
+            ->select('memory1', 'memory2.main_picture as picture2')
             ->join('memory1.location', 'location')
             ->join('App\Entity\Memory', 'memory2', 'WITH', 'memory1.location = memory2.location AND memory1.id != memory2.id')
             ->orderBy('RAND()')
@@ -67,6 +67,7 @@ class MemoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    
 
     //    /**
     //     * @return Memory[] Returns an array of Memory objects
