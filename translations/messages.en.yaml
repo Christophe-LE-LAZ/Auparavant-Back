@@ -168,7 +168,7 @@ picture:
     memory: 'Corresponding memory:'
 place:
     ### edit
-    ttitle.edit: Edit Place
+    title.edit: Edit Place
     ### index
     title.index: Place index
     new: Add a new place

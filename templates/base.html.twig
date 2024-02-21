@@ -1,4 +1,5 @@
 <!doctype html>
+{% set locale = app.request.attributes.get('_locale') %}
 <html lang="{{ app.request.locale }}">
 <head>
     <!-- Required meta tags -->

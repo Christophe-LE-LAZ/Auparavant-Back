@@ -15,5 +15,3 @@ app.swagger_ui:
 switch_language:
     path: /switch-language/{locale}
     controller: App\Controller\LanguageController::switchLanguage
-
-    
