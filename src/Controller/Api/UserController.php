@@ -3,10 +3,11 @@
 namespace App\Controller\Api;
 
 use App\Entity\User;
-use App\Repository\MemoryRepository;
+use App\Entity\Memory;
 use DateTimeImmutable;
 use OpenApi\Attributes as OA;
 use App\Repository\UserRepository;
+use App\Repository\MemoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Component\HttpFoundation\Request;
