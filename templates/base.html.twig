@@ -19,14 +19,24 @@
 </head>
 
 <body>
-    <header>   
-        <nav>
-                <!-- Language Switching Links -->
-            <div>
-                <a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'en'}) }}">{{ 'English'|trans }}</a>
-                <a class="btn btn-lg btn-primary mt-5" href="{{ path('switch_language', {'locale': 'fr'}) }}">{{ 'French'|trans }}</a>
-            </div>
+    <header>
+        <!-- Bootstrap Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
 
+                <!-- Language Switching Links within the navbar -->
+                <div class="navbar-collapse justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('switch_language', {'locale': 'en'}) }}">{{ 'English'|trans }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('switch_language', {'locale': 'fr'}) }}">{{ 'French'|trans }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
     <main>
@@ -34,7 +44,8 @@
     </main>
 </body>
 
-    <footer>
+    <footer class="text-center py-3">
+        <p>&copy; {{ 'All Rights Reserved'|trans }} — {{ 'Company Name'|trans }}</p>
     </footer>
 
 </html>
