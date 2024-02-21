@@ -1,68 +1,61 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1 class="mx-3 mb-5">Localité</h1>
+	<h1 class="mx-3 mb-5">{{ 'location.title'|trans }}</h1>
 
 	<table class="table">
 		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ location.id }}</td>
-			</tr>
-			<tr>
-				<th>Région</th>
-				<td>{{ location.area }}</td>
-			</tr>
-			<tr>
-				<th>Département</th>
-				<td>{{ location.department }}</td>
-			</tr>
-			<tr>
-				<th>Quartier</th>
-				<td>{{ location.district }}</td>
-			</tr>
-			<tr>
-				<th>Rue</th>
-				<td>{{ location.street }}</td>
-			</tr>
-			<tr>
-				<th>Code postal</th>
-				<td>{{ location.zipcode }}</td>
-			</tr>
-			<tr>
-				<th>Ville</th>
-				<td>{{ location.city }}</td>
-			</tr>
-			<tr>
-				<th>Latitude</th>
-				<td>{{ location.latitude }}</td>
-			</tr>
-			<tr>
-				<th>Longitude</th>
-				<td>{{ location.longitude }}</td>
-			</tr>
-			{# <tr>
-			                <th>CreatedAt</th>
-			                <td>{{ location.createdAt ? location.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-			            </tr>
-			            <tr>
-			                <th>UpdatedAt</th>
-			                <td>{{ location.updatedAt ? location.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-			            </tr> #}
-		</tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ location.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'location.area'|trans }}</th>
+                <td>{{ location.area }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'location.department'|trans }}</th>
+                <td>{{ location.department }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'location.district'|trans }}</th>
+                <td>{{ location.district }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'location.street'|trans }}</th>
+                <td>{{ location.street }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'location.zipcode'|trans }}</th>
+                <td>{{ location.zipcode }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'location.street'|trans }}</th>
+                <td>{{ location.city }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'location.latitude'|trans }}</th>
+                <td>{{ location.latitude }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'location.longitude'|trans }}</th>
+                <td>{{ location.longitude }}</td>
+            </tr>
+     </tbody>
 	</table>
 	<div class="row">
 
 		<div class="ms-5 col-2">
-			<a class="btn btn-lg btn-secondary text-white d-inline-block" href="{{ path('app_location_index') }}">Retour à la liste</a>
+			<a class="btn btn-lg btn-secondary text-white d-inline-block" href="{{ path('app_location_index') }}">{{ 'button.back'|trans }}</a>
 		</div>
 
 		<div class="col-1">
-			<a class="btn btn-lg btn-success" href="{{ path('app_location_edit', {'id': location.id}) }}">Modifier</a>
+			<a class="btn btn-lg btn-success" href="{{ path('app_location_edit', {'id': location.id}) }}">{{ 'button.edit'|trans }}</a>
 		</div>
 
 		<div class="col-1">
 			{{ include('back/location/_delete_form.html.twig') }}
 		</div>
+    
 	</div>
 {% endblock %}

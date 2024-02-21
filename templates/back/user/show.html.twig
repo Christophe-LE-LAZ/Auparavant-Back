@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Utilisateur</h1>
+    <h1>{{ 'user.title'|trans }}</h1>
 
     <table class="table">
         <tbody>
@@ -10,23 +10,23 @@
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Prénom</th>
+                <th>{{ 'user.firstname'|trans }}</th>
                 <td>{{ user.firstname }}</td>
             </tr>
             <tr>
-                <th>Nom</th>
+                <th>{{ 'user.lastname'|trans }}</th>
                 <td>{{ user.lastname }}</td>
             </tr>
             <tr>
-                <th>Adresse électronique</th>
+                <th>{{ 'user.email'|trans }}</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Mot de passe</th>
+                <th>{{ 'user.password'|trans }}</th>
                 <td>{{ user.password }}</td>
             </tr>
             <tr>
-                <th>Rôle</th>
+                <th>{{ 'user.role'|trans }}</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
             {# <tr>
@@ -40,9 +40,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_index') }}">retour à la liste</a>
+    <a href="{{ path('app_user_index') }}">{{ 'button.back'|trans }}</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">modifier</a>
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}">{{ 'button.edit'|trans }}</a>
 
     {{ include('back/user/_delete_form.html.twig') }}
 {% endblock %}

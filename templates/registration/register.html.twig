@@ -1,27 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Page d'inscription</h1>
+    <h1>{{ 'register.registration_page'|trans }}</h1>
 
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
       {{form_row(registrationForm.firstname, {
-        label : 'Votre prénom : '
+        label : 'user_access.firstname'
         }) }}
         {{form_row(registrationForm.lastname, {
-        label : 'Votre nom : '
+        label : 'user_access.lastname'
         }) }}
         {{ form_row(registrationForm.email, {
-            label: 'Adresse électronique : '
+            label: 'user_access.email'
         }) }}
         {{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe : '
+            label: 'user_access.password'
         }) }}
         {{ form_row(registrationForm.agreeTerms, {
-            label: 'Accepter les conditions d\'utilisation'
+            label: 'register.terms'
         }) }}
 
-        <button type="submit" class="btn">S'inscrire</button>
+        <button type="submit" class="btn">{{ 'register.button'|trans }}</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

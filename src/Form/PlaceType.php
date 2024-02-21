@@ -19,14 +19,14 @@ class PlaceType extends AbstractType
                 'name',
                 TextType::class,
                 [
-                    'label' => 'Nom : '
+                    'label' => 'place.name'
                 ]
             )
             ->add(
                 'type',
                 TextType::class,
                 [
-                    'label' => 'Type : '
+                    'label' => 'place.type'
                 ]
             )
             // ->add('createdAt')
@@ -35,7 +35,7 @@ class PlaceType extends AbstractType
                 'location',
                 EntityType::class,
                 [
-                    'label' => 'Adresse : ',
+                    'label' => 'place.address',
                     'class' =>
                     Location::class,
                     'choice_label' => function (Location $location) {

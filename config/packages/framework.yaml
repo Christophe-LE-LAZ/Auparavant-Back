@@ -1,13 +1,17 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
+    default_locale: 'en'
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
 
     # Note that the session will be started ONLY if you read or write from it.
-    session: true
+    session: 
+        handler_id: ~
 
     #esi: true
     #fragments: true
+
+    translator: ~
 
 when@test:
     framework:

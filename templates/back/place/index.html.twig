@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="mb-5 mx-3">Index des endroits</h1>
+    <h1 class="mb-5 mx-3">{{ 'place.title.index'|trans }}</h1>
 
     <table class="table">
         <thead>
@@ -10,20 +10,18 @@
                     <a class="text-decoration-none" href="{{ path('app_sort_place_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_place_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
-                <th>Nom
+                <th>{{ 'place.name'|trans }}
                     <a href="{{ path('app_sort_place_by', {'order': 'name', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_place_by', {'order': 'name', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                 <th>Type
+                 <th>{{ 'place.type'|trans }}
                     <a href="{{ path('app_sort_place_by', {'order': 'type', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_place_by', {'order': 'type', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>Adresse
+                <th>{{ 'place.address'|trans }}
                     <a href="{{ path('app_sort_place_by', {'order': 'location', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_place_by', {'order': 'location', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                {# <th>CreatedAt</th>
-                <th>UpdatedAt</th> #}
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,8 +35,8 @@
                     <td>{{ sortResult.type }}</td>
                     <td>{{ sortResult.street}}</td>
                     <td>
-                        <a href="{{ path('app_memory_show', {'id': sortResult.id}) }}">voir</a>
-                        <a href="{{ path('app_memory_edit', {'id': sortResult.id}) }}">modifier</a>
+                        <a href="{{ path('app_memory_show', {'id': sortResult.id}) }}">{{ 'button.show'|trans }}</a>
+                        <a href="{{ path('app_memory_edit', {'id': sortResult.id}) }}">{{ 'button.edit'|trans }}</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -58,23 +56,22 @@
                 {# <td>{{ place.createdAt ? place.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ place.updatedAt ? place.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    {# <a href="{{ path('app_place_show', {'id': place.id}) }}">voir</a> #}
-                    {# <a href="{{ path('app_place_edit', {'id': place.id}) }}">modifier</a> #}
-                     <a href="{{ path('app_place_show', {'id': place.id}) }}" title= "accéder à la place" aria-label ="accéder à la place"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
-                    <a href="{{ path('app_place_edit', {'id': place.id}) }}" title= "éditer la place" aria-label ="éditer la place"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>       
+                     <a href="{{ path('app_place_show', {'id': place.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
+                    <a href="{{ path('app_place_edit', {'id': place.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>       
                 </td>
             </tr>
             {% endfor %}
         {% else %}
             <tr>
-                <td colspan="9">Aucun élément n'a été trouvé</td>
+                <td colspan="9">{{ 'no_records_found'|trans }}</td>
             </tr>
         {% endif %}
     {% endif %}
         </tbody>
     </table>
 
-    <a class="btn btn-lg btn-success m-5"  href="{{ path('app_place_new') }}">Créer un nouvel endroit</a>
+<a class="btn btn-lg btn-success m-5"  href="{{ path('app_place_new') }}">{{ 'place.new'|trans }}</a>
 
-<a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">Accueil</a>
+<a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
+
 {% endblock %}

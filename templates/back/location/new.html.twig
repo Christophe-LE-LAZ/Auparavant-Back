@@ -1,13 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1 class="mx-3 mb-5">Créer une nouvelle localité</h1>
-
+	<h1 class="mx-3 mb-5">{{ 'location.title.new'|trans }}</h1>
 	<div class="container">
 		<div class="row">
 			<div class="col">{{ include('back/location/_form.html.twig') }}</div>
-		</div>
-	      
+		</div>  
 	</div>
-
 {% endblock %}

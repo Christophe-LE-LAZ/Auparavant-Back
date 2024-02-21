@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Modifier une photo</h1>
+    <h1>{{ 'picture.title.edit'|trans }}</h1>
 
-    {{ include('back/picture/_form.html.twig', {'button_label': 'Valider'}) }}
+    {{ include('back/picture/_form.html.twig', {'button_label': 'button.update'|trans}) }}
 
-    <a href="{{ path('app_picture_index') }}">retour à la liste</a>
+    <a href="{{ path('app_picture_index') }}">{{ 'button.back'|trans }}</a>
 
     {{ include('back/picture/_delete_form.html.twig') }}
 {% endblock %}

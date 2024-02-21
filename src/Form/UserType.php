@@ -22,21 +22,21 @@ class UserType extends AbstractType
                 'firstname',
                 TextType::class,
                 [
-                    'label' => 'Prénom : '
+                    'label' => 'user_access.firstname'
                 ]
             )
             ->add(
                 'lastname',
                 TextType::class,
                 [
-                    'label' => 'Nom : '
+                    'label' => 'user_access.lastname'
                 ]
             )
             ->add(
                 'email',
                 EmailType::class,
                 [
-                    'label' => 'Adresse électronique : '
+                    'label' => 'user_access.email'
                 ]
             )
             // ->add(
@@ -50,11 +50,11 @@ class UserType extends AbstractType
                 'roles',
                 ChoiceType::class,
                 [
-                    'label' => 'Rôle : ',
+                    'label' => 'user_access.role',
                     'choices'  => [
-                        'Administrateur' => 'ROLE_ADMIN',
-                        'Modérateur' => 'ROLE_MODERATOR',
-                        'Utilisateur' => 'ROLE_USER',
+                        'user.admin' => 'ROLE_ADMIN',
+                        'user.moderator' => 'ROLE_MODERATOR',
+                        'user.user' => 'ROLE_USER',
                     ],
                     'multiple' => true,
                     'expanded' => true
@@ -66,7 +66,7 @@ class UserType extends AbstractType
                     'password',
                     PasswordType::class,
                     [
-                        'label' => 'Mot de passe : ',
+                        'label' => 'user_access.password',
                         'required' => !$isEdit, 
                     ]
                 );

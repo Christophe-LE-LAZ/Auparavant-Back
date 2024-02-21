@@ -21,7 +21,7 @@ class PictureType extends AbstractType
                 'picture',
                 FileType::class,
                 [
-                    'label' => 'Photo :',
+                    'label' => 'picture.picture',
                     'mapped' => false,
                     'required' => true,
 
@@ -31,7 +31,7 @@ class PictureType extends AbstractType
                 'memory',
                 EntityType::class,
                 [
-                    'label' => 'Souvenir : ',
+                    'label' => 'picture.memory',
                     'class' =>
                     Memory::class,
                     'choice_label' => 'title',

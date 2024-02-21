@@ -24,21 +24,21 @@ class MemoryType extends AbstractType
                 'title',
                 TextType::class,
                 [
-                    'label' => 'Titre : '
+                    'label' => 'memory.form.title'
                 ]
             )
             ->add(
                 'content',
                 TextareaType::class,
                 [
-                    'label' => 'Contenu : '
+                    'label' => 'memory.form.content'
                 ]
             )
             ->add(
                 'main_picture',
                 FileType::class,
                 [
-                    'label' => 'Photo principale :',
+                    'label' => 'memory.form.main_picture',
                     'mapped' => false,
                     'required' => true,
 
@@ -48,14 +48,14 @@ class MemoryType extends AbstractType
                 'picture_date',
                 DateType::class,
                 [
-                    'label' => 'Date de la photo : ',
+                    'label' => 'memory.form.picture_date',
                     'placeholder' => ['année' => 'Année', 'mois' => 'Mois', 'jour' => 'Jour'],
                 ]
             )
             // ->add('publishedAt')
             ->add('user', EntityType::class, 
             [
-                'label' => 'Utilisateur : ',
+                'label' => 'memory.form.user',
                 'class' => User::class,
                 'choice_label' => function (User $user) {
                     return $user->getFirstname() . ' ' . $user->getLastname();
@@ -63,7 +63,7 @@ class MemoryType extends AbstractType
             ])
             ->add('location', EntityType::class, 
             [
-                'label' => 'Adresse : ',
+                'label' => 'memory.form.location',
                 'class' => Location::class,
                 'choice_label' => function (Location $location) {
                     return $location->getStreet() . ' ' . $location->getZipcode() . ' ' . $location->getCity();
@@ -71,7 +71,7 @@ class MemoryType extends AbstractType
             ])
             ->add('place', EntityType::class, 
             [
-                'label' => 'Endroit : ',
+                'label' => 'memory.form.place',
                 'class' => Place::class,
                 'choice_label' => function (Place $place) {
                     return $place->getName() . ' ' . $place->getType();

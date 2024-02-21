@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Endroit</h1>
+    <h1>{{ 'place.title'|trans }}</h1>
 
     <table class="table">
         <tbody>
@@ -10,15 +10,15 @@
                 <td>{{ place.id }}</td>
             </tr>
             <tr>
-                <th>Nom</th>
+                <th>{{ 'place.name'|trans }}</th>
                 <td>{{ place.name }}</td>
             </tr>
             <tr>
-                <th>Type</th>
+                <th>{{ 'place.type'|trans }}</th>
                 <td>{{ place.type }}</td>
             </tr>
             <tr>
-                <th>Adresse</th>
+                <th>{{ 'place.address'|trans }}</th>
                 <td>{{ place.location.street }} {{ place.location.zipcode }} {{ place.location.city }}</td>
             </tr>
             {# <tr>
@@ -32,9 +32,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_place_index') }}">retour à la liste</a>
+    <a href="{{ path('app_place_index') }}">{{ 'button.back'|trans }}</a>
 
-    <a href="{{ path('app_place_edit', {'id': place.id}) }}">modifier</a>
+    <a href="{{ path('app_place_edit', {'id': place.id}) }}">{{ 'button.edit'|trans }}</a>
 
     {{ include('back/place/_delete_form.html.twig') }}
 {% endblock %}

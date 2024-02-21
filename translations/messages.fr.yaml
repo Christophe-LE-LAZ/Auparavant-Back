@@ -1,0 +1,226 @@
+# translations/messages.fr.yaml
+
+English: Anglais
+French: Français
+Company Name: Auparavant
+All Rights Reserved: Tous droits réservés
+main.title: Backoffice d'Auparavant
+page.title: Bienvenue sur le backoffice d'«Auparavant»
+button.login: Se connecter
+button.logout: Se déconnecter
+
+## A.P.I
+confirmation:
+    location_creation: La localité a été créée avec succès.
+    location_update: La localité a été modifiée avec succès.
+    location_deletion: La localité a été supprimée avec succès.
+    memory_creation: Le souvenir a été créé avec succès.
+    memory_update: Le souvenir a été modifié avec succès.
+    memory_deletion: Le souvenir a été supprimé avec succès.
+    picture_creation: La photo a été téléchargée avec succès.
+    picture_update: La photo a été mise à jour avec succès.
+    picture_deletion: La photo a été supprimée avec succès.
+    place_creation: L'endroit a été créé avec succès.
+    place_update: L'endroit a été modifié avec succès.
+    place_deletion: L'endroit a été supprimé avec succès.
+    user_creation: Le compte a été créé avec succès.
+    user_update: Le compte a été modifié avec succès.
+    user_deletion: Le compte a été supprimé avec succès.
+errors:
+    not_found: La page demandée n'a pas été trouvée.
+    resource_not_found: La ressource demandée n'a pas été trouvée.
+    picture_deletion_failure: La suppression de l'image a échoué.
+    former_picture_deletion_failure: La suppression de l'image précédente a échoué.
+mandatory_fields:
+    picture: Le souvenir doit contenir une photo.
+non-existent_entities:
+    location: Cette localité n'existe pas.
+    memory: Ce souvenir n'existe pas.
+    picture: Cette photographie n'existe pas.
+    place: Cet endroit n'existe pas.
+    user: Ce compte n'existe pas.
+unauthorized_access:
+    page: Vous n'êtes pas autorisé à accéder à cette page.
+    view: Vous n'êtes pas autorisé à visualiser ce contenu.
+    modification: Vous n'êtes pas autorisé à modifier ce contenu.
+    deletion: Vous n'êtes pas autorisé à supprimer ce contenu.
+
+## Backoffice
+
+### _delete_form
+deletion_confirmation: Êtes-vous sûr de vouloir supprimer cet élément ?
+button.delete: Supprimer
+
+### _form
+button.submit: Valider
+
+### edit
+# title: Modifier une entité
+button.update: Mettre à jour
+button.back: retour à la liste
+
+## index
+# title.reversed: Index des entités
+button.show: voir
+button.edit: modifier
+warning: Aucun élément n'a été trouvé
+# button.create: Créer une nouvelle entité
+button.home: accueil
+
+# new
+# title.new: Créer une nouvelle entité
+# button.back: back to list
+
+# show
+# title: Entity
+# button.back: back to list
+# button.edit: edit
+
+main:
+    name: Nom
+    list: Liste
+    view: Voir
+    locations: Localités
+    places: Lieux
+    memories: Souvenirs
+    pictures: Photos
+    users: Utilisateurs
+
+location:
+    ### edit
+    title.edit: Modifier une localité
+    ### index
+    title.index: Index des localités
+    new: Ajouter une nouvelle localité
+    ### new
+    title.new: Créer une nouvelle localité
+    ### show:
+    title: Localité
+    ### success
+    create.success : Localité créée avec succès
+    update.success : Localité mise à jour avec succès
+    delete.success : Localité supprimée avec succès
+    not_found : Localité non trouvée
+    area: Région
+    department: Département
+    district: Quartier
+    street: Rue
+    zipcode: Code postal
+    city: Ville
+    latitude: Latitude
+    longitude: Longitude
+    form:
+        area: 'Région :'
+        department: 'Département :'
+        district: 'Quartier :'
+        street: 'Rue :'
+        city: 'Ville :'
+        zipcode: 'Code postal :'
+        latitude: 'Latitude :'
+        longitude: 'Longitude :'
+memory:
+    ### edit
+    title.edit: Modifier un souvenir
+    ### index
+    title.index: Index des souvenirs
+    new: Ajouter un nouveau souvenir
+    ### new
+    title.new: Créer un nouveau souvenir
+    ### show:
+    title: Souvenir
+    ### success
+    create.success : Souvenir créé avec succès
+    update.success : Souvenir mis à jour avec succès
+    delete.success : Souvenir supprimée avec succès
+    not_found : Souvenir non trouvé
+    article.title: Titre
+    content: Contenu
+    main_picture: Photograghie principale
+    picture_date: Date de la photographie
+    place: Nom et type de lieu
+    address: Adresse
+    user: Créateur
+    form:
+        title: 'Titre :'
+        content: 'Contenu :'
+        main_picture: 'Photo principale :'
+        picture_date: 'Date de la photo :'
+        user: 'Créateur :'
+        location: 'Adresse :'
+        place: 'Lieu :'
+
+picture:
+    ### edit
+    title.edit: Modifier une photo
+    ### index
+    title.index: Index des photos
+    new: Ajouter une nouvelle photo
+    ### new
+    title.new: Ajouter une nouvelle photo
+    ### show:
+    title: Photo
+    ### success
+    create.success : Photo téléchargée avec succès
+    update.success : Photo mise à jour avec succès
+    delete.success : Photo supprimée avec succès
+    not_found : Photo non trouvée
+    picture: 'Photographie :'
+    memory: 'Souvenir correspondant :'
+place:
+    ### edit
+    title.edit: Modifier un lieu
+    ### index
+    title.index: Index des lieux
+    new: Ajouter un nouvel lieu
+    ### new
+    title.new: Créer un nouvel lieu
+    ### show:
+    title: Lieu
+    ### success
+    create.success : Lieu créé avec succès
+    update.success : Lieu mis à jour avec succès
+    delete.success : Lieu supprimé avec succès
+    not_found : Lieu non trouvé
+    name: 'Nom :'
+    type: 'Type :'
+    address: 'Adresse :'
+user:
+    ### edit
+    title.edit: Modifier le compte d'un utilisateur
+    ### index
+    title.index: Index des utilisateurs
+    new: Ajouter un nouvel utilisateur
+    ### new
+    title.new: Créer un nouveau compte utilisateur
+    ### show:
+    title: Utilisateur
+    ### success
+    create.success : Compte créé avec succès
+    update.success : Compte mis à jour avec succès
+    delete.success : Compte supprimé avec succès
+    not_found : Compte non trouvé
+    firstname: Prénom
+    lastname: Nom
+    email: Adresse électronique
+    password: Mot de passe
+    role: Rôle
+    admin: Administrateur
+    moderator: Modérateur
+    user: Utilisateur
+user_access:
+    firstname: 'Prénom : '
+    lastname: 'Nom : '
+    email: 'Adresse électronique : '
+    password: 'Mot de passe : '
+    role: 'Rôle : '
+register:
+    registration_page: Page d'inscription
+    terms: Accepter les conditions d'utilisation
+    terms.must: Vous devez accepter nos conditions.
+    password_message: Le mot de passe ne peut pas être vide.
+    password_min_message: Le mot de passe doit faire au minimum {{ limit }} caractères.
+    button: S'inscrire
+login:
+    greeting: Bonjour
+    message: Vous êtes connecté en tant que
+    instruction: Veuillez vous connecter

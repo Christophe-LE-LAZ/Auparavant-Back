@@ -1,5 +1,5 @@
-<form class="form-group" method="post" action="{{ path('app_location_delete', {'id': location.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');">
+<form class="form-group" method="post" action="{{ path('app_location_delete', {'id': location.id}) }}" onsubmit="return confirm('{{ 'deletion_confirmation'|trans }}');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ location.id) }}">
-    <button class="btn btn-lg text-white mb-2 btn-danger">Supprimer</button>
+    <button class="btn btn-lg text-white mb-2 btn-danger">{{ 'button.delete'|trans }}</button>
 </form>
 
