@@ -224,3 +224,4 @@ login:
     greeting: Bonjour
     message: Vous êtes connecté en tant que
     instruction: Veuillez vous connecter
+    already logged in: Vous êtes déjà connecté.

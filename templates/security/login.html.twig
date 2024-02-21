@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if not app.user %}
     <form method="post" class="mx-auto" style="max-width: 400px;">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -23,12 +24,17 @@
                value="{{ csrf_token('authenticate') }}"
         >
         <br>
-        {% if not app.user %}
+        
         <div class="text-center">
         <button class="btn btn-lg btn-secondary" type="submit">
             {{ 'button.login'|trans }}
         </button>
         </div>
-        {% endif %}
     </form>
+    {% else %}
+        <div class="text-center">
+            <p>{{ 'login.already_logged_in'|trans }}</p>
+            <a href="{{ path('app_main') }}" class="btn btn-secondary">{{ 'button.home'|trans }}</a>
+        </div>
+    {% endif %}
 {% endblock %}
