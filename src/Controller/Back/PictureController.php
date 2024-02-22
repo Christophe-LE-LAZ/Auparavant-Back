@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Service\FileUploader;
+use App\Service\FileUploader;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,10 +13,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 #[Route('/back/picture')]
 class PictureController extends AbstractController
 {
+
+    private $fileUploader;
+
+    public function __construct(FileUploader $fileUploader)
+    {
+        $this->fileUploader = $fileUploader;
+    }
+
     /**
      * Display all pictures
      *
@@ -122,9 +133,15 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/{id}', name: 'app_picture_delete', methods: ['POST'])]
-    public function delete(Request $request, Picture $picture, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    public function delete(Request $request, Picture $picture, EntityManagerInterface $entityManager, TranslatorInterface $translator, ParameterBagInterface $params): Response
     {
         if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
+            $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
+
+            if (!$deleteFileResult) {
+                // Gérer l'erreur de suppression de fichier
+                $this->addFlash('warning', 'Erreur lors de la suppression du fichier associé à la photo.');
+            }
             $entityManager->remove($picture);
             $entityManager->flush();
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="form-group">
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -10,3 +11,27 @@
     {{ form_end(form) }}
 </div>
 
+=======
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<div class="row">
+	<div class="col d-flex">
+		{% for picture in memory.picture %}
+			<div class="col-3 d-flex flex-column align-items-center">
+				<img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-thumbnail mx-5" alt="Additional Picture">
+				<a href="{{ path ('app_picture_delete', {'id':picture.id} )}}">
+					<i class="bi bi-trash-fill align-items-center" style="font-size: 1.5rem; color:#0761ff;"></i>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+    </div>
+	<div class="row">
+		<div class="col d-flex flex-column flex-md-row mx-md-3 my-md-2 align-items-md-start">
+			<button class="btn btn-lg btn-success text-white mb-2">{{ button_label|default('button.submit'|trans) }}</button>
+			<a class="btn btn-lg btn-secondary text-white mb-2 mx-md-2" href="{{ path('app_memory_index') }}">{{ 'button.back'|trans }}</a>
+		</div>
+	</div>
+
+	{{ form_end(form) }}
+>>>>>>> 4ffb708 (init delete additionnal picture for form edit memory)

@@ -129,12 +129,11 @@ class MemoryController extends AbstractController
     
             $picture = $form->get('main_picture')->getData();
     
-    
             if ($picture === null) {
                  // if the user forgets to insert a photo, I keep the current photo in memory
                 if ($memory->getMainPicture()) {
                   
-                    $entityManager->flush();
+                $entityManager->flush();
                 } else {
                     
                     $this->addFlash('warning', 'Aucun changement effectué car aucune image principale n\'a été soumise.');
