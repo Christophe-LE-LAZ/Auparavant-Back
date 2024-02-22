@@ -139,6 +139,7 @@ memory:
     place: Name and type of location
     address: Address
     user: Creator
+    additional_picture: Additional picture
     form:
         title: 'Title:'
         content: 'Content:'

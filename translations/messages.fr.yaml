@@ -139,6 +139,7 @@ memory:
     place: Nom et type de lieu
     address: Adresse
     user: Créateur
+    additional_picture: Photo supplémentaire
     form:
         title: 'Titre :'
         content: 'Contenu :'
