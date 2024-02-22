@@ -148,7 +148,8 @@ memory:
         user: 'Créateur :'
         location: 'Adresse :'
         place: 'Lieu :'
-
+        choose_file: Choisir un fichier
+        no_file_chosen: Aucun fichier choisi
 picture:
     ### edit
     title.edit: Modifier une photo
