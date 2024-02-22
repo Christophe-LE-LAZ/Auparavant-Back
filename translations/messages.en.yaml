@@ -9,9 +9,7 @@ page.title: Welcome to "What did there use to be?" backoffice
 button.login: Login
 button.logout: Logout
 
-## Backoffice
-
-### Flash messages
+## A.P.I
 confirmation:
     location_added: The location has been successfully added.
     location_updated: The location has been successfully updated.
@@ -47,6 +45,7 @@ unauthorized_access:
     modification: You are not authorized to modify this content.
     deletion: You are not authorized to delete this content.
 
+## Backoffice
 ### _delete_form
 deletion_confirmation: Are you sure you want to delete this item?
 button.delete: Delete
@@ -143,8 +142,8 @@ memory:
     form:
         title: 'Title:'
         content: 'Content:'
-        main_picture: 'Main Picture:'
-        picture_date: 'Picture Date:'
+        main_picture: 'Main picture:'
+        picture_date: 'Picture date:'
         user: 'Creator:'
         location: 'Address:'
         place: 'Place:'

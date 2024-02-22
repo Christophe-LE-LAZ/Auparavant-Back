@@ -9,9 +9,7 @@ page.title: Bienvenue sur le backoffice d'«Auparavant»
 button.login: Se connecter
 button.logout: Se déconnecter
 
-## Backoffice
-
-### Flash messages
+## A.P.I
 confirmation:
     location_added: La localité a été créée avec succès.
     location_updated: La localité a été modifiée avec succès.
@@ -47,6 +45,7 @@ unauthorized_access:
     modification: Vous n'êtes pas autorisé à modifier ce contenu.
     deletion: Vous n'êtes pas autorisé à supprimer ce contenu.
 
+## Backoffice
 ### _delete_form
 deletion_confirmation: Êtes-vous sûr de vouloir supprimer cet élément ?
 button.delete: Supprimer
