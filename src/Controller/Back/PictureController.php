@@ -62,7 +62,6 @@ class PictureController extends AbstractController
 
                 return $this->addFlash('warning', 'Aucun changement effectué car aucune image  n\'a été soumise.');
 
-        return $this->addFlash('warning', 'Aucun changement effectué car aucune image n\'a été soumise.');
 
             }
             $newFilename = $this->fileUploader->uploadImage($picture);
