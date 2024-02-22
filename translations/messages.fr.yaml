@@ -148,6 +148,7 @@ memory:
         user: 'Créateur :'
         location: 'Adresse :'
         place: 'Lieu :'
+        picture: 'Photo supplémentaire :'
         choose_file: Choisir un fichier
         no_file_chosen: Aucun fichier choisi
 picture:
