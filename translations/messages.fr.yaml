@@ -9,23 +9,25 @@ page.title: Bienvenue sur le backoffice d'«Auparavant»
 button.login: Se connecter
 button.logout: Se déconnecter
 
-## A.P.I
+## Backoffice
+
+### Flash messages
 confirmation:
-    location_creation: La localité a été créée avec succès.
-    location_update: La localité a été modifiée avec succès.
-    location_deletion: La localité a été supprimée avec succès.
-    memory_creation: Le souvenir a été créé avec succès.
-    memory_update: Le souvenir a été modifié avec succès.
-    memory_deletion: Le souvenir a été supprimé avec succès.
-    picture_creation: La photo a été téléchargée avec succès.
-    picture_update: La photo a été mise à jour avec succès.
-    picture_deletion: La photo a été supprimée avec succès.
-    place_creation: L'endroit a été créé avec succès.
-    place_update: L'endroit a été modifié avec succès.
-    place_deletion: L'endroit a été supprimé avec succès.
-    user_creation: Le compte a été créé avec succès.
-    user_update: Le compte a été modifié avec succès.
-    user_deletion: Le compte a été supprimé avec succès.
+    location_added: La localité a été créée avec succès.
+    location_updated: La localité a été modifiée avec succès.
+    location_deleted: La localité a été supprimée avec succès.
+    memory_created: Le souvenir a été créé avec succès.
+    memory_updated: Le souvenir a été modifié avec succès.
+    memory_deleted: Le souvenir a été supprimé avec succès.
+    picture_uploaded: La photo a été téléchargée avec succès.
+    picture_updated: La photo a été mise à jour avec succès.
+    picture_deleted: La photo a été supprimée avec succès.
+    place_added: L'endroit a été créé avec succès.
+    place_updated: L'endroit a été modifié avec succès.
+    place_deleted: L'endroit a été supprimé avec succès.
+    user_created: Le compte a été créé avec succès.
+    user_updated: Le compte a été modifié avec succès.
+    user_deleted: Le compte a été supprimé avec succès.
 errors:
     not_found: La page demandée n'a pas été trouvée.
     resource_not_found: La ressource demandée n'a pas été trouvée.
@@ -44,8 +46,6 @@ unauthorized_access:
     view: Vous n'êtes pas autorisé à visualiser ce contenu.
     modification: Vous n'êtes pas autorisé à modifier ce contenu.
     deletion: Vous n'êtes pas autorisé à supprimer ce contenu.
-
-## Backoffice
 
 ### _delete_form
 deletion_confirmation: Êtes-vous sûr de vouloir supprimer cet élément ?

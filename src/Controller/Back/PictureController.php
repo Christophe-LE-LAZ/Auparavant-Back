@@ -4,13 +4,14 @@ namespace App\Controller\Back;
 
 use App\Entity\Picture;
 use App\Form\PictureType;
-use App\Repository\PictureRepository;
 use App\Service\FileUploader;
+use App\Repository\PictureRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/back/picture')]
 class PictureController extends AbstractController
@@ -34,10 +35,12 @@ class PictureController extends AbstractController
      *
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
+     * @param FileUploader $fileUploader
      * @return Response
      */
     #[Route('/new', name: 'app_picture_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator, FileUploader $fileUploader): Response
     {
         $picture = new Picture();
         $form = $this->createForm(PictureType::class, $picture);
@@ -55,6 +58,8 @@ class PictureController extends AbstractController
             $entityManager->flush();
             
             $this->addFlash('success', 'La photo a bien été ajoutée');
+
+            $this->addFlash('success', $translator->trans('confirmation.picture_uploaded'));
 
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
@@ -85,10 +90,11 @@ class PictureController extends AbstractController
      * @param Request $request
      * @param Picture $picture
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
      * @return Response
      */
     #[Route('/{id}/edit', name: 'app_picture_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Picture $picture, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Picture $picture, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
@@ -96,7 +102,7 @@ class PictureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'La photo a bien été mise à jour');
+            $this->addFlash('success', $translator->trans('confirmation.picture_updated'));
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -112,16 +118,17 @@ class PictureController extends AbstractController
      * @param Request $request
      * @param Picture $picture
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
      * @return Response
      */
     #[Route('/{id}', name: 'app_picture_delete', methods: ['POST'])]
-    public function delete(Request $request, Picture $picture, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Picture $picture, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
             $entityManager->remove($picture);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La photo a bien été supprimée');
+            $this->addFlash('success', $translator->trans('confirmation.picture_deleted'));
         }
 
         return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
