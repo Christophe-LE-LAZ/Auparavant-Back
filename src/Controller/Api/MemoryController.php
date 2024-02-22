@@ -38,11 +38,17 @@ class MemoryController extends AbstractController
 {
 
     private $fileUploader;
+    private $memoryRepository;
 
-    public function __construct(FileUploader $fileUploader)
+    public function __construct(FileUploader $fileUploader, MemoryRepository $memoryRepository)
     {
         $this->fileUploader = $fileUploader;
+        $this->memoryRepository = $memoryRepository;
     }
+
+
+    
+    
 
 
     /**
@@ -907,58 +913,62 @@ class MemoryController extends AbstractController
     }
 
 
-    #[Route('/api/memoriestest', methods: ['GET'])]
+    #[Route('/api/memorieswithtwopictures', methods: ['GET'])]
     public function getAllMemoriesSort(MemoryRepository $memoryRepository)
     {
-        // Récupérer tous les souvenirs triés par picture_date décroissante
-        $memories = $memoryRepository->findBy([], ['picture_date' => 'DESC']);
+        $memories = $memoryRepository->findAll();
+           // Associer la compare_picture selon la date
+        $processedMemories = $this->processMemories($memories);
 
-           // Associer la main_picture selon vos critères
-           $processedMemories = $this->processMemories($memories);
-
-           // Retourner les données en JSON
-           return $this->json($processedMemories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
+         return $this->json($processedMemories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
        }
   
+       /**
+        * Boucle sur l'ensemble des souvenirs; récupère pour chaque localité la photo la plus récente et la plus ancienne.
+        * Compare les dates de souvenir pour savoir si le souvenir et le plus récent ou non.
+        * Si le souvenir est le plus récent alors lui associer la photo du souvenir le plus ancien de la localité;
+        * Si le souvenir n'est pas le plus récent de la localité alors lui associer la photo la plus récente de la localité;
+        */
        private function processMemories(array $memories): array
-       {
-           $processedMemories = [];
-           $oldestPicturesByLocation = [];
-           $mostRecentPictureDate = null;
-       
-           foreach ($memories as $memory) {
-               $locationId = $memory->getLocation()->getId();
-               
-       
-               // Vérifier si la localité a déjà été traitée
-               if (!isset($oldestPicturesByLocation[$locationId])) {
-                   // Si non, associer la main_picture du souvenir le plus ancien
-                   $oldestPicturesByLocation[$locationId] = $memory->getMainPicture();
-               }
-       
-               // Vérifier si la picture_date du souvenir est la plus récente
-               if ($mostRecentPictureDate === null || $memory->getPictureDate() > $mostRecentPictureDate) {
-                   $mostRecentPictureDate = $memory->getPictureDate();
-                   $mainPicture = $oldestPicturesByLocation[$locationId];
-                   $oldPicture = null; // Pas d'old_picture pour le souvenir le plus récent
-               } else {
-                   $mainPicture = $memory->getMainPicture();
-                   $oldPicture = $oldestPicturesByLocation[$locationId];
-               }
-       
-               $processedMemories[] = [
-                   'id' => $memory->getId(),
-                   'location_id' => $memory->getLocation()->getId(),
-                   'user_id' => $memory->getUser()->getId(),
-                   // ... autres champs
-                   'main_picture' => $mainPicture,
-                   'old_picture' => $oldPicture,
-               ];
-           }
-       
-           return $processedMemories;
-       }
+    {
+         $processedMemories = [];
 
+        foreach ($memories as $memory) {
+        $locationId = $memory->getLocation()->getId();
+    
+        // Trouver la photo la plus récente pour cette localité
+        $mostRecentMemory = $this->memoryRepository->findMostRecentMemoryByLocation($locationId);
+        $mostRecentMainPicture = $mostRecentMemory['main_picture'];
+
+         // Trouver la photo la plus ancienne pour cette localité
+        $oldestMemory = $this->memoryRepository->findOldestMemoryByLocation($locationId);
+        $oldestMainPicture = $oldestMemory['main_picture'];
+
+        // Convertir les dates en objets DateTime
+        $memoryDate = new \DateTime($memory->getPictureDate()->format('Y-m-d H:i:s'));
+        $mostRecentDate = new \DateTime($mostRecentMemory['picture_date']);
+       
+        // Comparer les dates pour déterminer le plus récent ou le plus ancien
+        if ($memoryDate < $mostRecentDate) {
+           $comparePicture = $mostRecentMainPicture;
+        } elseif ($memoryDate == $mostRecentDate) {
+           $comparePicture = $oldestMainPicture;
+        } else {
+           $comparePicture = null;
+        }
+
+        $processedMemories[] = [
+           'id' => $memory->getId(),
+           'location_id' => $memory->getLocation()->getId(),
+           'user_id' => $memory->getUser()->getId(),
+           // ... autres champs
+           'main_picture' => $memory->getMainPicture(),
+           'compare_picture' => $comparePicture,
+       ];
+   }
+
+   return $processedMemories;
+}
 
 
 
