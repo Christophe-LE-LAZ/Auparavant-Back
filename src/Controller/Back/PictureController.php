@@ -45,10 +45,10 @@ class PictureController extends AbstractController
         $picture = new Picture();
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $pictures = $form->get('picture')->getData();
-
+            
             if ($pictures) {
                 $newPicture = $fileUploader->uploadImage($pictures);
                 $picture->setPicture($newPicture);
@@ -56,6 +56,8 @@ class PictureController extends AbstractController
             
             $entityManager->persist($picture);
             $entityManager->flush();
+            
+            $this->addFlash('success', 'La photo a bien été ajoutée');
 
             $this->addFlash('success', $translator->trans('confirmation.picture_uploaded'));
 
