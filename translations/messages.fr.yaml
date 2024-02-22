@@ -139,6 +139,7 @@ memory:
     place: Nom et type de lieu
     address: Adresse
     user: Créateur
+    additional_picture: Photo supplémentaire
     form:
         title: 'Titre :'
         content: 'Contenu :'
@@ -147,6 +148,7 @@ memory:
         user: 'Créateur :'
         location: 'Adresse :'
         place: 'Lieu :'
+        picture: 'Photo supplémentaire :'
         choose_file: Choisir un fichier
         no_file_chosen: Aucun fichier choisi
 picture:
