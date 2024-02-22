@@ -121,7 +121,7 @@ class MemoryController extends AbstractController
     public function edit(Request $request, Memory $memory, EntityManagerInterface $entityManager, ParameterBagInterface $params, TranslatorInterface $translator): Response
  
     {
-        $form = $this->createForm(MemoryType::class, $memory);
+        $form = $this->createForm(MemoryType::class, $memory, ['is_edit' => true]);
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
@@ -151,9 +151,11 @@ class MemoryController extends AbstractController
                
                 $newFilename = $this->fileUploader->uploadImage($picture);
                 $memory->setMainPicture($newFilename);
+            }
 
                 $additionalPictures = $form->get('additionalPictures')->getData();
 
+    
                 foreach ($additionalPictures as $additionalPicture) {
          
                     $newFilename = $this->fileUploader->uploadImage($additionalPicture);
@@ -162,15 +164,12 @@ class MemoryController extends AbstractController
                     $memory->addPicture($newPicture);
                     $entityManager->persist($newPicture);
                 }
-    
+                
                 $entityManager->flush();
     
                 $this->addFlash('success', $translator->trans('confirmation.location_updated'));
+                return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
             }
-    
-
-            return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
-        }
     
         return $this->render('back/memory/edit.html.twig', [
             'memory' => $memory,

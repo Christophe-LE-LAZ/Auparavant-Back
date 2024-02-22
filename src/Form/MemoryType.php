@@ -40,7 +40,7 @@ class MemoryType extends AbstractType
                 [
                     'label' => 'memory.form.main_picture',
                     'mapped' => false,
-                    'required' => true,
+                    'required' => !$options['is_edit'],
                 ]
             )
             ->add(
@@ -80,15 +80,17 @@ class MemoryType extends AbstractType
             [
                     'label' => 'additional pictures',
                     'mapped' => false,
-                    'required' => true,
+                    'required' => false,
                     'multiple' => true,   
             ]);
-    }
+
+        }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Memory::class,
+            'is_edit' => false,
         ]);
     }
 }
