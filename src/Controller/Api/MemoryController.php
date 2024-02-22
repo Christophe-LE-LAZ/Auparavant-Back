@@ -900,10 +900,66 @@ class MemoryController extends AbstractController
                 }
             }
         }
-
         $entityManager->remove($memory);
         $entityManager->flush();
 
         return $this->json(['message' => 'Souvenir supprimé'], Response::HTTP_OK);
     }
+
+
+    #[Route('/api/memoriestest', methods: ['GET'])]
+    public function getAllMemoriesSort(MemoryRepository $memoryRepository)
+    {
+        // Récupérer tous les souvenirs triés par picture_date décroissante
+        $memories = $memoryRepository->findBy([], ['picture_date' => 'DESC']);
+
+           // Associer la main_picture selon vos critères
+           $processedMemories = $this->processMemories($memories);
+
+           // Retourner les données en JSON
+           return $this->json($processedMemories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
+       }
+  
+       private function processMemories(array $memories): array
+       {
+           $processedMemories = [];
+           $oldestPicturesByLocation = [];
+           $mostRecentPictureDate = null;
+       
+           foreach ($memories as $memory) {
+               $locationId = $memory->getLocation()->getId();
+               
+       
+               // Vérifier si la localité a déjà été traitée
+               if (!isset($oldestPicturesByLocation[$locationId])) {
+                   // Si non, associer la main_picture du souvenir le plus ancien
+                   $oldestPicturesByLocation[$locationId] = $memory->getMainPicture();
+               }
+       
+               // Vérifier si la picture_date du souvenir est la plus récente
+               if ($mostRecentPictureDate === null || $memory->getPictureDate() > $mostRecentPictureDate) {
+                   $mostRecentPictureDate = $memory->getPictureDate();
+                   $mainPicture = $oldestPicturesByLocation[$locationId];
+                   $oldPicture = null; // Pas d'old_picture pour le souvenir le plus récent
+               } else {
+                   $mainPicture = $memory->getMainPicture();
+                   $oldPicture = $oldestPicturesByLocation[$locationId];
+               }
+       
+               $processedMemories[] = [
+                   'id' => $memory->getId(),
+                   'location_id' => $memory->getLocation()->getId(),
+                   'user_id' => $memory->getUser()->getId(),
+                   // ... autres champs
+                   'main_picture' => $mainPicture,
+                   'old_picture' => $oldPicture,
+               ];
+           }
+       
+           return $processedMemories;
+       }
+
+
+
+
 }
