@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 #[Route('/back/picture')]
@@ -70,8 +69,6 @@ class PictureController extends AbstractController
             $newPicture->setPicture($newFilename);
             $entityManager->persist($newPicture);
             $entityManager->flush();
-
-            $this->addFlash('success', 'La photo a bien été ajoutée');
 
             $this->addFlash('success', $translator->trans('confirmation.picture_uploaded'));
 
