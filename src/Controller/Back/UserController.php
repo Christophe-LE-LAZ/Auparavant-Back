@@ -102,6 +102,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    
     /**
      * Delete a user by its id
      * @param Request $request
