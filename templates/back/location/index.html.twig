@@ -69,12 +69,11 @@
         {% endfor %}
         </tbody>
     </table>
-    {# {% if is_mobile %} #}
-        {# <a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}"><i class="bi bi-plus-square-fill"></i></a>
-        <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a> #}
-    {# {% else %} #}
+        {# {% if is_mobile %} #}
+            {# <a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}"><i class="bi bi-plus-square-fill"></i></a>
+            <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a> #}
+        {# {% else %} #}
         <a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}">{{ 'location.new'|trans }}</a>
         <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
-    {# {% endif %} #}
-
+        {# {% endif %} #}
 {% endblock %}                 
