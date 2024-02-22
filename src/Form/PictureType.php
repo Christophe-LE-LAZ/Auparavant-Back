@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PictureType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
