@@ -78,7 +78,7 @@ class MemoryType extends AbstractType
             ])
                 ->add('additionalPictures', FileType::class, 
             [
-                    'label' => 'additional pictures',
+                    'label' => 'memory.form.picture',
                     'mapped' => false,
                     'required' => true,
                     'multiple' => true,   

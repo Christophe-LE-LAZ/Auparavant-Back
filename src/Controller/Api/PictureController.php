@@ -116,7 +116,6 @@ class PictureController extends AbstractController
             );
         }
         return $this->json(['picture' => $picture], Response::HTTP_OK, [], ['groups' => ['get_picture', 'get_memory_id']]);
-
     }
 
     /**
@@ -186,7 +185,8 @@ class PictureController extends AbstractController
                         "type" => "Mausolée"
                     ]
                 ],
-    ])
+            ]
+        )
     )]
     #[OA\Tag(name: 'picture')]
     public function upload_update_main_picture(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager, LocationRepository $locationRepository, PlaceRepository $placeRepository)
@@ -243,12 +243,12 @@ class PictureController extends AbstractController
         if ($memory->getMainPicture()) {
             $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
             if (!$deleteFileResult) {
-            return $this->json("Erreur : Échec de suppression de la photo", 500);
+                return $this->json("Erreur : Échec de suppression de la photo", 500);
             }
         }
-        
+
         $newFilename = $this->fileUploader->uploadImage($picture);
-        
+
         $memory->setMainPicture($newFilename);
         $entityManager->flush();
 
@@ -294,46 +294,47 @@ class PictureController extends AbstractController
             example: [
                 [
                     "pictures" => [
-                    [
-                        "id" => 1,
-                        "picture" => "fileName.jpg",
+                        [
+                            "id" => 1,
+                            "picture" => "fileName.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "fileName.jpg",
+                        ]
                     ],
-                    [
-                        "id" => 2,
-                        "picture" => "fileName.jpg",
-                    ]
-                    ],         
                 ],
-    ])
+            ]
+        )
     )]
     #[OA\Tag(name: 'picture')]
     #[Route('api/secure/upload/additional_pictures/{id<\d+>}', methods: ['POST'])]
     public function upload_additional_pictures(Memory $memory, Request $request, ParameterBagInterface $params, EntityManagerInterface $entityManager): Response
     {
 
-         /** @var \App\Entity\User $user */
-         $user = $this->getUser();
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
-         if ($user !== $memory->getUser()) {
-             return $this->json("Erreur : Vous n'êtes pas autorisé à ajouter de photo à ce souvenir.", 401);
-         }
-         // Retrieve the uploaded picture file from the request
-         $pictures = $request->files->get('additional_pictures');
+        if ($user !== $memory->getUser()) {
+            return $this->json("Erreur : Vous n'êtes pas autorisé à ajouter de photo à ce souvenir.", 401);
+        }
+        // Retrieve the uploaded picture file from the request
+        $pictures = $request->files->get('additional_pictures');
 
         $newPictures = [];
 
         foreach ($pictures as $picture) {
 
-        $newFilename = $this->fileUploader->uploadImage($picture);
+            $newFilename = $this->fileUploader->uploadImage($picture);
 
-        // ne pas oublier d'ajouter l'url de l'image dans l'entité appropriée
-        // $entity est l'entity qui doit recevoir votre image
-        $newPicture = (new Picture())
-        ->setPicture($newFilename)
-        ->setMemory($memory);
-        $entityManager->persist($newPicture);
+            // ne pas oublier d'ajouter l'url de l'image dans l'entité appropriée
+            // $entity est l'entity qui doit recevoir votre image
+            $newPicture = (new Picture())
+                ->setPicture($newFilename)
+                ->setMemory($memory);
+            $entityManager->persist($newPicture);
 
-        $newPictures[]= $newPicture;
+            $newPictures[] = $newPicture;
         }
         $entityManager->flush();
 
@@ -341,7 +342,7 @@ class PictureController extends AbstractController
         return $this->json(['pictures' => $newPictures, 'message' => 'Image(s) téléchargée(s) et associée(s) au souvenir avec succès.'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 
-      /**
+    /**
      * Update an additional memory picture
      * @param Picture $picture
      * @param Request $request
@@ -360,7 +361,7 @@ class PictureController extends AbstractController
         description: 'Exemple of data to be supplied to update the additional picture',
         content: new OA\JsonContent(
             properties: [
-                new OA\Property(property: "id", type: "integer", example: 9), 
+                new OA\Property(property: "id", type: "integer", example: 9),
                 new OA\Property(property: 'picture', type: 'file', example: 'photo.jpg'),
             ]
         )
@@ -374,13 +375,14 @@ class PictureController extends AbstractController
             example: [
                 [
                     "picture" => [
-                    [
-                        "id" => 1,
-                        "picture" => "fileName.jpg",
+                        [
+                            "id" => 1,
+                            "picture" => "fileName.jpg",
+                        ],
                     ],
-                    ],         
                 ],
-    ])
+            ]
+        )
     )]
     #[OA\Tag(name: 'picture')]
     #[Route('api/secure/update/additional_pictures/{id<\d+>}', methods: ['POST'])]
@@ -391,16 +393,16 @@ class PictureController extends AbstractController
         $user = $this->getUser();
 
         if ($user !== $picture->getMemory()->getUser()) {
-             return $this->json("Erreur : Vous n'êtes pas autorisé à ajouter de photo à ce souvenir.", 401);
+            return $this->json("Erreur : Vous n'êtes pas autorisé à ajouter de photo à ce souvenir.", 401);
         }
-         
+
         $newPicture = $request->files->get('additional_pictures');
 
         if ($newPicture === null) {
             $picture->getPicture();
             $entityManager->flush();
             return $this->json(['message' => 'Le souvenir a bien été mis à jour.']);
-            }
+        }
         $currentPictureDeleteResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
         if (!$currentPictureDeleteResult) {
             return $this->json("Erreur : Échec de suppression de l'ancienne photo", 500);
@@ -435,7 +437,7 @@ class PictureController extends AbstractController
         schema: new OA\Schema(type: 'integer')
     )]
     #[OA\Tag(name: 'picture')]
-    public function delete(Picture $picture, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository, ParameterBagInterface $params ): Response
+    public function delete(Picture $picture, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository, ParameterBagInterface $params): Response
     {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
