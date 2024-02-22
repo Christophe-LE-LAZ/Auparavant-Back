@@ -435,7 +435,7 @@ class PictureController extends AbstractController
         schema: new OA\Schema(type: 'integer')
     )]
     #[OA\Tag(name: 'picture')]
-    public function delete(Picture $picture, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository, ParameterBagInterface $params, ): Response
+    public function delete(Picture $picture, EntityManagerInterface $entityManager, MemoryRepository $memoryRepository, ParameterBagInterface $params ): Response
     {
         /** @var \App\Entity\User $user */
         $user = $this->getUser();

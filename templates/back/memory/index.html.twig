@@ -44,7 +44,8 @@
                     <td>{{ sortResult.id }}</td>
                     <td>{{ sortResult.title }}</td>
                     <td>{{ sortResult.content| slice(0,50) }}</td>
-                    <td> <img src="/assets/pictures/{{ sortResult.main_picture}} "class="img-thumbnail"></td>
+                    {# <td> <img src="/assets/pictures/{{sortResult.main_picture}} "class="img-thumbnail"></td> #}
+                    <td> <img src="{{ asset('assets/pictures/' ~ sortResult.main_picture) }}" class="img-thumbnail"></td>
                     <td>{{ sortResult.picture_date ? sortResult.picture_date|date('Y-m-d') : '' }}</td>
                     <td>{{ sortResult.placeName }} {{ sortResult.type }}</td>
                     <td>{{ sortResult.street }} {{ sortResult.zipcode }} {{ sortResult.city }}</td>

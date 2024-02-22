@@ -75,6 +75,13 @@ class MemoryType extends AbstractType
                 'choice_label' => function (Place $place) {
                     return $place->getName() . ' ' . $place->getType();
                 },
+            ])
+                ->add('additionalPictures', FileType::class, 
+            [
+                    'label' => 'additional pictures',
+                    'mapped' => false,
+                    'required' => true,
+                    'multiple' => true,   
             ]);
     }
 
