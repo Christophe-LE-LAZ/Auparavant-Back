@@ -15,15 +15,17 @@
 {{ form_start(form) }}
 {{ form_widget(form) }}
 <div class="row">
-	<div class="col d-flex">
+	<div class="col d-flex"
+	 {% if memory.picture is not empty %}>
 		{% for picture in memory.picture %}
 			<div class="col-3 d-flex flex-column align-items-center">
 				<img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-thumbnail mx-5" alt="Additional Picture">
 				<a href="{{ path ('app_picture_delete', {'id':picture.id} )}}">
-					<i class="bi bi-trash-fill align-items-center" style="font-size: 1.5rem; color:#0761ff;"></i>
+					<i class="bi bi-trash-fill align-items-center" style="font-size: 1.5rem; color:#dc3646;"></i>
 				</a>
 			</div>
 		{% endfor %}
+		{% endif %}
 	</div>
     </div>
 	<div class="row">

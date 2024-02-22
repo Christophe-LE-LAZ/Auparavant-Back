@@ -72,7 +72,7 @@ class MemoryController extends AbstractController
             $additionalPictures = $form->get('additionalPictures')->getData();
 
             foreach ($additionalPictures as $additionalPicture) {
-                // dd($additionalPicture);
+                
                 $newFilename = $this->fileUploader->uploadImage($additionalPicture);
                 $newPicture = new Picture();
                 $newPicture->setPicture($newFilename);
@@ -151,6 +151,17 @@ class MemoryController extends AbstractController
                
                 $newFilename = $this->fileUploader->uploadImage($picture);
                 $memory->setMainPicture($newFilename);
+
+                $additionalPictures = $form->get('additionalPictures')->getData();
+
+                foreach ($additionalPictures as $additionalPicture) {
+         
+                    $newFilename = $this->fileUploader->uploadImage($additionalPicture);
+                    $newPicture = new Picture();
+                    $newPicture->setPicture($newFilename);
+                    $memory->addPicture($newPicture);
+                    $entityManager->persist($newPicture);
+                }
     
                 $entityManager->flush();
     

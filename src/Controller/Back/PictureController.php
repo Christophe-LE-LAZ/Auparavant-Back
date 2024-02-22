@@ -53,21 +53,22 @@ class PictureController extends AbstractController
     #[Route('/new', name: 'app_picture_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator, FileUploader $fileUploader): Response
     {
-        $picture = new Picture();
-        $form = $this->createForm(PictureType::class, $picture);
+        $newPicture = new Picture();
+        $form = $this->createForm(PictureType::class, $newPicture);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $pictures = $form->get('picture')->getData();
-            
-            if ($pictures) {
-                $newPicture = $fileUploader->uploadImage($pictures);
-                $picture->setPicture($newPicture);
+            $picture = $form->get('picture')->getData();
+
+            if ( !$picture) {
+                return $this->addFlash('warning', 'Aucun changement effectué car aucune image  n\'a été soumise.');
+
             }
-            
-            $entityManager->persist($picture);
+            $newFilename = $this->fileUploader->uploadImage($picture);
+            $newPicture->setPicture($newFilename);
+            $entityManager->persist($newPicture);
             $entityManager->flush();
-            
+
             $this->addFlash('success', 'La photo a bien été ajoutée');
 
             $this->addFlash('success', $translator->trans('confirmation.picture_uploaded'));
@@ -77,7 +78,7 @@ class PictureController extends AbstractController
         }
 
         return $this->render('back/picture/new.html.twig', [
-            'picture' => $picture,
+            'picture' => $newPicture,
             'form' => $form,
         ]);
     }
@@ -135,6 +136,8 @@ class PictureController extends AbstractController
     #[Route('/{id}', name: 'app_picture_delete', methods: ['POST'])]
     public function delete(Request $request, Picture $picture, EntityManagerInterface $entityManager, TranslatorInterface $translator, ParameterBagInterface $params): Response
     {
+        $memoryId = $picture->getMemory()->getId();
+
         if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
             $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
 
@@ -146,6 +149,9 @@ class PictureController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', $translator->trans('confirmation.picture_deleted'));
+
+            return $this->redirectToRoute('app_memory_edit', ['id' => $memoryId]);
+
         }
 
         return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);

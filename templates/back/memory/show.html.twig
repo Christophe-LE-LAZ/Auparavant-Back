@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <th>{{ 'memory.main_picture'|trans }}</th>
-                <td>{{ memory.mainPicture }}</td>
+                <td>{{ memory.mainPicture }} <img src="{{ asset('assets/pictures/' ~ memory.mainPicture) }}" class="img-thumbnail mx-5" alt="Main Picture"></td>
             </tr>
             <tr>
                 <th>{{ 'memory.picture_date'|trans }}</th>
@@ -37,6 +37,14 @@
                 <th>{{ 'memory.user'|trans }}</th>
                 <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
             </tr>
+            {% if memory.picture is not empty %}>
+		{% for picture in memory.picture %}
+            <tr>
+                <th>{{ 'memory.additional_picture'|trans }}</th>
+                <td>{{ picture.picture }} <img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-thumbnail mx-5" alt="Additional Picture"></td>
+            </tr>
+        {% endfor %}
+		{% endif %}
         </tbody>
     </table>
     <div class="row">
