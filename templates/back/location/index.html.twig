@@ -58,8 +58,8 @@
                 <td class="text-center align-middle">{{ location.latitude }}</td>
                 <td class="text-center align-middle">{{ location.longitude }}</td>
                 <td class="text-center align-middle">
-                    <a href="{{ path('app_location_show', {'id': location.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
-                    <a href="{{ path('app_location_edit', {'id': location.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>                    
+                    <a href="{{ path('app_location_show', {'id': location.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ={{ 'button.show'|trans }}><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
+                    <a href="{{ path('app_location_edit', {'id': location.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ={{ 'button.edit'|trans }}><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>                    
                 </td>
             </tr>
         {% else %}
@@ -69,7 +69,12 @@
         {% endfor %}
         </tbody>
     </table>
+    {# {% if is_mobile %} #}
+        {# <a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}"><i class="bi bi-plus-square-fill"></i></a>
+        <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a> #}
+    {# {% else %} #}
+        <a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}">{{ 'location.new'|trans }}</a>
+        <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
+    {# {% endif %} #}
 
-<a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}">{{ 'location.new'|trans }}</a>
-<a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
-{% endblock %}
+{% endblock %}                 
