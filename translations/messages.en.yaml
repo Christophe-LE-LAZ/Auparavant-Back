@@ -9,23 +9,25 @@ page.title: Welcome to "What did there use to be?" backoffice
 button.login: Login
 button.logout: Logout
 
-## A.P.I
+## Backoffice
+
+### Flash messages
 confirmation:
-    location_creation: The location has been successfully created.
-    location_update: The location has been successfully updated.
-    location_deletion: The location has been successfully deleted.
-    memory_creation: The memory has been successfully created.
-    memory_update: The memory has been successfully updated.
-    memory_deletion: The memory has been successfully deleted.
-    picture_creation: The picture has been successfully uploaded.
-    picture_update: The picture has been successfully updated.
-    picture_deletion: The picture has been successfully deleted.
-    place_creation: The place has been successfully created.
-    place_update: The place has been successfully updated.
-    place_deletion: The place has been successfully deleted.
-    user_creation: The account has been successfully created.
-    user_update: The account has been successfully updated.
-    user_deletion: The account has been successfully deleted.
+    location_added: The location has been successfully added.
+    location_updated: The location has been successfully updated.
+    location_deleted: The location has been successfully deleted.
+    memory_created: The memory has been successfully created.
+    memory_updated: The memory has been successfully updated.
+    memory_deleted: The memory has been successfully deleted.
+    picture_uploaded: The picture has been successfully uploaded.
+    picture_updated: The picture has been successfully updated.
+    picture_deleted: The picture has been successfully deleted.
+    place_added: The place has been successfully addded.
+    place_updated: The place has been successfully updated.
+    place_deleted: The place has been successfully deleted.
+    user_created: The account has been successfully created.
+    user_updated: The account has been successfully updated.
+    user_deleted: The account has been successfully deleted.
 errors:
     not_found: The page you requested was not found.
     resource_not_found: The requested resource was not found.
@@ -44,9 +46,6 @@ unauthorized_access:
     view: You are not authorized to view this content.
     modification: You are not authorized to modify this content.
     deletion: You are not authorized to delete this content.
-
-
-## Backoffice
 
 ### _delete_form
 deletion_confirmation: Are you sure you want to delete this item?

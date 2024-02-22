@@ -6,10 +6,11 @@ use App\Entity\Location;
 use App\Form\LocationType;
 use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/back/location')]
 class LocationController extends AbstractController
@@ -33,10 +34,11 @@ class LocationController extends AbstractController
      *
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
      * @return Response
      */
     #[Route('/new', name: 'app_location_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $location = new Location();
         $form = $this->createForm(LocationType::class, $location);
@@ -46,7 +48,7 @@ class LocationController extends AbstractController
             $entityManager->persist($location);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La localité a bien été ajoutée');
+            $this->addFlash('success', $translator->trans('confirmation.location_added'));
 
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -76,10 +78,11 @@ class LocationController extends AbstractController
      * @param Request $request
      * @param Location $location
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
      * @return Response
      */
     #[Route('/{id}/edit', name: 'app_location_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Location $location, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Location $location, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $form = $this->createForm(LocationType::class, $location);
         $form->handleRequest($request);
@@ -87,7 +90,7 @@ class LocationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'La localité a bien été modifiée');
+            $this->addFlash('success', $translator->trans('confirmation.location_updated'));
 
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -103,16 +106,17 @@ class LocationController extends AbstractController
      * @param Request $request
      * @param Location $location
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
      * @return Response
      */
     #[Route('/{id}', name: 'app_location_delete', methods: ['POST'])]
-    public function delete(Request $request, Location $location, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Location $location, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete'.$location->getId(), $request->request->get('_token'))) {
             $entityManager->remove($location);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La localité a bien été supprimée');
+            $this->addFlash('success', $translator->trans('confirmation.location_deleted'));
         }
 
         return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
