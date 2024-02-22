@@ -5,7 +5,6 @@ namespace App\Controller\Back;
 use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Service\FileUploader;
-use App\Service\FileUploader;
 use App\Repository\PictureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,7 +60,10 @@ class PictureController extends AbstractController
             $picture = $form->get('picture')->getData();
 
             if ( !$picture) {
+
                 return $this->addFlash('warning', 'Aucun changement effectué car aucune image  n\'a été soumise.');
+
+        return $this->addFlash('warning', 'Aucun changement effectué car aucune image n\'a été soumise.');
 
             }
             $newFilename = $this->fileUploader->uploadImage($picture);
@@ -106,15 +108,31 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/{id}/edit', name: 'app_picture_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Picture $picture, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+
+    public function edit(Request $request, Picture $picture, EntityManagerInterface $entityManager, TranslatorInterface $translator, ParameterBagInterface $params): Response
+
     {
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $newPicture = $form->get('picture')->getData();
+
+            if ( !$newPicture) {
+                return $this->addFlash('warning', 'Aucun changement effectué car aucune image n\'a été soumise.');
+            }
+            $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
+
+            if (!$deleteFileResult) {
+                $this->addFlash('warning', 'Erreur lors de la suppression du fichier associé à la photo.');
+            }
+            $newFilename = $this->fileUploader->uploadImage($newPicture);
+            $picture->setPicture($newFilename);
+            $entityManager->persist($picture);
             $entityManager->flush();
 
             $this->addFlash('success', $translator->trans('confirmation.picture_updated'));
+
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -142,7 +160,7 @@ class PictureController extends AbstractController
             $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
 
             if (!$deleteFileResult) {
-                // Gérer l'erreur de suppression de fichier
+                
                 $this->addFlash('warning', 'Erreur lors de la suppression du fichier associé à la photo.');
             }
             $entityManager->remove($picture);
