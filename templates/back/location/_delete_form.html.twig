@@ -1,5 +1,12 @@
-<form class="form-group" method="post" action="{{ path('app_location_delete', {'id': location.id}) }}" onsubmit="return confirm('{{ 'deletion_confirmation'|trans }}');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ location.id) }}">
-    <button class="btn btn-lg text-white mb-2 btn-danger">{{ 'button.delete'|trans }}</button>
-</form>
 
+{# {% if is_mobile %} #}
+    <form class="form-group" method="post" action="{{ path('app_location_delete', {'id': location.id}) }}" onsubmit="return confirm('{{ 'deletion_confirmation'|trans }}');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ location.id) }}">
+            <button class="btn btn-lg text-white mb-2 btn-danger"><i class="bi bi-trash3-fill"></i></button>
+    </form>
+{# {% else %} #}
+    {# <form class="form-group" method="post" action="{{ path('app_location_delete', {'id': location.id}) }}" onsubmit="return confirm('{{ 'deletion_confirmation'|trans }}');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ location.id) }}">
+            <button class="btn btn-lg text-white mb-2 btn-danger">{{ 'button.delete'|trans }}</button>
+    </form> #}
+{# {% endif %} #}
