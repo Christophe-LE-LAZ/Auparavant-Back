@@ -6,10 +6,11 @@ use App\Entity\Memory;
 use App\Form\MemoryType;
 use App\Repository\MemoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/back/memory')]
 class MemoryController extends AbstractController
@@ -33,10 +34,11 @@ class MemoryController extends AbstractController
      *
      * @param Request $request
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
      * @return Response
      */
     #[Route('/new', name: 'app_memory_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $memory = new Memory();
         $form = $this->createForm(MemoryType::class, $memory);
@@ -46,7 +48,7 @@ class MemoryController extends AbstractController
             $entityManager->persist($memory);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le souvenir a bien été ajouté');
+            $this->addFlash('success', $translator->trans('confirmation.memory_created'));
 
             return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -76,10 +78,11 @@ class MemoryController extends AbstractController
      * @param Request $request
      * @param Memory $memory
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
      * @return Response
      */
     #[Route('/{id}/edit', name: 'app_memory_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Memory $memory, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Memory $memory, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $form = $this->createForm(MemoryType::class, $memory);
         $form->handleRequest($request);
@@ -87,7 +90,7 @@ class MemoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le souvenir a bien été modifié');
+            $this->addFlash('success', $translator->trans('confirmation.location_updated'));
 
             return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -103,16 +106,17 @@ class MemoryController extends AbstractController
      * @param Request $request
      * @param Memory $memory
      * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
      * @return Response
      */
     #[Route('/{id}', name: 'app_memory_delete', methods: ['POST'])]
-    public function delete(Request $request, Memory $memory, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Memory $memory, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete'.$memory->getId(), $request->request->get('_token'))) {
             $entityManager->remove($memory);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le souvenir a bien été supprimé');
+            $this->addFlash('success', $translator->trans('confirmation.location_deleted'));
         }
 
         return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
