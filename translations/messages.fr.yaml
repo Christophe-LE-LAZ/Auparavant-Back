@@ -62,7 +62,7 @@ button.back: retour à la liste
 # title.reversed: Index des entités
 button.show: voir
 button.edit: modifier
-warning: Aucun élément n'a été trouvé
+no_records_found: Aucun élément n'a été trouvé
 # button.create: Créer une nouvelle entité
 button.home: accueil
 
