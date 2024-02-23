@@ -1,11 +1,20 @@
 <div class="form-group">
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <div class="row">
-		    <div class="col d-flex flex-column flex-md-row mx-md-3 my-md-2 align-items-md-start">
-                <button class="btn btn-lg btn-success text-white mb-2">{{ button_label|default('button.submit'|trans) }}</button>
-                <a class="btn btn-lg btn-secondary text-white mb-2 mx-md-2" href="{{ path('app_user_index') }}">{{ 'button.back'|trans }}</a>
-            </div>
-	    </div>
+        {# {% if is_mobile %} #}
+            {# <div class="row">
+		        <div class="col d-flex flex-column flex-md-row mx-md-3 my-md-2 align-items-md-start">
+                    <button class="btn btn-lg btn-success text-white mb-2">{{ button_label|default(' '|trans) }}<i class="bi bi-check-square-fill"></i></button>
+                    <a class="btn btn-lg btn-secondary text-white mb-2 mx-md-2" href="{{ path('app_user_index') }}"><i class="bi bi-backspace-fill"></i></a>
+                </div>
+	        </div> #}
+        {# {% else %} #}
+            <div class="row">
+		        <div class="col d-flex flex-column flex-md-row mx-md-3 my-md-2 align-items-md-start">
+                    <button class="btn btn-lg btn-success text-white mb-2">{{ button_label|default('button.submit'|trans) }}</button>
+                    <a class="btn btn-lg btn-secondary text-white mb-2 mx-md-2" href="{{ path('app_user_index') }}">{{ 'button.back'|trans }}</a>
+                </div>
+	        </div>
+        {# {% endif %} #}
     {{ form_end(form) }}
 </div>
