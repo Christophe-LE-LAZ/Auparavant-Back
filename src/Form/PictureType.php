@@ -29,7 +29,7 @@ class PictureType extends AbstractType
                             'mimeTypes' => [
                                 'image/*',
                             ],
-                            'mimeTypesMessage' => 'Veuillez choisir un fichier valide',
+                            'mimeTypesMessage' => 'picture.valid_file_required',
                         ])
                         ],
 

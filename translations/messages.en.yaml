@@ -151,6 +151,7 @@ memory:
         picture: 'Additional picture:'
         choose_file: Select a file
         no_file_chosen: No file selected
+        valid_file_required: Please select a valid file
 picture:
     ### edit
     title.edit: Edit Picture
@@ -168,6 +169,7 @@ picture:
     not_found: Picture not found
     picture: 'Picture:'
     memory: 'Corresponding memory:'
+    valid_file_required: Please select a valid file
 place:
     ### edit
     title.edit: Edit Place

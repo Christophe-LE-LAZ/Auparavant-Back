@@ -151,6 +151,7 @@ memory:
         picture: 'Photo supplémentaire :'
         choose_file: Choisir un fichier
         no_file_chosen: Aucun fichier choisi
+        valid_file_required: Veuillez choisir un fichier valide
 picture:
     ### edit
     title.edit: Modifier une photo
@@ -168,6 +169,7 @@ picture:
     not_found : Photo non trouvée
     picture: 'Photographie :'
     memory: 'Souvenir correspondant :'
+    valid_file_required: Veuillez choisir un fichier valide
 place:
     ### edit
     title.edit: Modifier un lieu

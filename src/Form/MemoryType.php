@@ -47,7 +47,7 @@ class MemoryType extends AbstractType
                             'mimeTypes' => [
                                 'image/*',
                             ],
-                            'mimeTypesMessage' => 'Veuillez choisir un fichier valide',
+                            'mimeTypesMessage' => 'memory.form.valid_file_required',
                         ])
                         ],
                 ]
@@ -91,14 +91,14 @@ class MemoryType extends AbstractType
                     'mapped' => false,
                     'required' => false,
                     'multiple' => true, 
-                    'constraints' => [
-                        new File([
-                            'mimeTypes' => [
-                                'image/*',
-                            ],
-                            'mimeTypesMessage' => 'Veuillez choisir un fichier valide',
-                        ])
-                        ],  
+                    // 'constraints' => [
+                    //     new File([
+                    //         'mimeTypes' => [
+                    //             'image/*',
+                    //         ],
+                    //         'mimeTypesMessage' => 'memory.form.valid_file_required',
+                    //     ])
+                    //     ],  
             ]);
 
         }
