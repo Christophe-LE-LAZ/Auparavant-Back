@@ -164,6 +164,120 @@ class MemoryController extends AbstractController
         return $this->json($memories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
     }
 
+     /**
+     * Route qui permet de récupérer l'ensemble des souvenirs associés avec une image avant/après
+     */
+    #[Route('/api/memorieswithtwopictures', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns the memory list with two pictures after/before',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture'])),
+            example: [
+                [
+                    "id" => 1,
+                    "title" => "Le Panthéon en 1792",
+                    "content" => "Le Panthéon en 1792, avec La Renommée en son sommet.n",
+                    "picture_date" => "1792-01-01T00:00:00+00:00",
+                    "main_picture" => "fileName.jpg",
+                    "compare_picture" => "fileName.jpg",
+                    "location" => [
+                        "id" => 1,
+                        "area" => "Île-de-France",
+                        "department" => "Paris",
+                        "district" => "Quartier latin",
+                        "street" => "28 place du Panthéon",
+                        "city" => "Paris",
+                        "zipcode" => 75005,
+                        "latitude" => "48.84619800",
+                        "longitude" => "2.34610500"
+                    ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
+                    "user" => [
+                        "id" => 1,
+                        "firstname" => "Aurélien",
+                        "lastname" => "ROUCHETTE-MARET",
+                        "email" => "aurelien.rouchette@orange.fr",
+                        "roles" => [
+                            "ROLE_USER",
+                            "ROLE_ADMIN"
+                        ]
+                    ],
+                    "place" => [
+                        "id" => 1,
+                        "name" => "Le Panthéon",
+                        "type" => "Mausolée"
+                    ]
+                ],
+                [
+                    "id" => 2,
+                    "title" => "Le Panthéon de nos jours",
+                    "content" => "Le Panthéon vu de la tour Montparnasse en 2016.",
+                    "picture_date" => "2016-01-01T00:00:00+00:00",
+                    "main_picture" => "fileName.jpg",
+                    "compare_picture" => "fileName.jpg",
+                    "location" => [
+                        "id" => 1,
+                        "area" => "Île-de-France",
+                        "department" => "Paris",
+                        "district" => "Quartier latin",
+                        "street" => "28 place du Panthéon",
+                        "city" => "Paris",
+                        "zipcode" => 75005,
+                        "latitude" => "48.84619800",
+                        "longitude" => "2.34610500"
+                    ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
+                    "user" => [
+                        "id" => 1,
+                        "firstname" => "Aurélien",
+                        "lastname" => "ROUCHETTE-MARET",
+                        "email" => "aurelien.rouchette@orange.fr",
+                        "roles" => [
+                            "ROLE_USER",
+                            "ROLE_ADMIN"
+                        ]
+                    ],
+                    "place" => [
+                        "id" => 1,
+                        "name" => "Le Panthéon",
+                        "type" => "Mausolée"
+                    ]
+                ],
+            ]
+        )
+    )]
+    #[OA\Tag(name: 'memory')]
+    public function getAllMemoriesWithPicturesBeforeAfter(MemoryRepository $memoryRepository)
+    {
+        $memories = $memoryRepository->findAll();
+           // Associer la compare_picture selon la date
+        $processedMemories = $this->processMemories($memories);
+
+         return $this->json($processedMemories, Response::HTTP_OK);
+    }
+    
     /**
      * Display a single memory by its id
      * TODO: Retrieve additional pictures from a memory
@@ -912,16 +1026,7 @@ class MemoryController extends AbstractController
         return $this->json(['message' => 'Souvenir supprimé'], Response::HTTP_OK);
     }
 
-
-    #[Route('/api/memorieswithtwopictures', methods: ['GET'])]
-    public function getAllMemoriesSort(MemoryRepository $memoryRepository)
-    {
-        $memories = $memoryRepository->findAll();
-           // Associer la compare_picture selon la date
-        $processedMemories = $this->processMemories($memories);
-
-         return $this->json($processedMemories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
-       }
+   
   
        /**
         * Boucle sur l'ensemble des souvenirs; récupère pour chaque localité la photo la plus récente et la plus ancienne.
@@ -944,7 +1049,7 @@ class MemoryController extends AbstractController
         $oldestMemory = $this->memoryRepository->findOldestMemoryByLocation($locationId);
         $oldestMainPicture = $oldestMemory['main_picture'];
 
-        // Convertir les dates en objets DateTime
+        // Convertir les dates en objet DateTime
         $memoryDate = new \DateTime($memory->getPictureDate()->format('Y-m-d H:i:s'));
         $mostRecentDate = new \DateTime($mostRecentMemory['picture_date']);
        
@@ -957,19 +1062,49 @@ class MemoryController extends AbstractController
            $comparePicture = null;
         }
 
+        // Itération sur chaque photo additionnelle associée au memory et stockage dans le tableau $pictures[]
+        $pictures = [];
+        foreach ($memory->getPicture() as $picture) {
+            $pictures[] = [
+                'id' => $picture->getId(),
+                'picture' => $picture->getPicture(),
+            ];
+        }
+
+
         $processedMemories[] = [
            'id' => $memory->getId(),
-           'location_id' => $memory->getLocation()->getId(),
-           'user_id' => $memory->getUser()->getId(),
-           // ... autres champs
+           'title' => $memory->getTitle(),
+           'content' => $memory->getContent(),
+           'picture_date' => $memory->getPictureDate(),
            'main_picture' => $memory->getMainPicture(),
            'compare_picture' => $comparePicture,
-       ];
-   }
+           'location' => [
+            'id' => $memory->getLocation()->getId(),
+            'area' => $memory->getLocation()->getArea(),
+            'department' => $memory->getLocation()->getDepartment(),
+            'district' => $memory->getLocation()->getDistrict(),
+            'street' => $memory->getLocation()->getStreet(),
+            'city' => $memory->getLocation()->getCity(),
+            'zipcode' => $memory->getLocation()->getZipcode(),
+            'latitude' => $memory->getLocation()->getLatitude(),
+            'longitude' => $memory->getLocation()->getLongitude(),],
+            'picture' => $pictures,
+           'user' => [
+            'id' => $memory->getUser()->getId(),
+            'firstname' => $memory->getUser()->getFirstName(),
+            'lastname' => $memory->getUser()->getLastName(),
+            'email' => $memory->getUser()->getEmail(),
+            'roles' => $memory->getUser()->getRoles(),],
+           'place' => [
+             'id'=> $memory->getPlace()->getId(),
+             'name'=> $memory->getPlace()->getName(),
+             'type'=> $memory->getPlace()->getType(),
+           ],
+           ];
+        }
 
    return $processedMemories;
-}
-
-
+    }
 
 }
