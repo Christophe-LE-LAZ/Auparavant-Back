@@ -8,6 +8,7 @@ use App\Entity\Memory;
 use App\Entity\Location;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\All;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -44,11 +45,10 @@ class MemoryType extends AbstractType
                     'required' => !$options['is_edit'],
                     'constraints' => [
                         new File([
-                            'mimeTypes' => [
-                                'image/*',
-                            ],
-                            'mimeTypesMessage' => 'memory.form.valid_file_required',
-                        ])
+                            'maxSize' => '5M',
+                            'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif', 'image/webp', ],
+                            'mimeTypesMessage' => 'memory.form.valid_file_required'
+                        ]),
                         ],
                 ]
             )
@@ -91,18 +91,22 @@ class MemoryType extends AbstractType
                     'mapped' => false,
                     'required' => false,
                     'multiple' => true, 
-                    // 'constraints' => [
-                    //     new File([
-                    //         'mimeTypes' => [
-                    //             'image/*',
-                    //         ],
-                    //         'mimeTypesMessage' => 'memory.form.valid_file_required',
-                    //     ])
-                    //     ],  
+                    'constraints' => [
+                        new All([
+                          'constraints' => [
+                            new File([
+                                'maxSize' => '5M',
+                                'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif', 'image/webp', ],
+                                'mimeTypesMessage' => 'memory.form.valid_file_required'
+                            ]),
+                          ],
+                        ]),
+                      ]
+
             ]);
 
         }
-
+        
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
