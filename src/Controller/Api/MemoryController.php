@@ -676,7 +676,7 @@ class MemoryController extends AbstractController
         }
 
         $memoryData = $data['memory'];
-        // dd($memory);
+     
         $newMemory = (new Memory())
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
@@ -775,7 +775,7 @@ class MemoryController extends AbstractController
         $entityManager->persist($newPlace);
 
         $memoryData = $data['memory'];
-        // dd($memory);
+        
         $newMemory = (new Memory())
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])

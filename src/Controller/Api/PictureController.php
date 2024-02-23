@@ -239,7 +239,7 @@ class PictureController extends AbstractController
             return $this->json("Erreur : Le souvenir doit contenir une image principale  .", 400);
         }
         // Continue with the code to handle the case when a new picture is uploaded
-        dd($picture);
+        
         if ($memory->getMainPicture()) {
             $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
             if (!$deleteFileResult) {
