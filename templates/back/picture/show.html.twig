@@ -12,9 +12,11 @@
             <tr>
                 <th>{{ 'picture.picture'|trans }}</th>
                 <td>{{ picture.picture }}</td>
-                <td><img src={{picture.picture}}></td>
-                <td><img src="{{('/assets/pictures/' ~ picture.picture)}}"></td>
             </tr>
+                <tr>
+                <th>Visuel</th>
+                    <td><img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-edit"></td>
+                </tr>
             <tr>
                 <th>{{ 'picture.memory'|trans }}</th>
                 <td>{{ picture.memory.title }}</td>

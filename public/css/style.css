@@ -6,6 +6,13 @@
     object-fit: cover;
 }
 
+.img-edit {
+    height: 300px;
+    width: 300px;
+    object-fit: contain;
+
+}
+
 .navbar-logo {
     max-width: 50px; /* Adjust the max-width to your preference */
     height: auto; /* Maintain aspect ratio */

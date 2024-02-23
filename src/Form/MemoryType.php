@@ -41,15 +41,7 @@ class MemoryType extends AbstractType
                 [
                     'label' => 'memory.form.main_picture',
                     'mapped' => false,
-                    'required' => true,
-                    'constraints' => [
-                        new File([
-                            'mimeTypes' => [
-                                'image/*',
-                            ],
-                            'mimeTypesMessage' => 'Veuillez choisir un fichier valide',
-                        ])
-                        ],
+                    'required' => !$options['is_edit'],
                 ]
             )
             ->add(
@@ -84,13 +76,22 @@ class MemoryType extends AbstractType
                 'choice_label' => function (Place $place) {
                     return $place->getName() . ' ' . $place->getType();
                 },
+            ])
+                ->add('additionalPictures', FileType::class, 
+            [
+                    'label' => 'memory.form.picture',
+                    'mapped' => false,
+                    'required' => false,
+                    'multiple' => true,   
             ]);
-    }
+
+        }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Memory::class,
+            'is_edit' => false,
         ]);
     }
 }

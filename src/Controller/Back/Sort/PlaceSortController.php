@@ -27,7 +27,7 @@ class PlaceSortController extends AbstractController
 
         if ($order === 'location') {
             $sortResults = $locationRepository->findByOrderAlphabeticalStreet($direction);
-            // dd($sortResults);
+           
         }
            $places = $placeRepository->findBy([], [$order => $direction]);
 

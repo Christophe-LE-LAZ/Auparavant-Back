@@ -28,7 +28,7 @@ class PictureSortController extends AbstractController
 
         if ($order === 'memory') {
             $sortResults = $pictureRepository->findByOrderAlphabeticalMemory($direction);
-            // dd($sortResults);
+           
         }
 
         $pictures = $pictureRepository->findBy([], [$order => $direction]);

@@ -24,7 +24,7 @@
                 {% for sortResult in sortResults %}
                 <tr>
                     <td>{{ sortResult.id }}</td>
-                    <td> <img src="/assets/pictures/{{ sortResult.picture }} "class="img-thumbnail"></td>
+                    <td> <img src="{{ asset('assets/pictures/' ~  sortResult.picture)}}"class="img-thumbnail"></td>
                     <td>{{ sortResult.title }}</td>
                     <td>
                         <a href="{{ path('app_picture_show', {'id': sortResult.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
@@ -42,7 +42,7 @@
                 {% for picture in pictures %}
                 <tr>
                     <td>{{ picture.id }}</td>
-                    <td> <img src="/assets/pictures/{{picture.picture }} "class="img-thumbnail"></td>
+                    <td> <img src="{{ asset('assets/pictures/' ~  picture.picture)}}"class="img-thumbnail"></td>
                     <td>{{ picture.memory.title }}</td>
                     <td>
                         <a href="{{ path('app_picture_show', {'id': picture.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>

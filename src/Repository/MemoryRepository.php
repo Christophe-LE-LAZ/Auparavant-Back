@@ -67,7 +67,43 @@ class MemoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Récupère le souvenir le plus ancien par localité
+     */
+    public function findOldestMemoryByLocation(int $locationId): ?array {
+        $sql = "SELECT m.*
+                FROM memory m
+                WHERE m.location_id = :locationId
+                ORDER BY m.picture_date ASC
+                LIMIT 1";
+        
+        $conn = $this->getEntityManager()->getConnection();
+        $resultSet = $conn->executeQuery($sql, ['locationId' => $locationId]);
+        return $resultSet->fetchAssociative();
+    }
     
+    /**
+     * Récupère le souvenir le plus récent par localité
+     */
+    public function findMostRecentMemoryByLocation(int $locationId): ?array {
+        $sql = "SELECT m.*
+                FROM memory m
+                WHERE m.location_id = :locationId
+                ORDER BY m.picture_date DESC
+                LIMIT 1";
+        
+        $conn = $this->getEntityManager()->getConnection();
+        $resultSet = $conn->executeQuery($sql, ['locationId' => $locationId]);
+        return $resultSet->fetchAssociative();
+    }
+
+
+
+
+
+
+
 
     //    /**
     //     * @return Memory[] Returns an array of Memory objects

@@ -22,6 +22,7 @@ class Memory
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\NotBlank]
     #[Assert\Length(
         min: 2,
         max: 30,
@@ -32,6 +33,7 @@ class Memory
     private ?string $title = null;
   
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
     #[Assert\Length(
         min: 10,
         max: 64000,
@@ -46,9 +48,6 @@ class Memory
     private ?\DateTimeInterface $picture_date = null;
 
     #[ORM\Column(length: 2000)]
-    #[Assert\Image(
-        mimeTypesMessage: 'Veuillez télécharger une image valide.'
-    )]
     #[Groups(['get_memory'])]
     private ?string $main_picture = null;
 
@@ -56,6 +55,7 @@ class Memory
     private ?\DateTimeImmutable $publishedAt = null;
 
     #[ORM\Column]
+    
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
