@@ -1,9 +1,9 @@
 <form class="form-group" method="post" action="{{ path('app_place_delete', {'id': place.id}) }}" onsubmit="return confirm('{{ 'deletion_confirmation'|trans }}');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ place.id) }}">
     <button class="btn btn-lg text-white mb-2 btn-danger">
-        {# {% if is_mobile %} #}
+        {# {% if is_mobile %}
             <i class="bi bi-trash3-fill"></i>
-        {# {% else %} #}
+        {% else %} #}
             {{ 'button.delete'|trans }}
         {# {% endif %} #}
     </button>
