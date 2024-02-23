@@ -19,9 +19,6 @@ class Picture
     private ?int $id = null;
 
     #[ORM\Column(length: 2000, nullable: true)]
-    #[Image(
-        mimeTypesMessage: 'Veuillez télécharger une image valide.'
-    )]
     #[Groups(['get_picture'])]
     private ?string $picture = null;
 
