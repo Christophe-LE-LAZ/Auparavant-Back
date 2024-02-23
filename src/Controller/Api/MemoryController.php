@@ -9,6 +9,7 @@ use DateTimeImmutable;
 use App\Entity\Location;
 use App\Service\FileUploader;
 use OpenApi\Attributes as OA;
+use App\Service\MemoryProcessor;
 use App\Repository\UserRepository;
 use App\Repository\PlaceRepository;
 use App\Repository\MemoryRepository;
@@ -38,10 +39,14 @@ class MemoryController extends AbstractController
 {
 
     private $fileUploader;
+    private $memoryRepository;
+    private $memoryProcessor;
 
-    public function __construct(FileUploader $fileUploader)
+    public function __construct(FileUploader $fileUploader, MemoryRepository $memoryRepository, MemoryProcessor $memoryProcessor)
     {
         $this->fileUploader = $fileUploader;
+        $this->memoryRepository = $memoryRepository;
+        $this->memoryProcessor = $memoryProcessor;
     }
 
 
@@ -156,6 +161,120 @@ class MemoryController extends AbstractController
         $memories = $memoryRepository->findAll();
       
         return $this->json($memories, 200, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
+    }
+
+     /**
+     * Route qui permet de récupérer l'ensemble des souvenirs associés avec une image avant/après
+     */
+    #[Route('/api/memorieswithtwopictures', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns the memory list with two pictures after/before',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture'])),
+            example: [
+                [
+                    "id" => 1,
+                    "title" => "Le Panthéon en 1792",
+                    "content" => "Le Panthéon en 1792, avec La Renommée en son sommet.n",
+                    "picture_date" => "1792-01-01T00:00:00+00:00",
+                    "main_picture" => "fileName.jpg",
+                    "compare_picture" => "fileName.jpg",
+                    "location" => [
+                        "id" => 1,
+                        "area" => "Île-de-France",
+                        "department" => "Paris",
+                        "district" => "Quartier latin",
+                        "street" => "28 place du Panthéon",
+                        "city" => "Paris",
+                        "zipcode" => 75005,
+                        "latitude" => "48.84619800",
+                        "longitude" => "2.34610500"
+                    ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
+                    "user" => [
+                        "id" => 1,
+                        "firstname" => "Aurélien",
+                        "lastname" => "ROUCHETTE-MARET",
+                        "email" => "aurelien.rouchette@orange.fr",
+                        "roles" => [
+                            "ROLE_USER",
+                            "ROLE_ADMIN"
+                        ]
+                    ],
+                    "place" => [
+                        "id" => 1,
+                        "name" => "Le Panthéon",
+                        "type" => "Mausolée"
+                    ]
+                ],
+                [
+                    "id" => 2,
+                    "title" => "Le Panthéon de nos jours",
+                    "content" => "Le Panthéon vu de la tour Montparnasse en 2016.",
+                    "picture_date" => "2016-01-01T00:00:00+00:00",
+                    "main_picture" => "fileName.jpg",
+                    "compare_picture" => "fileName.jpg",
+                    "location" => [
+                        "id" => 1,
+                        "area" => "Île-de-France",
+                        "department" => "Paris",
+                        "district" => "Quartier latin",
+                        "street" => "28 place du Panthéon",
+                        "city" => "Paris",
+                        "zipcode" => 75005,
+                        "latitude" => "48.84619800",
+                        "longitude" => "2.34610500"
+                    ],
+                    "picture" => [
+                        [
+                        "id" => 1,
+                        "picture" => "filename.jpg",
+                        ],
+                        [
+                            "id" => 2,
+                            "picture" => "filename.jpg",
+                            ],
+                       
+                        ],
+                    "user" => [
+                        "id" => 1,
+                        "firstname" => "Aurélien",
+                        "lastname" => "ROUCHETTE-MARET",
+                        "email" => "aurelien.rouchette@orange.fr",
+                        "roles" => [
+                            "ROLE_USER",
+                            "ROLE_ADMIN"
+                        ]
+                    ],
+                    "place" => [
+                        "id" => 1,
+                        "name" => "Le Panthéon",
+                        "type" => "Mausolée"
+                    ]
+                ],
+            ]
+        )
+    )]
+    #[OA\Tag(name: 'memory')]
+    public function getAllMemoriesWithPicturesBeforeAfter(MemoryRepository $memoryRepository)
+    {
+        $memories = $memoryRepository->findAll();
+           // Associer la compare_picture selon la date
+        $processedMemories = $this->memoryProcessor->processMemories($memories);
+
+         return $this->json($processedMemories, Response::HTTP_OK);
     }
 
     /**
@@ -900,10 +1019,14 @@ class MemoryController extends AbstractController
                 }
             }
         }
-
         $entityManager->remove($memory);
         $entityManager->flush();
 
         return $this->json(['message' => 'Souvenir supprimé'], Response::HTTP_OK);
     }
+
+   
+  
+
+
 }
