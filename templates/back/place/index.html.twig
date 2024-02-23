@@ -26,9 +26,9 @@
             </tr>
         </thead>
         <tbody>
-           {% if order is defined and order is same as ('location') %}
-        {% if sortResults is not empty %}
-            {% for sortResult in sortResults %}
+        {% if order is defined and order is same as ('location') %}
+            {% if sortResults is not empty %}
+                {% for sortResult in sortResults %}
                 <tr>
                     <td>{{ sortResult.id }}</td>
                     <td>{{ sortResult.placeName }}</td>
@@ -39,39 +39,39 @@
                         <a href="{{ path('app_memory_edit', {'id': sortResult.id}) }}">{{ 'button.edit'|trans }}</a>
                     </td>
                 </tr>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="9">Aucun élément n'a été trouvé</td>
+                </tr>
+            {% endif %}
         {% else %}
-            <tr>
-                <td colspan="9">Aucun élément n'a été trouvé</td>
-            </tr>
+            {% if places is not empty %}
+                {% for place in places %}
+                <tr>
+                    <td>{{ place.id }}</td>
+                    <td>{{ place.name }}</td>
+                    <td>{{ place.type }}</td>
+                    <td>{{ place.location.street }} {{ place.location.zipcode }} {{ place.location.city }}</td>
+                    <td>
+                        <a href="{{ path('app_place_show', {'id': place.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
+                        <a href="{{ path('app_place_edit', {'id': place.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>       
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="9">{{ 'no_records_found'|trans }}</td>
+                </tr>
+            {% endif %}
         {% endif %}
-        {% else %}
-        {% if places is not empty %}
-        {% for place in places %}
-            <tr>
-                <td>{{ place.id }}</td>
-                <td>{{ place.name }}</td>
-                <td>{{ place.type }}</td>
-                <td>{{ place.location.street }} {{ place.location.zipcode }} {{ place.location.city }}</td>
-                {# <td>{{ place.createdAt ? place.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ place.updatedAt ? place.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
-                <td>
-                    <a href="{{ path('app_place_show', {'id': place.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
-                    <a href="{{ path('app_place_edit', {'id': place.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>       
-                </td>
-            </tr>
-            {% endfor %}
-        {% else %}
-            <tr>
-                <td colspan="9">{{ 'no_records_found'|trans }}</td>
-            </tr>
-        {% endif %}
-    {% endif %}
         </tbody>
     </table>
-
-<a class="btn btn-lg btn-success m-5"  href="{{ path('app_place_new') }}">{{ 'place.new'|trans }}</a>
-
-<a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
-
+        {# {% if is_mobile %} #}
+            {# <a class="btn btn-lg btn-success m-5"  href="{{ path('app_place_new') }}"><i class="bi bi-plus-square-fill"></i></a>
+            <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a> #}
+        {# {% else %} #}
+            <a class="btn btn-lg btn-success m-5"  href="{{ path('app_place_new') }}">{{ 'place.new'|trans }}</a>
+            <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
+        {# {% endif %} #}
 {% endblock %}

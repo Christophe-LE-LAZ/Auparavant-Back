@@ -51,9 +51,11 @@
         {% endfor %}
         </tbody>
     </table>
-
-  <a class="btn btn-lg btn-success m-5" href="{{ path('app_user_new') }}">{{ 'place.new'|trans }}</a>
-
- <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
-
+        {# {% if is_mobile %} #}
+            {# <a class="btn btn-lg btn-success m-5" href="{{ path('app_user_new') }}"><i class="bi bi-plus-square-fill"></i></a>
+            <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a> #}
+        {# {% else %} #}
+            <a class="btn btn-lg btn-success m-5" href="{{ path('app_user_new') }}">{{ 'place.new'|trans }}</a>
+            <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
+        {# {% endif %} #}
 {% endblock %}

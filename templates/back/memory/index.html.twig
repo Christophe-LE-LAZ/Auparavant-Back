@@ -54,15 +54,15 @@
                        <a href="{{ path('app_memory_edit', {'id': sortResult.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>   
                     </td>
                 </tr>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="9">{{ 'no_records_found'|trans }}</td>
+                </tr>
+            {% endif %}
         {% else %}
-            <tr>
-                <td colspan="9">{{ 'no_records_found'|trans }}</td>
-            </tr>
-        {% endif %}
-        {% else %}
-        {% if memories is not empty %}
-            {% for memory in memories %}
+            {% if memories is not empty %}
+                {% for memory in memories %}
                 <tr>
                     <td>{{ memory.id }}</td>
                     <td>{{ memory.title }}</td>
@@ -77,19 +77,21 @@
                        <a href="{{ path('app_memory_edit', {'id': memory.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>  
                     </td>
                 </tr>
-            {% endfor %}
-        {% else %}
-            <tr>
-                <td colspan="9">{{ 'no_records_found'|trans }}</td>
-            </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="9">{{ 'no_records_found'|trans }}</td>
+                </tr>
+            {% endif %}
         {% endif %}
-    {% endif %}
-</tbody>
-
+        </tbody>
     </table>
-
-    <a class="btn btn-lg btn-success m-5" href="{{ path('app_memory_new') }}">{{ 'memory.new'|trans }}</a>
-
-    <a  class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
+        {# {% if is_mobile %} #}
+            {# <a class="btn btn-lg btn-success m-5" href="{{ path('app_memory_new') }}"><i class="bi bi-plus-square-fill"></i></a>
+            <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a> #}
+        {# {% else %} #}
+            <a class="btn btn-lg btn-success m-5" href="{{ path('app_memory_new') }}">{{ 'memory.new'|trans }}</a>
+            <a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a>
+        {# {% endif %} #}
 {% endblock %}
 

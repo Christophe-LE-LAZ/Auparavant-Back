@@ -1,4 +1,10 @@
-<form method="post" action="{{ path('app_picture_delete', {'id': picture.id}) }}" onsubmit="return confirm('{{ 'deletion_confirmation'|trans }}');">
+<form class="form-group" method="post" action="{{ path('app_picture_delete', {'id': picture.id}) }}" onsubmit="return confirm('{{ 'deletion_confirmation'|trans }}');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ picture.id) }}">
-    <button class="btn btn-lg text-white mb-2 btn-danger">{{ 'button.delete'|trans }}</button>
+    <button class="btn btn-lg text-white mb-2 btn-danger">
+        {# {% if is_mobile %} #}
+            {# <i class="bi bi-trash3-fill"></i> #}
+        {# {% else %} #}
+            {{ 'button.delete'|trans }}
+        {# {% endif %} #}
+    </button>
 </form>
