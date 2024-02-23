@@ -8,14 +8,14 @@
 						{{ button_label|default(' '|trans) }}<i class="bi bi-check-square-fill"></i>
 						{% else %} #}
 						{{ button_label|default('button.submit'|trans) }}
-						{# {% endif %} #}
+						{# {% else %} #}
 					</button>
 					<a class="btn btn-lg btn-secondary text-white mb-2 mx-md-2" href="{{ path('app_location_index') }}">
 						{# {% if is_mobile %}
 						<i class="bi bi-backspace-fill"></i>
 						{% else %} #}
 						{{ 'button.back'|trans }}
-						{# {% endif %} #}
+						{# {% else %} #}
 					</a>
 				</div>
 			</div>
