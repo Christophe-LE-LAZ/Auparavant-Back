@@ -31,33 +31,29 @@
             </tr> #}
         </tbody>
     </table>
-    {# {% if is_mobile %} #}
-        {# <div class="row">
-
-            <div class="ms-5 col-2">
-                <a class="btn btn-lg btn-secondary text-white d-inline-block" href="{{ path('app_place_index') }}"><i class="bi bi-backspace-fill"></i></a>
-            </div>
-            <div class="col-1">
-                <a class="btn btn-lg btn-success" href="{{ path('app_place_edit', {'id': place.id}) }}"><i class="bi bi-pencil-fill"></i></a>
-            </div>
-            <div class="col-1">
-                {{ include('back/place/_delete_form.html.twig') }}
-            </div>
-
-        </div> #}
-    {# {% else %} #}
         <div class="row">
 
             <div class="ms-5 col-2">
-                <a class="btn btn-lg btn-secondary text-white d-inline-block" href="{{ path('app_place_index') }}">{{ 'button.back'|trans }}</a>
+                <a class="btn btn-lg btn-secondary text-white d-inline-block" href="{{ path('app_place_index') }}">
+                {# Cell phone #}
+                <div class="d-block d-sm-none"><i class="bi bi-backspace-fill"></i></div>
+                {# Else #}
+                <div class="d-none d-sm-block">{{ 'button.back'|trans }}</div>
+                </a>
             </div>
+
             <div class="col-1">
-                <a class="btn btn-lg btn-success" href="{{ path('app_place_edit', {'id': place.id}) }}">{{ 'button.edit'|trans }}</a>
+                <a class="btn btn-lg btn-success" href="{{ path('app_place_edit', {'id': place.id}) }}">
+                {# Cell phone #}
+                <div class="d-block d-sm-none"><i class="bi bi-pencil-fill"></i></div>
+                {# Else #}
+                <div class="d-none d-sm-block">{{ 'button.edit'|trans }}</div>
+                </a>
             </div>
+
             <div class="col-1">
                 {{ include('back/place/_delete_form.html.twig') }}
             </div>
 
         </div>
-    {# {% endif %} #}
 {% endblock %}
