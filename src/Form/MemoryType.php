@@ -42,6 +42,14 @@ class MemoryType extends AbstractType
                     'label' => 'memory.form.main_picture',
                     'mapped' => false,
                     'required' => !$options['is_edit'],
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/*',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez choisir un fichier valide',
+                        ])
+                        ],
                 ]
             )
             ->add(
@@ -82,7 +90,15 @@ class MemoryType extends AbstractType
                     'label' => 'memory.form.picture',
                     'mapped' => false,
                     'required' => false,
-                    'multiple' => true,   
+                    'multiple' => true, 
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/*',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez choisir un fichier valide',
+                        ])
+                        ],  
             ]);
 
         }
