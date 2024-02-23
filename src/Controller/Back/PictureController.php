@@ -54,14 +54,13 @@ class PictureController extends AbstractController
         $newPicture = new Picture();
         $form = $this->createForm(PictureType::class, $newPicture);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $picture = $form->get('picture')->getData();
 
-            if ( !$picture) {
+            if (!$picture) {
 
                 return $this->addFlash('warning', 'Aucun changement effectué car aucune image  n\'a été soumise.');
-
 
             }
             $newFilename = $this->fileUploader->uploadImage($picture);
@@ -114,7 +113,7 @@ class PictureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newPicture = $form->get('picture')->getData();
 
-            if ( !$newPicture) {
+            if (!$newPicture) {
                 return $this->addFlash('warning', 'Aucun changement effectué car aucune image n\'a été soumise.');
             }
             $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
@@ -152,11 +151,11 @@ class PictureController extends AbstractController
     {
         $memoryId = $picture->getMemory()->getId();
 
-        if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $picture->getId(), $request->request->get('_token'))) {
             $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
 
             if (!$deleteFileResult) {
-                
+
                 $this->addFlash('warning', 'Erreur lors de la suppression du fichier associé à la photo.');
             }
             $entityManager->remove($picture);
@@ -165,7 +164,6 @@ class PictureController extends AbstractController
             $this->addFlash('success', $translator->trans('confirmation.picture_deleted'));
 
             return $this->redirectToRoute('app_memory_edit', ['id' => $memoryId]);
-
         }
 
         return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);

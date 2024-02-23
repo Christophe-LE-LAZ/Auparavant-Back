@@ -58,13 +58,12 @@ class MemoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $picture = $form->get('main_picture')->getData();
-                
+
             if ($picture === null) {
-            $this->addFlash('warning', 'La photo principale est obligatoire.');
-            }
-            else {
+                $this->addFlash('warning', 'La photo principale est obligatoire.');
+            } else {
                 $newFilename = $this->fileUploader->uploadImage($picture);
                 $memory->setMainPicture($newFilename);
             }
@@ -72,7 +71,7 @@ class MemoryController extends AbstractController
             $additionalPictures = $form->get('additionalPictures')->getData();
 
             foreach ($additionalPictures as $additionalPicture) {
-                
+
                 $newFilename = $this->fileUploader->uploadImage($additionalPicture);
                 $newPicture = new Picture();
                 $newPicture->setPicture($newFilename);
@@ -119,36 +118,36 @@ class MemoryController extends AbstractController
     #[Route('/{id}/edit', name: 'app_memory_edit', methods: ['GET', 'POST'])]
 
     public function edit(Request $request, Memory $memory, EntityManagerInterface $entityManager, ParameterBagInterface $params, TranslatorInterface $translator): Response
- 
+
     {
         $form = $this->createForm(MemoryType::class, $memory, ['is_edit' => true]);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
 
-    
+
             $picture = $form->get('main_picture')->getData();
-    
+
             if ($picture === null) {
-                 // if the user forgets to insert a photo, I keep the current photo in memory
+                // if the user forgets to insert a photo, I keep the current photo in memory
                 if ($memory->getMainPicture()) {
-                  
-                $entityManager->flush();
+
+                    $entityManager->flush();
                 } else {
-                    
+
                     $this->addFlash('warning', 'Aucun changement effectué car aucune image principale n\'a été soumise.');
                 }
-             // otherwise I recover the current photo, delete it from the asset pictures folder and the database and save the new one, changing its name.
+                // otherwise I recover the current photo, delete it from the asset pictures folder and the database and save the new one, changing its name.
             } else {
-                
+
                 if ($memory->getMainPicture()) {
-                   
+
                     $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
                     if (!$deleteFileResult) {
                         return $this->addFlash('warning', 'La photo n\'a pas pu être mise à jour', 500);
                     }
                 }
-               
+
                 $newFilename = $this->fileUploader->uploadImage($picture);
                 $memory->setMainPicture($newFilename);
             }
@@ -157,20 +156,20 @@ class MemoryController extends AbstractController
 
     
                 foreach ($additionalPictures as $additionalPicture) {
-         
+
                     $newFilename = $this->fileUploader->uploadImage($additionalPicture);
                     $newPicture = new Picture();
                     $newPicture->setPicture($newFilename);
                     $memory->addPicture($newPicture);
                     $entityManager->persist($newPicture);
                 }
-                
+
                 $entityManager->flush();
-    
+
                 $this->addFlash('success', $translator->trans('confirmation.location_updated'));
                 return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
             }
-    
+
         return $this->render('back/memory/edit.html.twig', [
             'memory' => $memory,
             'form' => $form->createView(),
@@ -186,28 +185,27 @@ class MemoryController extends AbstractController
      * @return Response
      */
     #[Route('/{id}', name: 'app_memory_delete', methods: ['POST'])]
-    public function delete(Request $request, Memory $memory, EntityManagerInterface $entityManager, ParameterBagInterface $params, TranslatorInterface $translator ): Response
+    public function delete(Request $request, Memory $memory, EntityManagerInterface $entityManager, ParameterBagInterface $params, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete' . $memory->getId(), $request->request->get('_token'))) {
             // Delete all associated pictures in the 'picture' table
             foreach ($memory->getPicture() as $picture) {
-            
+
                 $deletePictureResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
-    
+
                 if (!$deletePictureResult) {
                     $this->addFlash('warning', 'Échec de suppression d\'une photo associée');
-                } 
+                }
             }
             // delete main picture
             $deleteMainPictureResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
-    
+
             $entityManager->remove($memory);
             $entityManager->flush();
 
             $this->addFlash('success', $translator->trans('confirmation.location_deleted'));
         }
-    
+
         return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
     }
-
 }
