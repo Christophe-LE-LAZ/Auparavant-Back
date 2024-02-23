@@ -13,5 +13,7 @@ app.swagger_ui:
     defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
 
 switch_language:
-    path: /switch-language/{locale}
-    controller: App\Controller\LanguageController::switchLanguage
+    path: '/{_locale}/'
+    controller: 'App\Controller\LanguageController::switchLanguage'
+    requirements:
+        _locale: 'en|fr'
