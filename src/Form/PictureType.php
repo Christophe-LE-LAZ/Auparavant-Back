@@ -5,11 +5,10 @@ namespace App\Form;
 use App\Entity\Memory;
 use App\Entity\Picture;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PictureType extends AbstractType
@@ -25,6 +24,14 @@ class PictureType extends AbstractType
                     'label' => 'picture.picture',
                     'mapped' => false,
                     'required' => true,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/*',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez choisir un fichier valide',
+                        ])
+                        ],
 
                 ]
             )

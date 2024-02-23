@@ -9,6 +9,7 @@ use App\Entity\Location;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -41,6 +42,14 @@ class MemoryType extends AbstractType
                     'label' => 'memory.form.main_picture',
                     'mapped' => false,
                     'required' => true,
+                    'constraints' => [
+                        new File([
+                            'mimeTypes' => [
+                                'image/*',
+                            ],
+                            'mimeTypesMessage' => 'Veuillez choisir un fichier valide',
+                        ])
+                        ],
                 ]
             )
             ->add(
