@@ -200,12 +200,12 @@ class PictureController extends AbstractController
         // Retrieve the uploaded picture file from the request
         $picture = $request->files->get('main_picture');
 
-        // management format picture
-        $validationErrors = $this->fileUploader->validateImage($picture);
+        // // management format picture
+        // $validationErrors = $this->fileUploader->validateImage($picture);
 
-        if ($validationErrors !== null) {
-            return $this->json(['errors' => $validationErrors], 400);
-        }
+        // if ($validationErrors !== null) {
+        //     return $this->json(['errors' => $validationErrors], 400);
+        // }
 
         if ($picture === null) {
             // Handle case where no picture is uploaded (possibly indicating removal of the main picture)
