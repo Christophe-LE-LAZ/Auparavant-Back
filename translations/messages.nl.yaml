@@ -1,0 +1,238 @@
+# translations/messages.nl.yaml
+
+English: Engels
+French: Frans
+Deutsch: Duits
+Nederlands: Nederlands
+Company Name: Auparavant
+All Rights Reserved: Alle rechten voorbehouden
+main.title: Auparavant backoffice
+page.title: Welkom in de backoffice van "Auparavant"
+button.login: Inloggen
+button.logout: Uitloggen
+
+## A.P.I
+confirmation:
+    location_added: De locatie is succesvol toegevoegd.
+    location_updated: De locatie is succesvol bijgewerkt.
+    location_deleted: De locatie is succesvol verwijderd.
+    memory_created: Het herinnering is succesvol aangemaakt.
+    memory_updated: Het herinnering is succesvol bijgewerkt.
+    memory_deleted: Het herinnering is succesvol gewiverwijderd.st.
+    picture_uploaded: De afbeelding is succesvol geüpload.
+    picture_updated: De afbeelding is succesvol bijgewerkt.
+    picture_deleted: De afbeelding is succesvol verwijderd.
+    place_added: De plaats is succesvol toegevoegd.
+    place_updated: De plaats is succesvol bijgewerkt.
+    place_deleted: De plaats is succesvol verwijderd.
+    user_created: De account is succesvol aangemaakt.
+    user_updated: De account is succesvol bijgewerkt.
+    user_deleted: De account is succesvol verwijderd.
+warning:
+    not_found: De opgevraagde pagina is niet gevonden.
+    resource_not_found: De opgevraagde bron is niet gevonden.
+    memory_picture_update_failure: De update van de geheugenafbeelding is mislukt.
+    memory_picture_deletion_failure: Het verwijderen van de geheugenafbeelding is mislukt.
+    picture_update_failure: Het bijwerken van de afbeelding is mislukt.
+    picture_deletion_failure: Het verwijderen van de afbeelding is mislukt.
+    former_picture_deletion_failure: De vorige afbeelding is niet verwijderd.
+    memory_picture_mandatory: De herinnering moet een hoofdafbeelding bevatten.
+    no_change: Er zijn geen wijzigingen aangebracht omdat er geen hoofdafbeelding is ingediend.
+non-existent_entities:
+    location: De locatie bestaat niet.
+    memory: Het geheugen bestaat niet.
+    picture: De afbeelding bestaat niet.
+    place: De plaats bestaat niet.
+    user: De account bestaat niet.
+unauthorized_access:
+    page: U bent niet bevoegd om deze pagina te openen.
+    view: U bent niet gemachtigd om deze inhoud te bekijken.
+    modification: U bent niet gemachtigd om deze inhoud te wijzigen.
+    deletion: U bent niet gemachtigd om deze inhoud te verwijderen.
+
+## Backoffice
+### _delete_form
+deletion_confirmation: Weet u zeker dat u dit item wilt verwijderen?
+button.delete: Verwijder
+
+### _form
+button.submit: Indienen
+
+### edit
+# title: Edit Entity
+button.update: Updaten
+button.back: Terug naar de lijst
+
+## index
+# title.reversed: Entity index
+button.show: Weergave
+button.edit: Bewerk
+no_records_found: Geen items gevonden
+button.create: Nieuw
+button.home: Home
+
+# new
+# title.new: Create new Entity
+# button.back: back to list
+
+# show
+# title: Entity
+# button.back: back to list
+# button.edit: edit
+
+main:
+    name: Naam
+    list: Lijste
+    view: Zien
+    locations: Locaties
+    places: Plaatsen
+    memories: Herinneringen
+    pictures: Afbeeldingen
+    users: Gebruiker
+
+location:
+    ### edit
+    title.edit: Locatie bewerken
+    ### index
+    title.index: Index van locatie
+    new: Een nieuwe locatie toevoegen
+    ### new
+    title.new: Nieuwe locatie toevoegen
+    ### show:
+    title: Locatie
+    ### success
+    create.success: Locatie succesvol aangemaakt
+    update.success: Locatie succesvol bijgewerkt
+    delete.success: Locatie succesvol verwijderd
+    not_found: Locatie niet gevonden
+    area: Gebied
+    department: Afdeling
+    district: Wijk
+    street: Straat
+    zipcode: Postcode
+    city: Stad
+    latitude: Breedtegraad
+    longitude: Lengtegraad
+    form:
+        area: 'Gebied:'
+        department: 'Afdeling:'
+        district: 'Wijk:'
+        street: 'Straat:'
+        city: 'Stad:'
+        zipcode: 'Postcode:'
+        latitude: 'Breedtegraad:'
+        longitude: 'Lengtegraad:'
+memory:
+    ### edit
+    title.edit: Erinnerung bearbeiten
+    ### index
+    title.index: Erinnerungsindex
+    new: Eine neue Erinnerung hinzufügen
+    ### new
+    title.new: Neue Erinnerung erstellen
+    ### show:
+    title: Erinnerung
+    ### success
+    create.success: Erinnerung erfolgreich erstellt
+    update.success: Erinnerung erfolgreich aktualisiert
+    delete.success: Erinnerung erfolgreich gelöscht
+    not_found: Erinnerung nicht gefunden
+    article.title: Title
+    content: Content
+    main_picture: Main picture
+    picture_date: Picture date
+    place: Name and type of location
+    address: Address
+    user: Creator
+    additional_picture: Additional picture
+    form:
+        title: 'Titel:'
+        content: 'Inhalt:'
+        main_picture: 'Hauptbild:'
+        picture_date: 'Bild Datum:'
+        user: 'Schöpfer:'
+        location: 'Adresse:'
+        place: 'Ort:'
+        picture: 'Zusätzliches Bild:'
+        choose_file: Eine Datei auswählen
+        no_file_chosen: Keine Datei ausgewählt
+        valid_file_required: Bitte wählen Sie eine gültige Datei
+picture:
+    ### edit
+    title.edit: Bild bearbeiten
+    ### index
+    title.index: Bildindex
+    new: Ein neues Bild hochladen
+    ### new
+    title.new: Neues Bild hochladen
+    ### show:
+    title: Bild
+    ### success
+    create.success: Bild erfolgreich hochgeladen
+    update.success: Bild erfolgreich aktualisiert
+    delete.success: Bild erfolgreich gelöscht
+    not_found: Bild nicht gefunden
+    picture: 'Bild:'
+    memory: 'Entsprechende Erinnerung:'
+    valid_file_required: Bitte wählen Sie eine gültige Datei
+place:
+    ### edit
+    title.edit: Ort bearbeiten
+    ### index
+    title.index: Ortsindex
+    new: Einen neuen Ort hinzufügen
+    ### new
+    title.new: Neuen Ort erstellen
+    ### show:
+    title: Ort
+    ### success
+    create.success: Ort erfolgreich erstellt
+    update.success: Ort erfolgreich aktualisiert
+    delete.success: Ort erfolgreich gelöscht
+    not_found: Ort nicht gefunden
+    name: 'Name:'
+    type: 'Art:'
+    address: 'Adresse:'
+user:
+    ### edit
+    title.edit: Das Konto eines Benutzers bearbeiten
+    ### index
+    title.index: Benutzerkontoindex
+    new: Einen neuen Benutzerkonto hinzufügen
+    ### new
+    title.new: Ein neues Benutzerkonto erstellen
+    ### show:
+    title: Benutzerkonto
+    ### success
+    create.success: Konto erfolgreich erstellt
+    update.success: Konto erfolgreich aktualisiert
+    delete.success: Konto erfolgreich gelöscht
+    not_found: Konto nicht gefunden
+    firstname: Vorname
+    lastname: Nachname
+    email: Elektronische Postadresse
+    password: Passwort
+    role: Rolle
+    admin: Administrator
+    moderator: Moderator
+    user: Benutzer
+user_access:
+    firstname: 'Vorname: '
+    lastname: 'Nachname: '
+    email: 'Elektronische Postadresse: '
+    password: 'Passwort: '
+    role: 'Rolle: '
+register:
+    registration_page: Seite zur Registrierung
+    terms: Allgemeinen Geschäftsbedingungen akzeptieren
+    terms.must: Sie müssen unsere allgemeinen Geschäftsbedingungen akzeptieren.
+    password_message: Das Passwort kann nicht leer sein.
+    password_min_message: Das Passwort muss mindestens {{ limit }} Zeichen lang sein.
+    button: Einschreiben
+login:
+    greeting: Tag
+    message: Sie sind eingeloggt als
+    instruction: Bitte loggen Sie sich ein
+    already_logged_in: Sie sind bereits eingeloggt.
+
+

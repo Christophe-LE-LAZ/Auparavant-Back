@@ -3,6 +3,7 @@
 English: Englisch
 French: Französisch
 Deutsch: Deutsch
+Nederlands: Niederländisch
 Company Name: Auparavant
 All Rights Reserved: Alle Rechte vorbehalten
 main.title: Auparavant backoffice
@@ -34,7 +35,7 @@ warning:
     memory_picture_deletion_failure: Die Löschung des Speicherabbilds ist fehlgeschlagen.
     picture_update_failure: Die Bildaktualisierung ist fehlgeschlagen.
     picture_deletion_failure: Das Löschen des Bildes ist fehlgeschlagen.
-    former_picture_deletion_failure: Previous picture deletion failed.
+    former_picture_deletion_failure: Löschen des vorherigen Bildes fehlgeschlagen.
     memory_picture_mandatory: Die Erinnerung muss ein Hauptbild enthalten.
     no_change: Es wurden keine Änderungen vorgenommen, da kein Hauptbild eingereicht wurde.
 non-existent_entities:
@@ -103,7 +104,7 @@ location:
     create.success: Standort erfolgreich erstellt
     update.success: Standort erfolgreich aktualisiert
     delete.success: Standort erfolgreich gelöscht
-    not_found: Ort nicht gefunden
+    not_found: Standort nicht gefunden
     area: Region
     department: Abteilung
     district: Stadtteil
@@ -136,14 +137,14 @@ memory:
     update.success: Erinnerung erfolgreich aktualisiert
     delete.success: Erinnerung erfolgreich gelöscht
     not_found: Erinnerung nicht gefunden
-    article.title: Title
-    content: Content
-    main_picture: Main picture
-    picture_date: Picture date
-    place: Name and type of location
-    address: Address
-    user: Creator
-    additional_picture: Additional picture
+    article.title: Titel
+    content: Inhalt
+    main_picture: Hauptbild
+    picture_date: Bild Datum
+    place: Name und Art des Standorts
+    address: Adresse
+    user: Schöpfer
+    additional_picture: Zusätzliches Bild
     form:
         title: 'Titel:'
         content: 'Inhalt:'
