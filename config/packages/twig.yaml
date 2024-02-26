@@ -3,6 +3,8 @@ twig:
     # config/packages/twig.yaml
     #css form bootstrap
     form_themes: ['bootstrap_5_layout.html.twig']
+    globals: 
+        locales: '%app.locales%'
 
 when@test:
     twig:
