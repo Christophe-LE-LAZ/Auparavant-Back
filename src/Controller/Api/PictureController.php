@@ -134,7 +134,7 @@ class PictureController extends AbstractController
         description: 'Exemple of data to be supplied to upload or update the picture',
         content: new OA\JsonContent(
             properties: [
-                new OA\Property(property: 'picture', type: 'file', example: 'photo.jpg'),
+                new OA\Property(property: 'main_picture', type: 'file', example: 'photo.jpg'),
                 new OA\Property(
                     property: "memory",
                     type: "object",
@@ -201,11 +201,11 @@ class PictureController extends AbstractController
         $picture = $request->files->get('main_picture');
 
         // // management format picture
-        // $validationErrors = $this->fileUploader->validateImage($picture);
+        $validationErrors = $this->fileUploader->validateImage($picture);
 
-        // if ($validationErrors !== null) {
-        //     return $this->json(['errors' => $validationErrors], 400);
-        // }
+        if ($validationErrors !== null) {
+            return $this->json(['errors' => $validationErrors], 400);
+        }
 
         if ($picture === null) {
             // Handle case where no picture is uploaded (possibly indicating removal of the main picture)
