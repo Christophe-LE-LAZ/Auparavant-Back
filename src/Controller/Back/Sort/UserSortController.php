@@ -12,6 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/back/sort/user')]
 class UserSortController extends AbstractController
 {
+    /**
+     * User sorting management
+     *
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @return void
+     */
     #[Route('/', name: 'app_sort_user_by', methods: ['GET'])]
     public function sortBy(Request $request, UserRepository $userRepository) {
 

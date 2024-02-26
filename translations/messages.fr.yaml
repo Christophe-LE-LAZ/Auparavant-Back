@@ -56,15 +56,15 @@ button.submit: Valider
 ### edit
 # title: Modifier une entité
 button.update: Mettre à jour
-button.back: retour à la liste
+button.back: Retour à la liste
 
 ## index
 # title.reversed: Index des entités
-button.show: voir
-button.edit: modifier
+button.show: Voir
+button.edit: Modifier
 no_records_found: Aucun élément n'a été trouvé
 # button.create: Créer une nouvelle entité
-button.home: accueil
+button.home: Accueil
 
 # new
 # title.new: Créer une nouvelle entité

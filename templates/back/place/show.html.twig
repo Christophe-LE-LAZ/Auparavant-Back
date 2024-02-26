@@ -33,27 +33,26 @@
     </table>
         <div class="row">
 
-            <div class="ms-5 col-2">
-                <a class="btn btn-lg btn-secondary text-white d-inline-block" href="{{ path('app_place_index') }}">
+            <div class="col d-flex flex-column flex-md-row mx-3 my-2 align-items-md-start">
+                <a class="btn btn-lg btn-secondary text-white d-inline-block mb-2 mx-md-3" href="{{ path('app_place_index') }}">
                 {# Cell phone #}
-                <div class="d-block d-sm-none"><i class="bi bi-backspace-fill"></i></div>
+                {# <div class="d-block d-sm-none"><i class="bi bi-backspace-fill"></i></div> #}
                 {# Else #}
-                <div class="d-none d-sm-block">{{ 'button.back'|trans }}</div>
+                <div class="d-block">{{ 'button.back'|trans }}</div>
                 </a>
-            </div>
-
-            <div class="col-1">
-                <a class="btn btn-lg btn-success" href="{{ path('app_place_edit', {'id': place.id}) }}">
+            
+                <a class="btn btn-lg btn-warning text-white" href="{{ path('app_place_edit', {'id': place.id}) }}">
                 {# Cell phone #}
-                <div class="d-block d-sm-none"><i class="bi bi-pencil-fill"></i></div>
+                {# <div class="d-block d-sm-none"><i class="bi bi-pencil-fill"></i></div> #}
                 {# Else #}
-                <div class="d-none d-sm-block">{{ 'button.edit'|trans }}</div>
+                <div class="d-block">{{ 'button.edit'|trans }}</div>
                 </a>
-            </div>
-
-            <div class="col-1">
-                {{ include('back/place/_delete_form.html.twig') }}
             </div>
 
         </div>
+
+            <div class="px-3 col col-md-2 d-md-inline-block div-btn-delete">
+                {{ include('back/place/_delete_form.html.twig') }}
+            </div>
+
 {% endblock %}

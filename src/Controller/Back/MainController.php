@@ -9,6 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
+    /**
+     * Display backoffice home page
+     *
+     * @return Response
+     */
     #[Route('/back', name: 'app_main')]
     public function index(): Response
     {

@@ -9,6 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LanguageController extends AbstractController
 {
+    /**
+     * Language switching management
+     * @param
+     * @return Response
+     */
     #[Route('/{_locale}/switch-language', name: 'switch_language')]
     public function switchLanguage(Request $request, $_locale): Response
     {

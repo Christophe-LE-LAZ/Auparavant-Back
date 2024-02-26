@@ -56,15 +56,15 @@ button.submit: Save
 ### edit
 # title: Edit Entity
 button.update: Update
-button.back: back to list
+button.back: Back to list
 
 ## index
 # title.reversed: Entity index
-button.show: show
-button.edit: edit
-no_records_found: no records found
+button.show: Show
+button.edit: Edit
+no_records_found: No records found
 button.create: Create new
-button.home: home
+button.home: Home
 
 # new
 # title.new: Create new Entity

@@ -18,15 +18,15 @@
 			<div class="col d-flex flex-column flex-md-row mx-md-3 my-md-2 align-items-md-start">
 				<button class="btn btn-lg btn-success text-white mb-2">
 					{# Cell phone #}
-					<div class="d-block d-sm-none">{{ button_label|default(' '|trans) }}<i class="bi bi-check-square-fill"></i></div>
+					{# <div class="d-block d-sm-none">{{ button_label|default(' '|trans) }}<i class="bi bi-check-square-fill"></i></div> #}
 					{# Else #}
-					<div class="d-none d-sm-block">{{ button_label|default('button.submit'|trans) }}</div>
+					<div class="d-block">{{ button_label|default('button.submit'|trans) }}</div>
 				</button>
 				<a class="btn btn-lg btn-secondary text-white mb-2 mx-md-2" href="{{ path('app_memory_index') }}">
 					{# Cell phone #}
-					<div class="d-block d-sm-none"><i class="bi bi-backspace-fill"></i></div>
+					{# <div class="d-block d-sm-none"><i class="bi bi-backspace-fill"></i></div> #}
 					{# Else #}
-					<div class="d-none d-sm-block">{{ 'button.back'|trans }}</div>
+					<div class="d-sm-block">{{ 'button.back'|trans }}</div>
 				</a>
 			</div>
 		</div>

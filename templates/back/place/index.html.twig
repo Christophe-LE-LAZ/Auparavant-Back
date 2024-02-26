@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="mb-5 mx-3">{{ 'place.title.index'|trans }}</h1>
+    <h1 class="text-center text-md-start">{{ 'place.title.index'|trans }}</h1>
 
-    <table class="table">
+    <table class="table table-auto">
         <thead>
             <tr>
-                <th>Id
+                <th class="col-1 text-center align-middle">Id
                     <a class="text-decoration-none" href="{{ path('app_sort_place_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_place_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
-                <th>{{ 'place.name'|trans }}
+                <th class="text-center align-middle">{{ 'place.name'|trans }}
                     <a href="{{ path('app_sort_place_by', {'order': 'name', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_place_by', {'order': 'name', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                 <th>{{ 'place.type'|trans }}
+                 <th class="text-center align-middle">{{ 'place.type'|trans }}
                     <a href="{{ path('app_sort_place_by', {'order': 'type', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_place_by', {'order': 'type', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>{{ 'place.address'|trans }}
+                <th class="text-center align-middle">{{ 'place.address'|trans }}
                     <a href="{{ path('app_sort_place_by', {'order': 'location', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_place_by', {'order': 'location', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>Actions</th>
+                <th class="text-center align-middle">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -49,11 +49,11 @@
             {% if places is not empty %}
                 {% for place in places %}
                 <tr>
-                    <td>{{ place.id }}</td>
-                    <td>{{ place.name }}</td>
-                    <td>{{ place.type }}</td>
-                    <td>{{ place.location.street }} {{ place.location.zipcode }} {{ place.location.city }}</td>
-                    <td>
+                    <td class="text-center align-middle">{{ place.id }}</td>
+                    <td class="text-center align-middle">{{ place.name }}</td>
+                    <td class="text-center align-middle">{{ place.type }}</td>
+                    <td class="text-center align-middle">{{ place.location.street }} {{ place.location.zipcode }} {{ place.location.city }}</td>
+                    <td class="text-center align-middle">
                         <a href="{{ path('app_place_show', {'id': place.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>
                         <a href="{{ path('app_place_edit', {'id': place.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>       
                     </td>
@@ -68,9 +68,9 @@
         </tbody>
     </table>
         {# If you're on a cell phone #}
-            <div class="d-block d-sm-none"><a class="btn btn-lg btn-success m-5"  href="{{ path('app_place_new') }}"><i class="bi bi-plus-square-fill"></i></a></div>
-            <div class="d-block d-sm-none"><a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a></div>
+            {# <div class="d-inline-block d-sm-none"><a class="btn btn-lg btn-success m-5"  href="{{ path('app_place_new') }}"><i class="bi bi-plus-square-fill"></i></a></div>
+            <div class="d-inline-block d-sm-none"><a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a></div> #}
         {# Else #}
-            <div class="d-none d-sm-block"><a class="btn btn-lg btn-success m-5"  href="{{ path('app_place_new') }}">{{ 'place.new'|trans }}</a></div>
-            <div class="d-none d-sm-block"><a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a></div>
+            <div class="d-md-inline-block d-block text-center vertical-align-middle mb-2 mx-md-5"><a class="btn btn-lg btn-dark-purple btn-mobile text-white"  href="{{ path('app_place_new') }}">{{ 'place.new'|trans }}</a></div>
+            <div class="d-md-inline-block d-block text-center vertical-align-middle mb-2"><a class="btn btn-lg btn-secondary btn-mobile text-white" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a></div>
 {% endblock %}

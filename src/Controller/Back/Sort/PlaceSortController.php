@@ -14,6 +14,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/back/sort/place')]
 class PlaceSortController extends AbstractController
 {
+    /**
+     * Place sorting management
+     *
+     * @param Request $request
+     * @param LocationRepository $locationRepository
+     * @param PlaceRepository $placeRepository
+     * @return void
+     */
     #[Route('/', name: 'app_sort_place_by', methods: ['GET'])]
     public function sortBy(Request $request, LocationRepository $locationRepository, PlaceRepository $placeRepository) {
 

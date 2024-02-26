@@ -23,3 +23,27 @@
     width: 30px;
 }
 
+.btn-mobile {
+    width: 60%;
+}
+
+.btn-delete {
+    width:100%;
+}
+
+.btn-dark-purple {
+    background-color : #7332f9;
+}
+
+@media screen and (min-width: 765px) {
+
+    .btn-mobile {
+        width: 100%;
+    }
+    .div-btn-delete {
+        margin-left : 20px;
+    }
+    .btn-delete {
+        width:80%;
+    }
+}

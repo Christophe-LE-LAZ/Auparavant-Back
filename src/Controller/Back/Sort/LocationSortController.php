@@ -2,9 +2,7 @@
 
 namespace App\Controller\Back\Sort;
 
-use App\Entity\Location;
 use App\Repository\LocationRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/back/sort/location')]
 class LocationSortController extends AbstractController
 {
+    /**
+     * Location sorting management
+     *
+     * @param Request $request
+     * @param LocationRepository $locationRepository
+     * @return void
+     */
     #[Route('/', name: 'app_sort_location_by', methods: ['GET'])]
     public function sortBy(Request $request, LocationRepository $locationRepository) {
 

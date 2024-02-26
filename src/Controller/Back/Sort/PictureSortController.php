@@ -15,6 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/back/sort/picture')]
 class PictureSortController extends AbstractController
 {
+    /**
+     * Picture sorting management
+     *
+     * @param Request $request
+     * @param PictureRepository $pictureRepository
+     * @param MemoryRepository $memoryRepository
+     * @return void
+     */
     #[Route('/', name: 'app_sort_picture_by', methods: ['GET'])]
     public function sortBy(Request $request,PictureRepository $pictureRepository, MemoryRepository $memoryRepository) {
 
