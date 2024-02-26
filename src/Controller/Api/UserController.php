@@ -201,26 +201,7 @@ class UserController extends AbstractController
         );
     }
 
-    /**
-     * Create a new user
-     * 
-     * @param SerializerInterface $serializer
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return Response
-     */
-    #[Route('/api/secure/create/user', methods: ['POST'])]
-    #[OA\Tag(name: 'hidden')]
-    public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
-    {
-        // Pour la creation d'un utilisateur, on récupère des données en JSON, on envoie la requête en BDD et on sauvegarde. Si c'est OK, on indique un code 201
-        $user = $serializer->deserialize($request->getContent(), User::class, 'json');
-
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-        return $this->json($user, 201, []);
-    }
+  
 
     /**
      * Update a user by its id
@@ -237,10 +218,8 @@ class UserController extends AbstractController
         description: 'Exemple of data to be supplied to update the user',
         content: new OA\JsonContent(
             properties: [
-                new OA\Property(property: 'id', type: 'integer', example: '1'),
                 new OA\Property(property: 'firstname', type: 'string', example: 'John'),
                 new OA\Property(property: 'lastname', type: 'string', example: 'Doe'),
-                new OA\Property(property: 'email', type: 'string', example: 'updated@example.com'),
                 new OA\Property(property: 'password', type: 'string', example: 'newpassword'),
             ]
         )
@@ -333,5 +312,27 @@ class UserController extends AbstractController
         $entityManager->flush();
 
         return new Response('Utilisateur supprimé', 200);
+    }
+
+
+      /**
+     * Create a new user
+     * 
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('hidden/api/secure/create/user', methods: ['POST'])]
+    #[OA\Tag(name: 'hidden')]
+    public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
+    {
+        // Pour la creation d'un utilisateur, on récupère des données en JSON, on envoie la requête en BDD et on sauvegarde. Si c'est OK, on indique un code 201
+        $user = $serializer->deserialize($request->getContent(), User::class, 'json');
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->json($user, 201, []);
     }
 }

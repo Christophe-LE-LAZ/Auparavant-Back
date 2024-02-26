@@ -559,26 +559,6 @@ class MemoryController extends AbstractController
         );
     }
 
-    /**
-     * Create a new memory
-     * 
-     * @param SerializerInterface $serializer
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return Response
-     */
-    #[Route('api/secure/create/memory', methods: ['POST'])]
-    #[OA\Tag(name: 'hidden')]
-    public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
-    {
-        $memory = $serializer->deserialize($request->getContent(), Memory::class, 'json');
-
-        $entityManager->persist($memory);
-        $entityManager->flush();
-
-        return $this->json($memory, 201, []);
-    }
-
 
     /**
      * First method for creating a memory
@@ -606,11 +586,11 @@ class MemoryController extends AbstractController
                         ]),
                         new OA\Property(property: 'place', type: 'object', properties: [
                             new OA\Property(property: 'create_new_place', type: 'boolean', example: true),
-                            new OA\Property(property: 'name', type: 'string', example: "l'elysée"),
+                            new OA\Property(property: 'name', type: 'string', example: "l'élysée"),
                             new OA\Property(property: 'type', type: 'string', example: 'bâtiment'),
                         ]),
                         new OA\Property(property: 'memory', type: 'object', properties: [
-                            new OA\Property(property: 'title', type: 'string', example: "l'elysée en 1990"),
+                            new OA\Property(property: 'title', type: 'string', example: "l'élysée en 1990"),
                             new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
                             new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08'),
                             new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
@@ -789,33 +769,6 @@ class MemoryController extends AbstractController
         $entityManager->flush();
 
         return $this->json(['memory' => $newMemory, 'message' => 'Souvenir créé'], Response::HTTP_CREATED, [], ['groups' => ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']]);
-    }
-
-    /**
-     * Update a memory by its id
-     * 
-     * @param Memory $memory
-     * @param Request $request
-     * @param SerializerInterface $serializer
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     */
-    #[Route('/api/secure/update/memory/{id<\d+>}', methods: ['PUT'])]
-    #[OA\Tag(name: 'hidden')]
-    public function update(Memory $memory = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
-    {
-        if (!$memory) {
-            return $this->json(
-                "Erreur : Le souvenir n'existe pas",
-                404
-            );
-        }
-        $serializer->deserialize($request->getContent(), Memory::class, 'json', ['object_to_populate' => $memory]);
-        $memory->setUpdatedAt(new DateTimeImmutable());
-
-        $entityManager->flush();
-
-        return $this->json($memory, 200, [], ['groups' => ['get_memory']]);
     }
 
     /**
@@ -1024,7 +977,53 @@ class MemoryController extends AbstractController
         return $this->json(['message' => 'Souvenir supprimé'], Response::HTTP_OK);
     }
 
-   
+   /**
+     * Create a new memory
+     * 
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('hidden/api/secure/create/memory', methods: ['POST'])]
+    #[OA\Tag(name: 'hidden')]
+    public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
+    {
+        $memory = $serializer->deserialize($request->getContent(), Memory::class, 'json');
+
+        $entityManager->persist($memory);
+        $entityManager->flush();
+
+        return $this->json($memory, 201, []);
+    }
+
+     /**
+     * Update a memory by its id
+     * 
+     * @param Memory $memory
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    #[Route('hidden/api/secure/update/memory/{id<\d+>}', methods: ['PUT'])]
+    #[OA\Tag(name: 'hidden')]
+    public function update(Memory $memory = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
+    {
+        if (!$memory) {
+            return $this->json(
+                "Erreur : Le souvenir n'existe pas",
+                404
+            );
+        }
+        $serializer->deserialize($request->getContent(), Memory::class, 'json', ['object_to_populate' => $memory]);
+        $memory->setUpdatedAt(new DateTimeImmutable());
+
+        $entityManager->flush();
+
+        return $this->json($memory, 200, [], ['groups' => ['get_memory']]);
+    }
+
   
 
 

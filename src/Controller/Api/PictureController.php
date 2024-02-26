@@ -134,14 +134,7 @@ class PictureController extends AbstractController
         description: 'Exemple of data to be supplied to upload or update the picture',
         content: new OA\JsonContent(
             properties: [
-                new OA\Property(property: 'picture', type: 'file', example: 'photo.jpg'),
-                new OA\Property(
-                    property: "memory",
-                    type: "object",
-                    properties: [
-                        new OA\Property(property: "id", type: "integer", example: 9)
-                    ]
-                )
+                new OA\Property(property: 'main_picture', type: 'file', example: 'photo.jpg'),
             ]
         )
     )]
@@ -200,7 +193,7 @@ class PictureController extends AbstractController
         // Retrieve the uploaded picture file from the request
         $picture = $request->files->get('main_picture');
 
-        // management format picture
+        // // management format picture
         $validationErrors = $this->fileUploader->validateImage($picture);
 
         if ($validationErrors !== null) {
@@ -281,14 +274,7 @@ class PictureController extends AbstractController
         description: 'Exemple of data to be supplied to upload the additional picture',
         content: new OA\JsonContent(
             properties: [
-                new OA\Property(property: 'picture', type: 'file', example: 'photo.jpg'),
-                new OA\Property(
-                    property: "memory",
-                    type: "object",
-                    properties: [
-                        new OA\Property(property: "id", type: "integer", example: 9)
-                    ]
-                )
+                new OA\Property(property: 'additional_pictures', type: 'file', example: 'photo.jpg'),
             ]
         )
     )]
@@ -375,8 +361,7 @@ class PictureController extends AbstractController
         description: 'Exemple of data to be supplied to update the additional picture',
         content: new OA\JsonContent(
             properties: [
-                new OA\Property(property: "id", type: "integer", example: 9),
-                new OA\Property(property: 'picture', type: 'file', example: 'photo.jpg'),
+                new OA\Property(property: 'additional_pictures', type: 'file', example: 'photo.jpg'),
             ]
         )
     )]

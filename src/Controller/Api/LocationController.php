@@ -127,7 +127,7 @@ class LocationController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/api/secure/create/location', methods: ['POST'])]
+    #[Route('hidden/api/secure/create/location', methods: ['POST'])]
     #[OA\Response(
         response: 201,
         description: 'Returns a newly created location',
@@ -184,7 +184,7 @@ class LocationController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/api/secure/update/location/{id<\d+>}', methods: ['PUT'])]
+    #[Route('hidden/api/secure/update/location/{id<\d+>}', methods: ['PUT'])]
     #[OA\Tag(name: 'hidden')]
     public function update(Location $location = null, Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
@@ -208,7 +208,7 @@ class LocationController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/api/secure/delete/location/{id<\d+>}', methods: ['DELETE'])]
+    #[Route('hidden/api/secure/delete/location/{id<\d+>}', methods: ['DELETE'])]
     #[OA\Response(
         response: 200,
         description: 'Deletes a location',
