@@ -104,7 +104,7 @@ class PlaceController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    #[Route('/api/secure/create/place', methods: ['POST'])]
+    #[Route('hidden/api/secure/create/place', methods: ['POST'])]
     #[OA\Tag(name: 'hidden')]
     public function create(SerializerInterface $serializer, EntityManagerInterface $entityManager, Request $request)
     {
@@ -124,7 +124,7 @@ class PlaceController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/api/secure/update/place/{id<\d+>}', methods: ['PUT'])]
+    #[Route('hidden/api/secure/update/place/{id<\d+>}', methods: ['PUT'])]
     #[OA\Tag(name: 'hidden')]
     public function update(Place $place = null,  Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
@@ -148,7 +148,7 @@ class PlaceController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/api/secure/delete/place/{id<\d+>}', methods: ['DELETE'])]
+    #[Route('hidden/api/secure/delete/place/{id<\d+>}', methods: ['DELETE'])]
     #[OA\Response(
         response: 200,
         description: 'Deletes a place',
