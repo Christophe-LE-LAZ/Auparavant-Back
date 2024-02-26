@@ -60,7 +60,7 @@ class PictureController extends AbstractController
 
             if (!$picture) {
 
-                return $this->addFlash('warning', 'Aucun changement effectué car aucune image  n\'a été soumise.');
+                return $this->addFlash('warning', 'warning.no_change');
 
             }
             $newFilename = $this->fileUploader->uploadImage($picture);
@@ -114,12 +114,12 @@ class PictureController extends AbstractController
             $newPicture = $form->get('picture')->getData();
 
             if (!$newPicture) {
-                return $this->addFlash('warning', 'Aucun changement effectué car aucune image n\'a été soumise.');
+                return $this->addFlash('warning', 'warning.no_change');
             }
             $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
 
             if (!$deleteFileResult) {
-                $this->addFlash('warning', 'Erreur lors de la suppression du fichier associé à la photo.');
+                $this->addFlash('warning', 'warning.picture_deletion_failure');
             }
             $newFilename = $this->fileUploader->uploadImage($newPicture);
             $picture->setPicture($newFilename);
@@ -156,7 +156,7 @@ class PictureController extends AbstractController
 
             if (!$deleteFileResult) {
 
-                $this->addFlash('warning', 'Erreur lors de la suppression du fichier associé à la photo.');
+                $this->addFlash('warning', 'warning.picture_deletion_failure');
             }
             $entityManager->remove($picture);
             $entityManager->flush();

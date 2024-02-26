@@ -279,7 +279,6 @@ class MemoryController extends AbstractController
 
     /**
      * Display a single memory by its id
-     * TODO: Retrieve additional pictures from a memory
      * 
      * @param Memory $memory
      * @return Response

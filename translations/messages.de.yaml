@@ -1,0 +1,237 @@
+# translations/messages.de.yaml
+
+English: Englisch
+French: Französisch
+Deutsch: Deutsch
+Company Name: Auparavant
+All Rights Reserved: Alle Rechte vorbehalten
+main.title: Auparavant backoffice
+page.title: Willkommen im Backoffice von „Auparavant“
+button.login: Anmelden
+button.logout: Abmelden
+
+## A.P.I
+confirmation:
+    location_added: Der Standort wurde erfolgreich hinzugefügt.
+    location_updated: Der Standort wurde erfolgreich aktualisiert.
+    location_deleted: Der Standort wurde erfolgreich gelöscht.
+    memory_created: Die Erinnerung wurde erfolgreich erstellt.
+    memory_updated: Die Erinnerung wurde erfolgreich aktualisiert.
+    memory_deleted: Die Erinnerung wurde erfolgreich gelöscht.
+    picture_uploaded: Das Bild wurde erfolgreich hochgeladen.
+    picture_updated: Das Bild wurde erfolgreich aktualisiert.
+    picture_deleted: Das Bild wurde erfolgreich gelöscht.
+    place_added: Der Ort wurde erfolgreich hinzugefügt.
+    place_updated: Der Ort wurde erfolgreich aktualisiert.
+    place_deleted: Der Ort wurde erfolgreich gelöscht.
+    user_created: Das Konto wurde erfolgreich erstellt.
+    user_updated: Das Konto wurde erfolgreich aktualisiert.
+    user_deleted: Das Konto wurde erfolgreich gelöscht.
+warning:
+    not_found: Die angeforderte Seite wurde nicht gefunden.
+    resource_not_found: Die angeforderte Ressource wurde nicht gefunden.
+    memory_picture_update_failure: Die Aktualisierung des Speicherbildes ist fehlgeschlagen.
+    memory_picture_deletion_failure: Die Löschung des Speicherabbilds ist fehlgeschlagen.
+    picture_update_failure: Die Bildaktualisierung ist fehlgeschlagen.
+    picture_deletion_failure: Das Löschen des Bildes ist fehlgeschlagen.
+    former_picture_deletion_failure: Previous picture deletion failed.
+    memory_picture_mandatory: Die Erinnerung muss ein Hauptbild enthalten.
+    no_change: Es wurden keine Änderungen vorgenommen, da kein Hauptbild eingereicht wurde.
+non-existent_entities:
+    location: Der Standort existiert nicht.
+    memory: Die Erinnerung existiert nicht.
+    picture: Das Bild existiert nicht.
+    place: Der Ort existiert nicht.
+    user: Das Konto existiert nicht.
+unauthorized_access:
+    page: Sie sind nicht berechtigt, auf diese Seite zuzugreifen.
+    view: Sie sind nicht berechtigt, diesen Inhalt zu sehen.
+    modification: Sie sind nicht berechtigt, diesen Inhalt zu verändern.
+    deletion: Sie sind nicht berechtigt, diesen Inhalt zu löschen.
+
+## Backoffice
+### _delete_form
+deletion_confirmation: Sind Sie sicher, dass Sie dieses Element löschen möchten?
+button.delete: Löschen
+
+### _form
+button.submit: Speichern
+
+### edit
+# title: Edit Entity
+button.update: Aktualisieren
+button.back: Zurück zur Liste
+
+## index
+# title.reversed: Entity index
+button.show: Anzeigen
+button.edit: Bearbeiten
+no_records_found: Keine Einträge gefunden
+button.create: Neu
+button.home: Home
+
+# new
+# title.new: Create new Entity
+# button.back: back to list
+
+# show
+# title: Entity
+# button.back: back to list
+# button.edit: edit
+
+main:
+    name: Name
+    list: Liste
+    view: View
+    locations: Standorte
+    places: Orte
+    memories: Erinnerungen
+    pictures: Bilder
+    users: Nutzer
+
+location:
+    ### edit
+    title.edit: Standort bearbeiten
+    ### index
+    title.index: Standortindex
+    new: Einen neuen Standort hinzufügen 
+    ### new
+    title.new: Neuen Standort erstellen
+    ### show:
+    title: Standort
+    ### success
+    create.success: Standort erfolgreich erstellt
+    update.success: Standort erfolgreich aktualisiert
+    delete.success: Standort erfolgreich gelöscht
+    not_found: Ort nicht gefunden
+    area: Region
+    department: Abteilung
+    district: Stadtteil
+    street: Straße
+    zipcode: Postleitzahl
+    city: Stadt
+    latitude: Breitengrad
+    longitude: Längengrad
+    form:
+        area: 'Region:'
+        department: 'Abteilung:'
+        district: 'Stadtteil:'
+        street: 'Straße:'
+        city: 'Stadt:'
+        zipcode: 'Postleitzahl:'
+        latitude: 'Breitengrad:'
+        longitude: 'Längengrad:'
+memory:
+    ### edit
+    title.edit: Erinnerung bearbeiten
+    ### index
+    title.index: Erinnerungsindex
+    new: Eine neue Erinnerung hinzufügen
+    ### new
+    title.new: Neue Erinnerung erstellen
+    ### show:
+    title: Erinnerung
+    ### success
+    create.success: Erinnerung erfolgreich erstellt
+    update.success: Erinnerung erfolgreich aktualisiert
+    delete.success: Erinnerung erfolgreich gelöscht
+    not_found: Erinnerung nicht gefunden
+    article.title: Title
+    content: Content
+    main_picture: Main picture
+    picture_date: Picture date
+    place: Name and type of location
+    address: Address
+    user: Creator
+    additional_picture: Additional picture
+    form:
+        title: 'Titel:'
+        content: 'Inhalt:'
+        main_picture: 'Hauptbild:'
+        picture_date: 'Bild Datum:'
+        user: 'Schöpfer:'
+        location: 'Adresse:'
+        place: 'Ort:'
+        picture: 'Zusätzliches Bild:'
+        choose_file: Eine Datei auswählen
+        no_file_chosen: Keine Datei ausgewählt
+        valid_file_required: Bitte wählen Sie eine gültige Datei
+picture:
+    ### edit
+    title.edit: Bild bearbeiten
+    ### index
+    title.index: Bildindex
+    new: Ein neues Bild hochladen
+    ### new
+    title.new: Neues Bild hochladen
+    ### show:
+    title: Bild
+    ### success
+    create.success: Bild erfolgreich hochgeladen
+    update.success: Bild erfolgreich aktualisiert
+    delete.success: Bild erfolgreich gelöscht
+    not_found: Bild nicht gefunden
+    picture: 'Bild:'
+    memory: 'Entsprechende Erinnerung:'
+    valid_file_required: Bitte wählen Sie eine gültige Datei
+place:
+    ### edit
+    title.edit: Ort bearbeiten
+    ### index
+    title.index: Ortsindex
+    new: Einen neuen Ort hinzufügen
+    ### new
+    title.new: Neuen Ort erstellen
+    ### show:
+    title: Ort
+    ### success
+    create.success: Ort erfolgreich erstellt
+    update.success: Ort erfolgreich aktualisiert
+    delete.success: Ort erfolgreich gelöscht
+    not_found: Ort nicht gefunden
+    name: 'Name:'
+    type: 'Art:'
+    address: 'Adresse:'
+user:
+    ### edit
+    title.edit: Das Konto eines Benutzers bearbeiten
+    ### index
+    title.index: Benutzerkontoindex
+    new: Einen neuen Benutzerkonto hinzufügen
+    ### new
+    title.new: Ein neues Benutzerkonto erstellen
+    ### show:
+    title: Benutzerkonto
+    ### success
+    create.success: Konto erfolgreich erstellt
+    update.success: Konto erfolgreich aktualisiert
+    delete.success: Konto erfolgreich gelöscht
+    not_found: Konto nicht gefunden
+    firstname: Vorname
+    lastname: Nachname
+    email: Elektronische Postadresse
+    password: Passwort
+    role: Rolle
+    admin: Administrator
+    moderator: Moderator
+    user: Benutzer
+user_access:
+    firstname: 'Vorname: '
+    lastname: 'Nachname: '
+    email: 'Elektronische Postadresse: '
+    password: 'Passwort: '
+    role: 'Rolle: '
+register:
+    registration_page: Seite zur Registrierung
+    terms: Allgemeinen Geschäftsbedingungen akzeptieren
+    terms.must: Sie müssen unsere allgemeinen Geschäftsbedingungen akzeptieren.
+    password_message: Das Passwort kann nicht leer sein.
+    password_min_message: Das Passwort muss mindestens {{ limit }} Zeichen lang sein.
+    button: Einschreiben
+login:
+    greeting: Tag
+    message: Sie sind eingeloggt als
+    instruction: Bitte loggen Sie sich ein
+    already_logged_in: Sie sind bereits eingeloggt.
+
+

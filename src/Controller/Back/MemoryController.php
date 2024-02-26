@@ -62,7 +62,7 @@ class MemoryController extends AbstractController
             $picture = $form->get('main_picture')->getData();
 
             if ($picture === null) {
-                $this->addFlash('warning', 'La photo principale est obligatoire.');
+                $this->addFlash('warning', 'warning.memory_picture_mandatory');
             } else {
                 $newFilename = $this->fileUploader->uploadImage($picture);
                 $memory->setMainPicture($newFilename);
@@ -135,7 +135,7 @@ class MemoryController extends AbstractController
                     $entityManager->flush();
                 } else {
 
-                    $this->addFlash('warning', 'Aucun changement effectué car aucune image principale n\'a été soumise.');
+                    $this->addFlash('warning', 'warning.no_change');
                 }
                 // otherwise I recover the current photo, delete it from the asset pictures folder and the database and save the new one, changing its name.
             } else {
@@ -144,7 +144,7 @@ class MemoryController extends AbstractController
 
                     $deleteFileResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
                     if (!$deleteFileResult) {
-                        return $this->addFlash('warning', 'La photo n\'a pas pu être mise à jour', 500);
+                        return $this->addFlash('warning', 'warning.memory_picture_update_failure', 500);
                     }
                 }
 
@@ -194,7 +194,7 @@ class MemoryController extends AbstractController
                 $deletePictureResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $picture->getPicture());
 
                 if (!$deletePictureResult) {
-                    $this->addFlash('warning', 'Échec de suppression d\'une photo associée');
+                    $this->addFlash('warning', 'warning.memory_picture_deletion_failure');
                 }
             }
             // delete main picture

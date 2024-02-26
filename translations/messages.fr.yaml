@@ -27,13 +27,16 @@ confirmation:
     user_created: Le compte a été créé avec succès.
     user_updated: Le compte a été modifié avec succès.
     user_deleted: Le compte a été supprimé avec succès.
-errors:
+warning:
     not_found: La page demandée n'a pas été trouvée.
     resource_not_found: La ressource demandée n'a pas été trouvée.
-    picture_deletion_failure: La suppression de l'image a échoué.
+    memory_picture_update_failure: Une erreur s'est produite lors de la mise à jour d'une photo associée.
+    memory_picture_deletion_failure: Une erreur s'est produite lors de la suppression d'une photo associée.
+    picture_update_failure: Une erreur s'est produite lors de la mise à jour de la photo.
+    picture_deletion_failure: Une erreur s'est produite lors de la suppression de la photo.
     former_picture_deletion_failure: La suppression de l'image précédente a échoué.
-mandatory_fields:
-    picture: Le souvenir doit contenir une photo.
+    memory_picture_mandatory: Le souvenir doit contenir une photo.
+    no_change: Aucune modification n'a été apportée car aucune image principale n'a été soumise.
 non-existent_entities:
     location: Cette localité n'existe pas.
     memory: Ce souvenir n'existe pas.

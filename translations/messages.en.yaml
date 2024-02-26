@@ -21,19 +21,22 @@ confirmation:
     picture_uploaded: The picture has been successfully uploaded.
     picture_updated: The picture has been successfully updated.
     picture_deleted: The picture has been successfully deleted.
-    place_added: The place has been successfully addded.
+    place_added: The place has been successfully added.
     place_updated: The place has been successfully updated.
     place_deleted: The place has been successfully deleted.
     user_created: The account has been successfully created.
     user_updated: The account has been successfully updated.
     user_deleted: The account has been successfully deleted.
-errors:
+warning:
     not_found: The page you requested was not found.
     resource_not_found: The requested resource was not found.
-    picture_deletion_failure: Picture deletion failed.
+    memory_picture_update_failure: An error occurred when updating an associated picture.
+    memory_picture_deletion_failure: An error occurred when deleting an associated picture.
+    picture_update_failure: An error occurred while updating the picture.
+    picture_deletion_failure: An error occurred while deleting the picture.
     former_picture_deletion_failure: Previous picture deletion failed.
-mandatory_fields:
-    picture: The memory must include a main picture.
+    memory_picture_mandatory: The memory must include a main picture.
+    no_change: No changes have been made as no main image has been submitted.
 non-existent_entities:
     location: The location does not exist.
     memory: The memory does not exist.
