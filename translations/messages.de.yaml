@@ -82,7 +82,7 @@ button.home: Home
 main:
     name: Name
     list: Liste
-    view: View
+    view: Sehen
     locations: Standorte
     places: Orte
     memories: Erinnerungen
