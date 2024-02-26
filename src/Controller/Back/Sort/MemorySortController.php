@@ -15,6 +15,15 @@ use App\Repository\PlaceRepository;
 #[Route('/back/sort/memory')]
 class MemorySortController extends AbstractController
 {
+    /**
+     * Memory sorting management
+     *
+     * @param Request $request
+     * @param MemoryRepository $memoryRepository
+     * @param LocationRepository $locationRepository
+     * @param PlaceRepository $placeRepository
+     * @return void
+     */
     #[Route('/', name: 'app_sort_memory_by', methods: ['GET'])]
     public function sortBy(Request $request, MemoryRepository $memoryRepository, LocationRepository $locationRepository, PlaceRepository $placeRepository) {
 
