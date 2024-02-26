@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ 'location.title.index'|trans }}</h1>
+    <h1 class="text-center text-md-start">{{ 'location.title.index'|trans }}</h1>
 
-    <table class="table">
+    <table class="table table-auto">
         <thead>
             <tr>
-                <th class="text-center align-middle">Id
+                <th class="col-1 text-center align-middle">Id
                     <a class= "text-decoration-none" href="{{ path('app_sort_location_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
-                <th class="text-center align-middle">{{ 'location.area'|trans }}
+                <th class="col-2 text-center align-middle">{{ 'location.area'|trans }}
                     <a href="{{ path('app_sort_location_by', {'order': 'area', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'area', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th class="text-center align-middle">{{ 'location.department'|trans }}
+                <th class="col-2 text-center align-middle">{{ 'location.department'|trans }}
                     <a href="{{ path('app_sort_location_by', {'order': 'department', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'department', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th class="text-center align-middle">{{ 'location.district'|trans }}
+                <th class="col-2 text-center align-middle">{{ 'location.district'|trans }}
                     <a href="{{ path('app_sort_location_by', {'order': 'district', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'district', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th class="text-center align-middle">{{ 'location.street'|trans }}
+                <th class="col-3 text-center align-middle">{{ 'location.street'|trans }}
                     <a href="{{ path('app_sort_location_by', {'order': 'street', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'street', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
@@ -30,7 +30,7 @@
                     <a href="{{ path('app_sort_location_by', {'order': 'zipcode', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'zipcode', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
-                <th class="text-center align-middle">{{ 'location.street'|trans }}
+                <th class="text-center align-middle">{{ 'location.city'|trans }}
                     <a href="{{ path('app_sort_location_by', {'order': 'city', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_location_by', {'order': 'city', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
@@ -48,8 +48,8 @@
         <tbody>
         {% for location in locations %}
             <tr>
-                <td class="text-center align-middle">{{ location.area }}</td>
                 <td class="text-center align-middle">{{ location.id }}</td>
+                <td class="text-center align-middle">{{ location.area }}</td>
                 <td class="text-center align-middle">{{ location.department }}</td>
                 <td class="text-center align-middle">{{ location.district }}</td>
                 <td class="text-center align-middle">{{ location.street }}</td>
@@ -70,9 +70,9 @@
         </tbody>
     </table>
         {# If you're on a cell phone #}
-            <div class="d-block d-sm-none"><a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}"><i class="bi bi-plus-square-fill"></i></a></div>
-            <div class="d-block d-sm-none"><a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a></div>
+            {# <div class="d-inline-block d-sm-none"><a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}"><i class="bi bi-plus-square-fill"></i></a></div>
+            <div class="d-inline-block d-sm-none"><a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a></div> #}
         {# Else #}
-            <div class="d-none d-sm-block"><a class="btn btn-lg btn-success m-5" href="{{ path('app_location_new') }}">{{ 'location.new'|trans }}</a></div>
-            <div class="d-none d-sm-block"><a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a></div>
+            <div class="d-md-inline-block d-block text-center vertical-align-middle mb-2 mx-md-5"><a class="btn btn-lg btn-dark-purple btn-mobile text-white" href="{{ path('app_location_new') }}">{{ 'location.new'|trans }}</a></div>
+            <div class="d-md-inline-block d-block text-center vertical-align-middle mb-2"><a class="btn btn-lg btn-secondary btn-mobile text-white" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a></div>
 {% endblock %}                 
