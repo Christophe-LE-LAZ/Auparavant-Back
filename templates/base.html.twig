@@ -1,71 +1,88 @@
 <!doctype html>
 {% set locale = app.request.attributes.get('_locale') %}
 <html lang="{{ app.request.locale }}">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <!-- Bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <!-- Our custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <!-- favicon -->
-    {# <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon"> #}
+		<!-- Bootstrap CSS -->
+		<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+		<!-- Bootstrap icons -->
+		<link
+		rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+		<!-- Our custom CSS -->
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<!-- favicon -->
+		{# <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon"> #}<title>{{ 'main.title'|trans }}
+	</title>
+	</head>
 
-    <title>{{ 'main.title'|trans }}</title>
-</head>
+		<body>
+			<header>
+			<!-- Bootstrap Navigation Bar -->
+				<nav class="navbar navbar-expand-lg navbar-light bg-light"> <div class="container-fluid">
+					{% if app.user and app.request.attributes.get('_route') != 'app_main' %}
+						<a class="navbar-brand" href="{{ path('app_main') }}"><img class="col img-fluid navbar-logo" src="{{ asset('css/pictures/appareilphotovintage.png') }}" alt=""></a>
+					{% else %}
+						<a class="navbar-brand" href="#"><img class="col img-fluid navbar-logo" src="{{ asset('css/pictures/appareilphotovintage.png') }}" alt=""></a>
+					{% endif %}
 
-<body>
-    <header>
-        <!-- Bootstrap Navigation Bar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-            {% if app.user and app.request.attributes.get('_route') != 'app_main' %}
-                <a class="navbar-brand" href="{{ path('app_main') }}"><img class="col img-fluid navbar-logo" src="{{ asset('css/pictures/appareilphotovintage.png') }}" alt=""></a>
-            {% else %}
-                <a class="navbar-brand" href="#"><img class="col img-fluid navbar-logo" src="{{ asset('css/pictures/appareilphotovintage.png') }}" alt=""></a>
-            {% endif %}
+					<div class="navbar-collapse justify-content-end">
+						<ul class="navbar-nav justify-content-center align-items-center">
+							<li class="nav-item">
+								{% if app.user.firstname is defined and app.user.lastname is defined %}
+									<span class="nav-link">{{ 'login.greeting'|trans }}
+										{{ app.user.firstname }}
+										{{ app.user.lastname }}</span>
+								{% endif %}
+							</li>
+							{% if app.user %}
+								<li class="nav-item">
+									<a class="nav-link" href="{{ path('app_logout') }}">{{ 'button.logout'|trans }}</a>
+								</li>
+							{% endif %}
+							<!-- Language Switching Links within the navbar -->
+							{% for locale in locales %}
+								{% if locale != app.request.locale %}
+									<li class="nav-item">
+										<a class="nav-link" href="{{ path('app_translation', {'locale': locale}) }}"><img class="navbar-logo-flag" src="{{ asset('css/pictures/' ~ locale ~ '.png') }}" alt="{{locale}}"></a>
 
-                <div class="navbar-collapse justify-content-end">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            {% if app.user.firstname is defined and app.user.lastname is defined %}
-                                <span class="nav-link">{{ 'login.greeting'|trans }} {{ app.user.firstname }} {{ app.user.lastname }}</span>
-                            {% endif %}
-                        </li>
-                        {% if app.user %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_logout') }}">{{ 'button.logout'|trans }}</a>
-                            </li>
-                        {% endif %}
-                        <!-- Language Switching Links within the navbar -->
-                        {% if app.request.locale != 'en' %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('switch_language', {'_locale': 'en'}) }}">{{ 'English'|trans }}</a>
-                            </li>
-                        {% endif %}
-                        {% if app.request.locale != 'fr' %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('switch_language', {'_locale': 'fr'}) }}">{{ 'French'|trans }}</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
+									</li>
+								{% endif %}
+							{% endfor %}
 
-            </div>
-        </nav>
-    </header>
-    <main>
-    {% block body %}{% endblock %}
-    </main>
-</body>
+							{# {% if app.request.locale !='fr' %}
+							                            <li class="nav-item">
+							                          <a class="nav-link" href="{{ path('app_translation', {'locale': locale}) }}">{{ 'english'|trans }}</a>
+							                            </li>
+							                        {% endif %} #}
+							{# {% if app.request.locale != 'fr' %}
+							                            <li class="nav-item">
+							                                <a class="nav-link" href="{{ path('switch_language', {'_locale': 'fr'}) }}">{{ 'French'|trans }}</a>
+							                            </li>
+							                        {% endif %}
+							         #}
 
-    <footer class="text-center py-3">
-        <p>&copy; {{ 'All Rights Reserved'|trans }} — {{ 'Company Name'|trans }}</p>
-    </footer>
+						</ul>
+					</div>
+
+				</div>
+			</nav>
+		</header>
+		<main>
+			{% block body %}{% endblock %}
+		</main>
+	</body>
+
+	<footer class="text-center py-3">
+		<p>&copy;
+			{{ 'All Rights Reserved'|trans }}
+			—
+			{{ 'Company Name'|trans }}</p>
+
+	</footer>
 
 </html>

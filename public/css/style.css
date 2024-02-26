@@ -18,3 +18,8 @@
     height: auto; /* Maintain aspect ratio */
 }
 
+.navbar-logo-flag {
+    height: 30px;
+    width: 30px;
+}
+
