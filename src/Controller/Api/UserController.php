@@ -33,7 +33,6 @@ class UserController extends AbstractController
      * @param UserRepository $userRepository
      * @return Response
      */
-    #[IsGranted('ROLE_ADMIN')]
     #[Route('/api/users', methods: ['GET'])]
     #[OA\Response(
         response: 200,
