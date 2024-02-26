@@ -16,9 +16,9 @@ confirmation:
     location_added: De locatie is succesvol toegevoegd.
     location_updated: De locatie is succesvol bijgewerkt.
     location_deleted: De locatie is succesvol verwijderd.
-    memory_created: Het herinnering is succesvol aangemaakt.
-    memory_updated: Het herinnering is succesvol bijgewerkt.
-    memory_deleted: Het herinnering is succesvol gewiverwijderd.st.
+    memory_created: Het geheugen is succesvol aangemaakt.
+    memory_updated: Het geheugen is succesvol bijgewerkt.
+    memory_deleted: Het geheugen is succesvol gewiverwijderd.st.
     picture_uploaded: De afbeelding is succesvol geüpload.
     picture_updated: De afbeelding is succesvol bijgewerkt.
     picture_deleted: De afbeelding is succesvol verwijderd.
@@ -36,7 +36,7 @@ warning:
     picture_update_failure: Het bijwerken van de afbeelding is mislukt.
     picture_deletion_failure: Het verwijderen van de afbeelding is mislukt.
     former_picture_deletion_failure: De vorige afbeelding is niet verwijderd.
-    memory_picture_mandatory: De herinnering moet een hoofdafbeelding bevatten.
+    memory_picture_mandatory: De geheugen moet een hoofdafbeelding bevatten.
     no_change: Er zijn geen wijzigingen aangebracht omdat er geen hoofdafbeelding is ingediend.
 non-existent_entities:
     location: De locatie bestaat niet.
@@ -97,14 +97,7 @@ location:
     title.index: Index van locatie
     new: Een nieuwe locatie toevoegen
     ### new
-    title.new: Nieuwe locatie toevoegen
-    ### show:
-    title: Locatie
-    ### success
-    create.success: Locatie succesvol aangemaakt
-    update.success: Locatie succesvol bijgewerkt
-    delete.success: Locatie succesvol verwijderd
-    not_found: Locatie niet gevonden
+    title.new: Nieuwe locatie toevoegenGeheugen
     area: Gebied
     department: Afdeling
     district: Wijk
@@ -124,115 +117,115 @@ location:
         longitude: 'Lengtegraad:'
 memory:
     ### edit
-    title.edit: Erinnerung bearbeiten
+    title.edit: Geheugen bewerken
     ### index
-    title.index: Erinnerungsindex
-    new: Eine neue Erinnerung hinzufügen
+    title.index: Geheugenindex
+    new: Een nieuw geheugen toevoegen
     ### new
-    title.new: Neue Erinnerung erstellen
+    title.new: Nieuw geheugen maken
     ### show:
-    title: Erinnerung
+    title: Geheugen
     ### success
-    create.success: Erinnerung erfolgreich erstellt
-    update.success: Erinnerung erfolgreich aktualisiert
-    delete.success: Erinnerung erfolgreich gelöscht
-    not_found: Erinnerung nicht gefunden
-    article.title: Title
-    content: Content
-    main_picture: Main picture
-    picture_date: Picture date
-    place: Name and type of location
-    address: Address
-    user: Creator
-    additional_picture: Additional picture
+    create.success: Geheugen erfolgreich erstellt
+    update.success: Geheugen erfolgreich aktualisiert
+    delete.success: Geheugen erfolgreich gelöscht
+    not_found: Geheugen nicht gefunden
+    article.title: Titel
+    content: Inhoud
+    main_picture: Hoofdafbeelding
+    picture_date: Afbeeldingsdatum
+    place: Naam en type locatie
+    address: Adres
+    user: Schepper
+    additional_picture: Extra afbeelding
     form:
         title: 'Titel:'
-        content: 'Inhalt:'
-        main_picture: 'Hauptbild:'
-        picture_date: 'Bild Datum:'
-        user: 'Schöpfer:'
-        location: 'Adresse:'
-        place: 'Ort:'
-        picture: 'Zusätzliches Bild:'
-        choose_file: Eine Datei auswählen
-        no_file_chosen: Keine Datei ausgewählt
-        valid_file_required: Bitte wählen Sie eine gültige Datei
+        content: 'Inhoud:'
+        main_picture: 'Hoofdafbeelding:'
+        picture_date: 'Afbeeldingsdatum:'
+        user: 'Schepper:'
+        location: 'Adres:'
+        place: 'Plaats:'
+        picture: 'Extra afbeelding:'
+        choose_file: Selecteer een bestand
+        no_file_chosen: Geen bestand geselecteerd
+        valid_file_required: Selecteer een geldig bestand
 picture:
     ### edit
-    title.edit: Bild bearbeiten
+    title.edit: Afbeelding bewerken
     ### index
-    title.index: Bildindex
-    new: Ein neues Bild hochladen
+    title.index: Afbeeldingsindex
+    new: Een nieuwe afbeelding uploaden
     ### new
-    title.new: Neues Bild hochladen
+    title.new: Nieuwe afbeelding uploaden
     ### show:
-    title: Bild
+    title: Afbeelding
     ### success
-    create.success: Bild erfolgreich hochgeladen
-    update.success: Bild erfolgreich aktualisiert
-    delete.success: Bild erfolgreich gelöscht
-    not_found: Bild nicht gefunden
-    picture: 'Bild:'
-    memory: 'Entsprechende Erinnerung:'
-    valid_file_required: Bitte wählen Sie eine gültige Datei
+    create.success: Afbeelding succesvol geüpload
+    update.success: Afbeelding succesvol bijgewerkt
+    delete.success: Afbeelding succesvol verwijderd
+    not_found: Afbeelding niet gevonden
+    picture: 'Afbeelding:'
+    memory: 'Overeenkomstige geheugen:'
+    valid_file_required: Selecteer een geldig bestand
 place:
     ### edit
-    title.edit: Ort bearbeiten
+    title.edit: Plaats bewerken
     ### index
-    title.index: Ortsindex
-    new: Einen neuen Ort hinzufügen
+    title.index: Plaatsindex
+    new: Een nieuwe plaats toevoegen
     ### new
-    title.new: Neuen Ort erstellen
+    title.new: Nieuwe plaats maken
     ### show:
-    title: Ort
+    title: Plaats
     ### success
-    create.success: Ort erfolgreich erstellt
-    update.success: Ort erfolgreich aktualisiert
-    delete.success: Ort erfolgreich gelöscht
-    not_found: Ort nicht gefunden
-    name: 'Name:'
-    type: 'Art:'
-    address: 'Adresse:'
+    create.success: Plaats succesvol aangemaakt
+    update.success: Plaats succesvol bijgewerkt
+    delete.success: Plaats succesvol verwijderd
+    not_found: Plaats niet gevonden
+    name: 'Naam:'
+    type: 'Type:'
+    address: 'Adres:'
 user:
     ### edit
-    title.edit: Das Konto eines Benutzers bearbeiten
+    title.edit: Een gebruikersaccount bewerken
     ### index
-    title.index: Benutzerkontoindex
-    new: Einen neuen Benutzerkonto hinzufügen
+    title.index: Gebruikersindex
+    new: Een nieuwe gebruiker toevoegen
     ### new
-    title.new: Ein neues Benutzerkonto erstellen
+    title.new: Een nieuw gebruikersaccount maken
     ### show:
-    title: Benutzerkonto
+    title: Gebruiker
     ### success
-    create.success: Konto erfolgreich erstellt
-    update.success: Konto erfolgreich aktualisiert
-    delete.success: Konto erfolgreich gelöscht
-    not_found: Konto nicht gefunden
-    firstname: Vorname
-    lastname: Nachname
-    email: Elektronische Postadresse
-    password: Passwort
-    role: Rolle
-    admin: Administrator
+    create.success: Account succesvol aangemaakt
+    update.success: Account succesvol bijgewerkt
+    delete.success: Account succesvol verwijderd
+    not_found: Account niet gevonden
+    firstname: Voornaam
+    lastname: Achternaam
+    email: Elektronisch postadres
+    password: Wachtwoord
+    role: Rol
+    admin: Beheerder
     moderator: Moderator
-    user: Benutzer
+    user: Gebruikers
 user_access:
-    firstname: 'Vorname: '
-    lastname: 'Nachname: '
-    email: 'Elektronische Postadresse: '
-    password: 'Passwort: '
-    role: 'Rolle: '
+    firstname: 'Voornaam: '
+    lastname: 'Achternaam: '
+    email: 'Elektronisch postadres: '
+    password: 'Wachtwoord: '
+    role: 'Rol: '
 register:
-    registration_page: Seite zur Registrierung
-    terms: Allgemeinen Geschäftsbedingungen akzeptieren
-    terms.must: Sie müssen unsere allgemeinen Geschäftsbedingungen akzeptieren.
-    password_message: Das Passwort kann nicht leer sein.
-    password_min_message: Das Passwort muss mindestens {{ limit }} Zeichen lang sein.
-    button: Einschreiben
+    registration_page: Registratie pagina
+    terms: Algemene voorwaarden accepteren
+    terms.must: U moet onze algemene voorwaarden accepteren.
+    password_message: Het wachtwoord mag niet leeg zijn.
+    password_min_message: Het wachtwoord moet minstens {{ limit }} tekens lang zijn.
+    button: Zich registreren
 login:
-    greeting: Tag
-    message: Sie sind eingeloggt als
-    instruction: Bitte loggen Sie sich ein
-    already_logged_in: Sie sind bereits eingeloggt.
+    greeting: Goeiendag
+    message: U bent aangemeld als
+    instruction: U moet inloggen.
+    already_logged_in: U bent al aangemeld.
 
 

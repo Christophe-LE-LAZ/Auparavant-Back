@@ -230,7 +230,7 @@ register:
     password_min_message: Das Passwort muss mindestens {{ limit }} Zeichen lang sein.
     button: Einschreiben
 login:
-    greeting: Tag
+    greeting: Guten Tag
     message: Sie sind eingeloggt als
     instruction: Bitte loggen Sie sich ein
     already_logged_in: Sie sind bereits eingeloggt.
