@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class AuthenticationSuccessListener
 {
     /**
+     * Front-end authentication management
      * @param AuthenticationSuccessEvent $event
      */
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event)
