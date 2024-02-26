@@ -1,38 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="mb-5 mx-3">{{ 'memory.title.index'|trans }}</h1>
+    <h1 class="text-center text-md-start">{{ 'memory.title.index'|trans }}</h1>
 
-    <table class="table">
+    <table class="table table-auto">
         <thead>
             <tr>
-                <th>Id
+                <th class="col-1 text-center align-middle">Id
                     <a class="text-decoration-none" href="{{ path('app_sort_memory_by', {'order': 'id', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_memory_by', {'order': 'id', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
-                <th>{{ 'memory.article.title'|trans }}
+                <th class="text-center align-middle">{{ 'memory.article.title'|trans }}
                     <a href="{{ path('app_sort_memory_by', {'order': 'title', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_memory_by', {'order': 'title', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>{{ 'memory.content'|trans }}</th>
-                <th>{{ 'memory.main_picture'|trans }}</th>
-                <th>{{ 'memory.picture_date'|trans }}
+                <th class="text-center align-middle">{{ 'memory.content'|trans }}</th>
+                <th class="text-center align-middle">{{ 'memory.main_picture'|trans }}</th>
+                <th class="text-center align-middle">{{ 'memory.picture_date'|trans }}
                     <a class="text-decoration-none" href="{{ path('app_sort_memory_by', {'order': 'picture_date', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-numeric-up"></i></a>
                     <a href="{{ path('app_sort_memory_by', {'order': 'picture_date', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-numeric-down-alt"></i></a>
                 </th>
-                <th>{{ 'memory.place'|trans }}
+                <th class="text-center align-middle">{{ 'memory.place'|trans }}
                     <a href="{{ path('app_sort_memory_by', {'order': 'place', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_memory_by', {'order': 'place', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>{{ 'memory.address'|trans }}
+                <th class="text-center align-middle">{{ 'memory.address'|trans }}
                     <a href="{{ path('app_sort_memory_by', {'order': 'location', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_memory_by', {'order': 'location', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>{{ 'memory.user'|trans }}
+                <th class="text-center align-middle">{{ 'memory.user'|trans }}
                     <a href="{{ path('app_sort_memory_by', {'order': 'user', 'selectedDirection': 'asc'}) }}"><i class="bi bi-sort-alpha-up"></i></a>
                     <a href="{{ path('app_sort_memory_by', {'order': 'user', 'selectedDirection': 'desc'}) }}"><i class="bi bi-sort-alpha-down-alt"></i></a>
                 </th>
-                <th>actions</th>
+                <th class="text-center align-middle">actions</th>
             </tr>
         </thead>
         <tbody>
@@ -41,15 +41,15 @@
             {% if sortResults is not empty %}
                 {% for sortResult in sortResults %}
                 <tr>
-                    <td>{{ sortResult.id }}</td>
-                    <td>{{ sortResult.title }}</td>
-                    <td>{{ sortResult.content| slice(0,50) }}</td>
-                    <td> <img src="{{ asset('assets/pictures/' ~ sortResult.main_picture) }}" class="img-thumbnail"></td>
-                    <td>{{ sortResult.picture_date ? sortResult.picture_date|date('Y-m-d') : '' }}</td>
-                    <td>{{ sortResult.placeName }} {{ sortResult.type }}</td>
-                    <td>{{ sortResult.street }} {{ sortResult.zipcode }} {{ sortResult.city }}</td>
-                    <td>{{ sortResult.userFirstName }} {{ sortResult.userLastName }}</td>
-                    <td>
+                    <td class="text-center align-middle">{{ sortResult.id }}</td>
+                    <td class="text-center align-middle">{{ sortResult.title }}</td>
+                    <td class="text-center align-middle">{{ sortResult.content| slice(0,50) }}</td>
+                    <td class="text-center align-middle"> <img src="{{ asset('assets/pictures/' ~ sortResult.main_picture) }}" class="img-thumbnail"></td>
+                    <td class="text-center align-middle">{{ sortResult.picture_date ? sortResult.picture_date|date('Y-m-d') : '' }}</td>
+                    <td class="text-center align-middle">{{ sortResult.placeName }} {{ sortResult.type }}</td>
+                    <td class="text-center align-middle">{{ sortResult.street }} {{ sortResult.zipcode }} {{ sortResult.city }}</td>
+                    <td class="text-center align-middle">{{ sortResult.userFirstName }} {{ sortResult.userLastName }}</td>
+                    <td class="text-center align-middle">
                        <a href="{{ path('app_memory_show', {'id': sortResult.id}) }}" title= "{{ 'button.show'|trans }}" aria-label ="{{ 'button.show'|trans }}"><i class="bi bi-eye mx-2" style="font-size: 1.5rem; color:#0761ff;"></i></a>   
                        <a href="{{ path('app_memory_edit', {'id': sortResult.id}) }}" title= "{{ 'button.edit'|trans }}" aria-label ="{{ 'button.edit'|trans }}"><i class="bi bi-pencil-fill" style="font-size: 1.5rem; color: #ffc107;"></i></a>   
                     </td>
@@ -87,10 +87,10 @@
         </tbody>
     </table>
         {# If you're on a cell phone #}
-            <div class="d-block d-sm-none"><a class="btn btn-lg btn-success m-5" href="{{ path('app_memory_new') }}"><i class="bi bi-plus-square-fill"></i></a></div>
-            <div class="d-block d-sm-none"><a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a></div>
+            {# <div class="d-inline-block d-sm-none"><a class="btn btn-lg btn-success m-5" href="{{ path('app_memory_new') }}"><i class="bi bi-plus-square-fill"></i></a></div>
+            <div class="d-inline-block d-sm-none"><a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}"><i class="bi bi-backspace-fill"></i></a></div> #}
         {# Else #}
-            <div class="d-none d-sm-block"><a class="btn btn-lg btn-success m-5" href="{{ path('app_memory_new') }}">{{ 'memory.new'|trans }}</a></div>
-            <div class="d-none d-sm-block"><a class="btn btn-lg btn-secondary text-white m-1" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a></div>
+            <div class="d-md-inline-block d-block text-center vertical-align-middle mb-2 mx-md-5"><a class="btn btn-lg btn-dark-purple btn-mobile text-white" href="{{ path('app_memory_new') }}">{{ 'memory.new'|trans }}</a></div>
+            <div class="d-md-inline-block d-block text-center vertical-align-middle mb-2"><a class="btn btn-lg btn-secondary btn-mobile text-white" href="{{ path('app_main') }}">{{ 'button.home'|trans }}</a></div>
 {% endblock %}
 

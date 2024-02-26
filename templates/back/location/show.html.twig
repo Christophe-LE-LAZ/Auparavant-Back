@@ -52,9 +52,7 @@
                     {# Else #}
                     <div class="d-block">{{ 'button.back'|trans }}</div>
                 </a>
-            </div>
-
-		    <div class="col-1">
+            
 			    <a class="btn btn-lg btn-warning text-white" href="{{ path('app_location_edit', {'id': location.id}) }}">
                     {# Cell phone #}
                     {# <div class="d-block d-sm-none"><i class="bi bi-pencil-fill"></i></div> #}
@@ -62,10 +60,11 @@
                     <div class="d-block">{{ 'button.edit'|trans }}</div>
                 </a>
 		    </div>
-
+        
+        </div>
+        
 		    <div class="px-3 col col-md-2 d-md-inline-block div-btn-delete">
 			    {{ include('back/location/_delete_form.html.twig') }}
 		    </div>
-    
-	    </div>
+	    
 {% endblock %}
