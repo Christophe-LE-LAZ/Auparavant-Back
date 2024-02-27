@@ -38,6 +38,7 @@ INSERT INTO `location` (`id`, `area`, `department`, `district`, `street`, `city`
 (1,	'Île-de-France',	'Paris',	'Quartier latin',	'28 place du Panthéon',	'Paris',	75005,	48.84619800,	2.34610500,	'2024-02-07 13:48:00',	NULL),
 (2,	'Île-de-France',	'Paris',	'Gros-Caillou',	'5 avenue Anatole-France',	'Paris',	75007,	48.85829600,	2.29447900,	'2024-02-07 14:48:05',	NULL),
 (3,	'Île-de-France',	'Paris',	'Notre-Dame',	'6 Parvis Notre-Dame - Place Jean-Paul II',	'Paris',	75004,	48.51110000,	2.20590000,	'2024-02-08 09:45:03',	NULL),
+(4,	'Île-de-France',	'Paris',	'Bastille',	'Place de la Bastille',	'Paris',	75004,	48.85330000,	2.36950000,	'2024-02-27 00:00:00',	NULL),
 (5,	'Île-de-France',	'Essonne',	'Clause',	'Impasse du Blutin',	'Brétigny',	91220,	48.60870000,	2.30685000,	'2024-02-12 10:18:15',	NULL),
 (6,	'Île-de-France',	'Paris',	'Les Halles',	'Rues de Rivoli et Étienne-Marcel, bd de Sébastopol',	'Paris',	75001,	48.51400000,	2.20500000,	'2024-02-23 13:53:12',	NULL);
 
@@ -71,7 +72,9 @@ INSERT INTO `memory` (`id`, `location_id`, `user_id`, `place_id`, `title`, `cont
 (16,	5,	1,	5,	'Propriété de M. Clause',	'Propriété de M. Clause, édifiée en 1912',	'1912-01-01 00:00:00',	'65d89f89244b1.jpg',	NULL,	'2024-02-23 13:37:12',	NULL),
 (17,	5,	1,	6,	'Quartier Clause',	'Projet d\'aménagement urbain en 2023',	'2024-01-01 00:00:00',	'65d89fae71353.jpg',	NULL,	'2024-02-23 13:37:50',	NULL),
 (18,	6,	1,	7,	'Les Halles de Paris en 1862',	'Les Halles de Paris était le nom donné aux halles centrales, marché de vente en gros de produits alimentaires frais, situé au cœur de Paris, dans le premier arrondissement, et qui donna son nom au quartier environnant. Au plus fort de son activité et par manque de place, les étals des marchands s\'installaient même dans les rues adjacentes.',	'1862-01-01 00:00:00',	'65d8a43d3232a.jpg',	NULL,	'2024-02-23 13:57:16',	NULL),
-(19,	6,	1,	8,	'Les Halles de nos jours',	'À l\'emplacement de ce vaste marché, qui se tenait jusqu\'au début des années 1970, se trouvent aujourd\'hui un espace vert (le jardin Nelson-Mandela, précédemment jardin des Halles), un centre commercial souterrain (le Forum des Halles) et de nombreux espaces consacrés aux loisirs (piscine, cinéma) et aux activités culturelles (conservatoire, bibliothèque, centre culturel). La gare RER Châtelet - Les Halles, située sous le complexe, est la plus grande gare souterraine du monde et permet un accès depuis toute la région parisienne.',	'2021-05-01 00:00:00',	'65d8a5a915f62.jpg',	NULL,	'2024-02-23 14:03:20',	NULL);
+(19,	6,	1,	8,	'Les Halles de nos jours',	'À l\'emplacement de ce vaste marché, qui se tenait jusqu\'au début des années 1970, se trouvent aujourd\'hui un espace vert (le jardin Nelson-Mandela, précédemment jardin des Halles), un centre commercial souterrain (le Forum des Halles) et de nombreux espaces consacrés aux loisirs (piscine, cinéma) et aux activités culturelles (conservatoire, bibliothèque, centre culturel). La gare RER Châtelet - Les Halles, située sous le complexe, est la plus grande gare souterraine du monde et permet un accès depuis toute la région parisienne.',	'2021-05-01 00:00:00',	'65d8a5a915f62.jpg',	NULL,	'2024-02-23 14:03:20',	NULL),
+(20,	4,	1,	9,	'La Prise de la Bastille',	'La prise de la Bastille, survenue le mardi 14 juillet 1789 à Paris, est l\'un des événements inauguraux et emblématiques de la Révolution française. Cette journée, durant laquelle la Bastille est prise d\'assaut par des émeutiers est, dans la tradition historiographique, considérée comme la première intervention d\'ampleur du peuple parisien dans le cours de la Révolution et dans la vie politique française.\r\n\r\nJuste après la prise des Invalides pour trouver des armes et des canons, la Bastille est prise d’assaut le 14 juillet 1789 par le peuple parisien (une grande majorité des émeutiers venant du faubourg Saint-Antoine) venu chercher de la poudre et des munitions. Cette forteresse symbolisait aussi l\'arbitraire royal. La Bastille est défendue par une garnison de 82 invalides et 32 grenadiers du régiment suisse de Salis-Samade et accueille aussi sept prisonniers qui sont libérés par les émeutiers au cours de l\'assaut.\r\n\r\nDes délégations essayent de négocier avec le gouverneur de la Bastille Bernard-René Jourdan de Launay, en vain. Après la prise de la forteresse, ce dernier est emmené sur la place de Grève, où il est lynché, poignardé, fusillé et sa tête découpée par un boucher. Les révolutionnaires auxquels se sont ralliés certains membres de la garde bourgeoise et des Gardes françaises s\'emparent notamment de ses archives, les dispersent en partie (avec les meubles et la vaisselle) dans les fossés de la forteresse mais les collectionneurs, notamment Beaumarchais, mettent rapidement la main sur certaines. Dès le 15 juillet, les autorités municipales tentent de les récupérer. La grande majorité est transférée à la Bibliothèque de l\'Arsenal en 1798, dont le directeur est alors Hubert-Pascal Ameilhon, et cataloguée depuis le XIXème siècle (60 000 dossiers comprenant 600 000 feuillets, essentiellement des lettres de cachet, interrogatoires, suppliques au roi, rapports de police, correspondances de l\'embastillé).\r\n\r\nLa prise de la Bastille est aujourd’hui considérée comme le symbole de la Révolution française, dont elle marque le commencement.\r\n\r\nCependant, la fête nationale française commémore simultanément la fête de la Fédération, le 14 juillet 1790, qui coïncidait avec le premier anniversaire de la prise de la Bastille.',	'1789-07-14 00:00:00',	'65dda68394710.png',	NULL,	'2024-02-27 09:08:19',	NULL),
+(21,	4,	1,	10,	'Ce qu\'est devenu la Bastille',	'La Bastille fut abattue à partir du 15 juillet 1789 par un entrepreneur privé, Palloy, qui vendit une partie des pierres en guise de souvenirs (pierres sculptées représentant la Bastille en miniature), dont un certain nombre furent vendues en province (Palloy fit faire également des maquettes de l\'édifice qui furent envoyées dans tous les chefs-lieux des départements français). Le 14 août suivant, les ouvriers trouvèrent dans la tour de la Comté cinq boulets incrustés dans la pierre. On suppose qu\'ils avaient été lancés en cet endroit lors de la bataille du faubourg Saint-Antoine en 1652. Une partie des matériaux qu\'on tira de la démolition servit à construire le pont Louis XVI (actuel pont de la Concorde). Le chantier de démolition dura jusqu\'en 1806.\r\n\r\nOn peut y ajouter la transformation en objets de piété et de culte de tout ce qui put être récupéré sur les boiseries et les ferronneries de la vieille forteresse. Le marquis de La Fayette envoya une des clés de la Bastille à George Washington, l’une des grandes figures de la révolution américaine et premier président des États-Unis. Elle est aujourd’hui exposée à la résidence de Mount Vernon, transformée en musée.',	'2021-04-04 00:00:00',	'65dda8dc484a2.jpg',	NULL,	'2024-02-27 09:18:20',	NULL);
 
 DROP TABLE IF EXISTS `picture`;
 CREATE TABLE `picture` (
@@ -101,7 +104,11 @@ INSERT INTO `picture` (`id`, `memory_id`, `picture`, `created_at`, `updated_at`)
 (24,	18,	'65d8a43d32450.jpg',	'2024-02-23 13:57:17',	NULL),
 (25,	18,	'65d8a43d326ab.webp',	'2024-02-23 13:57:17',	NULL),
 (26,	19,	'65d8a5a915ff5.jpg',	'2024-02-23 14:03:21',	NULL),
-(27,	19,	'65d8a5e7a5c6b.jpg',	'2024-02-23 14:04:23',	NULL);
+(27,	19,	'65d8a5e7a5c6b.jpg',	'2024-02-23 14:04:23',	NULL),
+(28,	20,	'65dda68394779.jpg',	'2024-02-27 09:08:19',	NULL),
+(29,	20,	'65dda68394951.jpg',	'2024-02-27 09:08:19',	NULL),
+(30,	20,	'65dda683949da.jpg',	'2024-02-27 09:08:19',	NULL),
+(31,	21,	'65dda972c64bd.jpg',	'2024-02-27 09:20:50',	NULL);
 
 DROP TABLE IF EXISTS `place`;
 CREATE TABLE `place` (
@@ -123,7 +130,9 @@ INSERT INTO `place` (`id`, `location_id`, `name`, `type`, `created_at`, `updated
 (5,	5,	'Propriété Clause',	'Propriété',	'2024-02-12 10:18:15',	NULL),
 (6,	5,	'Résidence Clause',	'Résidence d\'immeubles',	'2024-02-12 10:24:58',	NULL),
 (7,	6,	'Les Halles de Paris',	'Marché de vente en gros',	'2024-02-23 13:54:51',	NULL),
-(8,	6,	'Les Halles',	'Forum et espace vert',	'2024-02-23 14:01:13',	NULL);
+(8,	6,	'Les Halles',	'Forum et espace vert',	'2024-02-23 14:01:13',	NULL),
+(9,	4,	'La Bastille',	'Château fort/arsenal/prison',	'2024-02-27 09:00:12',	NULL),
+(10,	4,	'Place de la Bastille',	'Place',	'2024-02-27 09:01:03',	NULL);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -146,4 +155,4 @@ INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `roles`,
 (4,	'Steven',	'Nguyen',	'steven.nguyen@oclock.school',	'$2y$13$NAKXQfNZT3mK1zMPKVEkfeLWuC.7Op0wC1D6FQbKzRUefuKuWeKGG',	'[\"ROLE_USER\"]',	'2024-02-15 13:05:22',	NULL),
 (5,	'Dylan',	'Frossard',	'dylan.frossard@oclock.school',	'$2y$13$6DnxY7N6tor2VOsS.7pxdev4wT9UCKsYZ8ueXRbLTbHPLNx4djyoe',	'[\"ROLE_USER\",\"ROLE_ADMIN\"]',	'2024-02-23 14:07:15',	NULL);
 
--- 2024-02-23 14:08:16
+-- 2024-02-27 09:21:09
