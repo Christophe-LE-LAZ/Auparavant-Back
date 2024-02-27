@@ -924,6 +924,9 @@ class MemoryController extends AbstractController
             );
         }
 
+        
+
+
         // Delete the main picture
         $deleteFileMainPictureResult = $this->fileUploader->deletePictureFile($params->get('images_directory'), $memory->getMainPicture());
         if (!$deleteFileMainPictureResult) {

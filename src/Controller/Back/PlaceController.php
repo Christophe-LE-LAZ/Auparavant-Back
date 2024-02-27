@@ -114,17 +114,16 @@ class PlaceController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$place->getId(), $request->request->get('_token'))) {
 
-            if ($place->getMemories()) {
-                $this->addFlash('danger', $translator->trans('warning.place_deleted'));
-            return $this->redirect($request->headers->get('referer'));
+            if ($place->getMemories()->isEmpty() ) {
+                $entityManager->remove($place);
+                $entityManager->flush();
+    
+                $this->addFlash('success', $translator->trans('confirmation.place_deleted'));
+                return $this->redirectToRoute('app_place_index', [], Response::HTTP_SEE_OTHER);
             }
+            $this->addFlash('danger', $translator->trans('warning.place_deleted'));
+            return $this->redirect($request->headers->get('referer'));
 
-            $entityManager->remove($place);
-            $entityManager->flush();
-
-            $this->addFlash('success', $translator->trans('confirmation.place_deleted'));
         }
-
-        return $this->redirectToRoute('app_place_index', [], Response::HTTP_SEE_OTHER);
     }
 }

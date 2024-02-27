@@ -114,16 +114,14 @@ class LocationController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$location->getId(), $request->request->get('_token'))) {
             
-            if ($location->getMemories()) {
-                $this->addFlash('danger', $translator->trans('warning.location_deleted'));
-            return $this->redirect($request->headers->get('referer'));
-            }
-            $entityManager->remove($location);
-            $entityManager->flush();
-
-            $this->addFlash('success', $translator->trans('confirmation.location_deleted'));
+            if ($location->getMemories()->isEmpty()) {
+                $entityManager->remove($location);
+                $entityManager->flush();
+                $this->addFlash('success', $translator->trans('confirmation.location_deleted'));
+                return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
+                }
         }
-
-        return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
+        $this->addFlash('danger', $translator->trans('warning.location_deleted'));
+        return $this->redirect($request->headers->get('referer'));
     }
 }
