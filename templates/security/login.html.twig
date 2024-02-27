@@ -15,10 +15,10 @@
 
         <h1 class="h3 mb-3 font-weight-normal">{{ 'login.instruction'|trans }}</h1>
         <label for="inputEmail">{{ 'user_access.email'|trans }}</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" autofocus>
         <br>
         <label for="inputPassword">{{ 'user_access.password'|trans }}</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password">
 
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
@@ -30,7 +30,9 @@
             {{ 'button.login'|trans }}
         </button>
         <button class="btn btn-lg btn-secondary" type="submit">
+            <a href="{{ path('app_forgot_password_request') }}">
             {{ 'button.forgotten_password'|trans }}
+            </a>
         </button>
         </div>
     </form>
