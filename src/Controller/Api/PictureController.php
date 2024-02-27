@@ -207,7 +207,7 @@ class PictureController extends AbstractController
             if ($memory->getMainPicture()) {
                 $entityManager->flush();
                 return $this->json([
-                    'message' => 'Le souvenir a bien été mis à jour.'
+                    'message' => 'Coucou Lisa.'
                 ]);
             }
 
