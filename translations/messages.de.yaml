@@ -40,6 +40,8 @@ warning:
     former_picture_deletion_failure: Löschen des vorherigen Bildes fehlgeschlagen.
     memory_picture_mandatory: Die Erinnerung muss ein Hauptbild enthalten.
     no_change: Es wurden keine Änderungen vorgenommen, da kein Hauptbild eingereicht wurde.
+    location_deleted: Mit dem Ort sind Erinnerungen verbunden, die nicht gelöscht werden können.
+    place_deleted: Mit dem Platz sind Erinnerungen verbunden, die nicht gelöscht werden können.
 non-existent_entities:
     location: Der Standort existiert nicht.
     memory: Die Erinnerung existiert nicht.

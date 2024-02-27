@@ -1,0 +1,240 @@
+# translations/messages.es.yaml
+
+English: Inglés
+French: Francés
+Deutsch: Alemán
+Nederlands: Neerlandés
+Español: Español
+Italiano: Italiano
+Company Name: Otrora
+All Rights Reserved: Todos los derechos reservados
+main.title: Back office de Otrora
+page.title: Bienvenido al backoffice de "Auparavant"
+button:
+    login: Conectarse
+    logout: Cerrar sesión
+    forgotten_password: ¿Ha olvidado su contraseña?
+
+## A.P.I
+confirmation:
+    location_added: La localidad se ha creado correctamente.
+    location_updated: La localidad se ha modificado correctamente.
+    location_deleted: La localidad se ha eliminado correctamente.
+    memory_created: El recuerdo se ha creado correctamente.
+    memory_updated: El recuerdo se ha modificado correctamente.
+    memory_deleted: El recuerdo se ha eliminado correctamente.
+    picture_uploaded: La foto se ha cargado correctamente.
+    picture_updated: La foto se ha actualizado correctamente.
+    picture_deleted: La foto se ha eliminado correctamente.
+    place_added: El lugar se ha creado correctamente.
+    place_updated: El lugar se ha modificado correctamente.
+    place_deleted: El lugar se ha eliminado correctamente.
+    user_created: La cuenta se ha creado correctamente.
+    user_updated: La cuenta se ha modificado correctamente.
+    user_deleted: La cuenta se ha eliminado correctamente.
+warning:
+    not_found: No se ha encontrado la página solicitada.
+    resource_not_found: No se ha encontrado el recurso solicitado.
+    memory_picture_update_failure: Se ha producido un error al actualizar una foto asociada.
+    memory_picture_deletion_failure: Se ha producido un error al eliminar una foto asociada.
+    picture_update_failure: Se ha producido un error al actualizar la foto.
+    picture_deletion_failure: Se ha producido un error al eliminar la foto.
+    former_picture_deletion_failure: Ha fallado el borrado de la imagen anterior.
+    memory_picture_mandatory: El recuerdo debe incluir una foto.
+    no_change: No se han realizado cambios, ya que no se ha presentado ninguna imagen principal.
+non-existent_entities:
+    location: No existe tal localidad.
+    memory: No existe tal recuerdo.
+    picture: No existe tal foto.
+    place: No existe tal lugar.
+    user: No existe tal usario.
+unauthorized_access:
+    page: No está autorizado a acceder a esta página.
+    view: No está autorizado a ver este contenido.
+    modification: No está autorizado a modificar este contenido.
+    deletion: No está autorizado a eliminar este contenido.
+
+## Backoffice
+### _delete_form
+deletion_confirmation: ¿Está seguro de que desea eliminar este elemento?
+button.delete: Eliminar
+
+### _form
+button.submit: Validar
+
+### edit
+# title: Modifier une entité
+button.update: Actualizar
+button.back: Volver a la lista
+
+## index
+# title.reversed: Index des entités
+button.show: Ver
+button.edit: Modificar
+no_records_found: No se han encontrado elementos
+# button.create: Créer une nouvelle entité
+button.home: Página de inicio
+
+# new
+# title.new: Créer une nouvelle entité
+# button.back: back to list
+
+# show
+# title: Entity
+# button.back: back to list
+# button.edit: edit
+
+main:
+    name: Nombre
+    list: Lista
+    view: Ver
+    locations: Localidades
+    places: Lugares
+    memories: Recuerdos
+    pictures: Fotos
+    users: Usarios
+
+location:
+    ### edit
+    title.edit: Modificar una localidad
+    ### index
+    title.index: Índice de localidades
+    new: Añadir una nueva localidad
+    ### new
+    title.new: Crear una nueva localidad
+    ### show:
+    title: Localidad
+    ### success
+    create.success : Localidad creada correctamente
+    update.success : Localidad actualizada correctamente
+    delete.success : Localidad eliminada correctamente
+    not_found : Localidad no encontrada
+    area: Región
+    department: Departamento
+    district: Barrio
+    street: Calle
+    zipcode: Código postal
+    city: Ciudad
+    latitude: Latitud
+    longitude: Longitud
+    form:
+        area: 'Región :'
+        department: 'Departamento :'
+        district: 'Barrio :'
+        street: 'Calle :'
+        city: 'Ciudad :'
+        zipcode: 'Código postal :'
+        latitude: 'Latitud :'
+        longitude: 'Longitud :'
+memory:
+    ### edit
+    title.edit: Modificar un recuerdo
+    ### index
+    title.index: Índice de recuerdos
+    new: Añadir un nuevo recuerdo
+    ### new
+    title.new: Crear un nuevo recuerdo
+    ### show:
+    title: Recuerdo
+    ### success
+    create.success : Recuerdo creado correctamente
+    update.success : Recuerdo actualizado correctamente
+    delete.success : Recuerdo eliminado correctamente
+    not_found : Recuerdo no encontrado
+    article.title: Título 
+    content: Contenido
+    main_picture: Fotografía principal
+    picture_date: Fecha de la fotografía
+    place: Nombre y tipo de lugar
+    address: Dirección
+    user: Creador
+    additional_picture: Foto adicional
+    form:
+        title: 'Título :'
+        content: 'Contenido :'
+        main_picture: 'Foto principal :'
+        picture_date: 'Fecha de la foto :'
+        user: 'Creador :'
+        location: 'Dirección :'
+        place: 'Lugar :'
+        picture: 'Foto adicional :'
+        choose_file: Seleccione un archivo
+        no_file_chosen: No hay archivos seleccionados
+        valid_file_required: Seleccione un archivo válido
+picture:
+    ### edit
+    title.edit: Modificar una foto
+    ### index
+    title.index: Índice de fotos
+    new: Añadir una nueva foto
+    ### new
+    title.new: Añadir una nueva foto
+    ### show:
+    title: Foto
+    ### success
+    create.success : Foto cargada correctamente
+    update.success : Foto actualizada correctamente
+    delete.success : Foto eliminada correctamente
+    not_found : Foto no encontrada
+    picture: 'Fotografía :'
+    memory: 'Recuerdo correspondiente :'
+    valid_file_required: Seleccione un archivo válido
+place:
+    ### edit
+    title.edit: Modificar un lugar
+    ### index
+    title.index: Índice de lugares
+    new: Añadir un nuevo lugar
+    ### new
+    title.new: Crear un nuevo lugar
+    ### show:
+    title: Lugar
+    ### success
+    create.success : Lugar creado correctamente
+    update.success : Lugar actualizado correctamente
+    delete.success : Lugar eliminado correctamente
+    not_found : Lugar no encontrado
+    name: 'Nombre :'
+    type: 'Tipo :'
+    address: 'Dirección :'
+user:
+    ### edit
+    title.edit: Modificar la cuenta de un usuario
+    ### index
+    title.index: Índice de usuarios
+    new: Añadir un nuevo usuario
+    ### new
+    title.new: Crear una nueva cuenta de usuario
+    ### show:
+    title: Usario
+    ### success
+    create.success : Cuenta creada correctamente
+    update.success : Cuenta actualizada correctamente
+    delete.success : Cuenta eliminada correctamente
+    not_found : Cuenta no encontrada
+    firstname: Prénom
+    lastname: Nom
+    email: Adresse électronique
+    password: Mot de passe
+    role: Rôle
+    admin: Administrateur
+    moderator: Modérateur
+    user: Utilisateur
+user_access:
+    firstname: 'Nombre : '
+    lastname: 'Apellido : '
+    email: 'Dirección electrónica : '
+    password: 'Contraseña : '
+    role: 'Rol : '
+register:
+    registration_page: Página de inscripción
+    terms: Aceptar las condiciones de uso
+    terms.must: Debe aceptar nuestras condiciones.
+    password_message: La contraseña no puede estar vacía.
+    password_min_message: La contraseña debe tener al menos {{ limit }} caracteres.
+    button: Inscribir
+login:
+    greeting: Hola
+    message: Está conectado como
+    instruction: Por favor, conéctese
+    already logged in: Ya está conectado.
