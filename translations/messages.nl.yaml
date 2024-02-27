@@ -233,8 +233,8 @@ login:
     already_logged_in: U bent al aangemeld.
 reset_password:
     title: E-mail verzonden om het wachtwoord opnieuw in te stellen
-    first_message: Als er een account bestaat dat overeenkomt met je e-mailadres, dan is er zojuist een e-mail verzonden met daarin een link waarmee je je wachtwoord opnieuw kunt instellen. Deze link verloopt in
-    second_message: Als je geen e-mail ontvangt, controleer dan je spamfolder of 
+    first_message: Als er een account is dat overeenkomt met uw e-mailadres, is er zojuist een e-mail verzonden met daarin een link waarmee u uw wachtwoord opnieuw kunt instellen. Deze link verloopt in
+    second_message: Als u geen e-mail ontvangt, controleer dan uw spamfolder of 
     try_again:  probeer het opnieuw
     third_message: Terug naar de
     home: startpagina
@@ -242,9 +242,9 @@ reset_password:
     fourth_message: Er is een verzoek ingediend om uw wachtwoord opnieuw in te stellen. Als u de afzender van dit verzoek bent, volg dan de onderstaande link. Anders kunt u deze e-mail negeren.
     fifth_message: Deze link verloopt in
     see_you: Bis bald
-    title2: Je wachtwoord opnieuw instellen
+    title2: Uw wachtwoord opnieuw instellen
     sixth_message: in app.
-    seventh_message: Voer je e-mailadres in en we sturen je een link om je wachtwoord opnieuw in te stellen.
+    seventh_message: Voer uw e-mailadres in en wij sturen u een link om uw wachtwoord opnieuw in te stellen
     button: Stuur een e-mail om het wachtwoord te resetten
     button2: Wachtwoord opnieuw instellen
     back: terug
