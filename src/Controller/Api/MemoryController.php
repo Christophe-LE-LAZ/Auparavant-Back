@@ -885,7 +885,7 @@ class MemoryController extends AbstractController
         $currentMemory 
             ->setTitle($memoryData['title'])
             ->setContent($memoryData['content'])
-            ->setMainPicture($memoryData['main_picture'])
+            ->setMainPicture($currentMemory->getMainPicture())
             ->setPictureDate(new DateTime($memoryData['picture_date']))
             ->setUpdatedAt(new DateTimeImmutable())
             ->setPlace($currentPlace);
