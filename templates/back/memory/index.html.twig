@@ -69,7 +69,7 @@
                     <td>{{ memory.content | slice(0,50) }}</td>
                     <td> <img src="{{ asset('assets/pictures/' ~  memory.mainPicture)}}"class="img-thumbnail"></td>
                     <td>{{ memory.pictureDate ? memory.pictureDate|date('Y-m-d') : '' }}</td>
-                    <td>{{ memory.place.name }} {{ memory.place.type }}</td>
+                    <td>{{ memory.place.name }} - {{ memory.place.type }}</td>
                     <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
                     <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
                     <td>
