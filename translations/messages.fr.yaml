@@ -141,7 +141,7 @@ memory:
     ### success
     create.success : Souvenir créé avec succès
     update.success : Souvenir mis à jour avec succès
-    delete.success : Souvenir supprimée avec succès
+    delete.success : Souvenir supprimé avec succès
     not_found : Souvenir non trouvé
     article.title: Titre
     content: Contenu
