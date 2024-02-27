@@ -237,4 +237,4 @@ login:
     greeting: Hola
     message: Está conectado como
     instruction: Por favor, conéctese
-    already logged in: Ya está conectado.
+    already_logged_in: Ya está conectado.
