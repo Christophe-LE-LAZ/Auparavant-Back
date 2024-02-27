@@ -52,7 +52,7 @@
 					<tr>
 						<th>{{ 'memory.additional_picture'|trans }}</th>
 						<td>{{ picture.picture }}
-							<img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-thumbnail mx-5" alt="Additional Picture"></td>
+							<img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-thumbnail mx-5" alt="Additional Picture"><a class="mx-5 btn btn-primary" href="{{ path('app_picture_show', {'id': picture.id}) }}">Voir</a></td>
 					</tr>
 				{% endfor %}
 			{% endif %}

@@ -21,11 +21,11 @@ class Memory
     #[Groups(['get_memory'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 50)]
     #[Assert\NotBlank]
     #[Assert\Length(
         min: 2,
-        max: 30,
+        max: 50,
         minMessage: 'Le titre doit comporter au moins {{ limit }} caractères.',
         maxMessage: 'Le titre ne peut pas dépasser {{ limit }} caractères.',
     )]
