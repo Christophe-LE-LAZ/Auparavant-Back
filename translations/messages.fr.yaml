@@ -256,3 +256,4 @@ reset_password:
     seventh_message: Saisissez votre adresse électronique et nous vous enverrons un lien pour réinitialiser votre mot de passe
     button: Envoyer un courriel de réinitialisation du mot de passe
     button2: Réinitialiser le mot de passe
+    back: Retour

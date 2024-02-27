@@ -247,3 +247,4 @@ reset_password:
     seventh_message: Voer je e-mailadres in en we sturen je een link om je wachtwoord opnieuw in te stellen.
     button: Stuur een e-mail om het wachtwoord te resetten
     button2: Wachtwoord opnieuw instellen
+    back: terug
