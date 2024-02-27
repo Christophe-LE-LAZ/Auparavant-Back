@@ -47,3 +47,8 @@
         width:80%;
     }
 }
+
+.forgotten_password {
+    color: white;
+    text-decoration: none;
+}
