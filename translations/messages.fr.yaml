@@ -8,8 +8,11 @@ Company Name: Auparavant
 All Rights Reserved: Tous droits réservés
 main.title: Backoffice d'Auparavant
 page.title: Bienvenue sur le backoffice d'«Auparavant»
-button.login: Se connecter
-button.logout: Se déconnecter
+button:
+    login: Se connecter
+    logout: Se déconnecter
+    forgotten_password: Mot de passe oublié ?
+
 
 ## A.P.I
 confirmation:

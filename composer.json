@@ -27,6 +27,8 @@
         "symfony/http-client": "7.0.*",
         "symfony/http-foundation": "7.0.*",
         "symfony/intl": "7.0.*",
+        "symfony/mailer": "7.0.*",
+        "symfony/mailer-send-mailer": "7.0.*",
         "symfony/mime": "7.0.*",
         "symfony/monolog-bundle": "^3.0",
         "symfony/property-access": "7.0.*",
@@ -38,6 +40,7 @@
         "symfony/twig-bundle": "7.0.*",
         "symfony/validator": "7.0.*",
         "symfony/yaml": "7.0.*",
+        "symfonycasts/reset-password-bundle": "^1.20",
         "twbs/bootstrap-icons": "*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^3.0"
