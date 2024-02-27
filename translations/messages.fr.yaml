@@ -4,8 +4,6 @@ English: Anglais
 French: Français
 Deutsch: Allemand
 Nederlands: Néerlandais
-Español: Espagnol
-Italiano: Italien
 Company Name: Auparavant
 All Rights Reserved: Tous droits réservés
 main.title: Backoffice d'Auparavant
@@ -139,7 +137,7 @@ memory:
     ### success
     create.success : Souvenir créé avec succès
     update.success : Souvenir mis à jour avec succès
-    delete.success : Souvenir supprimé avec succès
+    delete.success : Souvenir supprimée avec succès
     not_found : Souvenir non trouvé
     article.title: Titre
     content: Contenu
