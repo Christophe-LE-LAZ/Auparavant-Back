@@ -1,74 +1,79 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ 'memory.title'|trans }}</h1>
+	<h1>{{ 'memory.title'|trans }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ memory.id }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'memory.article.title'|trans }}</th>
-                <td>{{ memory.title }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'memory.content'|trans }}</th>
-                <td>{{ memory.content }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'memory.main_picture'|trans }}</th>
-                <td>{{ memory.mainPicture }} <img src="{{ asset('assets/pictures/' ~ memory.mainPicture) }}" class="img-thumbnail mx-5" alt="Main Picture"></td>
-            </tr>
-            <tr>
-                <th>{{ 'memory.picture_date'|trans }}</th>
-                <td>{{ memory.pictureDate ? memory.pictureDate|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'memory.place'|trans }}</th>
-                <td>{{ memory.place.name }} {{ memory.place.type }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'memory.address'|trans }}</th>
-                <td>{{ memory.location.street }} {{ memory.location.zipcode }} {{ memory.location.city }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'memory.user'|trans }}</th>
-                <td>{{ memory.user.firstname }} {{ memory.user.lastname }}</td>
-            </tr>
-            {% if memory.picture is not empty %}>
-		{% for picture in memory.picture %}
-            <tr>
-                <th>{{ 'memory.additional_picture'|trans }}</th>
-                <td>{{ picture.picture }} <img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-thumbnail mx-5" alt="Additional Picture"></td>
-            </tr>
-        {% endfor %}
-		{% endif %}
-        </tbody>
-    </table>
-        <div class="row">
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ memory.id }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'memory.article.title'|trans }}</th>
+				<td>{{ memory.title }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'memory.content'|trans }}</th>
+				<td>{{ memory.content }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'memory.main_picture'|trans }}</th>
+				<td>{{ memory.mainPicture }}
+					<img src="{{ asset('assets/pictures/' ~ memory.mainPicture) }}" class="img-thumbnail mx-5" alt="Main Picture"></td>
+			</tr>
+			<tr>
+				<th>{{ 'memory.picture_date'|trans }}</th>
+				<td>{{ memory.pictureDate ? memory.pictureDate|date('d-m-Y') : '' }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'memory.place'|trans }}</th>
+				<td>{{ memory.place.name }}
+					{{ memory.place.type }}<a class="mx-5 btn btn-primary" href="{{ path('app_place_show', {'id': memory.place.id}) }}">Voir</a>
+				</td>
 
-            <div class="col d-flex flex-column flex-md-row mx-3 my-2 align-items-md-start">
-                <a class="btn btn-lg btn-secondary text-white d-inline-block mb-2 mx-md-3" href="{{ path('app_memory_index') }}">
-                    {# Cell phone #}
-                    {# <div class="d-block d-sm-none"><i class="bi bi-backspace-fill"></i></div> #}
-                    {# Else #}
-                    <div class="d-block">{{ 'button.back'|trans }}</div>
-                </a>
-            
-                <a class="btn btn-lg btn-warning text-white" href="{{ path('app_memory_edit', {'id': memory.id}) }}">
-                    {# Cell phone #}
-                    {# <div class="d-block d-sm-none"><i class="bi bi-pencil-fill"></i></div> #}
-                    {# Else #}
-                    <div class="d-nblock">{{ 'button.edit'|trans }}</div>
-                </a>
-            </div>
 
-        </div>
+			</tr>
+			<tr>
+				<th>{{ 'memory.address'|trans }}</th>
+				<td>{{ memory.location.street }}
+					{{ memory.location.zipcode }}
+					{{ memory.location.city }}
+					<a class="mx-5 btn btn-primary" href="{{ path('app_location_show', {'id': memory.location.id}) }}">Voir</a>
+				</td>
+			</tr>
+			<tr>
+				<th>{{ 'memory.user'|trans }}</th>
+				<td>{{ memory.user.firstname }}
+					{{ memory.user.lastname }}</td>
+			</tr>
+			{% if memory.picture is not empty %}>
+				{% for picture in memory.picture %}
+					<tr>
+						<th>{{ 'memory.additional_picture'|trans }}</th>
+						<td>{{ picture.picture }}
+							<img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-thumbnail mx-5" alt="Additional Picture"></td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+		</tbody>
+	</table>
+	<div class="row">
 
-            <div class="px-3 col col-md-2 d-md-inline-block div-btn-delete">
-                {{ include('back/memory/_delete_form.html.twig') }}
-            </div>
-        
+		<div class="col d-flex flex-column flex-md-row mx-3 my-2 align-items-md-start">
+			<a class="btn btn-lg btn-secondary text-white d-inline-block mb-2 mx-md-3" href="{{ path('app_memory_index') }}">
+				<div class="d-block">{{ 'button.back'|trans }}</div>
+			</a>
+
+			<a class="btn btn-lg btn-warning text-white" href="{{ path('app_memory_edit', {'id': memory.id}) }}">
+				<div class="d-nblock">{{ 'button.edit'|trans }}</div>
+			</a>
+		</div>
+
+	</div>
+
+	<div class="px-3 col col-md-2 d-md-inline-block div-btn-delete">
+		{{ include('back/memory/_delete_form.html.twig') }}
+	</div>
+
 {% endblock %}
