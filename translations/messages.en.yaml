@@ -230,5 +230,6 @@ login:
     message: You are logged in as
     instruction: Please log in
     already_logged_in: You are already logged in.
+    button.forgotten_password: Forgot your password?
 
 
