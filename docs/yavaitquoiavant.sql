@@ -155,4 +155,17 @@ INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `roles`,
 (4,	'Steven',	'Nguyen',	'steven.nguyen@oclock.school',	'$2y$13$NAKXQfNZT3mK1zMPKVEkfeLWuC.7Op0wC1D6FQbKzRUefuKuWeKGG',	'[\"ROLE_USER\"]',	'2024-02-15 13:05:22',	NULL),
 (5,	'Dylan',	'Frossard',	'dylan.frossard@oclock.school',	'$2y$13$6DnxY7N6tor2VOsS.7pxdev4wT9UCKsYZ8ueXRbLTbHPLNx4djyoe',	'[\"ROLE_USER\",\"ROLE_ADMIN\"]',	'2024-02-23 14:07:15',	NULL);
 
+DROP TABLE IF EXISTS `reset_password_request`;
+CREATE TABLE `reset_password_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `selector` varchar(20) NOT NULL,
+  `hashed_token` varchar(100) NOT NULL,
+  `requested_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `expires_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  PRIMARY KEY (`id`),
+  KEY `IDX_7CE748AA76ED395` (`user_id`),
+  CONSTRAINT `FK_7CE748AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- 2024-02-27 09:21:09
