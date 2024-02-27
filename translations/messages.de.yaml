@@ -8,8 +8,10 @@ Company Name: Auparavant
 All Rights Reserved: Alle Rechte vorbehalten
 main.title: Auparavant backoffice
 page.title: Willkommen im Backoffice von „Auparavant“
-button.login: Anmelden
-button.logout: Abmelden
+button:
+    login: Anmelden
+    logout: Abmelden
+    forgotten_password: Haben Sie Ihr Passwort vergessen?
 
 ## A.P.I
 confirmation:
