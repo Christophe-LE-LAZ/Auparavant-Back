@@ -33,7 +33,8 @@ class LocationType extends AbstractType
                 'district',
                 TextType::class,
                 [
-                    'label' => 'location.form.district'
+                    'label' => 'location.form.district',
+                    'required' => false
                 ]
             )
             ->add(
