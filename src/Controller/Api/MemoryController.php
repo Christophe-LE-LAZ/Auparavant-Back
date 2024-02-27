@@ -814,23 +814,6 @@ class MemoryController extends AbstractController
                                 new OA\Property(property: 'title', type: 'string', example: 'new title'),
                                 new OA\Property(property: 'content', type: 'string', example: 'new content'),
                                 new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1890-02-08T14:00:00Z'),
-                                new OA\Property(property: 'main_picture', type: 'string', example: 'nouvelle_URL'),
-                                new OA\Property(
-                                    property: 'additional_pictures',
-                                    type: 'array',
-                                    items: new OA\Items(
-                                        type: 'object',
-                                        properties: [
-                                            new OA\Property(property: 'id', type: 'integer', example: 7),
-                                            new OA\Property(property: 'URL_image', type: 'string', example: 'nouvelle_URL_image_12'),
-                                        ]
-                                    ),
-                                    example: [
-                                        ['id' => 7, 'URL_image' => 'nouvelle_URL_image_12'],
-                                        ['id' => 2, 'URL_image' => 'nouvelle_URL_image_24'],
-                                        ['URL_image' => 'nouvelle_URL_image_38'],
-                                    ],
-                                ),
                             ]
                         ),
                     ]
@@ -852,13 +835,6 @@ class MemoryController extends AbstractController
                                 new OA\Property(property: 'title', type: 'string', example: 'l\'elysée en 1990'),
                                 new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
                                 new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
-                                new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
-                                new OA\Property(
-                                    property: 'additional_pictures',
-                                    type: 'array',
-                                    items: new OA\Items(type: 'string'),
-                                    example: ['URL_image_1', 'URL_image_2'],
-                                ),
                             ]
                         ),
                     ]
