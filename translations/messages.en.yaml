@@ -40,6 +40,8 @@ warning:
     former_picture_deletion_failure: Previous picture deletion failed.
     memory_picture_mandatory: The memory must include a main picture.
     no_change: No changes have been made as no main image has been submitted.
+    location_deleted: Memories are associated with the locality, impossible to remove.
+    place_deleted: Memories are associated with the place, impossible to remove.
 non-existent_entities:
     location: The location does not exist.
     memory: The memory does not exist.

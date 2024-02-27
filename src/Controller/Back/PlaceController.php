@@ -113,6 +113,12 @@ class PlaceController extends AbstractController
     public function delete(Request $request, Place $place, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete'.$place->getId(), $request->request->get('_token'))) {
+
+            if ($place->getMemories()) {
+                $this->addFlash('danger', $translator->trans('warning.place_deleted'));
+            return $this->redirect($request->headers->get('referer'));
+            }
+
             $entityManager->remove($place);
             $entityManager->flush();
 

@@ -113,6 +113,11 @@ class LocationController extends AbstractController
     public function delete(Request $request, Location $location, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete'.$location->getId(), $request->request->get('_token'))) {
+            
+            if ($location->getMemories()) {
+                $this->addFlash('danger', $translator->trans('warning.location_deleted'));
+            return $this->redirect($request->headers->get('referer'));
+            }
             $entityManager->remove($location);
             $entityManager->flush();
 
