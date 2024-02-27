@@ -593,8 +593,6 @@ class MemoryController extends AbstractController
                             new OA\Property(property: 'title', type: 'string', example: "l'élysée en 1990"),
                             new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
                             new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08'),
-                            new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
-                            new OA\Property(property: 'additional_pictures', type: 'array', items: new OA\Items(type: 'string'), example: ['URL_image_1', 'URL_image_2']),
                         ]),
                     ]
                 ),
@@ -611,8 +609,6 @@ class MemoryController extends AbstractController
                             new OA\Property(property: 'title', type: 'string', example: "l'elysée en 1990"),
                             new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
                             new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
-                            new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
-                            new OA\Property(property: 'additional_pictures', type: 'array', items: new OA\Items(type: 'string'), example: ['URL_image_1', 'URL_image_2']),
                         ]),
                     ]
                 ),
@@ -621,7 +617,7 @@ class MemoryController extends AbstractController
     )]
     #[OA\Response(
         response: 201,
-        description: 'Retourne le souvenir créé, la localisation, la place et le user associés',
+        description: 'Returns the memory created, the associated location, place and user',
         content: new OA\JsonContent(
             type: 'array',
             items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']))
@@ -631,7 +627,6 @@ class MemoryController extends AbstractController
     public function createMemoryAndPlace(Request $request, EntityManagerInterface $entityManager, LocationRepository $locationRepository, PlaceRepository $placeRepository)
     {
         $jsonContent = $request->getContent();
-        // $jsonContent = {"user":{"id":1},"location":{"id":1},"place":{"create_new_place":true, "id": 1, "name":"l'elysée","type":"batiment"},"memory":{"title":"l'elysée en 1990","content":"que de souvenirs avec ce lieu","picture_date":"1990-02-08T14:00:00Z","main_picture":"URL","additional_pictures":["URL_image_1","URL_image_2"]}}
 
         $jsonContent = trim($jsonContent);
         $data = json_decode($jsonContent, true);
@@ -692,8 +687,6 @@ class MemoryController extends AbstractController
                     new OA\Property(property: 'title', type: 'string', example: "l'elysée en 1990"),
                     new OA\Property(property: 'content', type: 'string', example: 'que de souvenirs avec ce lieu'),
                     new OA\Property(property: 'picture_date', type: 'string', format: 'date-time', example: '1990-02-08T14:00:00Z'),
-                    new OA\Property(property: 'main_picture', type: 'string', example: 'URL'),
-                    new OA\Property(property: 'additional_pictures', type: 'array', items: new OA\Items(type: 'string'), example: ['URL_image_1', 'URL_image_2']),
                 ]),
                 new OA\Property(property: 'place', type: 'object', properties: [
                     new OA\Property(property: 'name', type: 'string', example: "l'elysée"),
@@ -718,7 +711,7 @@ class MemoryController extends AbstractController
     )]
     #[OA\Response(
         response: 201,
-        description: 'Retourne le souvenir créé, la localisation, la place et le user associés',
+        description: 'Returns the memory created, the associated location, place and user',
         content: new OA\JsonContent(
             type: 'array',
             items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']))
@@ -844,7 +837,7 @@ class MemoryController extends AbstractController
     )]
     #[OA\Response(
         response: 200,
-        description: 'Retourne le souvenir mis à jour, la localisation, la place et le user associés',
+        description: 'Returns the updated memory, associated location, place and user',
         content: new OA\JsonContent(
             type: 'array',
             items: new OA\Items(ref: new Model(type: Memory::class, groups: ['get_memory', 'get_location', 'get_place', 'get_user', 'get_picture']))
