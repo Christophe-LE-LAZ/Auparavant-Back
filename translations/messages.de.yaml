@@ -75,7 +75,7 @@ button.show: Anzeigen
 button.edit: Bearbeiten
 no_records_found: Keine Einträge gefunden
 button.create: Neu
-button.home: Home
+button.home: Startseite
 
 # new
 # title.new: Create new Entity
@@ -240,5 +240,19 @@ login:
     message: Sie sind eingeloggt als
     instruction: Bitte loggen Sie sich ein
     already_logged_in: Sie sind bereits eingeloggt.
-
-
+reset_password:
+    title: E-Mail zum Zurücksetzen des Passworts gesendet
+    first_message: Wenn es ein Konto gibt, das mit Ihrer E-Mail-Adresse übereinstimmt, wurde soeben eine E-Mail versandt, die einen Link enthält, mit dem Sie Ihr Passwort zurücksetzen können. Dieser Link läuft ab in
+    second_message: Wenn Sie keine E-Mail erhalten, überprüfen Sie bitte Ihren Spam-Ordner oder
+    try_again: versuchen Sie es erneut
+    third_message: Rückkehr zum
+    home: Startseite
+    h1: Guten Tag,
+    fourth_message: Es wurde ein Antrag auf Zurücksetzung des Passworts gestellt. Wenn Sie der Absender dieser Anfrage sind, folgen Sie bitte dem unten stehenden Link. Andernfalls können Sie diese E-Mail ignorieren.
+    fifth_message: Dieser Link läuft ab in
+    see_you: Bis bald
+    title2: Ihr Passwort zurücksetzen
+    sixth_message: in app.
+    seventh_message: Geben Sie Ihre E-Mail-Adresse ein, und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.
+    button: E-Mail zum Zurücksetzen des Passworts senden
+    button2: Das Passwort zurücksetzen

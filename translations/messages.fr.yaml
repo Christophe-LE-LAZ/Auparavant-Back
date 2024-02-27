@@ -240,3 +240,19 @@ login:
     message: Vous êtes connecté en tant que
     instruction: Veuillez vous connecter
     already_logged_in: Vous êtes déjà connecté.
+reset_password:
+    title: Courriel de réinitialisation du mot de passe envoyé
+    first_message: Si un compte correspondant à votre adresse e-mail existe, un e-mail contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe vient d'être envoyé. Ce lien expirera dans
+    second_message: Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier spam ou
+    try_again: réessayez
+    third_message: Retourner à
+    home: Accueil
+    h1: Bonjour,
+    fourth_message: Une demande de réinitialisation de mot de passe a été demandé. Si vous êtes à l'origine de cette demande, suivez le lien ci-dessous. Sinon, vous pouvez ignorez ce mail.
+    fifth_message: Ce lien expire dans
+    see_you: À bientôt
+    title2: Réinitialiser votre mot de passe
+    sixth_message: surn app.
+    seventh_message: Saisissez votre adresse électronique et nous vous enverrons un lien pour réinitialiser votre mot de passe
+    button: Envoyer un courriel de réinitialisation du mot de passe
+    button2: Réinitialiser le mot de passe

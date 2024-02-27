@@ -238,3 +238,19 @@ login:
     message: Está conectado como
     instruction: Por favor, conéctese
     already_logged_in: Ya está conectado.
+reset_password:
+    title: Correo electrónico de restablecimiento de contraseña enviado
+    first_message: Si existe una cuenta correspondiente a su dirección de correo electrónico, se le acaba de enviar un mensaje con un enlace que puede utilizar para restablecer su contraseña. Este enlace caducará en
+    second_message: Si no recibe ningún correo electrónico, compruebe su carpeta de spam o
+    try_again:  inténtelo de nuevo
+    third_message: Volver a la página
+    home: inicio
+    h1: Buenos días,
+    fourth_message: Se ha realizado una solicitud para restablecer su contraseña. Si usted es el origen de esta solicitud, siga el enlace que aparece a continuación. De lo contrario, puede ignorar este correo electrónico.
+    fifth_message: Este enlace caducará en
+    see_you: Hasta pronto
+    title2: Restablecer su contraseña
+    sixth_message: en app.
+    seventh_message: Introduce tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
+    button: Enviar un correo electrónico de restablecimiento de contraseña
+    button2: Restablecer la contraseña
