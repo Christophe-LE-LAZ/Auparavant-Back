@@ -1,58 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ 'picture.title'|trans }}</h1>
+	<h1>{{ 'picture.title'|trans }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ picture.id }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'picture.picture'|trans }}</th>
-                <td>{{ picture.picture }}</td>
-            </tr>
-                <tr>
-                <th>Visuel</th>
-                    <td><img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-edit"></td>
-                </tr>
-            <tr>
-                <th>{{ 'picture.memory'|trans }}</th>
-                <td>{{ picture.memory.title }}</td>
-            </tr>
-            {# <tr>
-                <th>CreatedAt</th>
-                <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr> #}
-        </tbody>
-    </table>
-        <div class="row">
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ picture.id }}</td>
+			</tr>
+			<tr>
+				<th>{{ 'picture.picture'|trans }}</th>
+				<td>{{ picture.picture }}</td>
+			</tr>
+			<tr>
+				<th>Visuel</th>
+				<td><img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-edit"></td>
+			</tr>
+			<tr>
+				<th>{{ 'picture.memory'|trans }}</th>
+				<td>{{ picture.memory.title }}<a class="mx-5 btn btn-primary" href="{{ path('app_memory_show', {'id': picture.memory.id}) }}">Voir</a>
+				</td>
+			</tr>
+			{# <tr>
+			                <th>CreatedAt</th>
+			                <td>{{ picture.createdAt ? picture.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			            </tr>
+			            <tr>
+			                <th>UpdatedAt</th>
+			                <td>{{ picture.updatedAt ? picture.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+			            </tr> #}
+		</tbody>
+	</table>
+	<div class="row">
 
-            <div class="col d-flex flex-column flex-md-row mx-3 my-2 align-items-md-start">
-                <a class="btn btn-lg btn-secondary text-white d-inline-block mb-2 mx-md-3" href="{{ path('app_picture_index') }}">
-                {# Cell phone #}
-                {# <div class="d-block d-sm-none"><i class="bi bi-backspace-fill"></i></div> #}
-                {# Else #}
-                <div class="d-block">{{ 'button.back'|trans }}</div>
-                </a>
-            
-                <a class="btn btn-lg btn-warning text-white" href="{{ path('app_picture_edit', {'id': picture.id}) }}">
-                {# Cell phone #}
-                {# <div class="d-block d-sm-none"><i class="bi bi-pencil-fill"></i></div> #}
-                {# Else #}
-                <div class="d-block">{{ 'button.edit'|trans }}</div>
-                </a>
-            </div>
+		<div class="col d-flex flex-column flex-md-row mx-3 my-2 align-items-md-start">
+			<a class="btn btn-lg btn-secondary text-white d-inline-block mb-2 mx-md-3" href="{{ path('app_picture_index') }}">
+				<div class="d-block">{{ 'button.back'|trans }}</div>
+			</a>
 
-        </div>
+			<a class="btn btn-lg btn-warning text-white" href="{{ path('app_picture_edit', {'id': picture.id}) }}">
+				<div class="d-block">{{ 'button.edit'|trans }}</div>
+			</a>
+		</div>
 
-            <div class="px-3 col col-md-2 d-md-inline-block div-btn-delete">
-                {{ include('back/picture/_delete_form.html.twig') }}
-            </div>
+	</div>
+
+	<div class="px-3 col col-md-2 d-md-inline-block div-btn-delete">
+		{{ include('back/picture/_delete_form.html.twig') }}
+	</div>
 
 {% endblock %}
