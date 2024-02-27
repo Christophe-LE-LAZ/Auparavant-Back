@@ -1,11 +1,9 @@
-<h1>Bonjour, </h1>
+<h1>{{ 'reset_password.h1'|trans }}</h1>
 
-<p>Une demande de reinitialisation de mot de passe a ete demande.
-Si vous etes a l'origine de cette demande, suivez le lien ci-dessous.
-Sinon, vous pouvez ignorez ce mail.</p>
+<p>{{ 'reset_password.fourth_message'|trans }}</p>
 
 <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
-<p>Ce lien expire dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+<p>{{ 'reset_password.fifth_message'|trans }} {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
 
-<p>A bientot</p>
+<p>{{ 'reset_password.see_you'|trans }}</p>

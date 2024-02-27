@@ -166,7 +166,7 @@ class MemoryController extends AbstractController
 
                 $entityManager->flush();
 
-                $this->addFlash('success', $translator->trans('confirmation.location_updated'));
+                $this->addFlash('success', $translator->trans('confirmation.memory_updated'));
                 return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
             }
 
@@ -203,7 +203,7 @@ class MemoryController extends AbstractController
             $entityManager->remove($memory);
             $entityManager->flush();
 
-            $this->addFlash('success', $translator->trans('confirmation.location_deleted'));
+            $this->addFlash('success', $translator->trans('confirmation.memory_deleted'));
         }
 
         return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);

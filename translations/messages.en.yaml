@@ -240,5 +240,19 @@ login:
     message: You are logged in as
     instruction: Please log in
     already_logged_in: You are already logged in.
-
-
+reset_password:
+    title: Password Reset Email Sent
+    first_message: If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in
+    second_message: If you don't receive an email please check your spam folder or
+    try_again: try again
+    third_message: Return to the
+    home: home
+    h1: Hello,
+    fourth_message: A password reset request has been made. If you are the originator of this request, please follow the link below. Otherwise, you can ignore this mail.
+    fifth_message: This link expires in
+    see_you: See you soon
+    title2: Reset your password
+    sixth_message: in app.
+    seventh_message: Enter your email address, and we will send you a link to reset your password.
+    button: Send password reset email
+    button2: Reset password
