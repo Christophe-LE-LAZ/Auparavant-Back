@@ -35,7 +35,6 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * 
      * Display & process form to request a password reset.
      *
      * @param Request $request
