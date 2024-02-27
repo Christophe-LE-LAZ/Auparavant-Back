@@ -13,7 +13,6 @@ button:
     logout: Se déconnecter
     forgotten_password: Mot de passe oublié ?
 
-
 ## A.P.I
 confirmation:
     location_added: La localité a été créée avec succès.
