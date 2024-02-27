@@ -7,8 +7,10 @@ Company Name: What did there use to be?
 All Rights Reserved: All Rights Reserved
 main.title: What did there use to be? backoffice
 page.title: Welcome to "What did there use to be?" backoffice
-button.login: Login
-button.logout: Logout
+button:
+    login: Login
+    logout: Logout
+    forgotten_password: Forgot your password?
 
 ## A.P.I
 confirmation:
@@ -230,6 +232,5 @@ login:
     message: You are logged in as
     instruction: Please log in
     already_logged_in: You are already logged in.
-    button.forgotten_password: Forgot your password?
 
 
