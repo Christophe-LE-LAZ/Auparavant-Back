@@ -188,6 +188,7 @@ class MemoryController extends AbstractController
     public function delete(Request $request, Memory $memory, EntityManagerInterface $entityManager, ParameterBagInterface $params, TranslatorInterface $translator): Response
     {
         if ($this->isCsrfTokenValid('delete' . $memory->getId(), $request->request->get('_token'))) {
+
             // Delete all associated pictures in the 'picture' table
             foreach ($memory->getPicture() as $picture) {
 
@@ -203,9 +204,27 @@ class MemoryController extends AbstractController
             $entityManager->remove($memory);
             $entityManager->flush();
 
-            $this->addFlash('success', $translator->trans('confirmation.memory_deleted'));
+        // Retrieve the locality associated with the memory
+        $location = $memory->getLocation();
+
+       // Delete the locality if there are no other associated memories
+        if ($location && $location->getMemories()->isEmpty()) {
+        $entityManager->remove($location);
+        $entityManager->flush();
+
         }
+
+        // Retrieve the place associated with the location
+        $place = $memory->getPlace();
+        // Delete location if there are no other associated localities
+        if ($place && $place->getMemories()->isEmpty()) {
+            $entityManager->remove($place);
+            $entityManager->flush();
+        }
+
+        $this->addFlash('success', $translator->trans('confirmation.memory_deleted'));
 
         return $this->redirectToRoute('app_memory_index', [], Response::HTTP_SEE_OTHER);
     }
+}
 }
