@@ -256,4 +256,4 @@ reset_password:
     seventh_message: Enter your email address, and we will send you a link to reset your password.
     button: Send password reset email
     button2: Reset password
-    back: back
+    back: Back

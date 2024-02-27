@@ -254,4 +254,4 @@ reset_password:
     seventh_message: Introduce su dirección de correo electrónico y se enviaremos un enlace para restablecer su contraseña.
     button: Enviar un correo electrónico de restablecimiento de contraseña
     button2: Restablecer la contraseña
-    back: volver
+    back: Volver
