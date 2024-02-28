@@ -21,10 +21,10 @@
                 <th>{{ 'user.email'|trans }}</th>
                 <td>{{ user.email }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>{{ 'user.password'|trans }}</th>
                 <td>{{ user.password }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>{{ 'user.role'|trans }}</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
