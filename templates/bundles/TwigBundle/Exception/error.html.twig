@@ -2,12 +2,12 @@
 
 {% block body %}
 <div class="my-5 py-5 text-center">
-    <h1>Page introuvable</h1>
+    <h1>{{ 'warning.page_not_found'|trans }}</h1>
 
-    <p>La page que vous demandee n'existe pas</p>
+    <p>{{ 'warning.not_found'|trans }}</p>
 
 <div class="d-flex justify-content-center">
-    <a  class="btn btn-lg btn-primary mt-5" href="{{ path('app_main') }}">Retour a la page d'accueil</a>.
+    <a  class="btn btn-lg btn-secondary mt-5" href="{{ path('app_main') }}">{{ 'button.back_home'|trans }}</a>.
 </div>
 </div>
 {% endblock %}

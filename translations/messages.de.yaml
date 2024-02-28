@@ -14,6 +14,7 @@ button:
     login: Anmelden
     logout: Abmelden
     forgotten_password: Haben Sie Ihr Passwort vergessen?
+    back_home: Zurück zur Startseite
 
 ## A.P.I
 confirmation:
@@ -33,6 +34,7 @@ confirmation:
     user_updated: Das Konto wurde erfolgreich aktualisiert.
     user_deleted: Das Konto wurde erfolgreich gelöscht.
 warning:
+    page_not_found: Seite nicht gefunden
     not_found: Die angeforderte Seite wurde nicht gefunden.
     resource_not_found: Die angeforderte Ressource wurde nicht gefunden.
     memory_picture_update_failure: Die Aktualisierung des Speicherbildes ist fehlgeschlagen.
@@ -51,6 +53,7 @@ non-existent_entities:
     place: Der Ort existiert nicht.
     user: Das Konto existiert nicht.
 unauthorized_access:
+    forbidden: Verbotene Seite
     page: Sie sind nicht berechtigt, auf diese Seite zuzugreifen.
     view: Sie sind nicht berechtigt, diesen Inhalt zu sehen.
     modification: Sie sind nicht berechtigt, diesen Inhalt zu verändern.

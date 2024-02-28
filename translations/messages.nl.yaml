@@ -14,6 +14,7 @@ button:
     login: Inloggen
     logout: Uitloggen
     forgotten_password: Bent u uw wachtwoord vergeten?
+    back_home: Terug naar de startpagina
 
 ## A.P.I
 confirmation:
@@ -33,6 +34,7 @@ confirmation:
     user_updated: De account is succesvol bijgewerkt.
     user_deleted: De account is succesvol verwijderd.
 warning:
+    page_not_found: Pagina niet gevonden
     not_found: De opgevraagde pagina is niet gevonden.
     resource_not_found: De opgevraagde bron is niet gevonden.
     memory_picture_update_failure: De update van de geheugenafbeelding is mislukt.
@@ -51,6 +53,7 @@ non-existent_entities:
     place: De plaats bestaat niet.
     user: De account bestaat niet.
 unauthorized_access:
+    forbidden: VVerboden pagina
     page: U bent niet bevoegd om deze pagina te openen.
     view: U bent niet gemachtigd om deze inhoud te bekijken.
     modification: U bent niet gemachtigd om deze inhoud te wijzigen.

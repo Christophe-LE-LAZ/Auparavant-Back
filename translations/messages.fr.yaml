@@ -14,6 +14,7 @@ button:
     login: Se connecter
     logout: Se déconnecter
     forgotten_password: Mot de passe oublié ?
+    back_home: Retourner à la page d'accueil
 
 ## A.P.I
 confirmation:
@@ -33,6 +34,7 @@ confirmation:
     user_updated: Le compte a été modifié avec succès.
     user_deleted: Le compte a été supprimé avec succès.
 warning:
+    page_not_found: Page introuvable
     not_found: La page demandée n'a pas été trouvée.
     resource_not_found: La ressource demandée n'a pas été trouvée.
     memory_picture_update_failure: Une erreur s'est produite lors de la mise à jour d'une photo associée.
@@ -51,6 +53,7 @@ non-existent_entities:
     place: Cet endroit n'existe pas.
     user: Ce compte n'existe pas.
 unauthorized_access:
+    forbidden: Que faites-vous là ?
     page: Vous n'êtes pas autorisé à accéder à cette page.
     view: Vous n'êtes pas autorisé à visualiser ce contenu.
     modification: Vous n'êtes pas autorisé à modifier ce contenu.

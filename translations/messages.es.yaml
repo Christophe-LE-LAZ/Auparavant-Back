@@ -14,6 +14,7 @@ button:
     login: Conectarse
     logout: Cerrar sesión
     forgotten_password: ¿Ha olvidado su contraseña?
+    back_home: Volver a la página de inicio
 
 ## A.P.I
 confirmation:
@@ -33,6 +34,7 @@ confirmation:
     user_updated: La cuenta se ha modificado correctamente.
     user_deleted: La cuenta se ha eliminado correctamente.
 warning:
+    page_not_found: Página no encontrada
     not_found: No se ha encontrado la página solicitada.
     resource_not_found: No se ha encontrado el recurso solicitado.
     memory_picture_update_failure: Se ha producido un error al actualizar una foto asociada.
@@ -51,6 +53,7 @@ non-existent_entities:
     place: No existe tal lugar.
     user: No existe tal usario.
 unauthorized_access:
+    forbidden: Página prohibida
     page: No está autorizado a acceder a esta página.
     view: No está autorizado a ver este contenido.
     modification: No está autorizado a modificar este contenido.
