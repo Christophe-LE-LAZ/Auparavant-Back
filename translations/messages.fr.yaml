@@ -42,8 +42,8 @@ warning:
     former_picture_deletion_failure: La suppression de l'image précédente a échoué.
     memory_picture_mandatory: Le souvenir doit contenir une photo.
     no_change: Aucune modification n'a été apportée car aucune image principale n'a été soumise.
-    location_deleted: Des souvenirs sont associés à la localité, impossible de supprimer.
-    place_deleted: Des souvenirs sont associés au lieu, impossible de supprimer.
+    location_deleted: Des souvenirs sont associés à la localité, impossible de le supprimer.
+    place_deleted: Des souvenirs sont associés au lieu, impossible de le supprimer.
 non-existent_entities:
     location: Cette localité n'existe pas.
     memory: Ce souvenir n'existe pas.
