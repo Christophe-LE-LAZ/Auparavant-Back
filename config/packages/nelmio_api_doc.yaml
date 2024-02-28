@@ -3,7 +3,7 @@ nelmio_api_doc:
 
         info:
             title: Auparavant
-            description: L'API d'Auparavant vous propose de récupérer des souvenirs, la localité, le nom et le type de l'endroit, les photos supplémentaires, les données des utilisateurs.
+            description: The Auparavant API allows you to retrieve memories, locality, name and type of place, additional photos and user data.
             version: 1.0.0
 
         paths:
