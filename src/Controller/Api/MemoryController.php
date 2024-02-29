@@ -946,6 +946,25 @@ class MemoryController extends AbstractController
         $entityManager->remove($memory);
         $entityManager->flush();
 
+        // Retrieve the locality associated with the memory
+        $location = $memory->getLocation();
+
+       // Delete the locality if there are no other associated memories
+        if ($location && $location->getMemories()->isEmpty()) {
+        $entityManager->remove($location);
+        $entityManager->flush();
+
+        }
+
+        // Retrieve the place associated with the location
+        $place = $memory->getPlace();
+        // Delete location if there are no other associated localities
+        if ($place && $place->getMemories()->isEmpty()) {
+            $entityManager->remove($place);
+            $entityManager->flush();
+        }
+
+
         return $this->json(['message' => 'Souvenir supprimé'], Response::HTTP_OK);
     }
 
