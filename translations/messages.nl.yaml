@@ -45,7 +45,7 @@ warning:
     memory_picture_mandatory: De geheugen moet een hoofdafbeelding bevatten.
     no_change: Er zijn geen wijzigingen aangebracht omdat er geen hoofdafbeelding is ingediend.
     location_deleted: Aangezien de locatie gekoppeld is aan geheugens, kan deze niet worden verwijderd.
-    place_deleted: Aangezien de plaats gekoppeld is aan geheugenens, kan deze niet worden verwijderd.
+    place_deleted: Aangezien de plaats gekoppeld is aan geheugens, kan deze niet worden verwijderd.
 non-existent_entities:
     location: De locatie bestaat niet.
     memory: Het geheugen bestaat niet.
