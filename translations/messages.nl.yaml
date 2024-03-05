@@ -23,7 +23,7 @@ confirmation:
     location_deleted: De locatie is succesvol verwijderd.
     memory_created: Het geheugen is succesvol aangemaakt.
     memory_updated: Het geheugen is succesvol bijgewerkt.
-    memory_deleted: Het geheugen is succesvol gewiverwijderd.st.
+    memory_deleted: Het geheugen is succesvol verwijderd.
     picture_uploaded: De afbeelding is succesvol geüpload.
     picture_updated: De afbeelding is succesvol bijgewerkt.
     picture_deleted: De afbeelding is succesvol verwijderd.
