@@ -37,8 +37,8 @@ warning:
     page_not_found: Seite nicht gefunden
     not_found: Die angeforderte Seite wurde nicht gefunden.
     resource_not_found: Die angeforderte Ressource wurde nicht gefunden.
-    memory_picture_update_failure: Die Aktualisierung des Speicherbildes ist fehlgeschlagen.
-    memory_picture_deletion_failure: Die Löschung des Speicherabbilds ist fehlgeschlagen.
+    memory_picture_update_failure: Die Aktualisierung des Speicherbbildes ist fehlgeschlagen.
+    memory_picture_deletion_failure: Die Löschung des Speicherabbildes ist fehlgeschlagen.
     picture_update_failure: Die Bildaktualisierung ist fehlgeschlagen.
     picture_deletion_failure: Das Löschen des Bildes ist fehlgeschlagen.
     former_picture_deletion_failure: Löschen des vorherigen Bildes fehlgeschlagen.
