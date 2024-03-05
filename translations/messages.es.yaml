@@ -51,7 +51,7 @@ non-existent_entities:
     memory: No existe tal recuerdo.
     picture: No existe tal foto.
     place: No existe tal lugar.
-    user: No existe tal usario.
+    user: No existe tal usuario.
 unauthorized_access:
     forbidden: Página prohibida
     page: No está autorizado a acceder a esta página.
