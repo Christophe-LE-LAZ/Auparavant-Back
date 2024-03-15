@@ -132,11 +132,14 @@ class PictureController extends AbstractController
     #[Route('/api/secure/upload_update/main_picture/{id<\d+>}', methods: ['POST'])]
     #[OA\RequestBody(
         description: 'Exemple of data to be supplied to upload or update the picture',
-        content: new OA\JsonContent(
-            properties: [
-                new OA\Property(property: 'main_picture', type: 'file', example: 'photo.jpg'),
-            ]
-        )
+        required: true,
+        content: 
+            new OA\MediaType(
+                mediaType: 'multipart/form-data',
+                schema: new OA\Schema(properties: [
+                    new OA\Property(property: 'main_picture', type: 'file', example: 'photo.jpg')
+                ])
+            ), 
     )]
     #[OA\Response(
         response: 201,
@@ -272,11 +275,14 @@ class PictureController extends AbstractController
     )]
     #[OA\RequestBody(
         description: 'Exemple of data to be supplied to upload the additional picture',
-        content: new OA\JsonContent(
-            properties: [
-                new OA\Property(property: 'additional_pictures', type: 'file', example: 'photo.jpg'),
-            ]
-        )
+        required: true,
+        content: 
+            new OA\MediaType(
+                mediaType: 'multipart/form-data',
+                schema: new OA\Schema(properties: [
+                    new OA\Property(property: 'additionnal_pictures', type: 'array', example: ['photo1.jpg', 'photo2.jpg'],)
+                ])
+            ), 
     )]
     #[OA\Response(
         response: 201,
