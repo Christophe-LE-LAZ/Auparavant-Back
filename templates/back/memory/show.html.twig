@@ -29,7 +29,8 @@
 			<tr>
 				<th>{{ 'memory.place'|trans }}</th>
 				<td>{{ memory.place.name }}
-					{{ memory.place.type }}<a class="mx-5 btn btn-primary" href="{{ path('app_place_show', {'id': memory.place.id}) }}">{{ 'button.show'|trans }}</a>
+					{{ memory.place.type }}
+					<a class="mx-5 btn btn-secondary" href="{{ path('app_place_show', {'id': memory.place.id}) }}">{{ 'button.show'|trans }}</a>
 				</td>
 
 
@@ -39,7 +40,7 @@
 				<td>{{ memory.location.street }}
 					{{ memory.location.zipcode }}
 					{{ memory.location.city }}
-					<a class="mx-5 btn btn-primary" href="{{ path('app_location_show', {'id': memory.location.id}) }}">{{ 'button.show'|trans }}</a>
+					<a class="mx-5 btn btn-secondary" href="{{ path('app_location_show', {'id': memory.location.id}) }}">{{ 'button.show'|trans }}</a>
 				</td>
 			</tr>
 			<tr>
@@ -52,7 +53,7 @@
 					<tr>
 						<th>{{ 'memory.additional_picture'|trans }}</th>
 						<td>{{ picture.picture }}
-							<img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-thumbnail mx-5" alt="Additional Picture"><a class="mx-5 btn btn-primary" href="{{ path('app_picture_show', {'id': picture.id}) }}">{{ 'button.show'|trans }}</a></td>
+							<img src="{{ asset('assets/pictures/' ~ picture.picture) }}" class="img-thumbnail mx-5" alt="Additional Picture"><a class="mx-5 btn btn-secondary" href="{{ path('app_picture_show', {'id': picture.id}) }}">{{ 'button.show'|trans }}</a></td>
 					</tr>
 				{% endfor %}
 			{% endif %}
