@@ -130,7 +130,14 @@ class PictureController extends AbstractController
      * @return Response
      */
     #[Route('/api/secure/upload_update/main_picture/{id<\d+>}', methods: ['POST'])]
-    #[OA\RequestBody(
+ #[OA\Parameter(
+        name: "id",
+        in: "path",
+        required: true,
+        description: "ID of the memory",
+        schema: new OA\Schema(type: 'integer')
+    )]
+ #[OA\RequestBody(
         description: 'Exemple of data to be supplied to upload or update the picture',
         required: true,
         content: 
@@ -140,7 +147,7 @@ class PictureController extends AbstractController
                     new OA\Property(property: 'main_picture', type: 'file', example: 'photo.jpg')
                 ])
             ), 
-    )]
+ )]
     #[OA\Response(
         response: 201,
         description: 'Returns the memory with the main picture',
@@ -273,7 +280,7 @@ class PictureController extends AbstractController
         description: "ID of the memory",
         schema: new OA\Schema(type: 'integer')
     )]
-    #[OA\RequestBody(
+  #[OA\RequestBody(
         description: 'Exemple of data to be supplied to upload the additional picture',
         required: true,
         content: 
@@ -283,8 +290,7 @@ class PictureController extends AbstractController
                     new OA\Property(property: 'additionnal_pictures', type: 'array', example: ['photo1.jpg', 'photo2.jpg'],)
                 ])
             ), 
-    )]
-    #[OA\Response(
+    )]    #[OA\Response(
         response: 201,
         description: 'Returns the additional pictures',
         content: new OA\JsonContent(
@@ -365,13 +371,15 @@ class PictureController extends AbstractController
     )]
     #[OA\RequestBody(
         description: 'Exemple of data to be supplied to update the additional picture',
-        content: new OA\JsonContent(
-            properties: [
-                new OA\Property(property: 'additional_pictures', type: 'file', example: 'photo.jpg'),
-            ]
-        )
-    )]
-    #[OA\Response(
+        required: true,
+        content: 
+            new OA\MediaType(
+                mediaType: 'multipart/form-data',
+                schema: new OA\Schema(properties: [
+                    new OA\Property(property: 'additional_picture', type: 'file', example: 'photo.jpg')
+                ])
+            ), 
+    )]    #[OA\Response(
         response: 201,
         description: 'Returns the additional picture',
         content: new OA\JsonContent(
