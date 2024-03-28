@@ -253,3 +253,38 @@ reset_password:
     button: Stuur een e-mail om het wachtwoord te resetten
     button2: Wachtwoord opnieuw instellen
     back: Terug
+
+## Translations in Entities
+Location:
+    area_min_length: 'Het gebied moet minimaal {{ limit }} tekens lang zijn.'
+    area_max_length: 'Het gebied mag niet meer dan {{ limit }} tekens bevatten.'
+    department_min_length: 'De afdeling moet minimaal {{ limit }} tekens lang zijn.'
+    department_max_length: 'De afdeling mag niet meer dan {{ limit }} tekens bevatten.'
+    district_min_length: 'De wijk moet minimaal {{ limit }} tekens lang zijn.'
+    district_max_length: 'De wijk mag niet meer dan {{ limit }} tekens bevatten.'
+    street_min_length: 'Het huisnummer en de straatnaam moeten minimaal {{ limit }} tekens lang zijn.'
+    street_max_length: 'Het huisnummer en de straatnaam mogen niet meer dan {{ limit }} tekens bevatten.'
+    city_min_length: 'De stad moet minimaal {{ limit }} tekens lang zijn.'
+    city_max_length: 'De stad mag niet meer dan {{ limit }} tekens bevatten.'
+    zipcode_min_length: 'De postcode moet minimaal {{ limit }} tekens lang zijn.'
+    zipcode_max_length: 'De postcode mag niet meer dan {{ limit }} tekens bevatten.'
+
+Memory:
+    title_min_length: 'De titel moet minimaal {{ limit }} tekens lang zijn.'
+    title_max_length: 'De titel mag niet meer dan {{ limit }} tekens bevatten.'
+    content_min_length: 'De inhoud moet minimaal {{ limit }} tekens lang zijn.'
+    content_max_length: 'De inhoud mag niet meer dan {{ limit }} tekens bevatten.'
+
+Place:
+    name_min_length: 'De plaatsnaam moet minimaal {{ limit }} tekens lang zijn.'
+    name_max_length: 'De plaatsnaam mag niet meer dan {{ limit }} tekens bevatten.'
+    type_min_length: 'Het type plaats moet minimaal {{ limit }} tekens lang zijn.'
+    type_max_length: 'Het type plaats mag niet meer dan {{ limit }} tekens bevatten.'
+
+User:
+    firstname_min_length: 'Uw voornaam moet minimaal {{ limit }} tekens lang zijn.'
+    firstname_max_length: 'Uw voornaam mag niet meer dan {{ limit }} tekens bevatten.'
+    lastname_min_length: 'Uw achternaam moet minimaal {{ limit }} tekens lang zijn.'
+    lastname_max_length: 'Uw achternaam mag niet meer dan {{ limit }} tekens bevatten.'
+    email_invalid: 'Het e-mailadres {{ value }} is niet geldig.'
+

@@ -260,3 +260,37 @@ reset_password:
     button: E-Mail zum Zurücksetzen des Passworts senden
     button2: Das Passwort zurücksetzen
     back: Zurück
+
+## Translations in Entities
+Location:
+    area_min_length: 'Die Region muss mindestens {{ limit }} Zeichen lang sein.'
+    area_max_length: 'Die Region darf nicht mehr als {{ limit }} Zeichen enthalten.'
+    department_min_length: 'Die Abteilung muss mindestens {{ limit }} Zeichen lang sein.'
+    department_max_length: 'Die Abteilung darf nicht mehr als {{ limit }} Zeichen enthalten.'
+    district_min_length: 'Der Stadtteil muss mindestens {{ limit }} Zeichen lang sein.'
+    district_max_length: 'Der Stadtteil darf nicht mehr als {{ limit }} Zeichen enthalten.'
+    street_min_length: 'Die Straßennummer und der Straßenname müssen mindestens {{ limit }} Zeichen lang sein.'
+    street_max_length: 'Die Straßennummer und der Straßenname dürfen nicht mehr als {{ limit }} Zeichen enthalten.'
+    city_min_length: 'Die Stadt muss mindestens {{ limit }} Zeichen lang sein.'
+    city_max_length: 'Die Stadt darf nicht mehr als {{ limit }} Zeichen enthalten.'
+    zipcode_min_length: 'Die Postleitzahl muss mindestens {{ limit }} Zeichen lang sein.'
+    zipcode_max_length: 'Die Postleitzahl darf nicht mehr als {{ limit }} Zeichen enthalten.'
+
+Memory:
+    title_min_length: 'Der Titel muss mindestens {{ limit }} Zeichen lang sein.'
+    title_max_length: 'Der Titel darf nicht mehr als {{ limit }} Zeichen lang sein.'
+    content_min_length: 'Der Inhalt muss mindestens {{ limit }} Zeichen lang sein.'
+    content_max_length: 'Der Inhalt darf nicht mehr als {{ limit }} Zeichen lang sein.'
+
+Place:
+    name_min_length: 'Der Ortsname muss mindestens {{ limit }} Zeichen lang sein.'
+    name_max_length: 'Der Ortsname darf nicht mehr als {{ limit }} Zeichen enthalten.'
+    type_min_length: 'Der Ortstyp muss mindestens {{ limit }} Zeichen lang sein.'
+    type_max_length: 'Der Ortstyp darf nicht mehr als {{ limit }} Zeichen enthalten.'
+
+User:
+    firstname_min_length: 'Ihr Vorname muss mindestens {{ limit }} Zeichen lang sein.'
+    firstname_max_length: 'Ihr Vorname darf nicht mehr als {{ limit }} Zeichen lang sein.'
+    lastname_min_length: 'Ihr Nachname muss mindestens {{ limit }} Zeichen lang sein.'
+    lastname_max_length: 'Ihr Nachname darf nicht mehr als {{ limit }} Zeichen lang sein.'
+    email_invalid: 'Die E-Mail-Adresse {{ value }} ist ungültig.'

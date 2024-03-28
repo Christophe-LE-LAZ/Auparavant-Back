@@ -260,3 +260,37 @@ reset_password:
     button: Enviar un correo electrónico de restablecimiento de contraseña
     button2: Restablecer la contraseña
     back: Volver
+
+## Translations in Entities
+Location:
+    area_min_length: 'La región debe tener al menos {{ limit }} caracteres.'
+    area_max_length: 'La región no puede exceder los {{ limit }} caracteres.'
+    department_min_length: 'El departamento debe tener al menos {{ limit }} caracteres.'
+    department_max_length: 'El departamento no puede exceder los {{ limit }} caracteres.'
+    district_min_length: 'El barrio debe tener al menos {{ limit }} caracteres.'
+    district_max_length: 'El barrio no puede exceder los {{ limit }} caracteres.'
+    street_min_length: 'El número y el nombre de la calle deben tener al menos {{ limit }} caracteres.'
+    street_max_length: 'El número y el nombre de la calle no pueden exceder los {{ limit }} caracteres.'
+    city_min_length: 'La ciudad debe tener al menos {{ limit }} caracteres.'
+    city_max_length: 'La ciudad no puede exceder los {{ limit }} caracteres.'
+    zipcode_min_length: 'El código postal debe tener al menos {{ limit }} caracteres.'
+    zipcode_max_length: 'El código postal no puede exceder los {{ limit }} caracteres.'
+
+Memory:
+    title_min_length: 'El título debe tener al menos {{ limit }} caracteres.'
+    title_max_length: 'El título no puede exceder {{ limit }} caracteres.'
+    content_min_length: 'El contenido debe tener al menos {{ limit }} caracteres.'
+    content_max_length: 'El contenido no puede exceder {{ limit }} caracteres.'
+
+Place:
+    name_min_length: 'El nombre del lugar debe tener al menos {{ limit }} caracteres.'
+    name_max_length: 'El nombre del lugar no puede exceder los {{ limit }} caracteres.'
+    type_min_length: 'El tipo de lugar debe tener al menos {{ limit }} caracteres.'
+    type_max_length: 'El tipo de lugar no puede exceder los {{ limit }} caracteres.'
+
+User:
+    firstname_min_length: 'Su nombre debe tener al menos {{ limit }} caracteres.'
+    firstname_max_length: 'Su nombre no puede exceder los {{ limit }} caracteres.'
+    lastname_min_length: 'Su apellido debe tener al menos {{ limit }} caracteres.'
+    lastname_max_length: 'Su apellido no puede exceder los {{ limit }} caracteres.'
+    email_invalid: 'La dirección de correo electrónico {{ value }} no es válida.'
