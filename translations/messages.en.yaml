@@ -262,35 +262,35 @@ reset_password:
     back: Back
 
 ## Translations in Entities
-Location:
-    area_min_length: 'The region must be at least {{ limit }} characters long.'
-    area_max_length: 'The region cannot exceed {{ limit }} characters.'
-    department_min_length: 'The department must be at least {{ limit }} characters long.'
-    department_max_length: 'The department cannot exceed {{ limit }} characters.'
-    district_min_length: 'The district must be at least {{ limit }} characters long.'
-    district_max_length: 'The district cannot exceed {{ limit }} characters.'
-    street_min_length: 'The street number and name must be at least {{ limit }} characters long.'
-    street_max_length: 'The street number and name cannot exceed {{ limit }} characters.'
-    city_min_length: 'The city must be at least {{ limit }} characters long.'
-    city_max_length: 'The city cannot exceed {{ limit }} characters.'
-    zipcode_min_length: 'The zipcode must be at least {{ limit }} characters long.'
-    zipcode_max_length: 'The zipcode cannot exceed {{ limit }} characters.'
+# Location:
+#     area_min_length: 'The region must be at least {{ limit }} characters long.'
+#     area_max_length: 'The region cannot exceed {{ limit }} characters.'
+#     department_min_length: 'The department must be at least {{ limit }} characters long.'
+#     department_max_length: 'The department cannot exceed {{ limit }} characters.'
+#     district_min_length: 'The district must be at least {{ limit }} characters long.'
+#     district_max_length: 'The district cannot exceed {{ limit }} characters.'
+#     street_min_length: 'The street number and name must be at least {{ limit }} characters long.'
+#     street_max_length: 'The street number and name cannot exceed {{ limit }} characters.'
+#     city_min_length: 'The city must be at least {{ limit }} characters long.'
+#     city_max_length: 'The city cannot exceed {{ limit }} characters.'
+#     zipcode_min_length: 'The zipcode must be at least {{ limit }} characters long.'
+#     zipcode_max_length: 'The zipcode cannot exceed {{ limit }} characters.'
 
-Memory:
-    title_min_length: 'The title must be at least {{ limit }} characters long.'
-    title_max_length: 'The title cannot exceed {{ limit }} characters.'
-    content_min_length: 'The content must be at least {{ limit }} characters long.'
-    content_max_length: 'The content cannot exceed {{ limit }} characters.'
+# Memory:
+#     title_min_length: 'The title must be at least {{ limit }} characters long.'
+#     title_max_length: 'The title cannot exceed {{ limit }} characters.'
+#     content_min_length: 'The content must be at least {{ limit }} characters long.'
+#     content_max_length: 'The content cannot exceed {{ limit }} characters.'
 
-Place:
-    name_min_length: 'The place name must be at least {{ limit }} characters long.'
-    name_max_length: 'The place name cannot exceed {{ limit }} characters.'
-    type_min_length: 'The place type must be at least {{ limit }} characters long.'
-    type_max_length: 'The place type cannot exceed {{ limit }} characters.'
+# Place:
+#     name_min_length: 'The place name must be at least {{ limit }} characters long.'
+#     name_max_length: 'The place name cannot exceed {{ limit }} characters.'
+#     type_min_length: 'The place type must be at least {{ limit }} characters long.'
+#     type_max_length: 'The place type cannot exceed {{ limit }} characters.'
 
-User:
-    firstname_min_length: 'Your first name must be at least {{ limit }} characters long.'
-    firstname_max_length: 'Your first name cannot exceed {{ limit }} characters.'
-    lastname_min_length: 'Your last name must be at least {{ limit }} characters long.'
-    lastname_max_length: 'Your last name cannot exceed {{ limit }} characters.'
-    email_invalid: 'The email address {{ value }} is not valid.'
+# User:
+#     firstname_min_length: 'Your first name must be at least {{ limit }} characters long.'
+#     firstname_max_length: 'Your first name cannot exceed {{ limit }} characters.'
+#     lastname_min_length: 'Your last name must be at least {{ limit }} characters long.'
+#     lastname_max_length: 'Your last name cannot exceed {{ limit }} characters.'
+#     email_invalid: 'The email address {{ value }} is not valid.'

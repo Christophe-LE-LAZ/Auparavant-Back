@@ -189,9 +189,9 @@ place:
     title.edit: Modifier un lieu
     ### index
     title.index: Index des lieux
-    new: Ajouter un nouvel lieu
+    new: Ajouter un nouveau lieu
     ### new
-    title.new: Créer un nouvel lieu
+    title.new: Créer un nouveau lieu
     ### show:
     title: Lieu
     ### success
@@ -262,35 +262,35 @@ reset_password:
     back: Retour
 
 ## Translations in Entities
-Location:
-    area_min_length: 'La région doit comporter au moins {{ limit }} caractères.'
-    area_max_length: 'La région ne peut pas dépasser {{ limit }} caractères.'
-    department_min_length: 'Le département doit comporter au moins {{ limit }} caractères.'
-    department_max_length: 'Le département ne peut pas dépasser {{ limit }} caractères.'
-    district_min_length: 'Le quartier doit comporter au moins {{ limit }} caractères.'
-    district_max_length: 'Le quartier ne peut pas dépasser {{ limit }} caractères.'
-    street_min_length: 'Le numéro et le nom de la rue doivent comporter au moins {{ limit }} caractères.'
-    street_max_length: 'Le numéro et le nom de la rue ne peuvent pas dépasser {{ limit }} caractères.'
-    city_min_length: 'La ville doit comporter au moins {{ limit }} caractères.'
-    city_max_length: 'La ville ne peut pas dépasser {{ limit }} caractères.'
-    zipcode_min_length: 'Le code postal doit comporter au moins {{ limit }} caractères.'
-    zipcode_max_length: 'Le code postal ne peut pas dépasser {{ limit }} caractères.'
+# Location:
+#     area_min_length: 'La région doit comporter au moins {{ limit }} caractères.'
+#     area_max_length: 'La région ne peut pas dépasser {{ limit }} caractères.'
+#     department_min_length: 'Le département doit comporter au moins {{ limit }} caractères.'
+#     department_max_length: 'Le département ne peut pas dépasser {{ limit }} caractères.'
+#     district_min_length: 'Le quartier doit comporter au moins {{ limit }} caractères.'
+#     district_max_length: 'Le quartier ne peut pas dépasser {{ limit }} caractères.'
+#     street_min_length: 'Le numéro et le nom de la rue doivent comporter au moins {{ limit }} caractères.'
+#     street_max_length: 'Le numéro et le nom de la rue ne peuvent pas dépasser {{ limit }} caractères.'
+#     city_min_length: 'La ville doit comporter au moins {{ limit }} caractères.'
+#     city_max_length: 'La ville ne peut pas dépasser {{ limit }} caractères.'
+#     zipcode_min_length: 'Le code postal doit comporter au moins {{ limit }} caractères.'
+#     zipcode_max_length: 'Le code postal ne peut pas dépasser {{ limit }} caractères.'
 
-Memory:
-    title_min_length: 'Le titre doit comporter au moins {{ limit }} caractères.'
-    title_max_length: 'Le titre ne peut pas dépasser {{ limit }} caractères.'
-    content_min_length: 'Le contenu doit comporter au moins {{ limit }} caractères.'
-    content_max_length: 'Le contenu ne peut pas dépasser {{ limit }} caractères.'
+# Memory:
+#     title_min_length: 'Le titre doit comporter au moins {{ limit }} caractères.'
+#     title_max_length: 'Le titre ne peut pas dépasser {{ limit }} caractères.'
+#     content_min_length: 'Le contenu doit comporter au moins {{ limit }} caractères.'
+#     content_max_length: 'Le contenu ne peut pas dépasser {{ limit }} caractères.'
 
-Place:
-    name_min_length: 'Le nom de l\'endroit doit comporter au moins {{ limit }} caractères.'
-    name_max_length: 'Le nom de l\'endroit ne peut pas dépasser {{ limit }} caractères.'
-    type_min_length: 'Le type d\'endroit doit comporter au moins {{ limit }} caractères.'
-    type_max_length: 'Le type d\'endroit ne peut pas dépasser {{ limit }} caractères.'
+# Place:
+#     name_min_length: 'Le nom de l\'endroit doit comporter au moins {{ limit }} caractères.'
+#     name_max_length: 'Le nom de l\'endroit ne peut pas dépasser {{ limit }} caractères.'
+#     type_min_length: 'Le type d\'endroit doit comporter au moins {{ limit }} caractères.'
+#     type_max_length: 'Le type d\'endroit ne peut pas dépasser {{ limit }} caractères.'
 
-User:
-    firstname_min_length: 'Votre prénom doit comporter au moins {{ limit }} caractères.'
-    firstname_max_length: 'Votre prénom ne peut pas dépasser {{ limit }} caractères.'
-    lastname_min_length: 'Votre nom doit comporter au moins {{ limit }} caractères.'
-    lastname_max_length: 'Votre nom ne peut pas dépasser {{ limit }} caractères.'
-    email_invalid: "L'adresse électronique {{ value }} n'est pas valide."
+# User:
+#     firstname_min_length: 'Votre prénom doit comporter au moins {{ limit }} caractères.'
+#     firstname_max_length: 'Votre prénom ne peut pas dépasser {{ limit }} caractères.'
+#     lastname_min_length: 'Votre nom doit comporter au moins {{ limit }} caractères.'
+#     lastname_max_length: 'Votre nom ne peut pas dépasser {{ limit }} caractères.'
+#     email_invalid: "L'adresse électronique {{ value }} n'est pas valide."
